@@ -10,90 +10,125 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf_viewer.min.css">
 
     <style>
-        body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background-color: #1a1a1a; color: white; font-family: sans-serif; }
-        #viewer-container { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; height: 100vh; width: 100vw; -webkit-overflow-scrolling: touch; }
-        .page-wrapper { position: relative; flex-shrink: 0; width: 100vw; height: 100vh; scroll-snap-align: start; display: block; overflow-y: auto; }
-        canvas { display: block; margin: 0 auto; max-width: 100%; z-index: 1; }
-        .annotationLayer { position: absolute; top: 0; left: 50%; transform: translateX(-50%); z-index: 2; }
-        #status-msg { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; z-index: 100; }
+        body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background-color: #1a1a1a; }
+        
+        #viewer-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            height: 100vh;
+            width: 100vw;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .page-wrapper {
+            position: relative;
+            flex-shrink: 0;
+            width: 100vw;
+            height: 100vh;
+            scroll-snap-align: start;
+            overflow: hidden; /* Evita scroll verticale fastidioso */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Il contenitore interno che tiene insieme Canvas e Link */
+        .canvas-wrapper {
+            position: relative;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        canvas { display: block; max-width: 100vw; max-height: 100vh; }
+
+        .annotationLayer {
+            position: absolute;
+            top: 0; left: 0;
+            z-index: 2;
+        }
+
+        /* Rende i link leggermente visibili per capire se sono centrati (togli dopo il test) */
+        .annotationLayer section { opacity: 0.2; background-color: yellow; }
+
         #viewer-container::-webkit-scrollbar { display: none; }
     </style>
 </head>
 <body>
 
-    <div id="status-msg">Caricamento guida in corso...</div>
     <div id="viewer-container"></div>
 
     <script>
-        const url = 'documento.pdf'; // ASSICURATI CHE IL NOME SIA CORRETTO
-        const status = document.getElementById('status-msg');
-        const container = document.getElementById('viewer-container');
-
-        // Configurazione PDF.js
+        const url = 'documento.pdf';
         const pdfjsLib = window['pdfjs-dist/build/pdf'];
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
 
+        const container = document.getElementById('viewer-container');
+
         const linkService = {
             externalLinkTarget: 2,
-            addLinkAttributes: (link, url) => { if (url) { link.href = url; link.target = "_blank"; } }
+            addLinkAttributes: (link, url) => {
+                if (url) {
+                    link.href = url;
+                    link.target = "_blank";
+                    link.rel = "noopener noreferrer";
+                }
+            },
+            getDestinationHash: () => "#",
+            getAnchorUrl: () => "#"
         };
 
         async function renderPDF() {
             try {
-                status.innerText = "Download del file...";
-                const loadingTask = pdfjsLib.getDocument({
-                    url: url,
-                    disableAutoFetch: true,
-                    disableStream: true
-                });
-
-                const pdf = await loadingTask.promise;
-                status.style.display = 'none'; // Nascondi messaggio se OK
+                const pdf = await pdfjsLib.getDocument({url: url, disableStream: true, disableAutoFetch: true}).promise;
                 
                 for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
                     const page = await pdf.getPage(pageNum);
+                    
                     const wrapper = document.createElement('div');
                     wrapper.className = 'page-wrapper';
+                    
+                    const canvasWrapper = document.createElement('div');
+                    canvasWrapper.className = 'canvas-wrapper';
+                    
+                    const canvas = document.createElement('canvas');
+                    const context = canvas.getContext('2d');
+                    
+                    wrapper.appendChild(canvasWrapper);
+                    canvasWrapper.appendChild(canvas);
                     container.appendChild(wrapper);
 
-                    const baseViewport = page.getViewport({ scale: 1.0 });
-                    const fitWidthScale = window.innerWidth / baseViewport.width;
-                    const viewport = page.getViewport({ scale: fitWidthScale * 1.5 }); // Zoom leggero per qualità
+                    // Calcolo scala per adattarsi sia in altezza che larghezza
+                    const viewportBase = page.getViewport({ scale: 1.0 });
+                    const scale = Math.min(window.innerWidth / viewportBase.width, window.innerHeight / viewportBase.height);
+                    const viewport = page.getViewport({ scale: scale * 2 }); // x2 per nitidezza
 
-                    const canvas = document.createElement('canvas');
                     canvas.width = viewport.width;
                     canvas.height = viewport.height;
-                    canvas.style.width = "100%"; // Adatta allo schermo
-                    wrapper.appendChild(canvas);
+                    canvas.style.width = (viewport.width / 2) + "px";
+                    canvas.style.height = (viewport.height / 2) + "px";
 
-                    await page.render({ canvasContext: canvas.getContext('2d'), viewport: viewport }).promise;
+                    await page.render({ canvasContext: context, viewport: viewport }).promise;
 
+                    // Layer Link
                     const annoDiv = document.createElement('div');
                     annoDiv.className = 'annotationLayer';
-                    annoDiv.style.width = canvas.clientWidth + "px";
-                    annoDiv.style.height = canvas.clientHeight + "px";
-                    wrapper.appendChild(annoDiv);
+                    annoDiv.style.width = (viewport.width / 2) + "px";
+                    annoDiv.style.height = (viewport.height / 2) + "px";
+                    canvasWrapper.appendChild(annoDiv);
 
                     const annotations = await page.getAnnotations();
                     pdfjsLib.AnnotationLayer.render({
-                        viewport: viewport.clone({ scale: canvas.clientWidth / baseViewport.width }),
+                        viewport: viewport.clone({ scale: scale }),
                         div: annoDiv,
                         annotations: annotations,
                         page: page,
                         linkService: linkService
                     });
                 }
-            } catch (err) {
-                status.innerHTML = "ERRORE: " + err.message + "<br><small>Controlla che il file documento.pdf sia sul server.</small>";
-                console.error(err);
-            }
+            } catch (err) { console.error(err); }
         }
 
         window.onload = renderPDF;
-
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js');
-        }
     </script>
 </body>
 </html>
