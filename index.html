@@ -50,7 +50,6 @@
 
         const container = document.getElementById('viewer-container');
 
-        // Mock del LinkService corretto per la versione 3.4.120
         const linkService = {
             externalLinkTarget: 2,
             externalLinkRel: 'noopener noreferrer nofollow',
@@ -60,7 +59,6 @@
             executeNamedAction: (action) => {},
             cachePageRef: (pageRef, pageNum) => {},
             isPageVisible: (pageNum) => true,
-            // Questa è la funzione che mancava e causava l'errore:
             addLinkAttributes: (link, url, newWindow) => {
                 if (url) {
                     link.href = url;
@@ -71,7 +69,16 @@
 
         async function renderPDF() {
             try {
-                const pdf = await pdfjsLib.getDocument(url).promise;
+                // Caricamento forzato a blocco unico per evitare errori di offset
+                const loadingTask = pdfjsLib.getDocument({
+                    url: url,
+                    disableAutoFetch: true,
+                    disableStream: true,
+                    cMapUrl: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/cmaps/',
+                    cMapPacked: true,
+                });
+
+                const pdf = await loadingTask.promise;
                 
                 for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
                     const page = await pdf.getPage(pageNum);
@@ -104,11 +111,12 @@
                         div: annoDiv,
                         annotations: annotations,
                         page: page,
-                        linkService: linkService // Ora con addLinkAttributes
+                        linkService: linkService
                     });
                 }
             } catch (err) {
                 console.error("Errore:", err);
+                document.body.innerHTML = `<div style="color:white; text-align:center; padding-top:50px;">Errore nel caricamento del PDF.</div>`;
             }
         }
 
