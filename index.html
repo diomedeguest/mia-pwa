@@ -33,26 +33,27 @@
 
         .canvas-wrapper {
             position: relative;
-            /* Se il PDF non occupa tutto lo schermo, lo centriamo */
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            display: inline-block;
         }
 
         canvas { display: block; max-width: 100vw; max-height: 100vh; }
 
-        /* Strato dei link: deve stare ESATTAMENTE sopra il canvas */
+        /* Strato dei link: lo forziamo a essere visibile */
         .annotationLayer {
             position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 10; /* Molto alto per stare sopra a tutto */
+            top: 0; left: 0;
+            right: 0; bottom: 0;
+            z-index: 10;
+            pointer-events: auto;
         }
 
-        /* Debug: rende i link visibili (gialli) */
-        .annotationLayer .linkAnnotation > a {
-            background-color: rgba(255, 255, 0, 0.3) !important;
-            border: 1px solid orange !important;
+        /* DEBUG: Forza la visibilità dei link */
+        .annotationLayer section, .annotationLayer a {
+            display: block !important;
+            background-color: rgba(255, 255, 0, 0.4) !important; /* Giallo acceso */
+            border: 2px solid red !important; /* Bordo rosso per vederli subito */
+            position: absolute !important;
+            cursor: pointer !important;
         }
 
         #viewer-container::-webkit-scrollbar { display: none; }
@@ -67,28 +68,11 @@
         const pdfjsLib = window['pdfjs-dist/build/pdf'];
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
 
-        const container = document.getElementById('viewer-container');
-
-        // Servizio per gestire i link
-        const linkService = {
-            externalLinkTarget: 2,
-            addLinkAttributes: (link, url) => {
-                if (url) {
-                    link.href = url;
-                    link.target = "_blank";
-                    link.rel = "noopener noreferrer";
-                }
-            },
-            getDestinationHash: () => "#",
-            getAnchorUrl: () => "#",
-            setHash: () => {},
-            executeNamedAction: () => {}
-        };
-
         async function renderPDF() {
             try {
                 const pdf = await pdfjsLib.getDocument({url: url, disableStream: true, disableAutoFetch: true}).promise;
-                
+                const container = document.getElementById('viewer-container');
+
                 for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
                     const page = await pdf.getPage(pageNum);
                     
@@ -104,42 +88,48 @@
                     const annoDiv = document.createElement('div');
                     annoDiv.className = 'annotationLayer';
 
-                    container.appendChild(wrapper);
-                    wrapper.appendChild(canvasWrapper);
                     canvasWrapper.appendChild(canvas);
                     canvasWrapper.appendChild(annoDiv);
+                    wrapper.appendChild(canvasWrapper);
+                    container.appendChild(wrapper);
 
-                    // Calcolo scala perfetta
+                    // Calcolo scala
                     const viewportBase = page.getViewport({ scale: 1.0 });
                     const scale = Math.min(window.innerWidth / viewportBase.width, window.innerHeight / viewportBase.height);
-                    
-                    // Renderizziamo a scala 2 per la qualità, ma visualizziamo a scala "scale"
-                    const viewport = page.getViewport({ scale: scale * 2 });
+                    const viewport = page.getViewport({ scale: scale });
 
-                    canvas.width = viewport.width;
-                    canvas.height = viewport.height;
-                    canvas.style.width = (viewport.width / 2) + "px";
-                    canvas.style.height = (viewport.height / 2) + "px";
+                    // Setup Canvas
+                    canvas.width = viewport.width * window.devicePixelRatio;
+                    canvas.height = viewport.height * window.devicePixelRatio;
+                    canvas.style.width = viewport.width + "px";
+                    canvas.style.height = viewport.height + "px";
+                    context.scale(window.devicePixelRatio, window.devicePixelRatio);
 
+                    // Render Pagina
                     await page.render({ canvasContext: context, viewport: viewport }).promise;
 
-                    // Prepariamo l'annotation layer con la scala corretta (quella di visualizzazione)
+                    // Rendering Link
                     const annotations = await page.getAnnotations();
-                    const annotationViewport = page.getViewport({ scale: scale });
-                    
-                    annoDiv.style.width = annotationViewport.width + "px";
-                    annoDiv.style.height = annotationViewport.height + "px";
-
                     pdfjsLib.AnnotationLayer.render({
-                        viewport: annotationViewport,
+                        viewport: viewport,
                         div: annoDiv,
                         annotations: annotations,
                         page: page,
-                        linkService: linkService
+                        linkService: {
+                            externalLinkTarget: 2,
+                            addLinkAttributes: (link, url) => {
+                                link.href = url;
+                                link.target = "_blank";
+                            },
+                            getDestinationHash: () => "#",
+                            getAnchorUrl: () => "#",
+                            setHash: () => {},
+                            executeNamedAction: () => {}
+                        }
                     });
                 }
             } catch (err) {
-                console.error("Errore fatale:", err);
+                console.error("Errore:", err);
             }
         }
 
