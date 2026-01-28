@@ -3,73 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Diomede Apartments - Guida</title>
+    <title>Diomede Apartments</title>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf_viewer.min.css">
 
     <style>
-        body, html { 
-            margin: 0; padding: 0; height: 100%; width: 100%; 
-            overflow: hidden; background-color: #1a1a1a; 
-        }
+        body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background-color: #1a1a1a; color: white; font-family: sans-serif; }
+        #viewer-container { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; height: 100vh; width: 100vw; -webkit-overflow-scrolling: touch; }
+        .page-wrapper { position: relative; flex-shrink: 0; width: 100vw; height: 100vh; scroll-snap-align: start; display: flex; justify-content: center; align-items: center; }
+        .canvas-wrapper { position: relative; }
+        canvas { display: block; max-width: 100vw; max-height: 100vh; }
+        .annotationLayer { position: absolute; top: 0; left: 0; z-index: 10; }
+        #debug-log { position: fixed; top: 10px; left: 10px; background: rgba(0,0,0,0.8); font-size: 12px; padding: 10px; z-index: 1000; pointer-events: none; }
         
-        #viewer-container {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            height: 100vh;
-            width: 100vw;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .page-wrapper {
-            position: relative;
-            flex-shrink: 0;
-            width: 100vw;
-            height: 100vh;
-            scroll-snap-align: start;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .canvas-wrapper {
-            position: relative; /* Indispensabile per ancorare i link */
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
-        }
-
-        canvas { 
-            display: block; 
-            max-width: 100vw; 
-            max-height: 100vh; 
-        }
-
-        /* Strato dei link */
-        .annotationLayer {
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 10;
-        }
-
-        /* Debug Link: Rende i link leggermente visibili per testarli. 
-           Rimuovi le 3 righe sotto una volta verificato che funzionano */
-        .annotationLayer .linkAnnotation > a {
-            background-color: rgba(0, 255, 0, 0.1) !important;
-            border: 1px solid rgba(0, 255, 0, 0.3) !important;
-        }
-
-        #viewer-container::-webkit-scrollbar { display: none; }
+        /* Stile per rendere i link cliccabili e visibili per test */
+        .linkAnnotation > a { background-color: rgba(255, 255, 0, 0.2) !important; border: 1px solid yellow !important; }
     </style>
 </head>
 <body>
 
+    <div id="debug-log">Inizializzazione...</div>
     <div id="viewer-container"></div>
 
     <script>
         const url = 'documento.pdf';
-        const pdfjsLib = window['pdfjs-dist/build/pdf'];
-        
-        // Configurazione Worker e Font
-        pdfjsLib.GlobalWorkerOptions.workerSrc = '
+        const log = document.getElementById('debug-log');
+
+        async function initPDF() {
+            try {
+                log.innerText = "Caricamento libreria...";
+                const pdfjsLib = window['pdfjs-dist/build/pdf'];
+                
+                // Forza l'uso di un worker "interno" per evitare blocchi del browser
+                pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+
+                log.innerText = "Recupero documento.pdf...";
+                const loadingTask = pdfjsLib.getDocument(url);
+                const pdf = await loadingTask.promise;
+
+                log.innerText = "PDF caricato. Elaborazione pagine...";
+                const container = document.getElementById('viewer-container');
+
+                for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+                    const page = await pdf.getPage(pageNum);
+                    const viewportBase = page.getViewport({ scale: 1.0 });
+                    const scale = Math.min(window.innerWidth / viewportBase.width, window.innerHeight / viewportBase.height);
+                    const viewport = page.getViewport({ scale: scale });
+
+                    // Creazione elementi
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'page-wrapper';
+                    const canvasWrapper = document.createElement('div');
+                    canvasWrapper.className = 'canvas-wrapper';
+                    const canvas = document.createElement('canvas');
+                    const annoDiv = document.createElement('div');
+                    annoDiv.className = 'annotationLayer';
+
+                    canvasWrapper.style.width = viewport.width + "px";
+                    canvasWrapper.style.height = viewport.height + "px";
+                    canvas.width = viewport.width * window.devicePixelRatio;
+                    canvas.height = viewport.height * window.devicePixelRatio;
+                    canvas.style.width = viewport.width + "px";
+                    canvas.style.height = viewport.height + "px";
+                    
+                    const context = canvas.getContext('2d');
+                    context.scale(window.devicePixelRatio, window.devicePixelRatio);
+
+                    canvasWrapper.appendChild(canvas);
+                    canvasWrapper.appendChild(annoDiv);
+                    wrapper.appendChild(canvasWrapper);
+                    container.appendChild(wrapper);
+
+                    // Rendering pagina
+                    await page.render({ canvasContext: context, viewport: viewport }).promise;
+
+                    // Rendering Link
+                    const annotations = await page.getAnnotations();
+                    pdfjsLib.AnnotationLayer.render({
+                        viewport: viewport,
+                        div: annoDiv,
+                        annotations: annotations,
+                        page: page,
+                        linkService: {
+                            externalLinkTarget: 2,
+                            addLinkAttributes: (link, url) => {
+                                link.href = url;
+                                link.target = "_blank";
+                            }
+                        }
+                    });
+                }
+                log.style.display = 'none'; // Nasconde il log se tutto è ok
+            } catch (err) {
+                log.innerHTML = "<span style='color:red'>ERRORE: " + err.message + "</span><br>Assicurati che il file si chiami documento.pdf";
+                console.error(err);
+            }
+        }
+
+        window.onload = initPDF;
+    </script>
+</body>
+</html>
