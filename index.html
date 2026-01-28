@@ -4,54 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Diomede Apartments</title>
-    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
-
     <style>
         body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background-color: #1a1a1a; color: white; font-family: sans-serif; }
-        
-        #viewer-container { 
-            display: flex; 
-            overflow-x: auto; 
-            scroll-snap-type: x mandatory; 
-            height: 100vh; 
-            width: 100vw; 
-            -webkit-overflow-scrolling: touch; 
-            scroll-behavior: smooth;
-        }
-
-        .page-wrapper { 
-            position: relative; 
-            flex-shrink: 0; 
-            width: 100vw; 
-            height: 100vh; 
-            scroll-snap-align: start; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-        }
-
+        #viewer-container { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; height: 100vh; width: 100vw; -webkit-overflow-scrolling: touch; scroll-behavior: smooth; }
+        .page-wrapper { position: relative; flex-shrink: 0; width: 100vw; height: 100vh; scroll-snap-align: start; display: flex; justify-content: center; align-items: center; }
         .canvas-wrapper { position: relative; }
         canvas { display: block; max-width: 100vw; max-height: 100vh; }
-
-        /* Bottoni cliccabili */
-        .hotspot {
-            position: absolute;
-            cursor: pointer;
-            z-index: 999;
-            /* Per testare la posizione, togli il commento alla riga sotto */
-            /* background: rgba(0, 255, 0, 0.3); border: 1px solid green; */
-        }
-
-        #loader { 
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: #1a1a1a; display: flex; justify-content: center; 
-            align-items: center; z-index: 10000; 
-        }
+        .hotspot { position: absolute; cursor: pointer; z-index: 999; background: rgba(255, 255, 255, 0); }
+        #loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #1a1a1a; display: flex; justify-content: center; align-items: center; z-index: 10000; }
     </style>
 </head>
 <body>
-
     <div id="loader">Caricamento Guida...</div>
     <div id="viewer-container"></div>
 
@@ -62,12 +26,7 @@
 
         async function init() {
             try {
-                const pdf = await pdfjsLib.getDocument({
-                    url: url, 
-                    disableAutoFetch: true, 
-                    disableStream: true
-                }).promise;
-                
+                const pdf = await pdfjsLib.getDocument({url: url, disableAutoFetch: true, disableStream: true}).promise;
                 const container = document.getElementById('viewer-container');
                 document.getElementById('loader').style.display = 'none';
 
@@ -78,52 +37,41 @@
                     const canvasWrapper = document.createElement('div');
                     canvasWrapper.className = 'canvas-wrapper';
                     const canvas = document.createElement('canvas');
-                    
                     canvasWrapper.appendChild(canvas);
                     wrapper.appendChild(canvasWrapper);
                     container.appendChild(wrapper);
 
                     const vp = page.getViewport({ scale: Math.min(window.innerWidth / page.getViewport({scale:1}).width, window.innerHeight / page.getViewport({scale:1}).height) });
                     const dpr = window.devicePixelRatio || 1;
-                    canvas.width = vp.width * dpr;
-                    canvas.height = vp.height * dpr;
-                    canvas.style.width = vp.width + "px";
-                    canvas.style.height = vp.height + "px";
+                    canvas.width = vp.width * dpr; canvas.height = vp.height * dpr;
+                    canvas.style.width = vp.width + "px"; canvas.style.height = vp.height + "px";
                     canvas.getContext('2d').scale(dpr, dpr);
-
                     await page.render({ canvasContext: canvas.getContext('2d'), viewport: vp }).promise;
 
-                    // --- MAPPATURA MANUALE PAGINA 3 ---
+                    // MAPPATURA PAGINA 3 CON LE TUE NUOVE INDICAZIONI
                     if (i === 3) {
                         const menu = [
-                            { top: '32%', left: '8%',  w: '40%', h: '9%', jump: 4 },  // Dettagli casa (Pag 4)
-                            { top: '32%', left: '52%', w: '40%', h: '9%', jump: 2 },  // Contatti (Pag 2)
-                            { top: '42%', left: '8%',  w: '40%', h: '9%', jump: 6 },  // Istruzioni/Cassaforte (Pag 6)
-                            { top: '42%', left: '52%', w: '40%', h: '9%', jump: 11 }, // Guide (Pag 11)
-                            { top: '53%', left: '8%',  w: '40%', h: '9%', jump: 10 }, // Wi-Fi (Pag 10) - CORRETTO
-                            { top: '53%', left: '52%', w: '40%', h: '9%', jump: 13 }, // Trasporti (Pag 13)
-                            { top: '64%', left: '8%',  w: '40%', h: '9%', jump: 12 }, // Cosa vedere (Pag 12)
-                            { top: '64%', left: '52%', w: '40%', h: '9%', jump: 12 }, // Convenzioni (Pag 12)
-                            { top: '75%', left: '30%', w: '40%', h: '9%', jump: 2 }   // Check Out (Pag 2)
+                            { top: '34%', left: '8%',  w: '40%', h: '8%', jump: 4 },  // Dettagli casa -> Pag 4
+                            { top: '34%', left: '52%', w: '40%', h: '8%', jump: 5 },  // Contatti -> Pag 5
+                            { top: '44%', left: '8%',  w: '40%', h: '8%', jump: 6 },  // Istruzioni -> Pag 6
+                            { top: '44%', left: '52%', w: '40%', h: '8%', jump: 12 }, // Guide -> Pag 12
+                            { top: '54%', left: '8%',  w: '40%', h: '8%', jump: 10 }, // Wi-Fi -> Pag 10
+                            { top: '54%', left: '52%', w: '40%', h: '8%', jump: 13 }, // Trasporti -> Pag 13
+                            { top: '64%', left: '8%',  w: '40%', h: '8%', jump: 12 }, // Cosa vedere -> Pag 12
+                            { top: '64%', left: '52%', w: '40%', h: '8%', jump: 12 }, // Convenzioni -> Pag 12
+                            { top: '74%', left: '30%', w: '40%', h: '8%', jump: 5 }   // Check Out -> Pag 5
                         ];
-
                         menu.forEach(m => {
                             const btn = document.createElement('div');
                             btn.className = 'hotspot';
-                            btn.style.top = m.top; 
-                            btn.style.left = m.left;
-                            btn.style.width = m.w; 
-                            btn.style.height = m.h;
-                            btn.onclick = () => {
-                                container.children[m.jump - 1].scrollIntoView({ behavior: 'smooth' });
-                            };
+                            btn.style.top = m.top; btn.style.left = m.left;
+                            btn.style.width = m.w; btn.style.height = m.h;
+                            btn.onclick = () => container.children[m.jump - 1].scrollIntoView({ behavior: 'smooth' });
                             canvasWrapper.appendChild(btn);
                         });
                     }
                 }
-            } catch (e) {
-                console.error(e);
-            }
+            } catch (e) { console.error(e); }
         }
         window.onload = init;
     </script>
