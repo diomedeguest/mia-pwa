@@ -16,8 +16,12 @@
         .annotationLayer { position: absolute; top: 0; left: 0; z-index: 10; }
         #debug-log { position: fixed; top: 10px; left: 10px; background: rgba(0,0,0,0.8); font-size: 12px; padding: 10px; z-index: 1000; pointer-events: none; }
         
-        /* Stile per rendere i link cliccabili e visibili per test */
-        .linkAnnotation > a { background-color: rgba(255, 255, 0, 0.2) !important; border: 1px solid yellow !important; }
+        /* Stile per i link ipertestuali (invisibili ma cliccabili) */
+        .annotationLayer .linkAnnotation > a {
+            display: block;
+            position: absolute;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -29,28 +33,41 @@
         const url = 'documento.pdf';
         const log = document.getElementById('debug-log');
 
+        // Oggetto LinkService completo per evitare errori TypeError
+        const fullLinkService = {
+            externalLinkTarget: 2,
+            addLinkAttributes: (link, url) => {
+                link.href = url;
+                link.target = "_blank";
+                link.rel = "noopener noreferrer";
+            },
+            getDestinationHash: (dest) => "#",
+            getAnchorUrl: (hash) => "#",
+            setHash: (hash) => {},
+            executeNamedAction: (action) => {},
+            cachePageRef: (pageRef, pageNum) => {},
+            isPageVisible: (pageNum) => true
+        };
+
         async function initPDF() {
             try {
-                log.innerText = "Caricamento libreria...";
                 const pdfjsLib = window['pdfjs-dist/build/pdf'];
-                
-                // Forza l'uso di un worker "interno" per evitare blocchi del browser
                 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
 
-                log.innerText = "Recupero documento.pdf...";
+                log.innerText = "Caricamento PDF...";
                 const loadingTask = pdfjsLib.getDocument(url);
                 const pdf = await loadingTask.promise;
 
-                log.innerText = "PDF caricato. Elaborazione pagine...";
                 const container = document.getElementById('viewer-container');
+                log.innerText = "Rendering...";
 
                 for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
                     const page = await pdf.getPage(pageNum);
+                    
                     const viewportBase = page.getViewport({ scale: 1.0 });
                     const scale = Math.min(window.innerWidth / viewportBase.width, window.innerHeight / viewportBase.height);
                     const viewport = page.getViewport({ scale: scale });
 
-                    // Creazione elementi
                     const wrapper = document.createElement('div');
                     wrapper.className = 'page-wrapper';
                     const canvasWrapper = document.createElement('div');
@@ -61,41 +78,36 @@
 
                     canvasWrapper.style.width = viewport.width + "px";
                     canvasWrapper.style.height = viewport.height + "px";
-                    canvas.width = viewport.width * window.devicePixelRatio;
-                    canvas.height = viewport.height * window.devicePixelRatio;
+                    
+                    // Alta risoluzione
+                    const dpr = window.devicePixelRatio || 1;
+                    canvas.width = viewport.width * dpr;
+                    canvas.height = viewport.height * dpr;
                     canvas.style.width = viewport.width + "px";
                     canvas.style.height = viewport.height + "px";
                     
                     const context = canvas.getContext('2d');
-                    context.scale(window.devicePixelRatio, window.devicePixelRatio);
+                    context.scale(dpr, dpr);
 
                     canvasWrapper.appendChild(canvas);
                     canvasWrapper.appendChild(annoDiv);
                     wrapper.appendChild(canvasWrapper);
                     container.appendChild(wrapper);
 
-                    // Rendering pagina
                     await page.render({ canvasContext: context, viewport: viewport }).promise;
 
-                    // Rendering Link
                     const annotations = await page.getAnnotations();
                     pdfjsLib.AnnotationLayer.render({
                         viewport: viewport,
                         div: annoDiv,
                         annotations: annotations,
                         page: page,
-                        linkService: {
-                            externalLinkTarget: 2,
-                            addLinkAttributes: (link, url) => {
-                                link.href = url;
-                                link.target = "_blank";
-                            }
-                        }
+                        linkService: fullLinkService
                     });
                 }
-                log.style.display = 'none'; // Nasconde il log se tutto è ok
+                log.style.display = 'none';
             } catch (err) {
-                log.innerHTML = "<span style='color:red'>ERRORE: " + err.message + "</span><br>Assicurati che il file si chiami documento.pdf";
+                log.innerHTML = "<span style='color:red'>ERRORE: " + err.message + "</span>";
                 console.error(err);
             }
         }
