@@ -11,6 +11,7 @@
 
     <style>
         body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background-color: #1a1a1a; }
+        
         #viewer-container {
             display: flex;
             overflow-x: auto;
@@ -19,23 +20,33 @@
             width: 100vw;
             -webkit-overflow-scrolling: touch;
         }
+
         .page-wrapper {
             position: relative;
             flex-shrink: 0;
             width: 100vw;
             height: 100vh;
             scroll-snap-align: start;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            display: block; /* Fondamentale per non rimpicciolire */
+            overflow-y: auto; /* Permette lo scorrimento verticale se la pagina è lunga */
+            background-color: #1a1a1a;
         }
-        canvas { max-width: 100%; max-height: 100%; display: block; z-index: 1; }
+
+        canvas { 
+            display: block; 
+            margin: 0 auto;
+            max-width: 100%; /* Forza il PDF a non superare la larghezza dello schermo */
+            z-index: 1; 
+        }
+
         .annotationLayer {
             position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
+            top: 0; 
+            left: 50%;
+            transform: translateX(-50%); /* Centra i link sopra il canvas */
             z-index: 2;
         }
+
         #viewer-container::-webkit-scrollbar { display: none; }
     </style>
 </head>
@@ -69,7 +80,6 @@
 
         async function renderPDF() {
             try {
-                // Caricamento forzato a blocco unico per evitare errori di offset
                 const loadingTask = pdfjsLib.getDocument({
                     url: url,
                     disableAutoFetch: true,
@@ -86,45 +96,14 @@
                     wrapper.className = 'page-wrapper';
                     container.appendChild(wrapper);
 
-                    const viewport = page.getViewport({ scale: 2 });
-                    const screenScale = Math.min(window.innerWidth / viewport.width, window.innerHeight / viewport.height);
-                    const finalViewport = page.getViewport({ scale: screenScale * 2 });
+                    // Calcolo scala per adattarsi perfettamente alla larghezza del tablet
+                    const baseViewport = page.getViewport({ scale: 1.0 });
+                    const fitWidthScale = window.innerWidth / baseViewport.width;
+                    const viewport = page.getViewport({ scale: fitWidthScale });
 
                     const canvas = document.createElement('canvas');
-                    canvas.height = finalViewport.height;
-                    canvas.width = finalViewport.width;
-                    canvas.style.width = (finalViewport.width / 2) + "px";
-                    canvas.style.height = (finalViewport.height / 2) + "px";
+                    canvas.width = viewport.width;
+                    canvas.height = viewport.height;
                     wrapper.appendChild(canvas);
 
-                    await page.render({ canvasContext: canvas.getContext('2d'), viewport: finalViewport }).promise;
-
-                    const annoDiv = document.createElement('div');
-                    annoDiv.className = 'annotationLayer';
-                    annoDiv.style.width = (finalViewport.width / 2) + "px";
-                    annoDiv.style.height = (finalViewport.height / 2) + "px";
-                    wrapper.appendChild(annoDiv);
-
-                    const annotations = await page.getAnnotations();
-                    pdfjsLib.AnnotationLayer.render({
-                        viewport: finalViewport.clone({ scale: screenScale }),
-                        div: annoDiv,
-                        annotations: annotations,
-                        page: page,
-                        linkService: linkService
-                    });
-                }
-            } catch (err) {
-                console.error("Errore:", err);
-                document.body.innerHTML = `<div style="color:white; text-align:center; padding-top:50px;">Errore nel caricamento del PDF.</div>`;
-            }
-        }
-
-        renderPDF();
-
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js');
-        }
-    </script>
-</body>
-</html>
+                    await page.
