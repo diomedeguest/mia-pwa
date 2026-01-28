@@ -3,13 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Diomede Apartments</title>
+    <title>Diomede Apartments - Guida</title>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf_viewer.min.css">
 
     <style>
-        body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background-color: #1a1a1a; }
+        body, html { 
+            margin: 0; padding: 0; height: 100%; width: 100%; 
+            overflow: hidden; background-color: #1a1a1a; 
+        }
         
         #viewer-container {
             display: flex;
@@ -32,28 +35,29 @@
         }
 
         .canvas-wrapper {
-            position: relative;
-            display: inline-block;
+            position: relative; /* Indispensabile per ancorare i link */
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
         }
 
-        canvas { display: block; max-width: 100vw; max-height: 100vh; }
+        canvas { 
+            display: block; 
+            max-width: 100vw; 
+            max-height: 100vh; 
+        }
 
-        /* Strato dei link: lo forziamo a essere visibile */
+        /* Strato dei link */
         .annotationLayer {
             position: absolute;
-            top: 0; left: 0;
-            right: 0; bottom: 0;
+            top: 0;
+            left: 0;
             z-index: 10;
-            pointer-events: auto;
         }
 
-        /* DEBUG: Forza la visibilità dei link */
-        .annotationLayer section, .annotationLayer a {
-            display: block !important;
-            background-color: rgba(255, 255, 0, 0.4) !important; /* Giallo acceso */
-            border: 2px solid red !important; /* Bordo rosso per vederli subito */
-            position: absolute !important;
-            cursor: pointer !important;
+        /* Debug Link: Rende i link leggermente visibili per testarli. 
+           Rimuovi le 3 righe sotto una volta verificato che funzionano */
+        .annotationLayer .linkAnnotation > a {
+            background-color: rgba(0, 255, 0, 0.1) !important;
+            border: 1px solid rgba(0, 255, 0, 0.3) !important;
         }
 
         #viewer-container::-webkit-scrollbar { display: none; }
@@ -66,74 +70,6 @@
     <script>
         const url = 'documento.pdf';
         const pdfjsLib = window['pdfjs-dist/build/pdf'];
-        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
-
-        async function renderPDF() {
-            try {
-                const pdf = await pdfjsLib.getDocument({url: url, disableStream: true, disableAutoFetch: true}).promise;
-                const container = document.getElementById('viewer-container');
-
-                for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
-                    const page = await pdf.getPage(pageNum);
-                    
-                    const wrapper = document.createElement('div');
-                    wrapper.className = 'page-wrapper';
-                    
-                    const canvasWrapper = document.createElement('div');
-                    canvasWrapper.className = 'canvas-wrapper';
-                    
-                    const canvas = document.createElement('canvas');
-                    const context = canvas.getContext('2d');
-                    
-                    const annoDiv = document.createElement('div');
-                    annoDiv.className = 'annotationLayer';
-
-                    canvasWrapper.appendChild(canvas);
-                    canvasWrapper.appendChild(annoDiv);
-                    wrapper.appendChild(canvasWrapper);
-                    container.appendChild(wrapper);
-
-                    // Calcolo scala
-                    const viewportBase = page.getViewport({ scale: 1.0 });
-                    const scale = Math.min(window.innerWidth / viewportBase.width, window.innerHeight / viewportBase.height);
-                    const viewport = page.getViewport({ scale: scale });
-
-                    // Setup Canvas
-                    canvas.width = viewport.width * window.devicePixelRatio;
-                    canvas.height = viewport.height * window.devicePixelRatio;
-                    canvas.style.width = viewport.width + "px";
-                    canvas.style.height = viewport.height + "px";
-                    context.scale(window.devicePixelRatio, window.devicePixelRatio);
-
-                    // Render Pagina
-                    await page.render({ canvasContext: context, viewport: viewport }).promise;
-
-                    // Rendering Link
-                    const annotations = await page.getAnnotations();
-                    pdfjsLib.AnnotationLayer.render({
-                        viewport: viewport,
-                        div: annoDiv,
-                        annotations: annotations,
-                        page: page,
-                        linkService: {
-                            externalLinkTarget: 2,
-                            addLinkAttributes: (link, url) => {
-                                link.href = url;
-                                link.target = "_blank";
-                            },
-                            getDestinationHash: () => "#",
-                            getAnchorUrl: () => "#",
-                            setHash: () => {},
-                            executeNamedAction: () => {}
-                        }
-                    });
-                }
-            } catch (err) {
-                console.error("Errore:", err);
-            }
-        }
-
-        window.onload = renderPDF;
-    </script>
-</body>
-</html>
+        
+        // Configurazione Worker e Font
+        pdfjsLib.GlobalWorkerOptions.workerSrc = '
