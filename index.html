@@ -39,8 +39,8 @@
             position: absolute;
             cursor: pointer;
             z-index: 999;
-            /* Debug: togli il commento sotto per vedere i rettangoli durante i test */
-            /* background: rgba(255, 0, 0, 0.2); border: 1px solid red; */
+            /* Per testare la posizione, togli il commento alla riga sotto */
+            /* background: rgba(0, 255, 0, 0.3); border: 1px solid green; */
         }
 
         #loader { 
@@ -62,7 +62,6 @@
 
         async function init() {
             try {
-                // Caricamento forzato per file pesanti
                 const pdf = await pdfjsLib.getDocument({
                     url: url, 
                     disableAutoFetch: true, 
@@ -94,18 +93,18 @@
 
                     await page.render({ canvasContext: canvas.getContext('2d'), viewport: vp }).promise;
 
-                    // MAPPATURA MANUALE PAGINA 3 (ACCESSO RAPIDO)
+                    // --- MAPPATURA MANUALE PAGINA 3 ---
                     if (i === 3) {
                         const menu = [
-                            { top: '35%', left: '8%',  w: '40%', h: '8%', jump: 4 },  // Dettagli casa
-                            { top: '35%', left: '52%', w: '40%', h: '8%', jump: 14 }, // Contatti
-                            { top: '45%', left: '8%',  w: '40%', h: '8%', jump: 6 },  // Istruzioni
-                            { top: '45%', left: '52%', w: '40%', h: '8%', jump: 12 }, // Guide (stima)
-                            { top: '55%', left: '8%',  w: '40%', h: '8%', jump: 10 }, // Wi-Fi
-                            { top: '55%', left: '52%', w: '40%', h: '8%', jump: 13 }, // Trasporti (stima)
-                            { top: '65%', left: '8%',  w: '40%', h: '8%', jump: 11 }, // Cosa vedere
-                            { top: '65%', left: '52%', w: '40%', h: '8%', jump: 12 }, // Convenzioni
-                            { top: '75%', left: '30%', w: '40%', h: '8%', jump: 15 }  // Check out
+                            { top: '32%', left: '8%',  w: '40%', h: '9%', jump: 4 },  // Dettagli casa (Pag 4)
+                            { top: '32%', left: '52%', w: '40%', h: '9%', jump: 2 },  // Contatti (Pag 2)
+                            { top: '42%', left: '8%',  w: '40%', h: '9%', jump: 6 },  // Istruzioni/Cassaforte (Pag 6)
+                            { top: '42%', left: '52%', w: '40%', h: '9%', jump: 11 }, // Guide (Pag 11)
+                            { top: '53%', left: '8%',  w: '40%', h: '9%', jump: 10 }, // Wi-Fi (Pag 10) - CORRETTO
+                            { top: '53%', left: '52%', w: '40%', h: '9%', jump: 13 }, // Trasporti (Pag 13)
+                            { top: '64%', left: '8%',  w: '40%', h: '9%', jump: 12 }, // Cosa vedere (Pag 12)
+                            { top: '64%', left: '52%', w: '40%', h: '9%', jump: 12 }, // Convenzioni (Pag 12)
+                            { top: '75%', left: '30%', w: '40%', h: '9%', jump: 2 }   // Check Out (Pag 2)
                         ];
 
                         menu.forEach(m => {
@@ -116,7 +115,6 @@
                             btn.style.width = m.w; 
                             btn.style.height = m.h;
                             btn.onclick = () => {
-                                // Scorrimento fluido alla pagina desiderata
                                 container.children[m.jump - 1].scrollIntoView({ behavior: 'smooth' });
                             };
                             canvasWrapper.appendChild(btn);
@@ -125,7 +123,6 @@
                 }
             } catch (e) {
                 console.error(e);
-                document.getElementById('loader').innerText = "Errore: rinomina il file in documento.pdf";
             }
         }
         window.onload = init;
