@@ -3,15 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Diomede Apartments - Guida</title>
+    <title>Diomede Apartments</title>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf_viewer.min.css">
 
     <style>
         body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background-color: #1a1a1a; color: white; font-family: sans-serif; }
-        
-        /* Contenitore a scorrimento orizzontale */
         #viewer-container { 
             display: flex; 
             overflow-x: auto; 
@@ -21,25 +19,14 @@
             -webkit-overflow-scrolling: touch; 
             scroll-behavior: smooth;
         }
-
         .page-wrapper { 
-            position: relative; 
-            flex-shrink: 0; 
-            width: 100vw; 
-            height: 100vh; 
-            scroll-snap-align: start; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
+            position: relative; flex-shrink: 0; width: 100vw; height: 100vh; 
+            scroll-snap-align: start; display: flex; justify-content: center; align-items: center; 
         }
-
         .canvas-wrapper { position: relative; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
         canvas { display: block; max-width: 100vw; max-height: 100vh; }
-
-        /* Strato dei link (Annotation Layer) */
         .annotationLayer { position: absolute; top: 0; left: 0; z-index: 10; }
         
-        /* Overlay di caricamento per i 19MB del file */
         #loader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #1a1a1a; display: flex; flex-direction: column;
@@ -53,7 +40,7 @@
 
     <div id="loader">
         <div class="spinner"></div>
-        <p>Caricamento guida di lusso...</p>
+        <p>Caricamento guida (19MB)...</p>
     </div>
 
     <div id="viewer-container"></div>
@@ -65,7 +52,6 @@
 
         async function renderPDF() {
             try {
-                // Configurazione per file pesanti (no streaming a pezzi per evitare errori offset)
                 const loadingTask = pdfjsLib.getDocument({
                     url: url,
                     disableAutoFetch: true,
@@ -76,26 +62,32 @@
                 const container = document.getElementById('viewer-container');
                 document.getElementById('loader').style.display = 'none';
 
-                // Gestore dei link interni (per l'indice a pagina 3)
+                // LinkService "Blindato": contiene tutte le funzioni richieste per evitare TypeError
                 const linkService = {
                     externalLinkTarget: 2,
+                    isInPresentationMode: false,
+                    addLinkAttributes: (link, url, target) => {
+                        link.href = url;
+                        link.target = "_blank";
+                        link.rel = "noopener noreferrer";
+                    },
+                    getDestinationHash: (dest) => "#",
+                    getAnchorUrl: (hash) => "#",
+                    setHash: (hash) => {},
+                    executeNamedAction: (action) => {},
+                    cachePageRef: (pageRef, pageNum) => {},
+                    isPageVisible: (pageNum) => true,
                     navigateTo: async (dest) => {
                         const explicitDest = typeof dest === 'string' ? await pdf.getDestination(dest) : dest;
                         if (explicitDest) {
                             const pageIdx = await pdf.getPageIndex(explicitDest[0]);
-                            const targetPage = container.children[pageIdx];
-                            targetPage.scrollIntoView({ behavior: 'smooth' });
+                            container.children[pageIdx].scrollIntoView({ behavior: 'smooth' });
                         }
-                    },
-                    getDestinationHash: () => "#",
-                    getAnchorUrl: () => "#",
-                    setHash: () => {},
-                    executeNamedAction: () => {}
+                    }
                 };
 
                 for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
                     const page = await pdf.getPage(pageNum);
-                    
                     const wrapper = document.createElement('div');
                     wrapper.className = 'page-wrapper';
                     const canvasWrapper = document.createElement('div');
@@ -110,8 +102,8 @@
                     container.appendChild(wrapper);
 
                     const viewport = page.getViewport({ scale: Math.min(window.innerWidth / page.getViewport({scale:1}).width, window.innerHeight / page.getViewport({scale:1}).height) });
-                    
                     const dpr = window.devicePixelRatio || 1;
+                    
                     canvas.width = viewport.width * dpr;
                     canvas.height = viewport.height * dpr;
                     canvas.style.width = viewport.width + "px";
@@ -120,7 +112,6 @@
 
                     await page.render({ canvasContext: canvas.getContext('2d'), viewport: viewport }).promise;
 
-                    // Rendering dei link (Indice e Wi-Fi)
                     const annotations = await page.getAnnotations();
                     annoDiv.style.width = viewport.width + "px";
                     annoDiv.style.height = viewport.height + "px";
@@ -134,7 +125,8 @@
                     });
                 }
             } catch (err) {
-                alert("Errore caricamento: " + err.message);
+                console.error(err);
+                document.getElementById('loader').innerHTML = "<p style='color:red'>Errore: " + err.message + "</p>";
             }
         }
 
