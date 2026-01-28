@@ -10,22 +10,36 @@
 
     <style>
         body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background-color: #1a1a1a; }
-        #viewer-container { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; height: 100vh; width: 100vw; -webkit-overflow-scrolling: touch; }
-        .page-wrapper { position: relative; flex-shrink: 0; width: 100vw; height: 100vh; scroll-snap-align: start; display: flex; justify-content: center; align-items: center; }
+        #viewer-container { 
+            display: flex; 
+            overflow-x: auto; 
+            scroll-snap-type: x mandatory; 
+            height: 100vh; 
+            width: 100vw; 
+            -webkit-overflow-scrolling: touch; 
+        }
+        .page-wrapper { 
+            position: relative; 
+            flex-shrink: 0; 
+            width: 100vw; 
+            height: 100vh; 
+            scroll-snap-align: start; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+        }
         .canvas-wrapper { position: relative; }
         canvas { display: block; max-width: 100vw; max-height: 100vh; }
         
-        /* FORZIAMO LA VISIBILITÀ DEI LINK */
+        /* Strato annotazioni per i link interni */
         .annotationLayer {
             position: absolute;
             top: 0; left: 0;
-            z-index: 999;
-            pointer-events: auto;
+            z-index: 10;
         }
-        .annotationLayer a, .linkAnnotation > a {
-            background-color: rgba(255, 255, 0, 0.5) !important; /* GIALLO EVIDENTE */
-            border: 2px solid red !important;             /* BORDO ROSSO */
-            display: block !important;
+        /* Rendi i link attivi e visibili (gialli) per il test */
+        .annotationLayer .linkAnnotation > a {
+            background-color: rgba(255, 255, 0, 0.2) !important;
             cursor: pointer !important;
         }
     </style>
@@ -42,16 +56,39 @@
             try {
                 const loadingTask = pdfjsLib.getDocument({
                     url: url,
-                    cMapUrl: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/cmaps/',
-                    cMapPacked: true,
+                    disableAutoFetch: true,
+                    disableStream: true
                 });
 
                 const pdf = await loadingTask.promise;
                 const container = document.getElementById('viewer-container');
 
+                // Creiamo un linkService reale per gestire i salti di pagina
+                const linkService = {
+                    externalLinkTarget: 2,
+                    // Questa funzione permette di saltare alla pagina corretta
+                    navigateTo: (dest) => {
+                        if (typeof dest === 'string') {
+                            console.log("Salto a destinazione:", dest);
+                        }
+                        // Se il link punta a una pagina specifica
+                        pdf.getDestination(dest).then(explicitDest => {
+                            pdf.getPageIndex(explicitDest[0]).then(index => {
+                                const targetWrapper = container.children[index];
+                                targetWrapper.scrollIntoView({ behavior: 'smooth' });
+                            });
+                        });
+                    },
+                    getDestinationHash: (dest) => "#",
+                    getAnchorUrl: (hash) => "#",
+                    setHash: () => {},
+                    executeNamedAction: () => {},
+                    cachePageRef: () => {},
+                    isPageVisible: () => true
+                };
+
                 for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
                     const page = await pdf.getPage(pageNum);
-                    
                     const wrapper = document.createElement('div');
                     wrapper.className = 'page-wrapper';
                     const canvasWrapper = document.createElement('div');
@@ -67,40 +104,25 @@
 
                     const viewport = page.getViewport({ scale: Math.min(window.innerWidth / page.getViewport({scale:1}).width, window.innerHeight / page.getViewport({scale:1}).height) });
                     
-                    canvas.width = viewport.width * window.devicePixelRatio;
-                    canvas.height = viewport.height * window.devicePixelRatio;
+                    canvas.width = viewport.width * (window.devicePixelRatio || 1);
+                    canvas.height = viewport.height * (window.devicePixelRatio || 1);
                     canvas.style.width = viewport.width + "px";
                     canvas.style.height = viewport.height + "px";
-                    canvas.getContext('2d').scale(window.devicePixelRatio, window.devicePixelRatio);
+                    canvas.getContext('2d').scale(window.devicePixelRatio || 1, window.devicePixelRatio || 1);
 
                     await page.render({ canvasContext: canvas.getContext('2d'), viewport: viewport }).promise;
 
-                    // CONTROLLO LINK
                     const annotations = await page.getAnnotations();
-                    console.log(`Pagina ${pageNum}: trovate ${annotations.length} annotazioni`);
+                    annoDiv.style.width = viewport.width + "px";
+                    annoDiv.style.height = viewport.height + "px";
 
-                    if (annotations.length > 0) {
-                        annoDiv.style.width = viewport.width + "px";
-                        annoDiv.style.height = viewport.height + "px";
-
-                        pdfjsLib.AnnotationLayer.render({
-                            viewport: viewport,
-                            div: annoDiv,
-                            annotations: annotations,
-                            page: page,
-                            linkService: {
-                                externalLinkTarget: 2,
-                                addLinkAttributes: (link, url) => {
-                                    link.href = url;
-                                    link.target = "_blank";
-                                },
-                                getDestinationHash: () => "#",
-                                getAnchorUrl: () => "#",
-                                setHash: () => {},
-                                executeNamedAction: () => {}
-                            }
-                        });
-                    }
+                    pdfjsLib.AnnotationLayer.render({
+                        viewport: viewport,
+                        div: annoDiv,
+                        annotations: annotations,
+                        page: page,
+                        linkService: linkService // Usiamo il nostro navigatore personalizzato
+                    });
                 }
             } catch (err) { console.error(err); }
         }
