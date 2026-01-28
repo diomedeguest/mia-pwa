@@ -10,12 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf_viewer.min.css">
 
     <style>
-        body, html { 
-            margin: 0; padding: 0; height: 100%; width: 100%; 
-            overflow: hidden; background-color: #1a1a1a; 
-        }
-
-        /* Contenitore scorrimento orizzontale */
+        body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background-color: #1a1a1a; }
         #viewer-container {
             display: flex;
             overflow-x: auto;
@@ -24,7 +19,6 @@
             width: 100vw;
             -webkit-overflow-scrolling: touch;
         }
-
         .page-wrapper {
             position: relative;
             flex-shrink: 0;
@@ -34,22 +28,14 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
         }
-
-        canvas {
-            max-width: 100%;
-            max-height: 100%;
-            display: block;
-        }
-
-        /* Strato dei link: fondamentale per renderli cliccabili */
+        canvas { max-width: 100%; max-height: 100%; display: block; z-index: 1; }
         .annotationLayer {
             position: absolute;
             top: 50%; left: 50%;
-            transform: translate(-50%, -50%); /* Allinea ai link del canvas */
+            transform: translate(-50%, -50%);
+            z-index: 2;
         }
-
         #viewer-container::-webkit-scrollbar { display: none; }
     </style>
 </head>
@@ -64,60 +50,69 @@
 
         const container = document.getElementById('viewer-container');
 
+        // Mock del LinkService corretto per la versione 3.4.120
+        const linkService = {
+            externalLinkTarget: 2,
+            externalLinkRel: 'noopener noreferrer nofollow',
+            getDestinationHash: (dest) => "#",
+            getAnchorUrl: (hash) => "#",
+            setHash: (hash) => {},
+            executeNamedAction: (action) => {},
+            cachePageRef: (pageRef, pageNum) => {},
+            isPageVisible: (pageNum) => true,
+            // Questa è la funzione che mancava e causava l'errore:
+            addLinkAttributes: (link, url, newWindow) => {
+                if (url) {
+                    link.href = url;
+                    link.target = "_blank";
+                }
+            }
+        };
+
         async function renderPDF() {
-            const pdf = await pdfjsLib.getDocument(url).promise;
-            
-            for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
-                const page = await pdf.getPage(pageNum);
+            try {
+                const pdf = await pdfjsLib.getDocument(url).promise;
                 
-                // Creazione elementi
-                const wrapper = document.createElement('div');
-                wrapper.className = 'page-wrapper';
-                
-                const canvas = document.createElement('canvas');
-                const context = canvas.getContext('2d');
-                const annoDiv = document.createElement('div');
-                annoDiv.className = 'annotationLayer';
+                for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+                    const page = await pdf.getPage(pageNum);
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'page-wrapper';
+                    container.appendChild(wrapper);
 
-                container.appendChild(wrapper);
-                wrapper.appendChild(canvas);
-                wrapper.appendChild(annoDiv);
+                    const viewport = page.getViewport({ scale: 2 });
+                    const screenScale = Math.min(window.innerWidth / viewport.width, window.innerHeight / viewport.height);
+                    const finalViewport = page.getViewport({ scale: screenScale * 2 });
 
-                // Calcolo scala per adattarsi allo schermo
-                const viewport = page.getViewport({ scale: 2 }); // Qualità retina
-                const screenScale = Math.min(window.innerWidth / viewport.width, window.innerHeight / viewport.height);
-                const finalViewport = page.getViewport({ scale: screenScale * 2 });
+                    const canvas = document.createElement('canvas');
+                    canvas.height = finalViewport.height;
+                    canvas.width = finalViewport.width;
+                    canvas.style.width = (finalViewport.width / 2) + "px";
+                    canvas.style.height = (finalViewport.height / 2) + "px";
+                    wrapper.appendChild(canvas);
 
-                canvas.height = finalViewport.height;
-                canvas.width = finalViewport.width;
-                canvas.style.width = (finalViewport.width / 2) + "px";
-                canvas.style.height = (finalViewport.height / 2) + "px";
+                    await page.render({ canvasContext: canvas.getContext('2d'), viewport: finalViewport }).promise;
 
-                // Renderizza grafica
-                await page.render({ canvasContext: context, viewport: finalViewport }).promise;
+                    const annoDiv = document.createElement('div');
+                    annoDiv.className = 'annotationLayer';
+                    annoDiv.style.width = (finalViewport.width / 2) + "px";
+                    annoDiv.style.height = (finalViewport.height / 2) + "px";
+                    wrapper.appendChild(annoDiv);
 
-                // Renderizza i link
-                const annotations = await page.getAnnotations();
-                pdfjsLib.AnnotationLayer.render({
-                    viewport: finalViewport.clone({ scale: screenScale }),
-                    div: annoDiv,
-                    annotations: annotations,
-                    page: page,
-                    linkService: {
-                        externalLinkTarget: 2, // Apre i link in nuove schede
-                        getDestinationHash: () => "#",
-                        navigateTo: () => {},
-                        getAnchorUrl: () => "#"
-                    }
-                });
-                
-                // Sistema dimensioni del layer dei link
-                annoDiv.style.width = (finalViewport.width / 2) + "px";
-                annoDiv.style.height = (finalViewport.height / 2) + "px";
+                    const annotations = await page.getAnnotations();
+                    pdfjsLib.AnnotationLayer.render({
+                        viewport: finalViewport.clone({ scale: screenScale }),
+                        div: annoDiv,
+                        annotations: annotations,
+                        page: page,
+                        linkService: linkService // Ora con addLinkAttributes
+                    });
+                }
+            } catch (err) {
+                console.error("Errore:", err);
             }
         }
 
-        renderPDF().catch(console.error);
+        renderPDF();
 
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('sw.js');
