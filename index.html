@@ -2,34 +2,47 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Diomede Apartments</title>
+    
     <link rel="manifest" href="manifest.json">
-    <style>
-        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background-color: #333; }
-        
-        /* Contenitore per il PDF */
-        #pdf-container {
-            width: 100vw;
-            height: 100vh;
-        }
+    <meta name="theme-color" content="#2196F3">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-        /* Rimuoviamo i bordi e forziamo il riempimento */
-        iframe {
-            width: 100%;
-            height: 100%;
+    <style>
+        /* Elimina ogni spazio bianco e blocca lo scroll della pagina esterna */
+        body, html { 
+            margin: 0; 
+            padding: 0; 
+            height: 100%; 
+            width: 100%; 
+            overflow: hidden; 
+            background-color: #333; 
+        }
+        
+        /* L'iframe occupa tutto lo schermo del telefono */
+        iframe { 
+            width: 100vw; 
+            height: 100vh; 
             border: none;
+            display: block;
         }
     </style>
 </head>
 <body>
 
-    <iframe src="documento.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH"></iframe>
+    <iframe 
+        src="documento.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH" 
+        allow="fullscreen">
+    </iframe>
 
     <script>
-        // Registrazione Service Worker per uso offline
+        // Attiva il Service Worker per far funzionare l'app offline
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js');
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js');
+            });
         }
     </script>
 </body>
