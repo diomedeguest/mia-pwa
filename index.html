@@ -4,45 +4,123 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Diomede Apartments</title>
-    
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#2196F3">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf_viewer.min.css">
 
     <style>
-        /* Elimina ogni spazio bianco e blocca lo scroll della pagina esterna */
         body, html { 
-            margin: 0; 
-            padding: 0; 
-            height: 100%; 
-            width: 100%; 
-            overflow: hidden; 
-            background-color: #333; 
+            margin: 0; padding: 0; height: 100%; width: 100%; 
+            overflow: hidden; background-color: #1a1a1a; 
         }
-        
-        /* L'iframe occupa tutto lo schermo del telefono */
-        iframe { 
-            width: 100vw; 
-            height: 100vh; 
-            border: none;
+
+        /* Contenitore scorrimento orizzontale */
+        #viewer-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            height: 100vh;
+            width: 100vw;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .page-wrapper {
+            position: relative;
+            flex-shrink: 0;
+            width: 100vw;
+            height: 100vh;
+            scroll-snap-align: start;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        canvas {
+            max-width: 100%;
+            max-height: 100%;
             display: block;
         }
+
+        /* Strato dei link: fondamentale per renderli cliccabili */
+        .annotationLayer {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%); /* Allinea ai link del canvas */
+        }
+
+        #viewer-container::-webkit-scrollbar { display: none; }
     </style>
 </head>
 <body>
 
-    <iframe 
-        src="documento.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH" 
-        allow="fullscreen">
-    </iframe>
+    <div id="viewer-container"></div>
 
     <script>
-        // Attiva il Service Worker per far funzionare l'app offline
+        const url = 'documento.pdf';
+        const pdfjsLib = window['pdfjs-dist/build/pdf'];
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+
+        const container = document.getElementById('viewer-container');
+
+        async function renderPDF() {
+            const pdf = await pdfjsLib.getDocument(url).promise;
+            
+            for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+                const page = await pdf.getPage(pageNum);
+                
+                // Creazione elementi
+                const wrapper = document.createElement('div');
+                wrapper.className = 'page-wrapper';
+                
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+                const annoDiv = document.createElement('div');
+                annoDiv.className = 'annotationLayer';
+
+                container.appendChild(wrapper);
+                wrapper.appendChild(canvas);
+                wrapper.appendChild(annoDiv);
+
+                // Calcolo scala per adattarsi allo schermo
+                const viewport = page.getViewport({ scale: 2 }); // Qualità retina
+                const screenScale = Math.min(window.innerWidth / viewport.width, window.innerHeight / viewport.height);
+                const finalViewport = page.getViewport({ scale: screenScale * 2 });
+
+                canvas.height = finalViewport.height;
+                canvas.width = finalViewport.width;
+                canvas.style.width = (finalViewport.width / 2) + "px";
+                canvas.style.height = (finalViewport.height / 2) + "px";
+
+                // Renderizza grafica
+                await page.render({ canvasContext: context, viewport: finalViewport }).promise;
+
+                // Renderizza i link
+                const annotations = await page.getAnnotations();
+                pdfjsLib.AnnotationLayer.render({
+                    viewport: finalViewport.clone({ scale: screenScale }),
+                    div: annoDiv,
+                    annotations: annotations,
+                    page: page,
+                    linkService: {
+                        externalLinkTarget: 2, // Apre i link in nuove schede
+                        getDestinationHash: () => "#",
+                        navigateTo: () => {},
+                        getAnchorUrl: () => "#"
+                    }
+                });
+                
+                // Sistema dimensioni del layer dei link
+                annoDiv.style.width = (finalViewport.width / 2) + "px";
+                annoDiv.style.height = (finalViewport.height / 2) + "px";
+            }
+        }
+
+        renderPDF().catch(console.error);
+
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js');
-            });
+            navigator.serviceWorker.register('sw.js');
         }
     </script>
 </body>
