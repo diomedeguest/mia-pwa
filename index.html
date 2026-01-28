@@ -5,19 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Diomede Apartments</title>
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#2196F3">
     <style>
-        body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background-color: #333; }
-        iframe { width: 100%; height: 100%; border: none; }
+        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #000; }
+        
+        /* Contenitore a scorrimento orizzontale */
+        .slider {
+            display: flex;
+            overflow-x: auto;
+            snap-type: x mandatory;
+            scroll-behavior: smooth;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .slider img {
+            flex-shrink: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: contain; /* Adatta l'immagine senza tagliarla */
+            scroll-snap-align: start;
+        }
+
+        /* Nasconde la barra di scorrimento */
+        .slider::-webkit-scrollbar { display: none; }
     </style>
 </head>
 <body>
-    <iframe src="documento.pdf"></iframe>
+
+    <div class="slider">
+        <img src="pagina1.jpg" alt="Pagina 1">
+        <img src="pagina2.jpg" alt="Pagina 2">
+        <img src="pagina3.jpg" alt="Pagina 3">
+        </div>
+
     <script>
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js');
-            });
+            navigator.serviceWorker.register('sw.js');
         }
     </script>
 </body>
