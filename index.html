@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Diomede Apartments</title>
-    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
-
     <style>
         body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background-color: #1a1a1a; color: white; font-family: sans-serif; }
         #viewer-container { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; height: 100vh; width: 100vw; -webkit-overflow-scrolling: touch; }
@@ -14,14 +12,7 @@
         .canvas-wrapper { position: relative; }
         canvas { display: block; max-width: 100vw; max-height: 100vh; }
         .annotationLayer { position: absolute; top: 0; left: 0; z-index: 10; }
-        #debug-log { position: fixed; top: 10px; left: 10px; background: rgba(0,0,0,0.8); font-size: 12px; padding: 10px; z-index: 1000; pointer-events: none; }
-        
-        /* Stile per i link ipertestuali (invisibili ma cliccabili) */
-        .annotationLayer .linkAnnotation > a {
-            display: block;
-            position: absolute;
-            cursor: pointer;
-        }
+        #debug-log { position: fixed; top: 10px; left: 10px; background: rgba(0,0,0,0.8); font-size: 12px; padding: 10px; z-index: 1000; }
     </style>
 </head>
 <body>
@@ -33,7 +24,6 @@
         const url = 'documento.pdf';
         const log = document.getElementById('debug-log');
 
-        // Oggetto LinkService completo per evitare errori TypeError
         const fullLinkService = {
             externalLinkTarget: 2,
             addLinkAttributes: (link, url) => {
@@ -54,16 +44,21 @@
                 const pdfjsLib = window['pdfjs-dist/build/pdf'];
                 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
 
-                log.innerText = "Caricamento PDF...";
-                const loadingTask = pdfjsLib.getDocument(url);
-                const pdf = await loadingTask.promise;
+                log.innerText = "Download completo del file...";
 
+                // SOLUZIONE AL BAD OFFSET: Disabilitiamo il caricamento a pezzi (Range Requests)
+                const loadingTask = pdfjsLib.getDocument({
+                    url: url,
+                    disableAutoFetch: true,  // Scarica tutto subito
+                    disableStream: true      // Disabilita lo streaming parziale
+                });
+
+                const pdf = await loadingTask.promise;
                 const container = document.getElementById('viewer-container');
-                log.innerText = "Rendering...";
+                log.innerText = "Elaborazione pagine...";
 
                 for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
                     const page = await pdf.getPage(pageNum);
-                    
                     const viewportBase = page.getViewport({ scale: 1.0 });
                     const scale = Math.min(window.innerWidth / viewportBase.width, window.innerHeight / viewportBase.height);
                     const viewport = page.getViewport({ scale: scale });
@@ -79,7 +74,6 @@
                     canvasWrapper.style.width = viewport.width + "px";
                     canvasWrapper.style.height = viewport.height + "px";
                     
-                    // Alta risoluzione
                     const dpr = window.devicePixelRatio || 1;
                     canvas.width = viewport.width * dpr;
                     canvas.height = viewport.height * dpr;
@@ -107,7 +101,7 @@
                 }
                 log.style.display = 'none';
             } catch (err) {
-                log.innerHTML = "<span style='color:red'>ERRORE: " + err.message + "</span>";
+                log.innerHTML = "<span style='color:red'>ERRORE: " + err.message + "</span><br>Prova a ricaricare la pagina.";
                 console.error(err);
             }
         }
