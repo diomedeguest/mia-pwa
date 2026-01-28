@@ -10,85 +10,45 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf_viewer.min.css">
 
     <style>
-        body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background-color: #1a1a1a; }
-        
-        #viewer-container {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            height: 100vh;
-            width: 100vw;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .page-wrapper {
-            position: relative;
-            flex-shrink: 0;
-            width: 100vw;
-            height: 100vh;
-            scroll-snap-align: start;
-            display: block; /* Fondamentale per non rimpicciolire */
-            overflow-y: auto; /* Permette lo scorrimento verticale se la pagina è lunga */
-            background-color: #1a1a1a;
-        }
-
-        canvas { 
-            display: block; 
-            margin: 0 auto;
-            max-width: 100%; /* Forza il PDF a non superare la larghezza dello schermo */
-            z-index: 1; 
-        }
-
-        .annotationLayer {
-            position: absolute;
-            top: 0; 
-            left: 50%;
-            transform: translateX(-50%); /* Centra i link sopra il canvas */
-            z-index: 2;
-        }
-
+        body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background-color: #1a1a1a; color: white; font-family: sans-serif; }
+        #viewer-container { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; height: 100vh; width: 100vw; -webkit-overflow-scrolling: touch; }
+        .page-wrapper { position: relative; flex-shrink: 0; width: 100vw; height: 100vh; scroll-snap-align: start; display: block; overflow-y: auto; }
+        canvas { display: block; margin: 0 auto; max-width: 100%; z-index: 1; }
+        .annotationLayer { position: absolute; top: 0; left: 50%; transform: translateX(-50%); z-index: 2; }
+        #status-msg { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; z-index: 100; }
         #viewer-container::-webkit-scrollbar { display: none; }
     </style>
 </head>
 <body>
 
+    <div id="status-msg">Caricamento guida in corso...</div>
     <div id="viewer-container"></div>
 
     <script>
-        const url = 'documento.pdf';
+        const url = 'documento.pdf'; // ASSICURATI CHE IL NOME SIA CORRETTO
+        const status = document.getElementById('status-msg');
+        const container = document.getElementById('viewer-container');
+
+        // Configurazione PDF.js
         const pdfjsLib = window['pdfjs-dist/build/pdf'];
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
 
-        const container = document.getElementById('viewer-container');
-
         const linkService = {
             externalLinkTarget: 2,
-            externalLinkRel: 'noopener noreferrer nofollow',
-            getDestinationHash: (dest) => "#",
-            getAnchorUrl: (hash) => "#",
-            setHash: (hash) => {},
-            executeNamedAction: (action) => {},
-            cachePageRef: (pageRef, pageNum) => {},
-            isPageVisible: (pageNum) => true,
-            addLinkAttributes: (link, url, newWindow) => {
-                if (url) {
-                    link.href = url;
-                    link.target = "_blank";
-                }
-            }
+            addLinkAttributes: (link, url) => { if (url) { link.href = url; link.target = "_blank"; } }
         };
 
         async function renderPDF() {
             try {
+                status.innerText = "Download del file...";
                 const loadingTask = pdfjsLib.getDocument({
                     url: url,
                     disableAutoFetch: true,
-                    disableStream: true,
-                    cMapUrl: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/cmaps/',
-                    cMapPacked: true,
+                    disableStream: true
                 });
 
                 const pdf = await loadingTask.promise;
+                status.style.display = 'none'; // Nascondi messaggio se OK
                 
                 for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
                     const page = await pdf.getPage(pageNum);
@@ -96,14 +56,44 @@
                     wrapper.className = 'page-wrapper';
                     container.appendChild(wrapper);
 
-                    // Calcolo scala per adattarsi perfettamente alla larghezza del tablet
                     const baseViewport = page.getViewport({ scale: 1.0 });
                     const fitWidthScale = window.innerWidth / baseViewport.width;
-                    const viewport = page.getViewport({ scale: fitWidthScale });
+                    const viewport = page.getViewport({ scale: fitWidthScale * 1.5 }); // Zoom leggero per qualità
 
                     const canvas = document.createElement('canvas');
                     canvas.width = viewport.width;
                     canvas.height = viewport.height;
+                    canvas.style.width = "100%"; // Adatta allo schermo
                     wrapper.appendChild(canvas);
 
-                    await page.
+                    await page.render({ canvasContext: canvas.getContext('2d'), viewport: viewport }).promise;
+
+                    const annoDiv = document.createElement('div');
+                    annoDiv.className = 'annotationLayer';
+                    annoDiv.style.width = canvas.clientWidth + "px";
+                    annoDiv.style.height = canvas.clientHeight + "px";
+                    wrapper.appendChild(annoDiv);
+
+                    const annotations = await page.getAnnotations();
+                    pdfjsLib.AnnotationLayer.render({
+                        viewport: viewport.clone({ scale: canvas.clientWidth / baseViewport.width }),
+                        div: annoDiv,
+                        annotations: annotations,
+                        page: page,
+                        linkService: linkService
+                    });
+                }
+            } catch (err) {
+                status.innerHTML = "ERRORE: " + err.message + "<br><small>Controlla che il file documento.pdf sia sul server.</small>";
+                console.error(err);
+            }
+        }
+
+        window.onload = renderPDF;
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
+    </script>
+</body>
+</html>
