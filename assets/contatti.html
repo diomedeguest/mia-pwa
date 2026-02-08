@@ -24,7 +24,7 @@
         /* LOGO INGRANDITO */
         .logo-header { 
             width: 100%; 
-            max-height: 350px; /* Aumentato da 170px a 250px per massima visibilità */
+            max-height: 350px; 
             height: auto;
             object-fit: contain;
             display: block; 
@@ -49,34 +49,40 @@
         
         .divider { width: 35px; height: 1px; background-color: #000; margin: 12px auto 20px; }
 
-        .info-section { text-align: left; margin-bottom: 5px; }
+        .info-section { text-align: left; margin-bottom: 25px; }
 
         .section-title {
             font-family: 'PT Serif', serif;
             font-size: 19px;
-            margin: 20px 0 5px 0; 
+            margin: 20px 0 10px 0; 
             color: #000;
             border-bottom: 1px solid #f0f0f0;
             padding-bottom: 4px;
         }
 
-        .info-row {
+        /* STILE PULSANTI CONTATTO */
+        .contact-card {
             display: flex;
-            align-items: flex-start;
-            padding: 15px 0; 
-            border-bottom: 1px solid #f0f0f0;
+            align-items: center;
+            background-color: #f9f9f9;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 12px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s ease;
         }
 
-        .info-row:last-child { 
-            border-bottom: none; 
-            padding-bottom: 8px; 
+        .contact-card:active {
+            background-color: #f0f0f0;
+            transform: scale(0.98);
         }
 
         .info-icon {
-            margin-right: 14px;
-            font-size: 24px;
+            margin-right: 15px;
+            font-size: 28px;
             color: #000;
-            min-width: 28px;
         }
 
         .info-text h3 {
@@ -88,22 +94,36 @@
         }
 
         .info-text p {
-            margin: 5px 0 0;
-            font-size: 14px;
+            margin: 3px 0 0;
+            font-size: 15px;
             color: #444;
-            line-height: 1.5;
+            font-weight: 600;
+        }
+
+        .emergency-card {
+            background-color: #fff5f5; 
+            border-color: #ffe0e0;
+        }
+
+        /* CENTRATURA LINK HOME */
+        .back-link-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin-top: 25px;
+            margin-bottom: 20px;
         }
 
         .back-link { 
             display: inline-block; 
-            margin-top: 15px; 
-            text-decoration: none; color: #000; 
-            font-size: 10px; font-weight: 600;
-            text-transform: uppercase; border-bottom: 1px solid #000;
+            text-decoration: none; 
+            color: #000; 
+            font-size: 10px; 
+            font-weight: 600;
+            text-transform: uppercase; 
+            border-bottom: 1px solid #000;
             padding-bottom: 3px;
         }
-
-        a { color: inherit; text-decoration: none; }
     </style>
 </head>
 <body>
@@ -118,46 +138,61 @@
         <div class="info-section">
             <div class="section-title">Host Contact</div>
             
-            <div class="info-row">
+            <a href="tel:+39123456789" class="contact-card">
                 <span class="material-symbols-outlined info-icon">contact_phone</span>
                 <div class="info-text">
                     <h3>Antonio Marolo</h3>
-                    <p>Tel: <a href="tel:+39123456789">123-456-789</a></p>
+                    <p>Chiama ora</p>
                 </div>
-            </div>
+            </a>
 
-            <div class="info-row">
+            <a href="tel:+39123456789" class="contact-card">
                 <span class="material-symbols-outlined info-icon">contact_phone</span>
                 <div class="info-text">
                     <h3>Davide Marolo</h3>
-                    <p>Tel: <a href="tel:+39123456789">123-456-789</a></p>
+                    <p>Chiama ora</p>
                 </div>
-            </div>
+            </a>
 
             <div class="section-title">Emergenze</div>
 
-            <div class="info-row">
+            <a href="tel:112" class="contact-card emergency-card">
                 <span class="material-symbols-outlined info-icon">emergency</span>
                 <div class="info-text">
                     <h3>Emergenza Unica Europea</h3>
-                    <p><b>Tel: 112</b><br>
-                    Via [Nome Via], 72100, Brindisi</p>
+                    <p>Chiama il 112</p>
                 </div>
-            </div>
+            </a>
 
-            <div class="info-row">
+            <div class="contact-card">
                 <span class="material-symbols-outlined info-icon">medical_services</span>
                 <div class="info-text">
                     <h3>Guardia Medica</h3>
-                    <p>Piazza A. Di Summa, Brindisi | <b>Tel: <a href="tel:116117">116 117</a></b></p>
-                    <p style="font-size: 12px; color: #777; margin-top: 5px;">
-                        Feriali: 20:00 - 08:00 | Sab: 10:00 - 08:00 lun | Dom: h24
-                    </p>
+                    <a href="tel:116117" style="text-decoration: none; color: inherit;">
+                        <p style="margin-bottom: 8px;">Chiama il 116 117</p>
+                    </a>
+                    
+                    <div style="margin-top: 10px; border-top: 1px solid #eee; padding-top: 10px;">
+                        <p style="font-size: 12px; color: #777; margin: 0 0 4px 0;">
+                            <strong>Indirizzo:</strong> Piazza Antonino Di Summa, 72100 Brindisi
+                        </p>
+                        <p style="font-size: 12px; color: #777; margin: 0 0 4px 0;">
+                            <strong>giorni feriali:</strong> dalle ore 20:00 alle ore 08:00 del mattino successivo
+                        </p>
+                        <p style="font-size: 12px; color: #777; margin: 0 0 4px 0;">
+                            <strong>sabato e prefestivi:</strong> dalle ore 10:00 (o 14:00) fino alle 08:00 del lunedì
+                        </p>
+                        <p style="font-size: 12px; color: #777; margin: 0;">
+                            <strong>domenica e festivi:</strong> h24
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <a href="index.html" class="back-link">torna alla home</a>
+        <div class="back-link-container">
+            <a href="index.html" class="back-link">torna alla home</a>
+        </div>
     </div>
 
 </body>
