@@ -1,10 +1,11 @@
-const CACHE_NAME = 'diomede-luxury-v3'; // Incrementata versione
+const CACHE_NAME = 'diomede-luxury-v4'; // Cambiato nome per forzare aggiornamento
+
 const ASSETS_TO_CACHE = [
   './',
-  './welcome.html', // Assicurati che la tua pagina di benvenuto si chiami così
-  './manifest.json',
+  './index.html',
   './logo.png',
   './logo_start.png',
+  './manifest.json',
   './assets/menu.html',
   './assets/regole.html',
   './assets/trasporti.html',
@@ -16,9 +17,8 @@ const ASSETS_TO_CACHE = [
   './assets/checkout.html',
   './assets/wifi.html',
   './assets/servizi.json',
-  // Loghi e Icone
   './assets/dettagli_logo.png',
-  './assets/logo_checkout.png', // Corretto refuso 'ccheckout'
+  './assets/logo_checkout.png',
   './assets/logo_contatti.png',
   './assets/logo_convenzioni.png',
   './assets/logo_istruzioni.png',
@@ -31,17 +31,19 @@ const ASSETS_TO_CACHE = [
   './assets/calemone.png'
 ];
 
-// Installazione
+// Installazione migliorata: non blocca se un file manca
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      // Usiamo addAll ma con un catch per evitare che un solo file mancante blocchi tutto
-      return cache.addAll(ASSETS_TO_CACHE).catch(err => console.warn("Errore cache assets:", err));
+      console.log('Cache aperta, salvataggio file...');
+      // Proviamo a caricare i file uno per uno così se uno manca gli altri passano
+      return Promise.allSettled(
+        ASSETS_TO_CACHE.map(url => cache.add(url))
+      ).then(() => self.skipWaiting());
     })
   );
 });
 
-// Attivazione e pulizia vecchia cache
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
@@ -52,11 +54,10 @@ self.addEventListener('activate', (event) => {
           }
         })
       );
-    })
+    }).then(() => self.clients.claim())
   );
 });
 
-// Strategia: Cache first, poi Network
 self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request).then((response) => {
