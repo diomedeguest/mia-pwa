@@ -1,31 +1,65 @@
-const cacheName = 'diomede-v1';
-const assets = [
-  '/',
-  '/index.html',
-  '/wifi.html',
-  '/convenzioni.html',
-  '/checkout.html',
-  '/istruzioni.html',
-  '/contatti.html',
-  '/manifest.json',
-  '/assets/logo.svg',
-  '/assets/wifi.svg',
-  '/assets/regole.svg',
-  '/assets/istruzioni.svg',
-  '/assets/trasporti.svg',
-  '/assets/vedere.svg',
-  '/assets/convenzioni.svg',
-  '/assets/checkout.svg',
-  '/assets/casa.svg',
-  '/assets/contatti.svg'
+const CACHE_NAME = 'diomede-luxury-v1';
+const ASSETS_TO_CACHE = [
+  './',
+  './index.html',
+  './regole.html',
+  './trasporti.html',
+  './contatti.html',
+  './convenzioni.html',
+  './dettagli.html',
+  './istruzioni.html',
+  './regole.html',
+  './convenzioni.html',
+  './trasporti.html',
+  './turismo.html',
+  './checkout.html',
+  './wifi.html',
+  './servizi.json',
+  './manifest.json',
+  // Aggiungi qui i loghi e le immagini se hanno nomi diversi
+  './dettagli_logo.png',
+  './logo.png',
+  './logo_ccheckout.png',
+  './logo_contatti.png',
+  './logo_convenzioni.png',
+  './logo_istruzioni.png',
+  './logo_regole.png',
+  './logo_trasporti.png',
+  './logo_turismo.png',
+  './logo_wifi.png',
+  './molo33.png',
+  './calemone.png'
 ];
 
-// Installa il Service Worker e salva i file in cache
-self.addEventListener('install', e => {
-  e.waitUntil(caches.open(cacheName).then(cache => cache.addAll(assets)));
+// Installazione: crea il database di cache e salva i file
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.addAll(ASSETS_TO_CACHE);
+    })
+  );
 });
 
-// Serve i contenuti dalla cache se sei offline
-self.addEventListener('fetch', e => {
-  e.respondWith(caches.match(e.request).then(res => res || fetch(e.request)));
+// Attivazione: pulisce le vecchie versioni della cache
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.map((cache) => {
+          if (cache !== CACHE_NAME) {
+            return caches.delete(cache);
+          }
+        })
+      );
+    })
+  );
+});
+
+// Intercettazione richieste: serve i file dalla cache se offline
+self.addEventListener('fetch', (event) => {
+  event.respondWith(
+    caches.match(event.request).then((response) => {
+      return response || fetch(event.request);
+    })
+  );
 });
