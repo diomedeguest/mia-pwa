@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>Turismo - Diomede Luxury</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=Open+Sans:wght@400;600&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,200,0,0&display=swap" rel="stylesheet">
+    
+    <style>
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { 
+            font-family: 'Open Sans', sans-serif; 
+            margin: 0; padding: 20px; 
+            text-align: center; 
+            background-color: #ffffff; 
+            color: #000000;
+        }
+        
+        .container { max-width: 450px; margin: 0 auto; }
+        
+        .logo-header { 
+            width: 100%; 
+            height: auto; 
+            display: block; 
+            margin-bottom: 20px; 
+        }
+        
+        h2 { 
+            font-family: 'PT Serif', serif;
+            font-weight: 400; font-size: 32px; 
+            margin: 10px 0 5px 0;
+            letter-spacing: 1px;
+        }
+        
+        .divider { width: 40px; height: 1px; background-color: #000; margin: 15px auto 30px; }
+
+        .info-section { text-align: left; }
+
+        .destination-card {
+            padding: 25px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .destination-card:last-child { border-bottom: none; }
+
+        .dest-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .dest-header h3 {
+            margin: 0;
+            font-family: 'PT Serif', serif;
+            font-size: 22px;
+            font-weight: 400;
+            color: #000;
+        }
+
+        .distance-tag {
+            font-size: 11px;
+            text-transform: uppercase;
+            background: #f5f5f5;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: #666;
+        }
+
+        .dest-description {
+            margin: 10px 0;
+            font-size: 14px;
+            color: #444;
+            line-height: 1.6;
+        }
+
+        .flex-row { display: flex; gap: 10px; margin-top: 15px; }
+
+        .maps-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #ffffff;
+            border: 1px solid #000000;
+            border-radius: 8px;
+            padding: 6px 12px;
+            text-decoration: none;
+            color: #000;
+            max-width: 140px;
+            transition: all 0.2s ease;
+        }
+
+        .maps-btn:active {
+            background-color: #f0f0f0;
+            transform: scale(0.98);
+        }
+
+        .back-link-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin-top: 35px;
+            margin-bottom: 20px;
+        }
+
+        .back-link { 
+            display: inline-block; 
+            text-decoration: none; 
+            color: #000; 
+            font-size: 10px; 
+            font-weight: 600;
+            text-transform: uppercase; 
+            border-bottom: 1px solid #000;
+            padding-bottom: 3px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img src="logo_turismo.png" alt="Diomede Luxury Logo" class="logo-header">
+
+        <h2>Cosa vedere</h2>
+        <div class="divider"></div>
+
+        <div class="info-section">
+            
+            <div class="destination-card">
+                <div class="dest-header">
+                    <h3>Brindisi</h3>
+                    <span class="distance-tag">0 min</span>
+                </div>
+                <p class="dest-description">Il cuore pulsante della città è il suo porto naturale a forma di corna di cervo. Passeggiare su Via del Mare al tramonto, tra palme e yacht, è un'esperienza rigenerante. Non dimenticate di salire la scalinata monumentale per ammirare le Colonne Romane, simbolo della fine della Via Appia e punto panoramico mozzafiato.</p>
+                <div class="flex-row">
+                    <a href="https://maps.app.goo.gl/brindisi" target="_blank" class="maps-btn">
+                        <span class="material-symbols-outlined" style="margin-right: 6px; font-size: 18px;">location_on</span>
+                        <span style="font-size: 12px; font-weight: 600;">Posizione</span>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="destination-card">
+                <div class="dest-header">
+                    <h3>Mesagne</h3>
+                    <span class="distance-tag">15 min</span>
+                </div>
+                <p class="dest-description">Una tappa imperdibile famosa per il suo splendido centro storico a forma di cuore e per il suo castello.</p>
+                <div class="flex-row">
+                    <a href="https://maps.app.goo.gl/mesagne" target="_blank" class="maps-btn">
+                        <span class="material-symbols-outlined" style="margin-right: 6px; font-size: 18px;">location_on</span>
+                        <span style="font-size: 12px; font-weight: 600;">Posizione</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="destination-card">
+                <div class="dest-header">
+                    <h3>Torre Guaceto</h3>
+                    <span class="distance-tag">20 min</span>
+                </div>
+                <p class="dest-description">Area marina protetta con spiagge selvagge e acque cristalline. Ideale per snorkeling e passeggiate tra dune e ulivi secolari.</p>
+                <div class="flex-row">
+                    <a href="https://maps.app.goo.gl/torreguaceto" target="_blank" class="maps-btn">
+                        <span class="material-symbols-outlined" style="margin-right: 6px; font-size: 18px;">location_on</span>
+                        <span style="font-size: 12px; font-weight: 600;">Posizione</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="destination-card">
+                <div class="dest-header">
+                    <h3>Lecce</h3>
+                    <span class="distance-tag">30 min</span>
+                </div>
+                <p class="dest-description">Il capoluogo del Barocco pugliese. Ammirate la Basilica di Santa Croce e l'Anfiteatro Romano tra palazzi in pietra leccese.</p>
+                <div class="flex-row">
+                    <a href="https://maps.app.goo.gl/lecce" target="_blank" class="maps-btn">
+                        <span class="material-symbols-outlined" style="margin-right: 6px; font-size: 18px;">location_on</span>
+                        <span style="font-size: 12px; font-weight: 600;">Posizione</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="destination-card">
+                <div class="dest-header">
+                    <h3>Ostuni</h3>
+                    <span class="distance-tag">35 min</span>
+                </div>
+                <p class="dest-description">La "Città Bianca", celebre per le sue case candide e la splendida Cattedrale. Perdetevi tra i vicoli panoramici del centro storico.</p>
+                <div class="flex-row">
+                    <a href="https://maps.app.goo.gl/ostuni" target="_blank" class="maps-btn">
+                        <span class="material-symbols-outlined" style="margin-right: 6px; font-size: 18px;">location_on</span>
+                        <span style="font-size: 12px; font-weight: 600;">Posizione</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="destination-card">
+                <div class="dest-header">
+                    <h3>Cisternino</h3>
+                    <span class="distance-tag">45 min</span>
+                </div>
+                <p class="dest-description">Uno dei borghi più belli d'Italia, celebre per i vicoli bianchi e le "fornelli pronti" (macellerie con cottura alla brace).</p>
+                <div class="flex-row">
+                    <a href="https://maps.app.goo.gl/cisternino" target="_blank" class="maps-btn">
+                        <span class="material-symbols-outlined" style="margin-right: 6px; font-size: 18px;">location_on</span>
+                        <span style="font-size: 12px; font-weight: 600;">Posizione</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="destination-card">
+                <div class="dest-header">
+                    <h3>Alberobello</h3>
+                    <span class="distance-tag">50 min</span>
+                </div>
+                <p class="dest-description">Sito UNESCO celebre nel mondo per i "Trulli", le iconiche costruzioni in pietra a secco con i tetti a cono.</p>
+                <div class="flex-row">
+                    <a href="https://maps.app.goo.gl/alberobello" target="_blank" class="maps-btn">
+                        <span class="material-symbols-outlined" style="margin-right: 6px; font-size: 18px;">location_on</span>
+                        <span style="font-size: 12px; font-weight: 600;">Posizione</span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="back-link-container">
+            <a href="..\index.html" class="back-link">torna alla home</a>
+        </div>
+    </div>
+
+</body>
+</html>
