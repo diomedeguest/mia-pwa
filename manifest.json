@@ -1,20 +1,23 @@
 {
-  "name": "Diomede Luxury Guide",
   "short_name": "Diomede",
-  "start_url": "index.html", 
-  "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#000000",
+  "name": "Diomede Luxury Guide",
   "icons": [
     {
       "src": "logo.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "logo.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     }
-  ]
+  ],
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff",
+  "orientation": "portrait"
 }
