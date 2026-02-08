@@ -3,134 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-    <title>Diomede Luxury</title>
+    <title>Welcome - Diomede Luxury</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=Open+Sans:wght@400;600&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,200,0,0&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
     
     <style>
-        * { box-sizing: border-box; }
-        body { 
-            font-family: 'PT Serif', Georgia, serif; 
-            margin: 0; 
-            padding: 20px; 
-            text-align: center; 
-            background-color: #ffffff; 
-            color: #000000;
-        }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
-        .logo-box { margin-bottom: 20px; min-height: 80px; }
-        .logo-img { max-width: 180px; height: auto; }
-        
-        .divider { width: 40px; height: 1px; background-color: #000000; margin: 15px auto; }
-        
-        /* TITOLO: Capitalize (Prima lettera di ogni parola maiuscola) */
-        h2 { 
-            font-family: 'PT Serif', serif;
-            font-weight: 400;
-            color: #000000; 
-            font-size: 35px; 
-            letter-spacing: 1px; 
-            margin-bottom: 35px; 
-            margin-top: 10px;
-            text-transform: capitalize;
-        }
-        
-        .grid { 
-            display: grid; 
-            grid-template-columns: repeat(3, 1fr); 
-            gap: 25px 10px; 
-            max-width: 400px; 
-            margin: 0 auto; 
-        }
-        
-        .btn { 
-            text-decoration: none; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-        }
-        
-        .circle { 
-            width: 70px; 
-            height: 70px; 
-            background-color: #F8F8F8; 
-            border-radius: 50%; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            margin-bottom: 8px; 
-            color: #000000; 
-            border: 1px solid #E0E0E0; 
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Open Sans', sans-serif;
+            background-color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
         }
 
-        .material-symbols-outlined { 
-            font-size: 28px; 
-            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 48;
+        /* SFONDO CON ZOOM LENTO */
+        .bg-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.2)), url('logo_start.png') no-repeat center center;
+            background-size: cover;
+            z-index: 1;
+            animation: slowZoom 25s infinite alternate;
         }
-        
-        /* PULSANTI: Tutto Maiuscolo */
-        span.label { 
-            font-family: 'Open Sans', sans-serif; 
-            font-size: 10px; 
-            color: #000000; 
-            text-transform: uppercase; 
-            font-weight: 600; 
-            letter-spacing: 0.8px;
+
+        @keyframes slowZoom {
+            from { transform: scale(1); }
+            to { transform: scale(1.15); }
+        }
+
+        /* BOX BIANCO */
+        .white-box {
+            position: relative;
+            z-index: 2;
+            background-color: rgba(255, 255, 255, 0.98);
+            width: 88%;
+            max-width: 370px;
+            padding: 55px 35px;
+            text-align: center;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.35);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            animation: revealBox 1.4s cubic-bezier(0.15, 0.85, 0.35, 1) forwards;
+            animation-delay: 0.3s;
+        }
+
+        @keyframes revealBox {
+            from { opacity: 0; transform: translateY(30px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .logo-inner {
+            width: 130px;
+            height: auto;
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeIn 1.2s ease forwards;
+            animation-delay: 1s;
+        }
+
+        /* TITOLI CON INIZIALI MAIUSCOLE */
+        .title-container {
+            margin-bottom: 5px;
+        }
+
+        .title-text {
+            font-family: 'PT Serif', serif;
+            font-weight: 400;
+            font-size: 50px;
+            color: #000;
+            margin: 0;
+            line-height: 0.9;
+            letter-spacing: -0.5px;
+            display: block;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .title-text:nth-child(1) { animation-delay: 1.3s; }
+        .title-text:nth-child(2) { animation-delay: 1.5s; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .divider {
+            width: 35px;
+            height: 1px;
+            background-color: #000;
+            margin: 30px auto;
+            transform: scaleX(0);
+            animation: scaleX 1s ease forwards;
+            animation-delay: 1.8s;
+        }
+
+        @keyframes scaleX {
+            to { transform: scaleX(1); }
+        }
+
+        .subtitle {
+            font-family: 'PT Serif', serif;
+            font-size: 19px;
+            color: #000;
+            margin-bottom: 6px;
+            opacity: 0;
+            animation: fadeIn 1.2s ease forwards;
+            animation-delay: 2s;
+        }
+
+        .tagline {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #888;
+            margin-bottom: 45px;
+            line-height: 1.6;
+            max-width: 230px;
+            opacity: 0;
+            animation: fadeIn 1.2s ease forwards;
+            animation-delay: 2.2s;
+        }
+
+        /* PULSANTE PUNTATO AD ASSETS/MENU.HTML */
+        .enter-btn {
+            display: inline-block;
+            padding: 18px 0;
+            width: 100%;
+            background-color: #000;
+            color: #fff;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            transition: all 0.4s ease;
+            opacity: 0;
+            animation: fadeIn 1.2s ease forwards;
+            animation-delay: 2.4s;
+        }
+
+        .enter-btn:active {
+            background-color: #333;
+            transform: scale(0.97);
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
         }
     </style>
 </head>
 <body>
 
-    <div class="logo-box">
-        <img src="logo.png" alt="Logo" class="logo-img">
+    <div class="bg-image"></div>
+
+    <div class="white-box">
+        <img src="logo.png" alt="Logo" class="logo-inner">
+
+        <div class="title-container">
+            <span class="title-text">Welcome</span>
+            <span class="title-text">Guide</span>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="subtitle">Diomede Luxury Apartment</div>
+        <div class="tagline">Sentitevi a casa: tutto quello che c'è da sapere</div>
+
+        <a href="assets/menu.html" class="enter-btn">Entra</a>
     </div>
-
-    <div class="divider"></div>
-    <h2>accesso rapido</h2>
-
-    <div class="grid">
-		<a href="assets/dettagli.html" class="btn">
-    <div class="circle"><span class="material-symbols-outlined">home</span></div>
-    <span class="label">dettagli</span>
-</a>
-		<a href="assets/contatti.html" class="btn">
-    <div class="circle"><span class="material-symbols-outlined">call</span></div>
-    <span class="label">contatti</span>
-</a>
-		<a href="assets/regole.html" class="btn">
-    <div class="circle"><span class="material-symbols-outlined">gavel</span></div>
-    <span class="label">regole</span>
-</a>
-		<a href="assets/istruzioni.html" class="btn">
-    <div class="circle"><span class="material-symbols-outlined">menu_book</span></div>
-    <span class="label">istruzioni</span>
-</a>
-        <a href="assets/wifi.html" class="btn">
-    <div class="circle"><span class="material-symbols-outlined">wifi</span></div>
-    <span class="label">wi-fi</span>
-</a>
-        <a href="assets/trasporti.html" class="btn">
-    <div class="circle"><span class="material-symbols-outlined">directions_bus</span></div>
-    <span class="label">trasporti</span>
-</a>
-
-		<a href="assets/turismo.html" class="btn">
-    <div class="circle"><span class="material-symbols-outlined">explore</span></div>
-    <span class="label">Cosa vedere</span>
-</a>
-        <a href="assets/convenzioni.html" class="btn">
-    <div class="circle"><span class="material-symbols-outlined">sell</span></div>
-    <span class="label">Convenzioni</span>
-</a>
-		<a href="assets/checkout.html" class="btn">
-    <div class="circle"><span class="material-symbols-outlined">logout</span></div>
-    <span class="label">Check-Out</span>
-</a>
-	
-	
-	</div>
 
 </body>
 </html>

@@ -2,6 +2,7 @@ const CACHE_NAME = 'diomede-luxury-v1';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
+  './menu.html',
   './regole.html',
   './trasporti.html',
   './contatti.html',
@@ -27,6 +28,7 @@ const ASSETS_TO_CACHE = [
   './logo_trasporti.png',
   './logo_turismo.png',
   './logo_wifi.png',
+  './logo_menu.png',
   './molo33.png',
   './calemone.png'
 ];
