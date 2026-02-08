@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convenzioni - Diomede Luxury</title>
+    <style>
+        :root { --gold: #c5a059; --black: #1a1a1a; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f4f4; color: var(--black); }
+        .nav-back { padding: 20px; background: white; }
+        .nav-back a { text-decoration: none; color: var(--gold); font-weight: bold; }
+        
+        .container { padding: 20px; }
+        h1 { text-align: center; text-transform: uppercase; letter-spacing: 2px; font-size: 1.5rem; }
+
+        /* Card Convenzione */
+        .partner-card { 
+            background: white; 
+            border-radius: 20px; 
+            overflow: hidden; 
+            margin-bottom: 25px; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        .partner-img { 
+            width: 100%; 
+            height: 150px; 
+            background-color: #eee; 
+            background-size: cover;
+            background-position: center;
+        }
+        .partner-content { padding: 20px; }
+        .partner-title { font-size: 1.3rem; font-weight: bold; margin: 0 0 10px 0; }
+        .partner-desc { font-size: 0.9rem; color: #555; margin-bottom: 20px; }
+        
+        /* Griglia Pulsanti */
+        .action-grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 10px; 
+        }
+        .btn-action {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--black);
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 10px 5px;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            transition: 0.2s;
+        }
+        .btn-action:active { background: #fff9f0; border-color: var(--gold); }
+        .btn-action img { width: 24px; height: 24px; margin-bottom: 5px; }
+
+        /* Voucher Highlight */
+        .discount-badge {
+            display: inline-block;
+            background: var(--gold);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="nav-back">
+        <a href="index.html">← Torna alla Home</a>
+    </div>
+
+    <div class="container">
+        <h1>Convenzioni Esclusive</h1>
+
+        <div class="partner-card">
+            <div class="partner-img" style="background-image: url('assets/molo33.jpg');"></div>
+            <div class="partner-content">
+                <div class="discount-badge">-10% Sconto Diomede</div>
+                <div class="partner-title">Molo 33</div>
+                <div class="partner-desc">Ristorante e pizzeria elegante a Brindisi. Specialità di mare e ambiente raffinato.</div>
+                
+                <div class="action-grid">
+                    <a href="tel:+390831XXXXXX" class="btn-action">
+                        <img src="assets/call-icon.svg" alt="Chiama"> Chiama
+                    </a>
+                    <a href="https://maps.google.com/?q=Molo+33+Brindisi" target="_blank" class="btn-action">
+                        <img src="assets/map-icon.svg" alt="Mappa"> Posizione
+                    </a>
+                    <a href="#" onclick="showVoucher('Molo 33')" class="btn-action">
+                        <img src="assets/voucher-icon.svg" alt="Voucher"> Voucher
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="partner-card">
+            <div class="partner-img" style="background-image: url('assets/calemone.jpg');"></div>
+            <div class="partner-content">
+                <div class="discount-badge">Codice: DIOMEDE</div>
+                <div class="partner-title">Az. Agr. Calemone</div>
+                <div class="partner-desc">Prodotti biologici nel cuore della Riserva di Torre Guaceto. Sapori autentici pugliesi.</div>
+                
+                <div class="action-grid">
+                    <a href="https://www.calemone.it/shop" target="_blank" class="btn-action">
+                        <img src="assets/shop-icon.svg" alt="Shop"> Shop
+                    </a>
+                    <a href="https://maps.google.com/?q=Azienda+Agricola+Calemone" target="_blank" class="btn-action">
+                        <img src="assets/map-icon.svg" alt="Mappa"> Posizione
+                    </a>
+                    <a href="#" onclick="copyCode('DIOMEDE')" class="btn-action">
+                        <img src="assets/copy-icon.svg" alt="Copia"> Copia Codice
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showVoucher(name) {
+            alert("Mostra questa schermata al personale di " + name + " per ricevere lo sconto del 10% riservato agli ospiti Diomede.");
+        }
+        function copyCode(code) {
+            navigator.clipboard.writeText(code).then(() => {
+                alert("Codice " + code + " copiato! Incollalo nel carrello dello shop online.");
+            });
+        }
+    </script>
+</body>
+</html>
