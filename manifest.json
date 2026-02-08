@@ -1,15 +1,22 @@
 {
-  "name": "Diomede Luxury Apartment",
   "short_name": "Diomede",
-  "start_url": "index.html",
-  "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#000000",
+  "name": "Diomede Luxury Guest Directory",
   "icons": [
     {
-      "src": "assets/logo.svg", 
-      "sizes": "any",
-      "type": "image/svg+xml"
+      "src": "icon-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "icon-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
-  ]
+  ],
+  "start_url": "./index.html",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "scope": "./",
+  "theme_color": "#000000",
+  "description": "Guest Directory per gli ospiti di Diomede Luxury"
 }
