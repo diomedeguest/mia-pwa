@@ -21,7 +21,6 @@
         
         .container { max-width: 450px; margin: 0 auto; }
         
-        /* LOGO INGRANDITO */
         .logo-header { 
             width: 100%; 
             max-height: 350px; 
@@ -60,7 +59,10 @@
             padding-bottom: 4px;
         }
 
-        /* STILE PULSANTI CONTATTO */
+        /* LAYOUT PULSANTI AFFIANCATI */
+        .contact-group { margin-bottom: 25px; }
+        .flex-row { display: flex; gap: 10px; margin-top: 10px; }
+
         .contact-card {
             display: flex;
             align-items: center;
@@ -93,19 +95,11 @@
             font-weight: 600;
         }
 
-        .info-text p {
-            margin: 3px 0 0;
-            font-size: 15px;
-            color: #444;
-            font-weight: 600;
-        }
-
         .emergency-card {
             background-color: #fff5f5; 
             border-color: #ffe0e0;
         }
 
-        /* CENTRATURA LINK HOME */
         .back-link-container {
             display: flex;
             justify-content: center;
@@ -137,22 +131,34 @@
 
         <div class="info-section">
             <div class="section-title">Host Contact</div>
-            
-            <a href="tel:+39123456789" class="contact-card">
-                <span class="material-symbols-outlined info-icon">contact_phone</span>
-                <div class="info-text">
-                    <h3>Antonio Marolo</h3>
-                    <p>Chiama ora</p>
-                </div>
-            </a>
 
-            <a href="tel:+39123456789" class="contact-card">
-                <span class="material-symbols-outlined info-icon">contact_phone</span>
-                <div class="info-text">
-                    <h3>Davide Marolo</h3>
-                    <p>Chiama ora</p>
+            <div class="contact-group">
+                <h3 style="font-size: 14px; text-align: left; margin-bottom: 5px; color: #666; text-transform: uppercase; font-weight: 600;">Antonio Marolo</h3>
+                <div class="flex-row">
+                    <a href="tel:+39123456789" class="contact-card" style="flex: 1; margin-bottom: 0; justify-content: center; padding: 12px;">
+                        <span class="material-symbols-outlined" style="margin-right: 8px; font-size: 20px;">call</span>
+                        <span style="font-size: 13px; font-weight: 600;">Chiama</span>
+                    </a>
+                    <a href="https://wa.me/39123456789" class="contact-card" style="flex: 1; margin-bottom: 0; justify-content: center; padding: 12px; background-color: #e7f7ef; border-color: #25D366;">
+                        <span class="material-symbols-outlined" style="margin-right: 8px; color: #25D366; font-size: 20px;">chat</span>
+                        <span style="font-size: 13px; font-weight: 600;">WhatsApp</span>
+                    </a>
                 </div>
-            </a>
+            </div>
+
+            <div class="contact-group">
+                <h3 style="font-size: 14px; text-align: left; margin-bottom: 5px; color: #666; text-transform: uppercase; font-weight: 600;">Davide Marolo</h3>
+                <div class="flex-row">
+                    <a href="tel:+39123456789" class="contact-card" style="flex: 1; margin-bottom: 0; justify-content: center; padding: 12px;">
+                        <span class="material-symbols-outlined" style="margin-right: 8px; font-size: 20px;">call</span>
+                        <span style="font-size: 13px; font-weight: 600;">Chiama</span>
+                    </a>
+                    <a href="https://wa.me/39123456789" class="contact-card" style="flex: 1; margin-bottom: 0; justify-content: center; padding: 12px; background-color: #e7f7ef; border-color: #25D366;">
+                        <span class="material-symbols-outlined" style="margin-right: 8px; color: #25D366; font-size: 20px;">chat</span>
+                        <span style="font-size: 13px; font-weight: 600;">WhatsApp</span>
+                    </a>
+                </div>
+            </div>
 
             <div class="section-title">Emergenze</div>
 
@@ -160,38 +166,38 @@
                 <span class="material-symbols-outlined info-icon">emergency</span>
                 <div class="info-text">
                     <h3>Emergenza Unica Europea</h3>
-                    <p>Chiama il 112</p>
+                    <p style="margin-top: 5px; font-size: 14px; font-weight: 600;">Chiama il 112</p>
                 </div>
             </a>
 
-            <a href="tel:+39116117" class="contact-card emergency-card">
-                <span class="material-symbols-outlined info-icon">medical_services</span>
-                <div class="info-text">
-                    <h3>Guardia Medica</h3>
-                    <p>Chiama il 116-117</p>
-                </div>
-            </a>
-                    
-            <a style="margin-top: 10px; border-top: 1px solid #eee; padding-top: 10px;">
-                        <p style="font-size: 12px; color: #777; margin: 0 0 4px 0;">
-                            <strong>INDIRIZZO GUARDIA MEDICA:</strong> Piazza Antonino Di Summa, 72100 Brindisi
-                        </p>
-                        <p style="font-size: 12px; color: #777; margin: 0 0 4px 0;">
-                            <strong>GIORNI FERIALI:</strong> dalle ore 20:00 alle ore 08:00 del mattino successivo
-                        </p>
-                        <p style="font-size: 12px; color: #777; margin: 0 0 4px 0;">
-                            <strong>SABATO E PREFESTIVI:</strong> dalle ore 10:00 (o 14:00) fino alle 08:00 del lunedì
-                        </p>
-                        <p style="font-size: 12px; color: #777; margin: 0;">
-                            <strong>DOMENICA E PREFESTIVI:</strong> h24
-                        </p>
+            <div class="contact-card emergency-card" style="flex-direction: column; align-items: flex-start;">
+                <div style="display: flex; align-items: center; width: 100%; margin-bottom: 10px;">
+                    <span class="material-symbols-outlined info-icon">medical_services</span>
+                    <div class="info-text">
+                        <h3>Guardia Medica</h3>
+                        <a href="tel:116117" style="text-decoration: none; color: inherit; font-weight: 700; font-size: 15px;">Tel: 116 117</a>
                     </div>
+                </div>
+                
+                <div style="width: 100%; border-top: 1px solid #ffe0e0; padding-top: 10px;">
+                    <p style="font-size: 12px; color: #777; margin: 0 0 5px 0; text-transform: lowercase;">
+                        <strong>indirizzo:</strong> piazza antonino di summa, 72100 brindisi
+                    </p>
+                    <p style="font-size: 12px; color: #777; margin: 0 0 5px 0; text-transform: lowercase;">
+                        <strong>giorni feriali:</strong> dalle ore 20:00 alle ore 08:00
+                    </p>
+                    <p style="font-size: 12px; color: #777; margin: 0 0 5px 0; text-transform: lowercase;">
+                        <strong>sabato e prefestivi:</strong> dalle ore 10:00 (o 14:00) al lunedì ore 08:00
+                    </p>
+                    <p style="font-size: 12px; color: #777; margin: 0; text-transform: lowercase;">
+                        <strong>domenica e festivi:</strong> h24
+                    </p>
                 </div>
             </div>
         </div>
 
         <div class="back-link-container">
-            <a href="..\index.html" class="back-link">torna alla home</a>
+            <a href="index.html" class="back-link">torna alla home</a>
         </div>
     </div>
 
