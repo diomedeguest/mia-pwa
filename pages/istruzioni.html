@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>Istruzioni - Diomede Luxury</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=Open+Sans:wght@400;600&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,200,0,0&display=swap" rel="stylesheet">
+    
+    <style>
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
+        body { 
+            font-family: 'Open Sans', sans-serif; 
+            margin: 0; padding: 0; 
+            background-color: #ffffff; 
+            color: #000000;
+        }
+
+        /* Testata coordinata */
+        .hero-header {
+            width: 100%;
+            height: 200px;
+            background: url('../assets/images/logo_istruzioni.png') no-repeat center center;
+            background-size: cover;
+            position: relative;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 60px;
+            background: linear-gradient(to top, rgba(255,255,255,1), rgba(255,255,255,0));
+        }
+
+        .container { 
+            width: 100%; 
+            max-width: 550px; 
+            margin: -20px auto 0; 
+            padding: 0 20px 50px;
+            position: relative;
+            z-index: 10;
+            text-align: center;
+        }
+
+        h2 { 
+            font-family: 'PT Serif', serif;
+            font-weight: 400; font-size: 32px; 
+            margin: 10px 0 5px 0;
+            letter-spacing: 1px;
+        }
+        
+        .divider { width: 40px; height: 1px; background-color: #000; margin: 15px auto 30px; }
+
+        /* Griglia Istruzioni */
+        .instructions-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        /* Ottimizzazione Tablet */
+        @media (min-width: 700px) {
+            .hero-header { height: 300px; }
+            .container { max-width: 900px; }
+            .instructions-grid { 
+                grid-template-columns: 1fr 1fr; 
+                gap: 20px; 
+            }
+            h2 { font-size: 40px; }
+        }
+
+        .instruction-card {
+            background-color: #F9F9F9;
+            border: 1px solid #EAEAEA;
+            border-radius: 12px;
+            padding: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-decoration: none; 
+            color: inherit;
+            transition: all 0.2s ease;
+        }
+
+        .instruction-card:active { 
+            transform: scale(0.98); 
+            background-color: #F0F0F0; 
+        }
+
+        .left-content { display: flex; align-items: center; }
+
+        .main-icon { 
+            margin-right: 15px; 
+            font-size: 26px; 
+            color: #000;
+            font-variation-settings: 'wght' 200; 
+        }
+
+        .card-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-align: left;
+        }
+
+        .touch-icon { 
+            font-size: 18px; 
+            opacity: 0.2; 
+            color: #000;
+        }
+
+        .back-link { 
+            display: inline-block; 
+            margin-top: 45px;
+            text-decoration: none; 
+            color: #000; 
+            font-size: 10px; 
+            font-weight: 600;
+            text-transform: uppercase; 
+            border-bottom: 1px solid #000;
+            padding-bottom: 3px;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero-header">
+        <div class="hero-overlay"></div>
+    </div>
+
+    <div class="container">
+        <h2>Istruzioni</h2>
+        <div class="divider"></div>
+
+        <div class="instructions-grid">
+            
+            <a href="../assets/documents/cucina.pdf" class="instruction-card" target="_blank">
+                <div class="left-content">
+                    <span class="material-symbols-outlined main-icon">coffee_maker</span>
+                    <span class="card-title">Macchina del Caffè</span>
+                </div>
+                <span class="material-symbols-outlined touch-icon">arrow_forward_ios</span>
+            </a>
+
+            <a href="../assets/documents/cucina.pdf" class="instruction-card" target="_blank">
+                <div class="left-content">
+                    <span class="material-symbols-outlined main-icon">cooking</span>
+                    <span class="card-title">Piano a Induzione</span>
+                </div>
+                <span class="material-symbols-outlined touch-icon">arrow_forward_ios</span>
+            </a>
+
+            <a href="../assets/documents/depuratore.pdf" class="instruction-card" target="_blank">
+                <div class="left-content">
+                    <span class="material-symbols-outlined main-icon">water_full</span>
+                    <span class="card-title">Depuratore d'acqua</span>
+                </div>
+                <span class="material-symbols-outlined touch-icon">arrow_forward_ios</span>
+            </a>
+
+            <a href="../assets/documents/cassaforte.pdf" class="instruction-card" target="_blank">
+                <div class="left-content">
+                    <span class="material-symbols-outlined main-icon">lock</span>
+                    <span class="card-title">Cassaforte</span>
+                </div>
+                <span class="material-symbols-outlined touch-icon">arrow_forward_ios</span>
+            </a>
+
+            <a href="../assets/documents/Idromassaggio.pdf" class="instruction-card" target="_blank">
+                <div class="left-content">
+                    <span class="material-symbols-outlined main-icon">hot_tub</span>
+                    <span class="card-title">Vasca Idromassaggio</span>
+                </div>
+                <span class="material-symbols-outlined touch-icon">arrow_forward_ios</span>
+            </a>
+
+            <a href="../assets/documents/letto.pdf" class="instruction-card" target="_blank">
+                <div class="left-content">
+                    <span class="material-symbols-outlined main-icon">bed</span>
+                    <span class="card-title">Letto Contenitore</span>
+                </div>
+                <span class="material-symbols-outlined touch-icon">arrow_forward_ios</span>
+            </a>
+
+        </div>
+
+        <a href="menu.html" class="back-link">torna alla home</a>
+    </div>
+
+</body>
+</html>

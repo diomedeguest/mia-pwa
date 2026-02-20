@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>Wi-Fi - Diomede Luxury</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=Open+Sans:wght@400;600&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,200,0,0&display=swap" rel="stylesheet">
+    
+    <style>
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
+        body { 
+            font-family: 'Open Sans', sans-serif; 
+            margin: 0; padding: 0; 
+            background-color: #ffffff; 
+            color: #000000;
+        }
+
+        /* Testata con altezza ridotta coordinata */
+        .hero-header {
+            width: 100%;
+            height: 200px;
+            background: url('../assets/images/logo_wifi.png') no-repeat center center;
+            background-size: cover;
+            position: relative;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 60px;
+            background: linear-gradient(to top, rgba(255,255,255,1), rgba(255,255,255,0));
+        }
+
+        .container { 
+            width: 100%; 
+            max-width: 550px; 
+            margin: -20px auto 0; 
+            padding: 0 20px 50px;
+            position: relative;
+            z-index: 10;
+            text-align: center;
+        }
+
+        h2 { 
+            font-family: 'PT Serif', serif;
+            font-weight: 400; font-size: 32px; 
+            margin: 10px 0 5px 0;
+            letter-spacing: 1px;
+            text-transform: capitalize;
+        }
+        
+        .divider { width: 40px; height: 1px; background-color: #000; margin: 15px auto 30px; }
+
+        /* Box Informazioni Wi-Fi */
+        .info-box { 
+            background-color: #F9F9F9; 
+            padding: 30px 20px; 
+            border-radius: 12px; 
+            border: 1px solid #EAEAEA; 
+            text-align: left; 
+            display: grid; 
+            gap: 25px; 
+            grid-template-columns: 1fr; 
+        }
+        
+        @media (min-width: 700px) {
+            .hero-header { height: 300px; }
+            .container { max-width: 800px; }
+            .info-box { grid-template-columns: 1fr 1fr; padding: 40px; }
+            h2 { font-size: 40px; }
+        }
+
+        .item { display: flex; flex-direction: column; }
+
+        .label-group { 
+            display: flex; 
+            align-items: center; 
+            margin-bottom: 8px; 
+        }
+
+        .material-symbols-outlined { 
+            font-size: 26px; 
+            margin-right: 12px; 
+            color: #000; 
+            font-variation-settings: 'wght' 200; 
+        }
+
+        .label { 
+            font-size: 11px; 
+            text-transform: uppercase; 
+            font-weight: 700; 
+            letter-spacing: 1px; 
+            color: #000;
+        }
+
+        .value { 
+            font-size: 17px; 
+            font-weight: 600; 
+            padding-left: 38px; 
+            display: block; 
+            word-break: break-all;
+            color: #444;
+        }
+
+        .back-link { 
+            display: inline-block; 
+            margin-top: 45px;
+            text-decoration: none; 
+            color: #000; 
+            font-size: 10px; 
+            font-weight: 600;
+            text-transform: uppercase; 
+            border-bottom: 1px solid #000;
+            padding-bottom: 3px;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero-header">
+        <div class="hero-overlay"></div>
+    </div>
+
+    <div class="container">
+        <h2>Connessione Wi-Fi</h2>
+        <div class="divider"></div>
+
+        <div class="info-box">
+            <div class="item">
+                <div class="label-group">
+                    <span class="material-symbols-outlined">wifi</span>
+                    <span class="label">Nome Rete</span>
+                </div>
+                <span class="value">Diomede_Luxury_Guest</span>
+            </div>
+
+            <div class="item">
+                <div class="label-group">
+                    <span class="material-symbols-outlined">key</span>
+                    <span class="label">Password</span>
+                </div>
+                <span class="value">StayAtDiomede2!</span>
+            </div>
+        </div>
+
+        <a href="menu.html" class="back-link">torna alla home</a>
+    </div>
+
+</body>
+</html>
