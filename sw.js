@@ -28,7 +28,7 @@ const ASSETS_TO_CACHE = [
   './assets/images/logo_regole.png',
   './assets/images/logo_trasporti.png',
   './assets/images/logo_turismo.png',
-  './assets/images/logo_wifi.png',
+  './assets/images/header.png',
   './assets/images/logo_menu.png',
   './assets/images/molo33.png',
   './assets/images/calemone.png'
