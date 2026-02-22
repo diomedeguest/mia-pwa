@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>Benvenuti - Diomede Luxury</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
+        body { 
+            font-family: 'Open Sans', sans-serif; 
+            margin: 0; padding: 0; 
+            background-color: #ffffff; 
+            color: #000000;
+            text-align: center;
+        }
+
+        /* Testata ridotta al 30% dell'altezza */
+        .welcome-image {
+            width: 100%;
+            height: 30vh;
+            background: url('../assets/images/foto_casa.jpg') no-repeat center center;
+            background-size: cover;
+            position: relative;
+        }
+
+        .container { 
+            padding: 30px 25px 50px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        h1 { 
+            font-family: 'PT Serif', serif;
+            font-weight: 400; 
+            font-size: 28px; 
+            margin: 0 auto;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
+        
+        .divider { 
+            width: 35px; 
+            height: 1px; 
+            background-color: #000; 
+            margin: 15px auto 25px; 
+        }
+
+        .message {
+            font-family: 'PT Serif', serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .message p { margin-bottom: 15px; }
+
+        /* Box Contatti e Orari */
+        .info-box {
+            background-color: #fcfcfc;
+            border: 1px solid #f0f0f0;
+            padding: 20px;
+            margin-bottom: 35px;
+            border-radius: 4px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .info-item { flex: 1; }
+        .info-item span { 
+            display: block; 
+            font-size: 10px; 
+            text-transform: uppercase; 
+            color: #888; 
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+        .info-item strong { font-size: 14px; color: #000; }
+
+        .contact-text { font-size: 13px; margin: 5px 0; color: #000; text-decoration: none; display: block; }
+
+        .btn-next {
+            display: inline-block;
+            background-color: #000;
+            color: #fff;
+            text-decoration: none;
+            padding: 18px 45px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+        }
+
+        @media (min-width: 700px) {
+            .welcome-image { height: 40vh; }
+            h1 { font-size: 36px; }
+            .message { font-size: 19px; }
+            .container { max-width: 800px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="welcome-image"></div>
+
+    <div class="container">
+        <h1>Benvenuti</h1>
+        <div class="divider"></div>
+
+        <div class="message">
+            <p>Benvenuti! È un piacere avervi qui. Mettetevi comodi e godetevi ogni angolo della casa, che sia per un calice di vino in relax o come base per esplorare la zona.</p>
+            
+            <p>Abbiamo pensato a ogni dettaglio per il vostro arrivo; se dovesse servirvi altro, siamo a vostra disposizione. Buona permanenza!</p>
+        </div>
+
+        <div class="info-box">
+            <a href="tel:1234567890" class="contact-text">Tel. 123-456-7890</a>
+            <a href="mailto:youremail@domain.com" class="contact-text">youremail@domain.com</a>
+
+            <div class="info-row">
+                <div class="info-item">
+                    <span>Check In</span>
+                    <strong>15:00</strong>
+                </div>
+                <div class="info-item">
+                    <span>Check Out</span>
+                    <strong>11:00</strong>
+                </div>
+            </div>
+        </div>
+
+        <a href="menu.html" class="btn-next">Scopri la Guida</a>
+    </div>
+
+</body>
+</html>
