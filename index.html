@@ -9,11 +9,11 @@
     <meta name="theme-color" content="#000000">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="apple-touch-icon" href="logo.png">
+    <link rel="apple-touch-icon" href="logowelcome.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&family=Open+Sans:wght@300;400;600&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,200,0,0&display=swap" rel="stylesheet">
     
     <style>
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -80,7 +80,6 @@
             animation-delay: 1s;
         }
 
-        /* TITOLI CON INIZIALI MAIUSCOLE */
         .title-container {
             margin-bottom: 5px;
         }
@@ -143,26 +142,34 @@
             animation-delay: 2.2s;
         }
 
+        /* NUOVO PULSANTE: IDENTICO A "TORNA ALLA HOME" */
         .enter-btn {
-            display: inline-block;
-            padding: 18px 0;
-            width: 100%;
-            background-color: #000;
-            color: #fff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 28px;
+            background-color: #A39689; 
+            color: #ffffff;
             text-decoration: none;
-            font-size: 11px;
-            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 4px;
-            transition: all 0.4s ease;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            border-radius: 50px; 
+            transition: all 0.3s ease;
             opacity: 0;
             animation: fadeIn 1.2s ease forwards;
             animation-delay: 2.4s;
         }
 
+        .enter-btn span { 
+            margin-right: 8px; 
+            font-size: 16px; /* Icona leggermente più grande per l'ingresso */
+        }
+
         .enter-btn:active {
-            background-color: #333;
-            transform: scale(0.97);
+            transform: scale(0.95);
+            background-color: #8d8378;
         }
 
         @keyframes fadeIn {
@@ -197,7 +204,10 @@
         <div class="subtitle">Diomede Luxury Apartment</div>
         <div class="tagline">Sentitevi a casa: tutto quello che c'è da sapere</div>
 
-        <a href="pages/menu.html" class="enter-btn">Entra</a>
+        <a href="pages/menu.html" class="enter-btn">
+            <span class="material-symbols-outlined">login</span>
+            Entra
+        </a>
     </div>
 
 </body>
