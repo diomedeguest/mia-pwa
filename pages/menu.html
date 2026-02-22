@@ -15,8 +15,8 @@
         body { 
             font-family: 'Open Sans', sans-serif; 
             margin: 0; padding: 0; 
-            /* TORTORA FANGO SCURO */
-            background-color: #A39689; 
+            /* TORTORA ANCORA PIÙ CHIARO E LUMINOSO */
+            background-color: #C5BCB1; 
             color: #000000;
             text-align: center;
         }
@@ -32,15 +32,16 @@
         .hero-overlay {
             position: absolute;
             bottom: 0; left: 0; width: 100%; height: 70px;
-            /* Gradiente aggiornato per il tortora fango */
-            background: linear-gradient(to top, #A39689, rgba(163, 150, 137, 0));
+            /* Gradiente aggiornato per il nuovo tortora #C5BCB1 */
+            background: linear-gradient(to top, #C5BCB1, rgba(197, 188, 177, 0));
         }
 
         .container { 
             width: 100%; 
             max-width: 450px; 
-            margin: -15px auto 0; 
-            padding: 0 20px 50px;
+            margin: 0 auto; 
+            /* Spazio generoso per una distribuzione equilibrata sul telefono */
+            padding: 45px 20px 50px; 
             position: relative;
             z-index: 10;
         }
@@ -48,17 +49,7 @@
         .grid { 
             display: grid; 
             grid-template-columns: repeat(3, 1fr); 
-            gap: 25px 10px; 
-            margin-top: 20px;
-        }
-        
-        @media (min-width: 700px) {
-            .hero-header { height: 240px; }
-            .container { max-width: 700px; }
-            .grid { gap: 40px 30px; margin-top: 30px; }
-            .circle { width: 95px !important; height: 95px !important; }
-            .material-symbols-outlined { font-size: 38px !important; }
-            span.label { font-size: 11px !important; }
+            gap: 35px 10px; 
         }
         
         .btn { 
@@ -69,21 +60,19 @@
             transition: transform 0.2s ease;
         }
 
-        /* CERCHIO: Leggermente più chiaro dello sfondo per creare rilievo */
         .circle { 
             width: 75px; 
             height: 75px; 
-            background-color: rgba(255, 255, 255, 0.15); 
+            background-color: transparent; 
             border-radius: 50%; 
             display: flex; 
             justify-content: center; 
             align-items: center; 
-            margin-bottom: 10px; 
-            color: #000000; /* Icone nere per massimo contrasto */
-            border: 1px solid rgba(0, 0, 0, 0.1); 
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 12px; 
+            color: #000000; /* Icone Nere */
+            border: 1.5px solid #FFFFFF; /* Bordo Bianco */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease;
-            backdrop-filter: blur(5px); /* Effetto vetro satinato */
         }
 
         .material-symbols-outlined { 
@@ -101,11 +90,9 @@
             line-height: 1.2;
         }
 
-        /* Effetto al tocco */
         .btn:active .circle {
             transform: scale(0.92);
-            background-color: rgba(0, 0, 0, 0.1);
-            border-color: rgba(0, 0, 0, 0.3);
+            background-color: rgba(255, 255, 255, 0.4);
         }
     </style>
 </head>
