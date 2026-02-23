@@ -1,15 +1,15 @@
-const CACHE_NAME = 'diomede-luxury-v4'; // Cambiato nome per forzare aggiornamento
+const CACHE_NAME = 'diomede-luxury-v5'; // Incrementato a v5 per forzare il refresh
 
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
+  './welcome.html',
   './logo.png',
   './logo_start.png',
+  './sfondo.png',
+  './logowelcome.png',
   './manifest.json',
   './assets/pages/menu.html',
-  './assets/documents/idromassaggio.pdf',
-  './assets/documents/cassaforte.pdf',
-  './assets/documents/cucina.pdf',
   './assets/pages/regole.html',
   './assets/pages/trasporti.html',
   './assets/pages/contatti.html',
@@ -19,27 +19,13 @@ const ASSETS_TO_CACHE = [
   './assets/pages/turismo.html',
   './assets/pages/checkout.html',
   './assets/pages/wifi.html',
-  './assets/servizi.json',
-  './assets/images/dettagli_logo.png',
-  './assets/images/logo_checkout.png',
-  './assets/images/logo_contatti.png',
-  './assets/images/logo_convenzioni.png',
-  './assets/images/logo_istruzioni.png',
-  './assets/images/logo_regole.png',
-  './assets/images/logo_trasporti.png',
-  './assets/images/logo_turismo.png',
-  './assets/images/header.png',
-  './assets/images/logo_menu.png',
-  './assets/images/molo33.png',
-  './assets/images/calemone.png'
+  './assets/images/header.png'
 ];
 
-// Installazione migliorata: non blocca se un file manca
+// Installazione: scarica i nuovi file
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log('Cache aperta, salvataggio file...');
-      // Proviamo a caricare i file uno per uno così se uno manca gli altri passano
       return Promise.allSettled(
         ASSETS_TO_CACHE.map(url => cache.add(url))
       ).then(() => self.skipWaiting());
@@ -47,12 +33,14 @@ self.addEventListener('install', (event) => {
   );
 });
 
+// Attivazione: elimina le vecchie cache (v1, v2, v3, v4)
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames.map((cache) => {
           if (cache !== CACHE_NAME) {
+            console.log('Elimino vecchia cache:', cache);
             return caches.delete(cache);
           }
         })
@@ -61,10 +49,18 @@ self.addEventListener('activate', (event) => {
   );
 });
 
+// Strategia: Stale-while-revalidate
+// Serve il file dalla cache ma aggiorna la cache in background se c'è rete
 self.addEventListener('fetch', (event) => {
   event.respondWith(
-    caches.match(event.request).then((response) => {
-      return response || fetch(event.request);
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.match(event.request).then((response) => {
+        const fetchPromise = fetch(event.request).then((networkResponse) => {
+          cache.put(event.request, networkResponse.clone());
+          return networkResponse;
+        });
+        return response || fetchPromise;
+      });
     })
   );
 });

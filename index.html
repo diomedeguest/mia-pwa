@@ -2,128 +2,132 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Benvenuti - Diomede Luxury</title>
-    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:italic,wght@400;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>Welcome - Diomede Luxury</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=Open+Sans:wght@300;400;600&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,200,0,0&display=swap" rel="stylesheet">
     
     <style>
-        body, html {
-            margin: 0; padding: 0; width: 100%; height: 100%;
-            background: url('sfondo.png') no-repeat center center;
-            background-size: cover;
-            background-color: #B5A89A;
-            display: flex; justify-content: center; align-items: center;
-            overflow: hidden;
-            position: relative;
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
+        body, html { 
+            height: 100%; margin: 0; padding: 0; 
+            font-family: 'Open Sans', sans-serif; 
+            background-color: #000; 
+            display: flex; align-items: center; justify-content: center; 
+            overflow: hidden; 
         }
 
-        /* Overlay scuro per far risaltare il testo */
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.45);
-            z-index: 1;
+        /* SFONDO CON ZOOM LENTO */
+        .bg-image { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.3)), url('logo_start.png') no-repeat center center; 
+            background-size: cover; 
+            z-index: 1; 
+            animation: slowZoom 20s infinite alternate linear; 
         }
+        
+        @keyframes slowZoom { from { transform: scale(1); } to { transform: scale(1.1); } }
 
-        .splash-container {
-            width: 90%;
-            max-width: 600px; 
-            text-align: center;
-            position: relative;
-            z-index: 10;
-            /* Inizia la dissolvenza a 6 secondi per chiudere a 7 */
-            animation: fadeOutPage 1s ease-in-out forwards;
-            animation-delay: 6s;
-        }
-
-        .logo-container {
-            margin-bottom: 30px;
-            opacity: 0;
-            animation: fadeInScale 1.8s ease-out forwards;
-        }
-
-        .logo-container img {
-            width: 350px; 
-            max-width: 100%;
-            height: auto;
-            /* Se il logo ha sfondo bianco, mix-blend-mode lo pulisce */
-            mix-blend-mode: multiply; 
-            filter: drop-shadow(0 8px 20px rgba(0,0,0,0.3));
-        }
-
-        .welcome-text {
-            font-family: 'PT Serif', serif;
-            color: #ffffff;
-            line-height: 1.6;
-            font-size: 18px;
+        /* BOX BIANCO CENTRALE CON ANIMAZIONE DI ENTRATA */
+        .white-box { 
+            position: relative; 
+            z-index: 2; 
+            background-color: rgba(255, 255, 255, 0.98); 
+            width: 88%; 
+            max-width: 380px; 
+            padding: 50px 30px; 
+            text-align: center; 
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4); 
+            display: flex; flex-direction: column; align-items: center; 
+            border-radius: 2px;
+            
+            /* Animazione Box */
             opacity: 0;
             transform: translateY(20px);
-            animation: fadeInUp 1.8s ease-out forwards;
-            animation-delay: 0.8s;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
-            padding: 0 10px;
+            animation: revealBox 1.2s cubic-bezier(0.15, 0.85, 0.35, 1) forwards;
+            animation-delay: 0.2s;
         }
 
-        .welcome-text i {
-            display: block;
-            margin-bottom: 12px;
-            font-size: 30px; 
-            font-weight: 700;
-            font-style: normal;
-            letter-spacing: 4px;
-            text-transform: uppercase;
+        @keyframes revealBox {
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .signature {
-            margin-top: 25px;
-            font-family: 'PT Serif', serif;
-            font-style: italic;
-            font-size: 22px;
-            color: #ffffff;
+        /* ANIMAZIONI SINGOLI ELEMENTI */
+        .logo-inner, .title-container, .divider, .subtitle, .tagline, .enter-btn {
             opacity: 0;
-            animation: fadeIn 1.5s ease-out forwards;
-            animation-delay: 2.8s;
+            animation: fadeInUp 0.8s ease forwards;
         }
 
-        /* ANIMAZIONI */
-        @keyframes fadeInScale { 
-            from { opacity: 0; transform: scale(0.8); }
-            to { opacity: 1; transform: scale(1); }
-        }
+        .logo-inner { width: 160px; height: auto; margin-bottom: 30px; animation-delay: 0.6s; }
+        .title-text { font-family: 'PT Serif', serif; font-size: 42px; color: #000; margin: 0; line-height: 1.1; letter-spacing: -0.5px; }
+        .title-container { animation-delay: 0.8s; }
         
-        @keyframes fadeIn { to { opacity: 1; } }
-        
-        @keyframes fadeInUp { 
-            to { opacity: 1; transform: translateY(0); } 
+        .divider { 
+            width: 40px; height: 1px; background-color: #000; margin: 25px auto; 
+            animation: scaleDivider 0.8s ease forwards;
+            animation-delay: 1s;
         }
-        
-        @keyframes fadeOutPage { 
-            to { opacity: 0; transform: scale(1.02); visibility: hidden; } 
+
+        .subtitle { font-family: 'PT Serif', serif; font-size: 18px; color: #000; margin-bottom: 8px; animation-delay: 1.2s; }
+        .tagline { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: #666; margin-bottom: 40px; animation-delay: 1.4s; }
+        .enter-btn { animation-delay: 1.6s; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
         }
+
+        @keyframes scaleDivider {
+            from { opacity: 0; transform: scaleX(0); }
+            to { opacity: 1; transform: scaleX(1); }
+        }
+
+        /* PULSANTE NERO - SCRITTA BIANCA */
+        .enter-btn { 
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center; 
+            padding: 16px 45px; 
+            background-color: #000000;
+            color: #ffffff;
+            text-decoration: none; 
+            text-transform: uppercase; 
+            font-size: 11px; 
+            font-weight: 700; 
+            letter-spacing: 2px; 
+            border-radius: 50px; 
+            transition: all 0.3s ease; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .enter-btn span { margin-right: 10px; font-size: 18px; }
+        .enter-btn:active { transform: scale(0.95); background-color: #222; }
     </style>
 </head>
 <body>
 
-    <div class="splash-container">
-        <div class="logo-container">
-            <img src="logowelcome.png" alt="Diomede Luxury">
+    <div class="bg-image"></div>
+
+    <div class="white-box">
+        <img src="logo.png" alt="Diomede Luxury Logo" class="logo-inner">
+        
+        <div class="title-container">
+            <h1 class="title-text">Welcome Guide</h1>
         </div>
 
-        <div class="welcome-text">
-            <i>Benvenuti!</i>
-            È un piacere avervi qui. Mettetevi comodi e godetevi ogni angolo della casa, che sia per un calice di vino in relax o come base per esplorare la zona. Abbiamo pensato a ogni dettaglio per il vostro arrivo; se dovesse servirvi altro, siamo a vostra disposizione.
-        </div>
+        <div class="divider"></div>
 
-        <div class="signature">Buona permanenza!</div>
+        <div class="subtitle">Diomede Luxury Apartment</div>
+        <div class="tagline">Sentitevi a casa</div>
+        
+        <a href="welcome.html" class="enter-btn">
+            <span class="material-symbols-outlined">login</span>
+            Entra
+        </a>
     </div>
-
-    <script>
-        // Reindirizzamento automatico dopo 7 secondi
-        setTimeout(function(){
-            window.location.href = 'start.html'; 
-        }, 7000);
-    </script>
 
 </body>
 </html>
