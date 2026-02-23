@@ -16,43 +16,54 @@
             font-family: 'Open Sans', sans-serif; 
             margin: 0; padding: 0; 
             background-color: #F0EDE9; 
-            color: #000000;
+            color: #1a1a1a;
+            line-height: 1.4;
             text-align: center;
         }
 
-        /* HEADER - Allineato a Menu (170px) */
+        /* HEADER - Standardizzato con logo centrato */
         .hero-header {
             width: 100%;
-            height: 170px; 
-            background: url('../assets/images/header.png') no-repeat center center;
-            background-size: cover;
+            height: 240px; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
             position: relative;
+            padding: 10px 20px;
+            overflow: hidden;
         }
 
-        /* OVERLAY - Allineato a Menu (70px) */
+        .logo-img {
+            width: 100%;
+            max-width: 300px; 
+            height: auto;
+            z-index: 5;
+            display: block;
+        }
+
         .hero-overlay {
             position: absolute;
-            bottom: 0; left: 0; width: 100%; height: 70px;
+            bottom: 0; left: 0; width: 100%; height: 60px;
             background: linear-gradient(to top, #F0EDE9, rgba(240, 237, 233, 0));
         }
 
-        /* CONTAINER - Allineato a Menu (-15px e max 450px) */
+        /* CONTAINER - Margine -30px e max 900px */
         .container { 
             width: 100%; 
-            max-width: 450px; 
-            margin: -15px auto 0; 
-            padding: 0 20px 60px;
+            max-width: 900px; 
+            margin: -30px auto 0; 
+            padding: 0 20px 80px;
             position: relative;
             z-index: 10;
         }
 
-        /* TITOLO - Margine azzerato per coerenza visiva */
         h2 { 
-            font-family: 'PT Serif', serif;
-            font-weight: 400; font-size: 32px; 
-            margin: 0;
-            padding-top: 10px;
-            letter-spacing: 1px;
+            font-family: 'PT Serif', serif; 
+            font-size: 34px; 
+            margin: 0; 
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            color: #2c2c2c;
         }
 
         .checkout-time {
@@ -73,7 +84,7 @@
             color: #333;
         }
         
-        .divider { width: 40px; height: 1px; background-color: #000; margin: 15px auto 30px; }
+        .divider { width: 50px; height: 1px; background-color: #A39689; margin: 10px auto 30px; }
 
         .instruction-grid {
             display: grid;
@@ -83,9 +94,10 @@
             margin-top: 10px;
         }
 
-        @media (min-width: 700px) {
-            .hero-header { height: 240px; }
-            .container { max-width: 700px; }
+        @media (min-width: 768px) {
+            .hero-header { height: 280px; }
+            .logo-img { max-width: 400px; }
+            .container { margin-top: -40px; }
             .instruction-grid { grid-template-columns: 1fr 1fr; gap: 15px; }
             h2 { font-size: 40px; }
         }
@@ -141,33 +153,37 @@
 
         .confirm-btn:active { transform: scale(0.96); background-color: #8D8378; }
 
-        .back-btn-container {
-            margin: 40px auto 10px;
-            display: flex;
-            justify-content: center;
-        }
-
+        .back-btn-container { text-align: center; margin-top: 50px; }
+        
         .back-btn {
             display: inline-flex;
             align-items: center;
-            justify-content: center;
-            padding: 12px 28px;
+            padding: 12px 35px;
             background-color: transparent; 
-            color: #000000;
+            color: #1a1a1a;
             text-decoration: none;
             text-transform: uppercase;
             font-size: 10px;
             font-weight: 700;
             letter-spacing: 1.5px;
-            border-radius: 50px; 
-            border: 1px solid #000;
+            border-radius: 50px;
+            border: 1px solid #1a1a1a;
             transition: all 0.3s ease;
+        }
+
+        .back-btn:active { transform: scale(0.96); }
+
+        .back-btn span {
+            margin-right: 8px;
+            font-size: 14px;
+            font-variation-settings: 'wght' 400;
         }
     </style>
 </head>
 <body>
 
     <div class="hero-header">
+        <img src="../assets/images/header.png" alt="Diomede Luxury Logo" class="logo-img">
         <div class="hero-overlay"></div>
     </div>
 
@@ -218,8 +234,8 @@
 
         <div class="back-btn-container">
             <a href="menu.html" class="back-btn">
-                <span class="material-symbols-outlined" style="margin-right: 8px; font-size: 14px;">arrow_back_ios_new</span>
-                Torna alla home
+                <span class="material-symbols-outlined">arrow_back_ios_new</span>
+                Torna al menu
             </a>
         </div>
     </div>

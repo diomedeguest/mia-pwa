@@ -16,16 +16,28 @@
             font-family: 'Open Sans', sans-serif; 
             margin: 0; padding: 0; 
             background-color: #F0EDE9; 
-            color: #000000;
+            color: #1a1a1a;
+            line-height: 1.4;
         }
 
-        /* HEADER */
+        /* HEADER - Identico al CSS comune */
         .hero-header {
             width: 100%;
-            height: 200px;
-            background: url('../../assets/images/header.png') no-repeat center center;
-            background-size: cover;
+            height: 240px; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
             position: relative;
+            padding: 10px 20px;
+            overflow: hidden;
+        }
+
+        .logo-img {
+            width: 100%;
+            max-width: 300px; 
+            height: auto;
+            z-index: 5;
+            display: block;
         }
 
         .hero-overlay {
@@ -34,26 +46,36 @@
             background: linear-gradient(to top, #F0EDE9, rgba(240, 237, 233, 0));
         }
 
-        /* CONTAINER */
+        /* CONTAINER - Margini identici al CSS comune */
         .container { 
             width: 100%; 
-            max-width: 600px; 
-            margin: -20px auto 0; 
-            padding: 0 20px 60px;
+            max-width: 900px; 
+            margin: -30px auto 0; 
+            padding: 0 20px 80px;
             position: relative;
             z-index: 10;
         }
 
+        .header-content { text-align: center; margin-bottom: 30px; }
+
         h2 { 
             font-family: 'PT Serif', serif; 
-            font-size: 32px; 
-            text-align: center; 
-            margin: 10px 0 5px 0; 
+            font-size: 34px; 
+            margin: 0; 
             font-weight: 400;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
+            color: #2c2c2c;
+            text-align: center;
         }
         
-        .divider { width: 40px; height: 1px; background-color: #000; margin: 15px auto 30px; }
+        .divider { width: 50px; height: 1px; background-color: #A39689; margin: 10px auto 30px; }
+
+        /* SEZIONE CARTE */
+        .info-section { 
+            display: grid; 
+            grid-template-columns: 1fr; 
+            gap: 20px; 
+        }
 
         /* CARD PROMO */
         .promo-card {
@@ -61,8 +83,9 @@
             border: 1px solid rgba(163, 150, 137, 0.3);
             border-radius: 20px;
             padding: 25px;
-            margin-bottom: 25px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            display: flex;
+            flex-direction: column;
         }
 
         .promo-header {
@@ -94,7 +117,6 @@
             border-radius: 50px;
             font-weight: 700;
             font-size: 13px;
-            letter-spacing: 0.5px;
         }
 
         .promo-description { 
@@ -113,7 +135,6 @@
             color: #777;
             margin-bottom: 18px;
             font-weight: 600;
-            text-align: left;
         }
 
         .promo-offer {
@@ -124,15 +145,9 @@
             font-weight: 700;
             margin-bottom: 25px;
             color: #5D544C;
-            text-align: left;
         }
 
-        /* GRIGLIA PULSANTI - TESTI NERI */
-        .flex-row { 
-            display: flex; 
-            gap: 8px; 
-            justify-content: space-between;
-        }
+        .flex-row { display: flex; gap: 8px; justify-content: space-between; }
 
         .btn {
             flex: 1;
@@ -145,78 +160,57 @@
             font-size: 10px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.8px;
+            color: #000000;
             transition: all 0.2s ease;
-            white-space: nowrap;
-            color: #000000; /* TESTO NERO */
         }
         
         .action-btn { background: #A39689; }
         .maps-btn { background: #fff; border: 1px solid rgba(163, 150, 137, 0.4); }
-        
-        .btn:active { transform: scale(0.96); opacity: 0.9; }
-
-        /* ICONE SOTTILI */
-        .material-symbols-outlined {
-            font-variation-settings: 'wght' 200;
-            color: #000000;
-        }
 
         /* PULSANTE TORNA AI PARTNER */
-        .back-btn-container {
-            margin: 50px auto 20px;
-            display: flex;
-            justify-content: center;
-        }
-
+        .back-btn-container { text-align: center; margin-top: 50px; }
         .back-btn {
             display: inline-flex;
             align-items: center;
-            justify-content: center;
-            padding: 12px 28px;
+            padding: 12px 35px;
             background-color: #A39689; 
-            color: #000000;
+            color: #fff;
             text-decoration: none;
             text-transform: uppercase;
             font-size: 10px;
             font-weight: 700;
             letter-spacing: 1.5px;
-            border-radius: 50px; 
-            border: none;
+            border-radius: 50px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
         }
 
-        .back-btn:active {
-            transform: scale(0.96);
-            background-color: #8D8378;
-        }
-
-        .back-btn span {
-            margin-right: 8px;
-            font-size: 14px;
-            font-variation-settings: 'wght' 400;
-        }
-
+        /* MEDIA QUERIES - Allineate al modello */
         @media (min-width: 768px) {
-            .container { max-width: 900px; }
-            .info-section { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+            .hero-header { height: 280px; }
+            .logo-img { max-width: 400px; }
+            .container { margin-top: -40px; }
+            .info-section { grid-template-columns: 1fr 1fr; }
             h2 { font-size: 40px; }
         }
+
+        .material-symbols-outlined { font-variation-settings: 'wght' 200; color: #000; }
+        .back-btn .material-symbols-outlined { color: #fff; margin-right: 8px; font-size: 14px; }
     </style>
 </head>
 <body>
 
     <div class="hero-header">
+        <img src="../../assets/images/header.png" alt="Diomede Luxury Logo" class="logo-img">
         <div class="hero-overlay"></div>
     </div>
 
     <div class="container">
-        <h2>Café & Gelaterie</h2>
-        <div class="divider"></div>
+        <div class="header-content">
+            <h2>Café & Gelaterie</h2>
+            <div class="divider"></div>
+        </div>
 
         <div class="info-section">
-
             <div class="promo-card">
                 <div class="promo-header">
                     <div class="brand-info">
@@ -228,26 +222,17 @@
                 <p class="promo-description">
                     Inserire qui la descrizione del Cafè o della Gelateria partner. Racconta le specialità artigianali, le colazioni o i gelati imperdibili.
                 </p>
-
                 <div class="address-box">
                     <span class="material-symbols-outlined" style="font-size: 16px;">local_cafe</span>
                     <span>Via da inserire, 1, 72100 Brindisi BR</span>
                 </div>
-
                 <div class="promo-offer">
                     Presentando la convenzione Diomede, ottieni subito uno sconto del 10% sulle tue consumazioni.
                 </div>
-                
                 <div class="flex-row">
-                    <a href="tel:+390000000000" class="btn action-btn">
-                        <span class="material-symbols-outlined" style="margin-right: 4px; font-size: 14px;">call</span> Chiama
-                    </a>
-                    <a href="#" class="btn action-btn">
-                        <span class="material-symbols-outlined" style="margin-right: 4px; font-size: 14px;">confirmation_number</span> Voucher
-                    </a>
-                    <a href="#" target="_blank" class="btn maps-btn">
-                        <span class="material-symbols-outlined" style="margin-right: 4px; font-size: 14px;">location_on</span> Mappa
-                    </a>
+                    <a href="tel:+390000000000" class="btn action-btn">Chiama</a>
+                    <a href="#" class="btn action-btn">Voucher</a>
+                    <a href="#" target="_blank" class="btn maps-btn">Mappa</a>
                 </div>
             </div>
 
@@ -262,35 +247,24 @@
                 <p class="promo-description">
                     Secondo slot disponibile per una gelateria o pasticceria partner. Descrivi l'ambiente e i prodotti di punta offerti.
                 </p>
-
                 <div class="address-box">
                     <span class="material-symbols-outlined" style="font-size: 16px;">icecream</span>
                     <span>Indirizzo da definire, Brindisi</span>
                 </div>
-
                 <div class="promo-offer">
                     Sconto del 10% riservato ai clienti Diomede Luxury presentando il coupon digitale.
                 </div>
-                
                 <div class="flex-row">
-                    <a href="tel:+390000000000" class="btn action-btn">
-                        <span class="material-symbols-outlined" style="margin-right: 4px; font-size: 14px;">call</span> Chiama
-                    </a>
-                    <a href="#" class="btn action-btn">
-                        <span class="material-symbols-outlined" style="margin-right: 4px; font-size: 14px;">confirmation_number</span> Voucher
-                    </a>
-                    <a href="#" target="_blank" class="btn maps-btn">
-                        <span class="material-symbols-outlined" style="margin-right: 4px; font-size: 14px;">location_on</span> Mappa
-                    </a>
+                    <a href="tel:+390000000000" class="btn action-btn">Chiama</a>
+                    <a href="#" class="btn action-btn">Voucher</a>
+                    <a href="#" target="_blank" class="btn maps-btn">Mappa</a>
                 </div>
             </div>
-
         </div>
 
         <div class="back-btn-container">
             <a href="../convenzioni.html" class="back-btn">
-                <span class="material-symbols-outlined">arrow_back_ios_new</span>
-                Torna ai partner
+                <span class="material-symbols-outlined">arrow_back_ios_new</span> Torna ai partner
             </a>
         </div>
     </div>

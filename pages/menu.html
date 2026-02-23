@@ -16,32 +16,52 @@
             font-family: 'Open Sans', sans-serif; 
             margin: 0; padding: 0; 
             background-color: #C5BCB1; 
-            color: #000000;
+            color: #1a1a1a;
             text-align: center;
             overflow-x: hidden;
         }
 
+        /* HEADER - Logo più grande e centrato */
         .hero-header {
             width: 100%;
-            height: 170px; 
-            background: url('../assets/images/header.png') no-repeat center center;
-            background-size: cover;
+            height: 280px; /* Aumentata altezza per ospitare logo più grande */
+            display: flex;
+            align-items: center;
+            justify-content: center;
             position: relative;
+            padding: 0 20px;
+            overflow: hidden;
+        }
+
+        .logo-img {
+            width: 90%; /* Occupa più spazio orizzontale su mobile */
+            max-width: 380px; /* Aumentata la dimensione massima */
+            height: auto;
+            z-index: 5;
+            display: block;
+            margin: 0 auto;
         }
 
         .hero-overlay {
             position: absolute;
-            bottom: 0; left: 0; width: 100%; height: 70px;
+            bottom: 0; left: 0; width: 100%; height: 80px;
             background: linear-gradient(to top, #C5BCB1, rgba(197, 188, 177, 0));
         }
 
+        /* CONTAINER - Margine negativo bilanciato */
         .container { 
             width: 100%; 
-            max-width: 450px; 
-            margin: 0 auto; 
-            padding: 45px 20px 50px; 
+            max-width: 900px; 
+            margin: -10px auto 0; 
+            padding: 0 20px 80px;
             position: relative;
             z-index: 10;
+        }
+
+        @media (min-width: 768px) {
+            .hero-header { height: 350px; }
+            .logo-img { max-width: 550px; } /* Ancora più grande su desktop */
+            .container { margin-top: -20px; max-width: 600px; }
         }
         
         .grid { 
@@ -67,7 +87,7 @@
             justify-content: center; 
             align-items: center; 
             margin-bottom: 12px; 
-            color: #000000;
+            color: #1a1a1a;
             border: 1.5px solid #FFFFFF;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease;
@@ -81,7 +101,7 @@
         span.label { 
             font-family: 'Open Sans', sans-serif; 
             font-size: 9px; 
-            color: #000000; 
+            color: #1a1a1a; 
             text-transform: uppercase; 
             font-weight: 700; 
             letter-spacing: 0.8px;
@@ -97,6 +117,7 @@
 <body>
 
     <div class="hero-header">
+        <img src="../assets/images/header.png" alt="Diomede Luxury Logo" class="logo-img">
         <div class="hero-overlay"></div>
     </div>
 
@@ -143,15 +164,12 @@
 
     <script>
         let timerInattivita;
-
         function resettaTimer() {
             clearTimeout(timerInattivita);
             timerInattivita = setTimeout(function() {
-                // Ritorno alla pagina di benvenuto specifica
                 window.location.href = '../welcome.html';
-            }, 30000); // 30 secondi
+            }, 30000); 
         }
-
         window.onload = resettaTimer;
         window.ontouchstart = resettaTimer;
         window.onclick = resettaTimer;

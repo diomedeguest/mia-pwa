@@ -16,46 +16,57 @@
             font-family: 'Open Sans', sans-serif; 
             margin: 0; padding: 0; 
             background-color: #F0EDE9; 
-            color: #000000;
-        }
-
-        /* HEADER - Uniformato a 170px */
-        .hero-header {
-            width: 100%;
-            height: 170px; 
-            background: url('../assets/images/header.png') no-repeat center center;
-            background-size: cover;
-            position: relative;
-        }
-
-        /* OVERLAY - Uniformato a 70px */
-        .hero-overlay {
-            position: absolute;
-            bottom: 0; left: 0; width: 100%; height: 70px;
-            background: linear-gradient(to top, #F0EDE9, rgba(240, 237, 233, 0));
-        }
-
-        /* CONTAINER - Uniformato a max 450px e margin -15px */
-        .container { 
-            width: 100%; 
-            max-width: 450px; 
-            margin: -15px auto 0; 
-            padding: 0 20px 60px;
-            position: relative;
-            z-index: 10;
+            color: #1a1a1a;
+            line-height: 1.4;
             text-align: center;
         }
 
-        /* TITOLO - Margini azzerati per coerenza */
+        /* HEADER - Standardizzato con logo immagine centrato */
+        .hero-header {
+            width: 100%;
+            height: 240px; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 10px 20px;
+            overflow: hidden;
+        }
+
+        .logo-img {
+            width: 100%;
+            max-width: 300px; 
+            height: auto;
+            z-index: 5;
+            display: block;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 60px;
+            background: linear-gradient(to top, #F0EDE9, rgba(240, 237, 233, 0));
+        }
+
+        /* CONTAINER - Margine negativo -30px e max 900px */
+        .container { 
+            width: 100%; 
+            max-width: 900px; 
+            margin: -30px auto 0; 
+            padding: 0 20px 80px;
+            position: relative;
+            z-index: 10;
+        }
+
         h2 { 
-            font-family: 'PT Serif', serif;
-            font-weight: 400; font-size: 32px; 
-            margin: 0;
-            padding-top: 10px;
-            letter-spacing: 1px;
+            font-family: 'PT Serif', serif; 
+            font-size: 34px; 
+            margin: 0; 
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            color: #2c2c2c;
         }
         
-        .divider { width: 40px; height: 1px; background-color: #000; margin: 15px auto 30px; }
+        .divider { width: 50px; height: 1px; background-color: #A39689; margin: 15px auto 35px; }
 
         /* Griglia dei Trasporti */
         .info-grid {
@@ -66,19 +77,20 @@
             margin-top: 10px;
         }
 
-        @media (min-width: 700px) {
-            .hero-header { height: 240px; }
-            .container { max-width: 700px; }
+        @media (min-width: 768px) {
+            .hero-header { height: 280px; }
+            .logo-img { max-width: 400px; }
+            .container { margin-top: -40px; }
             .info-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
             h2 { font-size: 40px; }
         }
 
-        /* CARD COORDINATE */
+        /* CARD TRASPORTI */
         .info-card {
             background-color: rgba(255, 255, 255, 0.5);
             border: 1px solid rgba(163, 150, 137, 0.3);
             border-radius: 20px;
-            padding: 22px;
+            padding: 25px;
             display: flex;
             flex-direction: column;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
@@ -93,7 +105,7 @@
         .info-icon {
             margin-right: 15px;
             font-size: 26px;
-            color: #000;
+            color: #A39689;
             font-variation-settings: 'wght' 200;
         }
 
@@ -103,7 +115,7 @@
             text-transform: uppercase;
             letter-spacing: 1.2px;
             font-weight: 700;
-            color: #000;
+            color: #888;
         }
 
         .info-text p {
@@ -115,7 +127,6 @@
 
         .flex-row { display: flex; gap: 10px; margin-top: 18px; }
 
-        /* Pulsanti d'azione interni */
         .action-btn {
             display: flex;
             align-items: center;
@@ -125,7 +136,7 @@
             border-radius: 12px;
             padding: 10px;
             text-decoration: none;
-            color: #000;
+            color: #1a1a1a;
             flex: 1;
             transition: all 0.2s ease;
             font-size: 10px;
@@ -134,57 +145,52 @@
         }
 
         .action-btn.whatsapp {
-            background-color: rgba(37, 211, 102, 0.1);
+            background-color: rgba(37, 211, 102, 0.05);
             border-color: #25D366;
             color: #128C7E;
         }
 
-        .action-btn:active {
-            transform: scale(0.97);
-            background-color: #f5f5f5;
-        }
+        .action-btn:active { transform: scale(0.97); background-color: #f5f5f5; }
 
-        /* PULSANTE TORNA ALLA HOME - TESTO BIANCO */
-        .back-btn-container {
-            margin: 50px auto 20px;
+        /* PULSANTE BACK - PIENO TORTORA / SCRITTA BIANCA */
+        .back-btn-container { 
+            margin-top: 50px; 
             display: flex;
             justify-content: center;
         }
-
+        
         .back-btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 12px 28px;
+            padding: 16px 40px;
             background-color: #A39689; 
-            color: #ffffff; /* SCRITTA BIANCA */
+            color: #ffffff; 
             text-decoration: none;
             text-transform: uppercase;
-            font-size: 10px;
+            font-size: 11px;
             font-weight: 700;
             letter-spacing: 1.5px;
-            border-radius: 50px; 
+            border-radius: 50px;
             border: none;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
         }
 
-        .back-btn:active {
-            transform: scale(0.96);
-            background-color: #8D8378;
-        }
+        .back-btn:active { transform: scale(0.96); background-color: #8D8378; }
 
-        .back-btn span {
-            margin-right: 8px;
-            font-size: 14px;
-            color: #ffffff; /* ICONA BIANCA */
-            font-variation-settings: 'wght' 400;
+        .back-btn .material-symbols-outlined {
+            margin-right: 10px;
+            font-size: 16px;
+            color: #ffffff;
+            font-variation-settings: 'wght' 500;
         }
     </style>
 </head>
 <body>
 
     <div class="hero-header">
+        <img src="../assets/images/header.png" alt="Diomede Luxury Logo" class="logo-img">
         <div class="hero-overlay"></div>
     </div>
 
@@ -201,7 +207,7 @@
                 </div>
                 <div class="info-text">
                     <p>Servizio di fiducia. Consigliata la prenotazione.</p>
-                    <p style="font-size: 15px; color: #000; margin-top: 5px; font-weight: 700;">Mario Rossi</p>
+                    <p style="font-size: 15px; color: #1a1a1a; margin-top: 5px; font-weight: 700;">Mario Rossi</p>
                 </div>
                 <div class="flex-row">
                     <a href="tel:+39123456789" class="action-btn">

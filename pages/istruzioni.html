@@ -16,64 +16,71 @@
             font-family: 'Open Sans', sans-serif; 
             margin: 0; padding: 0; 
             background-color: #F0EDE9; 
-            color: #000000;
+            color: #1a1a1a;
+            line-height: 1.4;
             text-align: center;
         }
 
-        /* HEADER - Standardizzato 170px */
+        /* HEADER - Logo immagine centrato */
         .hero-header {
             width: 100%;
-            height: 170px; 
-            background: url('../assets/images/header.png') no-repeat center center;
-            background-size: cover;
+            height: 240px; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
             position: relative;
+            padding: 10px 20px;
+            overflow: hidden;
         }
 
-        /* OVERLAY - Standardizzato 70px */
+        .logo-img {
+            width: 100%;
+            max-width: 300px; 
+            height: auto;
+            z-index: 5;
+            display: block;
+        }
+
         .hero-overlay {
             position: absolute;
-            bottom: 0; left: 0; width: 100%; height: 70px;
+            bottom: 0; left: 0; width: 100%; height: 60px;
             background: linear-gradient(to top, #F0EDE9, rgba(240, 237, 233, 0));
         }
 
-        /* CONTAINER - Margine -15px e max-width 450px */
+        /* CONTAINER - Margine negativo e max-width uniformati */
         .container { 
             width: 100%; 
-            max-width: 450px; 
-            margin: -15px auto 0; 
-            padding: 0 20px 60px;
+            max-width: 900px; 
+            margin: -30px auto 0; 
+            padding: 0 20px 80px;
             position: relative;
             z-index: 10;
         }
 
-        /* TITOLO */
         h2 { 
-            font-family: 'PT Serif', serif;
-            font-weight: 400; 
-            font-size: 32px; 
+            font-family: 'PT Serif', serif; 
+            font-size: 34px; 
             margin: 0; 
-            padding-top: 10px;
-            letter-spacing: 1px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            color: #2c2c2c;
         }
         
-        .divider { 
-            width: 40px; 
-            height: 1px; 
-            background-color: #000; 
-            margin: 15px auto 30px; 
-        }
+        .divider { width: 50px; height: 1px; background-color: #A39689; margin: 15px auto 35px; }
 
+        /* Griglia Istruzioni */
         .instructions-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 15px;
+            gap: 12px;
             margin-top: 10px;
         }
 
-        @media (min-width: 700px) {
-            .hero-header { height: 240px; }
-            .container { max-width: 700px; }
-            .instructions-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (min-width: 768px) {
+            .hero-header { height: 280px; }
+            .logo-img { max-width: 400px; }
+            .container { margin-top: -40px; }
+            .instructions-grid { grid-template-columns: 1fr 1fr; gap: 15px; }
             h2 { font-size: 40px; }
         }
 
@@ -82,7 +89,7 @@
             background-color: rgba(255, 255, 255, 0.5); 
             border: 1px solid rgba(163, 150, 137, 0.3); 
             border-radius: 20px; 
-            padding: 22px;
+            padding: 22px 25px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -102,7 +109,7 @@
         .main-icon { 
             margin-right: 18px; 
             font-size: 28px; 
-            color: #000;
+            color: #A39689;
             font-variation-settings: 'wght' 200; 
         }
 
@@ -112,14 +119,14 @@
             font-weight: 700;
             letter-spacing: 1.2px;
             text-align: left;
-            color: #000;
+            color: #1a1a1a;
         }
 
-        .touch-icon { font-size: 16px; color: #A39689; }
+        .touch-icon { font-size: 18px; opacity: 0.3; color: #A39689; }
 
-        /* BACK BUTTON */
-        .back-btn-container {
-            margin: 50px auto 20px;
+        /* PULSANTE BACK - TORTORA PIENO / SCRITTA BIANCA */
+        .back-btn-container { 
+            margin-top: 50px; 
             display: flex;
             justify-content: center;
         }
@@ -128,17 +135,17 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 12px 28px;
+            padding: 16px 40px;
             background-color: #A39689; 
             color: #ffffff;
             text-decoration: none;
             text-transform: uppercase;
-            font-size: 10px;
+            font-size: 11px;
             font-weight: 700;
             letter-spacing: 1.5px;
             border-radius: 50px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
 
         .back-btn:active {
@@ -146,21 +153,27 @@
             background-color: #8D8378;
         }
 
-        .back-btn span { margin-right: 8px; font-size: 14px; }
+        .back-btn .material-symbols-outlined { 
+            margin-right: 10px; 
+            font-size: 16px; 
+            color: #ffffff;
+            font-variation-settings: 'wght' 500;
+        }
     </style>
 </head>
 <body>
 
     <div class="hero-header">
+        <img src="../assets/images/header.png" alt="Diomede Luxury Logo" class="logo-img">
         <div class="hero-overlay"></div>
     </div>
 
     <div class="container">
-        <h2>Istruzioni</h2>
+        <h2>Istruzioni d'uso</h2>
         <div class="divider"></div>
 
         <div class="instructions-grid">
-            <a href="../assets/documents/cucina.pdf" class="instruction-card" target="_blank">
+            <a href="istruzioni/caffe.html" class="instruction-card" target="_blank">
                 <div class="left-content">
                     <span class="material-symbols-outlined main-icon">coffee_maker</span>
                     <span class="card-title">Macchina del Caffè</span>
@@ -168,7 +181,7 @@
                 <span class="material-symbols-outlined touch-icon">arrow_forward_ios</span>
             </a>
 
-            <a href="../assets/documents/cucina.pdf" class="instruction-card" target="_blank">
+            <a href="istruzioni/induzione.html" class="instruction-card" target="_blank">
                 <div class="left-content">
                     <span class="material-symbols-outlined main-icon">cooking</span>
                     <span class="card-title">Piano a Induzione</span>
@@ -200,10 +213,18 @@
                 <span class="material-symbols-outlined touch-icon">arrow_forward_ios</span>
             </a>
 
-            <a href="../assets/documents/lavatrice.pdf" class="instruction-card" target="_blank">
+            <a href="istruzioni/lavatrice.html" class="instruction-card" target="_blank">
                 <div class="left-content">
                     <span class="material-symbols-outlined main-icon">local_laundry_service</span>
                     <span class="card-title">Lavatrice</span>
+                </div>
+                <span class="material-symbols-outlined touch-icon">arrow_forward_ios</span>
+            </a>
+
+            <a href="istruzioni/asciugatrice.html" class="instruction-card" target="_blank">
+                <div class="left-content">
+                    <span class="material-symbols-outlined main-icon">laundry</span>
+                    <span class="card-title">Asciugatrice</span>
                 </div>
                 <span class="material-symbols-outlined touch-icon">arrow_forward_ios</span>
             </a>

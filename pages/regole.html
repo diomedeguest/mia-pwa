@@ -16,201 +16,149 @@
             font-family: 'Open Sans', sans-serif; 
             margin: 0; padding: 0; 
             background-color: #F0EDE9; 
-            color: #000000;
+            color: #1a1a1a;
+            line-height: 1.4;
             text-align: center;
         }
 
-        /* HEADER - 170px */
+        /* HEADER */
         .hero-header {
             width: 100%;
-            height: 170px; 
-            background: url('../assets/images/header.png') no-repeat center center;
-            background-size: cover;
+            height: 240px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             position: relative;
         }
 
-        /* OVERLAY - 70px */
-        .hero-overlay {
-            position: absolute;
-            bottom: 0; left: 0; width: 100%; height: 70px;
-            background: linear-gradient(to top, #F0EDE9, rgba(240, 237, 233, 0));
-        }
+        .logo-img { width: 100%; max-width: 300px; height: auto; }
 
-        /* CONTAINER - max 450px e margin -15px */
+        /* CONTAINER */
         .container { 
             width: 100%; 
-            max-width: 450px; 
-            margin: -15px auto 0; 
-            padding: 0 20px 60px;
+            max-width: 900px; 
+            margin: -40px auto 0; 
+            padding: 0 20px 80px;
             position: relative;
             z-index: 10;
         }
 
         h2 { 
-            font-family: 'PT Serif', serif;
-            font-weight: 400; font-size: 32px; 
-            margin: 0;
-            padding-top: 10px;
-            letter-spacing: 1px;
+            font-family: 'PT Serif', serif; 
+            font-size: 34px; 
+            margin: 0; 
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            color: #2c2c2c;
         }
         
-        .divider { width: 40px; height: 1px; background-color: #000; margin: 15px auto 30px; }
+        .divider { width: 50px; height: 1px; background-color: #A39689; margin: 10px auto 35px; }
 
-        .info-section {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px;
-            text-align: left;
-            margin-top: 10px;
-        }
-
-        @media (min-width: 700px) {
-            .hero-header { height: 240px; }
-            .container { max-width: 700px; }
-            .info-section { grid-template-columns: 1fr 1fr; gap: 20px; }
-            h2 { font-size: 40px; }
-        }
-
+        /* REGOLE CARDS */
         .info-card {
+            display: flex;
+            align-items: center;
             background-color: rgba(255, 255, 255, 0.5);
             border: 1px solid rgba(163, 150, 137, 0.3);
             border-radius: 20px;
-            padding: 22px;
-            display: flex;
-            align-items: flex-start;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
-            transition: all 0.3s ease;
+            padding: 20px;
+            margin-bottom: 15px;
+            text-align: left;
         }
 
         .info-icon {
+            font-size: 28px;
+            color: #A39689;
             margin-right: 18px;
-            font-size: 26px;
-            color: #000;
-            min-width: 32px;
-            text-align: center;
             font-variation-settings: 'wght' 200;
         }
 
         .info-text h3 {
-            margin: 0;
-            font-size: 11px;
+            margin: 0 0 4px 0;
+            font-size: 14px;
             text-transform: uppercase;
-            letter-spacing: 1.2px;
+            letter-spacing: 1px;
+            font-family: 'Open Sans', sans-serif;
             font-weight: 700;
-            color: #000;
         }
 
         .info-text p {
-            margin: 8px 0 0;
-            font-size: 14px;
-            color: #333;
-            line-height: 1.6;
+            margin: 0;
+            font-size: 13px;
+            color: #444;
+            line-height: 1.4;
         }
 
-        /* BACK BUTTON - TESTO BIANCO */
-        .back-btn-container {
-            margin: 50px auto 20px;
-            display: flex;
-            justify-content: center;
-        }
-
+        /* BACK BUTTON */
+        .back-btn-container { text-align: center; margin-top: 50px; }
         .back-btn {
             display: inline-flex;
             align-items: center;
-            justify-content: center;
-            padding: 12px 28px;
+            padding: 12px 35px;
             background-color: #A39689; 
-            color: #ffffff; /* SCRITTA BIANCA */
+            color: #ffffff;
             text-decoration: none;
             text-transform: uppercase;
             font-size: 10px;
             font-weight: 700;
             letter-spacing: 1.5px;
-            border-radius: 50px; 
-            border: none;
+            border-radius: 50px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
         }
 
-        .back-btn:active {
-            transform: scale(0.96);
-            background-color: #8D8378;
-        }
-
-        .back-btn span {
-            margin-right: 8px;
-            font-size: 14px;
-            color: #ffffff; /* ICONA BIANCA */
-            font-variation-settings: 'wght' 400;
+        @media (min-width: 768px) {
+            .hero-header { height: 280px; }
+            .logo-img { max-width: 400px; }
+            h2 { font-size: 40px; }
         }
     </style>
 </head>
 <body>
 
     <div class="hero-header">
-        <div class="hero-overlay"></div>
+        <img src="../assets/images/header.png" alt="Diomede Luxury" class="logo-img">
     </div>
 
     <div class="container">
         <h2>Regole di Casa</h2>
         <div class="divider"></div>
-
-        <div class="info-section">
-            
-            <div class="info-card">
-                <span class="material-symbols-outlined info-icon">smoke_free</span>
-                <div class="info-text">
-                    <h3>È vietato fumare</h3>
-                    <p>Vi invitiamo a fumare esclusivamente all'aperto. Fumare all'interno comporta un costo extra per la sanificazione.</p>
-                </div>
+        
+        <div class="info-card">
+            <span class="material-symbols-outlined info-icon">smoke_free</span>
+            <div class="info-text">
+                <h3>Vietato Fumare</h3>
+                <p>Per la sicurezza e il comfort di tutti, è severamente vietato fumare all'interno dell'appartamento.</p>
             </div>
+        </div>
 
-            <div class="info-card">
-                <span class="material-symbols-outlined info-icon">pets</span>
-                <div class="info-text">
-                    <h3>No Pets</h3>
-                    <p>Siamo spiacenti, ma la nostra struttura non è purtroppo attrezzata per ospitare animali domestici.</p>
-                </div>
+        <div class="info-card">
+            <span class="material-symbols-outlined info-icon">volume_off</span>
+            <div class="info-text">
+                <h3>Rispetto e Quiete</h3>
+                <p>Vi chiediamo di limitare i rumori molesti, specialmente nelle ore notturne (22:00 - 08:00) e nel primo pomeriggio.</p>
             </div>
+        </div>
 
-            <div class="info-card">
-                <span class="material-symbols-outlined info-icon">self_care</span>
-                <div class="info-text">
-                    <h3>Pace e Relax</h3>
-                    <p>Per garantire un ambiente sereno, non è consentito organizzare feste o eventi privati.</p>
-                </div>
+        <div class="info-card">
+            <span class="material-symbols-outlined info-icon">group_off</span>
+            <div class="info-text">
+                <h3>No Party</h3>
+                <p>Non è consentito organizzare feste o invitare persone non registrate al momento del check-in.</p>
             </div>
+        </div>
 
-            <div class="info-card">
-                <span class="material-symbols-outlined info-icon">volume_off</span>
-                <div class="info-text">
-                    <h3>Rispetto e Quiete</h3>
-                    <p>Vi chiediamo di limitare i rumori nelle ore notturne per rispettare il riposo di tutti.</p>
-                </div>
+        <div class="info-card">
+            <span class="material-symbols-outlined info-icon">pets</span>
+            <div class="info-text">
+                <h3>Animali Domestici</h3>
+                <p>Gli animali non sono ammessi, salvo diversi accordi presi precedentemente con l'host.</p>
             </div>
-
-            <div class="info-card">
-                <span class="material-symbols-outlined info-icon">delete</span>
-                <div class="info-text">
-                    <h3>Gestione Rifiuti</h3>
-                    <p>Il martedì mattina è il giorno di ritiro: posizionate il bidone sul marciapiede il lunedì sera.</p>
-                </div>
-            </div>
-
-            <div class="info-card">
-                <span class="material-symbols-outlined info-icon">handshake</span>
-                <div class="info-text">
-                    <h3>Collaborazione</h3>
-                    <p>Segnalateci tempestivamente eventuali danni per permetterci di mantenere lo standard di eccellenza.</p>
-                </div>
-            </div>
-
         </div>
 
         <div class="back-btn-container">
             <a href="menu.html" class="back-btn">
-                <span class="material-symbols-outlined">arrow_back_ios_new</span>
-                Torna alla home
+                <span class="material-symbols-outlined" style="color:#fff; margin-right:8px; font-size:14px;">arrow_back_ios_new</span>
+                Torna al menu
             </a>
         </div>
     </div>
