@@ -13,6 +13,11 @@
 </head>
 <body>
 
+    <div class="lang-switcher">
+        <div id="btn-it" class="lang-btn" onclick="setLanguage('it')">ITA</div>
+        <div id="btn-en" class="lang-btn" onclick="setLanguage('en')">ENG</div>
+    </div>
+
     <div class="hero-header">
         <img src="../../assets/images/header.png" alt="Diomede Luxury Logo" class="logo-img">
         <div class="hero-overlay"></div>
@@ -20,7 +25,7 @@
 
     <div class="container">
         <div class="header-content">
-            <h2>Cassaforte</h2>
+            <h2 data-it="Cassaforte" data-en="Safety Deposit Box">Cassaforte</h2>
             <div class="divider"></div>
         </div>
 
@@ -30,47 +35,71 @@
 
         <div class="instruction-section">
             <div class="instruction-card">
-                <h3><span class="material-symbols-outlined">lock</span> 1. Per Chiudere</h3>
+                <h3>
+                    <span class="material-symbols-outlined">lock</span> 
+                    <span data-it="1. Per Chiudere" data-en="1. To Close">1. Per Chiudere</span>
+                </h3>
                 <ul class="step-list">
                     <li>
                         <span class="material-symbols-outlined item-icon">sensor_door</span>
-                        <div><strong>Sportello:</strong> Accostalo e mantienilo appoggiato al battente.</div>
+                        <div>
+                            <strong data-it="Sportello" data-en="Door">Sportello</strong>
+                            <span data-it="Accostalo e mantienilo appoggiato al battente." data-en="Close it and keep it pressed against the frame."></span>
+                        </div>
                     </li>
                     <li>
                         <span class="material-symbols-outlined item-icon">dialpad</span>
-                        <div><strong>Codice:</strong> Digita il tuo codice personale (da 3 a 6 cifre).</div>
+                        <div>
+                            <strong data-it="Codice" data-en="Code">Codice</strong>
+                            <span data-it="Digita il tuo codice personale (da 3 a 6 cifre)." data-en="Enter your personal code (3 to 6 digits)."></span>
+                        </div>
                     </li>
                     <li>
                         <span class="material-symbols-outlined item-icon">lock</span>
-                        <div><strong>Chiusura:</strong> Premi il tasto LOCK. Il LED rosso conferma il blocco.</div>
+                        <div>
+                            <strong data-it="Chiusura" data-en="Locking">Chiusura</strong>
+                            <span data-it="Premi il tasto LOCK. Il LED rosso conferma il blocco." data-en="Press the LOCK key. The red LED confirms it is locked."></span>
+                        </div>
                     </li>
                 </ul>
             </div>
 
             <div class="instruction-card">
-                <h3><span class="material-symbols-outlined">lock_open</span> 2. Per Aprire</h3>
+                <h3>
+                    <span class="material-symbols-outlined">lock_open</span> 
+                    <span data-it="2. Per Aprire" data-en="2. To Open">2. Per Aprire</span>
+                </h3>
                 <ul class="step-list">
                     <li>
                         <span class="material-symbols-outlined item-icon">pin</span>
-                        <div><strong>Sblocco:</strong> Digita il tuo codice personale memorizzato in precedenza.</div>
+                        <div>
+                            <strong data-it="Sblocco" data-en="Unlocking">Sblocco</strong>
+                            <span data-it="Digita il tuo codice personale memorizzato in precedenza." data-en="Enter your previously stored personal code."></span>
+                        </div>
                     </li>
                     <li>
                         <span class="material-symbols-outlined item-icon">check_circle</span>
-                        <div><strong>Apertura:</strong> Il LED verde si accende e la porta si apre automaticamente.</div>
+                        <div>
+                            <strong data-it="Apertura" data-en="Opening">Apertura</strong>
+                            <span data-it="Il LED verde si accende e la porta si apre automaticamente." data-en="The green LED lights up and the door opens automatically."></span>
+                        </div>
                     </li>
                 </ul>
             </div>
 
             <div class="instruction-card full-width-tablet">
-                <h3><span class="material-symbols-outlined">verified_user</span> Sicurezza e Consigli</h3>
+                <h3>
+                    <span class="material-symbols-outlined">verified_user</span> 
+                    <span data-it="Sicurezza e Consigli" data-en="Safety & Tips">Sicurezza e Consigli</span>
+                </h3>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px;">
                     <div class="alert-box">
-                        <h4>Blocco Tastiera</h4>
-                        <p>Dopo 4 tentativi errati la tastiera si blocca per 15 minuti (LED giallo).</p>
+                        <h4 data-it="Blocco Tastiera" data-en="Keypad Lock">Blocco Tastiera</h4>
+                        <p data-it="Dopo 4 tentativi errati la tastiera si blocca per 15 minuti (LED giallo)." data-en="After 4 wrong attempts, the keypad locks for 15 minutes (yellow LED)."></p>
                     </div>
                     <div class="alert-box">
-                        <h4>Check-out</h4>
-                        <p>Al termine del soggiorno, lasciare sempre lo sportello <strong>APERTO</strong>.</p>
+                        <h4 data-it="Check-out" data-en="Check-out">Check-out</h4>
+                        <p data-it="Al termine del soggiorno, lasciare sempre lo sportello APERTO." data-en="At the end of your stay, please leave the door OPEN."></p>
                     </div>
                 </div>
             </div>
@@ -79,10 +108,31 @@
         <div class="back-btn-container">
             <a href="../istruzioni.html" class="back-btn">
                 <span class="material-symbols-outlined">arrow_back_ios_new</span>
-                Torna alle istruzioni
+                <span data-it="Torna alle istruzioni" data-en="Back to instructions">Torna alle istruzioni</span>
             </a>
         </div>
     </div>
+
+    <script>
+        function setLanguage(lang) {
+            localStorage.setItem('preferredLang', lang);
+            const btnIt = document.getElementById('btn-it');
+            const btnEn = document.getElementById('btn-en');
+            
+            if(btnIt) btnIt.classList.toggle('active', lang === 'it');
+            if(btnEn) btnEn.classList.toggle('active', lang === 'en');
+
+            document.querySelectorAll('[data-it]').forEach(el => {
+                const text = el.getAttribute('data-' + lang);
+                el.textContent = text;
+            });
+        }
+
+        window.onload = () => {
+            const savedLang = localStorage.getItem('preferredLang') || 'it';
+            setLanguage(savedLang);
+        };
+    </script>
 
 </body>
 </html>

@@ -21,10 +21,43 @@
             text-align: center;
         }
 
-        /* HEADER - Logo immagine centrato */
+        /* LINGUA SWITCHER */
+        .lang-switcher {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 8px;
+            z-index: 100;
+        }
+
+        .lang-btn {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: 1px solid rgba(0,0,0,0.1);
+            background: rgba(255,255,255,0.6);
+            color: #1a1a1a;
+            font-size: 10px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+            transition: 0.3s;
+        }
+
+        .lang-btn.active {
+            background: #A39689;
+            color: white;
+            border-color: #A39689;
+        }
+
+        /* HEADER */
         .hero-header {
             width: 100%;
-            height: 240px; 
+            height: 200px; 
             display: flex;
             align-items: center;
             justify-content: center;
@@ -35,7 +68,7 @@
 
         .logo-img {
             width: 100%;
-            max-width: 300px; 
+            max-width: 250px; 
             height: auto;
             z-index: 5;
             display: block;
@@ -47,11 +80,11 @@
             background: linear-gradient(to top, #F0EDE9, rgba(240, 237, 233, 0));
         }
 
-        /* CONTAINER - Margine negativo e max-width uniformati */
+        /* CONTAINER */
         .container { 
             width: 100%; 
-            max-width: 900px; 
-            margin: -30px auto 0; 
+            max-width: 1000px; 
+            margin: -20px auto 0; 
             padding: 0 20px 80px;
             position: relative;
             z-index: 10;
@@ -59,16 +92,16 @@
 
         h2 { 
             font-family: 'PT Serif', serif; 
-            font-size: 34px; 
+            font-size: 30px; 
             margin: 0; 
             font-weight: 400;
             letter-spacing: 0.5px;
             color: #2c2c2c;
         }
         
-        .divider { width: 50px; height: 1px; background-color: #A39689; margin: 15px auto 35px; }
+        .divider { width: 40px; height: 1px; background-color: #A39689; margin: 12px auto 30px; }
 
-        /* Griglia Istruzioni */
+        /* Griglia Istruzioni - Adattiva Tablet */
         .instructions-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -76,12 +109,12 @@
             margin-top: 10px;
         }
 
-        @media (min-width: 768px) {
-            .hero-header { height: 280px; }
-            .logo-img { max-width: 400px; }
-            .container { margin-top: -40px; }
+        @media (min-width: 600px) {
             .instructions-grid { grid-template-columns: 1fr 1fr; gap: 15px; }
-            h2 { font-size: 40px; }
+            .hero-header { height: 260px; }
+            .logo-img { max-width: 350px; }
+            h2 { font-size: 38px; }
+            .container { margin-top: -30px; }
         }
 
         /* CARDS */
@@ -124,7 +157,7 @@
 
         .touch-icon { font-size: 18px; opacity: 0.3; color: #A39689; }
 
-        /* PULSANTE BACK - TORTORA PIENO / SCRITTA BIANCA */
+        /* PULSANTE BACK */
         .back-btn-container { 
             margin-top: 50px; 
             display: flex;
@@ -163,20 +196,25 @@
 </head>
 <body>
 
+    <div class="lang-switcher">
+        <div id="btn-it" class="lang-btn" onclick="setLanguage('it')">ITA</div>
+        <div id="btn-en" class="lang-btn" onclick="setLanguage('en')">ENG</div>
+    </div>
+
     <div class="hero-header">
         <img src="../assets/images/header.png" alt="Diomede Luxury Logo" class="logo-img">
         <div class="hero-overlay"></div>
     </div>
 
     <div class="container">
-        <h2>Istruzioni d'uso</h2>
+        <h2 data-it="Istruzioni d'uso" data-en="User Instructions">Istruzioni d'uso</h2>
         <div class="divider"></div>
 
         <div class="instructions-grid">
             <a href="istruzioni/caffe.html" class="instruction-card" target="_blank">
                 <div class="left-content">
                     <span class="material-symbols-outlined main-icon">coffee_maker</span>
-                    <span class="card-title">Macchina del Caffè</span>
+                    <span class="card-title" data-it="Macchina del Caffè" data-en="Coffee Machine">Macchina del Caffè</span>
                 </div>
                 <span class="material-symbols-outlined touch-icon">arrow_forward_ios</span>
             </a>
@@ -184,7 +222,7 @@
             <a href="istruzioni/induzione.html" class="instruction-card" target="_blank">
                 <div class="left-content">
                     <span class="material-symbols-outlined main-icon">cooking</span>
-                    <span class="card-title">Piano a Induzione</span>
+                    <span class="card-title" data-it="Piano a Induzione" data-en="Induction Hob">Piano a Induzione</span>
                 </div>
                 <span class="material-symbols-outlined touch-icon">arrow_forward_ios</span>
             </a>
@@ -192,7 +230,7 @@
             <a href="../assets/documents/depuratore.pdf" class="instruction-card" target="_blank">
                 <div class="left-content">
                     <span class="material-symbols-outlined main-icon">water_full</span>
-                    <span class="card-title">Depuratore d'acqua</span>
+                    <span class="card-title" data-it="Depuratore d'acqua" data-en="Water Purifier">Depuratore d'acqua</span>
                 </div>
                 <span class="material-symbols-outlined touch-icon">arrow_forward_ios</span>
             </a>
@@ -200,7 +238,7 @@
             <a href="istruzioni/cassaforte.html" class="instruction-card">
                 <div class="left-content">
                     <span class="material-symbols-outlined main-icon">lock</span>
-                    <span class="card-title">Cassaforte</span>
+                    <span class="card-title" data-it="Cassaforte" data-en="Safe Box">Cassaforte</span>
                 </div>
                 <span class="material-symbols-outlined touch-icon">arrow_forward_ios</span>
             </a>
@@ -208,7 +246,7 @@
             <a href="istruzioni/idromassaggio.html" class="instruction-card">
                 <div class="left-content">
                     <span class="material-symbols-outlined main-icon">hot_tub</span>
-                    <span class="card-title">Vasca Idromassaggio</span>
+                    <span class="card-title" data-it="Vasca Idromassaggio" data-en="Whirlpool Tub">Vasca Idromassaggio</span>
                 </div>
                 <span class="material-symbols-outlined touch-icon">arrow_forward_ios</span>
             </a>
@@ -216,7 +254,7 @@
             <a href="istruzioni/lavatrice.html" class="instruction-card" target="_blank">
                 <div class="left-content">
                     <span class="material-symbols-outlined main-icon">local_laundry_service</span>
-                    <span class="card-title">Lavatrice</span>
+                    <span class="card-title" data-it="Lavatrice" data-en="Washing Machine">Lavatrice</span>
                 </div>
                 <span class="material-symbols-outlined touch-icon">arrow_forward_ios</span>
             </a>
@@ -224,7 +262,7 @@
             <a href="istruzioni/asciugatrice.html" class="instruction-card" target="_blank">
                 <div class="left-content">
                     <span class="material-symbols-outlined main-icon">laundry</span>
-                    <span class="card-title">Asciugatrice</span>
+                    <span class="card-title" data-it="Asciugatrice" data-en="Tumble Dryer">Asciugatrice</span>
                 </div>
                 <span class="material-symbols-outlined touch-icon">arrow_forward_ios</span>
             </a>
@@ -232,19 +270,35 @@
             <a href="../assets/documents/letto.pdf" class="instruction-card" target="_blank">
                 <div class="left-content">
                     <span class="material-symbols-outlined main-icon">bed</span>
-                    <span class="card-title">Letto Contenitore</span>
+                    <span class="card-title" data-it="Letto Contenitore" data-en="Storage Bed">Letto Contenitore</span>
                 </div>
                 <span class="material-symbols-outlined touch-icon">arrow_forward_ios</span>
             </a>
         </div>
 
         <div class="back-btn-container">
-            <a href="menu.html" class="back-btn">
+            <a href="menu.html" class="back-btn" data-it="Torna alla home" data-en="Back to home">
                 <span class="material-symbols-outlined">arrow_back_ios_new</span>
                 Torna alla home
             </a>
         </div>
     </div>
 
+    <script>
+        function setLanguage(lang) {
+            localStorage.setItem('preferredLang', lang);
+            document.getElementById('btn-it').classList.toggle('active', lang === 'it');
+            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+
+            document.querySelectorAll('[data-it]').forEach(el => {
+                el.innerHTML = el.getAttribute('data-' + lang);
+            });
+        }
+
+        window.onload = () => {
+            const savedLang = localStorage.getItem('preferredLang') || 'it';
+            setLanguage(savedLang);
+        };
+    </script>
 </body>
 </html>

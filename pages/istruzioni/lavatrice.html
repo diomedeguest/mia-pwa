@@ -13,6 +13,11 @@
 </head>
 <body>
 
+    <div class="lang-switcher">
+        <div id="btn-it" class="lang-btn" onclick="setLanguage('it')">ITA</div>
+        <div id="btn-en" class="lang-btn" onclick="setLanguage('en')">ENG</div>
+    </div>
+
     <div class="hero-header">
         <img src="../../assets/images/header.png" alt="Diomede Luxury Logo" class="logo-img">
         <div class="hero-overlay"></div>
@@ -20,7 +25,7 @@
 
     <div class="container">
         <div class="header-content">
-            <h2>Lavatrice</h2>
+            <h2 data-it="Lavatrice" data-en="Washing Machine">Lavatrice</h2>
             <div class="divider"></div>
         </div>
 
@@ -30,43 +35,64 @@
 
         <div class="instruction-section">
             <div class="instruction-card">
-                <h3><span class="material-symbols-outlined">bolt</span> 1. Cicli Veloci</h3>
+                <h3>
+                    <span class="material-symbols-outlined">bolt</span> 
+                    <span data-it="1. Cicli Veloci" data-en="1. Rapid Cycles">1. Cicli Veloci</span>
+                </h3>
                 <ul class="step-list">
                     <li>
                         <span class="material-symbols-outlined item-icon">schedule</span>
-                        <div><strong>Rapidi (14'/30'/44'):</strong> Per rinfrescare velocemente i capi poco sporchi.</div>
+                        <div>
+                            <strong data-it="Rapidi (14'/30'/44')" data-en="Rapid (14'/30'/44')">Rapidi (14'/30'/44')</strong>
+                            <span data-it="Per rinfrescare velocemente i capi poco sporchi." data-en="To quickly refresh lightly soiled garments."></span>
+                        </div>
                     </li>
                     <li>
                         <span class="material-symbols-outlined item-icon">palette</span>
-                        <div><strong>Misti & Colorati 59':</strong> Lavaggio quotidiano completo in meno di un'ora.</div>
+                        <div>
+                            <strong data-it="Misti & Colorati 59'" data-en="Mixed & Colored 59'">Misti & Colorati 59'</strong>
+                            <span data-it="Lavaggio quotidiano completo in meno di un'ora." data-en="Complete daily wash in less than an hour."></span>
+                        </div>
                     </li>
                 </ul>
             </div>
 
             <div class="instruction-card">
-                <h3><span class="material-symbols-outlined">sanitizer</span> 2. Funzioni Speciali</h3>
+                <h3>
+                    <span class="material-symbols-outlined">sanitizer</span> 
+                    <span data-it="2. Funzioni Speciali" data-en="2. Special Functions">2. Funzioni Speciali</span>
+                </h3>
                 <ul class="step-list">
                     <li>
                         <span class="material-symbols-outlined item-icon">cloud</span>
-                        <div><strong>Stiro Facile:</strong> Trattamento a vapore per distendere i tessuti e ridurre le pieghe.</div>
+                        <div>
+                            <strong data-it="Stiro Facile" data-en="Easy Iron">Stiro Facile</strong>
+                            <span data-it="Trattamento a vapore per distendere i tessuti e ridurre le pieghe." data-en="Steam treatment to relax fabrics and reduce creases."></span>
+                        </div>
                     </li>
                     <li>
                         <span class="material-symbols-outlined item-icon">health_and_safety</span>
-                        <div><strong>Igiene Plus:</strong> Sanificazione profonda mantenendo la temperatura costante.</div>
+                        <div>
+                            <strong data-it="Igiene Plus" data-en="Hygiene Plus">Igiene Plus</strong>
+                            <span data-it="Sanificazione profonda mantenendo la temperatura costante." data-en="Deep sanitization by maintaining a constant temperature."></span>
+                        </div>
                     </li>
                 </ul>
             </div>
 
             <div class="instruction-card full-width-tablet">
-                <h3><span class="material-symbols-outlined">verified_user</span> Sicurezza e Consigli</h3>
+                <h3>
+                    <span class="material-symbols-outlined">verified_user</span> 
+                    <span data-it="Sicurezza e Consigli" data-en="Safety & Tips">Sicurezza e Consigli</span>
+                </h3>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px;">
                     <div class="alert-box">
-                        <h4>Kg Detector</h4>
-                        <p>Il sistema pesa il carico e ottimizza acqua ed energia automaticamente.</p>
+                        <h4 data-it="Kg Detector" data-en="Kg Detector">Kg Detector</h4>
+                        <p data-it="Il sistema pesa il carico e ottimizza acqua ed energia automaticamente." data-en="The system weighs the load and optimizes water and energy automatically."></p>
                     </div>
                     <div class="alert-box">
-                        <h4>Sicurezza Oblò</h4>
-                        <p>Attendere lo spegnimento della spia prima di aprire a fine ciclo.</p>
+                        <h4 data-it="Sicurezza Oblò" data-en="Door Safety">Sicurezza Oblò</h4>
+                        <p data-it="Attendere lo spegnimento della spia prima di aprire a fine ciclo." data-en="Wait for the indicator light to turn off before opening at the end of the cycle."></p>
                     </div>
                 </div>
             </div>
@@ -75,10 +101,31 @@
         <div class="back-btn-container">
             <a href="../istruzioni.html" class="back-btn">
                 <span class="material-symbols-outlined">arrow_back_ios_new</span>
-                Torna alle istruzioni
+                <span data-it="Torna alle istruzioni" data-en="Back to instructions">Torna alle istruzioni</span>
             </a>
         </div>
     </div>
+
+    <script>
+        function setLanguage(lang) {
+            localStorage.setItem('preferredLang', lang);
+            const btnIt = document.getElementById('btn-it');
+            const btnEn = document.getElementById('btn-en');
+            
+            if(btnIt) btnIt.classList.toggle('active', lang === 'it');
+            if(btnEn) btnEn.classList.toggle('active', lang === 'en');
+
+            document.querySelectorAll('[data-it]').forEach(el => {
+                const text = el.getAttribute('data-' + lang);
+                el.textContent = text;
+            });
+        }
+
+        window.onload = () => {
+            const savedLang = localStorage.getItem('preferredLang') || 'it';
+            setLanguage(savedLang);
+        };
+    </script>
 
 </body>
 </html>

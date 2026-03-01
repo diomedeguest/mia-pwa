@@ -9,136 +9,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=Open+Sans:wght@300;400;600&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,200,0,0&display=swap" rel="stylesheet">
     
-    <style>
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        
-        body { 
-            font-family: 'Open Sans', sans-serif; 
-            margin: 0; padding: 0; 
-            background-color: #F0EDE9; 
-            color: #1a1a1a;
-            line-height: 1.4;
-        }
-
-        /* HEADER MASSIMIZZATO */
-        .hero-header {
-            width: 100%;
-            height: 240px; 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            padding: 10px 20px;
-            overflow: hidden;
-        }
-
-        .logo-img {
-            width: 100%;
-            max-width: 300px; 
-            height: auto;
-            z-index: 5;
-            display: block;
-        }
-
-        .hero-overlay {
-            position: absolute;
-            bottom: 0; left: 0; width: 100%; height: 60px;
-            background: linear-gradient(to top, #F0EDE9, rgba(240, 237, 233, 0));
-        }
-
-        .container { 
-            width: 100%; 
-            max-width: 900px; 
-            margin: -30px auto 0; 
-            padding: 0 20px 80px;
-            position: relative;
-            z-index: 10;
-        }
-
-        .header-content { text-align: center; margin-bottom: 30px; }
-
-        h2 { 
-            font-family: 'PT Serif', serif; 
-            font-size: 34px; 
-            margin: 0;
-            font-weight: 400;
-            letter-spacing: 0.5px;
-            color: #2c2c2c;
-        }
-        
-        .divider { width: 50px; height: 1px; background-color: #A39689; margin: 10px auto; }
-
-        .image-container { text-align: center; margin-bottom: 35px; }
-        .instruction-image { width: 100%; max-width: 200px; height: auto; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.08)); }
-        
-        .instruction-section { display: grid; grid-template-columns: 1fr; gap: 20px; }
-
-        @media (min-width: 768px) {
-            .instruction-section { grid-template-columns: 1fr 1fr; }
-            .full-width-tablet { grid-column: span 2; }
-            .logo-img { max-width: 400px; }
-            .hero-header { height: 280px; }
-            .container { margin-top: -40px; }
-        }
-
-        /* CARD CON CONTORNI DEFINITI */
-        .instruction-card {
-            background-color: rgba(255, 255, 255, 0.5);
-            border: 1px solid rgba(163, 150, 137, 0.3);
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .instruction-card h3 {
-            font-family: 'PT Serif', serif;
-            letter-spacing: 1.5px;
-            margin: 0 0 15px 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-transform: uppercase;
-            font-size: 13px;
-            color: #8c7e70;
-        }
-
-        .step-list { list-style: none; padding: 0; margin: 0; }
-        .step-list li { font-size: 14px; margin-bottom: 15px; color: #444; display: flex; gap: 12px; }
-        .step-list li .item-icon { color: #A39689; font-size: 18px; }
-        .step-list li strong { color: #000; display: block; margin-bottom: 2px; }
-
-        /* BOX ATTENZIONE INTERNI */
-        .alert-box { 
-            background: rgba(163, 150, 137, 0.1); 
-            border-left: 2px solid #A39689;
-            padding: 15px; 
-            border-radius: 0 12px 12px 0; 
-            margin-top: 10px;
-        }
-        .alert-box h4 { margin: 0 0 5px 0; font-size: 11px; text-transform: uppercase; color: #5D544C; }
-        .alert-box p { font-size: 12px; margin: 0; color: #6d645d; line-height: 1.5; }
-
-        .back-btn-container { text-align: center; margin-top: 50px; }
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            padding: 12px 35px;
-            background-color: #A39689; 
-            color: #fff;
-            text-decoration: none;
-            text-transform: uppercase;
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            border-radius: 50px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        }
-        .back-btn .material-symbols-outlined { color: #fff; font-size: 14px; margin-right: 8px; }
-    </style>
+    <link rel="stylesheet" href="../../assets/css/style.css">
 </head>
 <body>
+
+    <div class="lang-switcher">
+        <div id="btn-it" class="lang-btn" onclick="setLanguage('it')">ITA</div>
+        <div id="btn-en" class="lang-btn" onclick="setLanguage('en')">ENG</div>
+    </div>
 
     <div class="hero-header">
         <img src="../../assets/images/header.png" alt="Diomede Luxury Logo" class="logo-img">
@@ -147,7 +25,7 @@
 
     <div class="container">
         <div class="header-content">
-            <h2>Asciugatrice</h2>
+            <h2 data-it="Asciugatrice" data-en="Tumble Dryer">Asciugatrice</h2>
             <div class="divider"></div>
         </div>
 
@@ -157,43 +35,64 @@
 
         <div class="instruction-section">
             <div class="instruction-card">
-                <h3><span class="material-symbols-outlined">air</span> 1. Programmi Principali</h3>
+                <h3>
+                    <span class="material-symbols-outlined">air</span> 
+                    <span data-it="1. Programmi Principali" data-en="1. Main Programs">1. Programmi Principali</span>
+                </h3>
                 <ul class="step-list">
                     <li>
                         <span class="material-symbols-outlined item-icon">dry</span>
-                        <div><strong>Eco Cotone:</strong> Il ciclo più efficiente per i capi in cotone e lino.</div>
+                        <div>
+                            <strong data-it="Eco Cotone" data-en="Eco Cotton">Eco Cotone</strong>
+                            <span data-it="Il ciclo più efficiente per i capi in cotone e lino." data-en="The most efficient cycle for cotton and linen items."></span>
+                        </div>
                     </li>
                     <li>
                         <span class="material-symbols-outlined item-icon">checkroom</span>
-                        <div><strong>Pronto Stiro:</strong> Lascia i capi leggermente umidi per facilitare la stiratura.</div>
+                        <div>
+                            <strong data-it="Pronto Stiro" data-en="Iron Dry">Pronto Stiro</strong>
+                            <span data-it="Lascia i capi leggermente umidi per facilitare la stiratura." data-en="Leaves garments slightly damp to make ironing easier."></span>
+                        </div>
                     </li>
                 </ul>
             </div>
 
             <div class="instruction-card">
-                <h3><span class="material-symbols-outlined">settings_suggest</span> 2. Funzioni Avanzate</h3>
+                <h3>
+                    <span class="material-symbols-outlined">settings_suggest</span> 
+                    <span data-it="2. Funzioni Avanzate" data-en="2. Advanced Functions">2. Funzioni Avanzate</span>
+                </h3>
                 <ul class="step-list">
                     <li>
                         <span class="material-symbols-outlined item-icon">timer</span>
-                        <div><strong>Rapido 45':</strong> Ciclo veloce per carichi ridotti e capi sintetici.</div>
+                        <div>
+                            <strong data-it="Rapido 45'" data-en="Quick 45'">Rapido 45'</strong>
+                            <span data-it="Ciclo veloce per carichi ridotti e capi sintetici." data-en="Fast cycle for small loads and synthetic garments."></span>
+                        </div>
                     </li>
                     <li>
                         <span class="material-symbols-outlined item-icon">waves</span>
-                        <div><strong>Anti-Piega:</strong> Movimenti speciali del cestello per ridurre la formazione di pieghe.</div>
+                        <div>
+                            <strong data-it="Anti-Piega" data-en="Anti-Crease">Anti-Piega</strong>
+                            <span data-it="Movimenti speciali del cestello per ridurre la formazione di pieghe." data-en="Special drum movements to reduce crease formation."></span>
+                        </div>
                     </li>
                 </ul>
             </div>
 
             <div class="instruction-card full-width-tablet">
-                <h3><span class="material-symbols-outlined">cleaning_services</span> Manutenzione e Cura</h3>
+                <h3>
+                    <span class="material-symbols-outlined">cleaning_services</span> 
+                    <span data-it="Manutenzione e Cura" data-en="Maintenance & Care">Manutenzione e Cura</span>
+                </h3>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px;">
                     <div class="alert-box">
-                        <h4>Pulizia Filtro</h4>
-                        <p>Pulire il filtro dai residui di lana dopo ogni ciclo di asciugatura.</p>
+                        <h4 data-it="Pulizia Filtro" data-en="Filter Cleaning">Pulizia Filtro</h4>
+                        <p data-it="Pulire il filtro dai residui di lana dopo ogni ciclo di asciugatura." data-en="Clean the lint filter after every drying cycle."></p>
                     </div>
                     <div class="alert-box">
-                        <h4>Serbatoio Acqua</h4>
-                        <p>Svuotare il contenitore dell'acqua di condensa al termine di ogni utilizzo.</p>
+                        <h4 data-it="Serbatoio Acqua" data-en="Water Tank">Serbatoio Acqua</h4>
+                        <p data-it="Svuotare il contenitore dell'acqua di condensa al termine di ogni utilizzo." data-en="Empty the condensation water container after each use."></p>
                     </div>
                 </div>
             </div>
@@ -202,10 +101,31 @@
         <div class="back-btn-container">
             <a href="../istruzioni.html" class="back-btn">
                 <span class="material-symbols-outlined">arrow_back_ios_new</span>
-                Torna alle istruzioni
+                <span data-it="Torna alle istruzioni" data-en="Back to instructions">Torna alle istruzioni</span>
             </a>
         </div>
     </div>
+
+    <script>
+        function setLanguage(lang) {
+            localStorage.setItem('preferredLang', lang);
+            const btnIt = document.getElementById('btn-it');
+            const btnEn = document.getElementById('btn-en');
+            
+            if(btnIt) btnIt.classList.toggle('active', lang === 'it');
+            if(btnEn) btnEn.classList.toggle('active', lang === 'en');
+
+            document.querySelectorAll('[data-it]').forEach(el => {
+                const text = el.getAttribute('data-' + lang);
+                el.textContent = text;
+            });
+        }
+
+        window.onload = () => {
+            const savedLang = localStorage.getItem('preferredLang') || 'it';
+            setLanguage(savedLang);
+        };
+    </script>
 
 </body>
 </html>

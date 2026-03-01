@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-    <title>Beauty e Wellness - Diomede Luxury</title>
+    <title>Beauty & Wellness - Diomede Luxury</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,7 +20,40 @@
             line-height: 1.4;
         }
 
-        /* HEADER - Allineato al modello lavatrice */
+        /* LINGUA SWITCHER - 35px come pagina Partner */
+        .lang-switcher {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 8px;
+            z-index: 100;
+        }
+
+        .lang-btn {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: 1px solid rgba(0,0,0,0.1);
+            background: rgba(255,255,255,0.6);
+            color: #1a1a1a;
+            font-size: 10px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+            transition: 0.3s;
+        }
+
+        .lang-btn.active {
+            background: #A39689;
+            color: white;
+            border-color: #A39689;
+        }
+
+        /* HEADER */
         .hero-header {
             width: 100%;
             height: 240px; 
@@ -46,7 +79,7 @@
             background: linear-gradient(to top, #F0EDE9, rgba(240, 237, 233, 0));
         }
 
-        /* CONTAINER - Margini allineati */
+        /* CONTAINER */
         .container { 
             width: 100%; 
             max-width: 900px; 
@@ -159,14 +192,13 @@
             font-size: 10px;
             font-weight: 700;
             text-transform: uppercase;
-            color: #000000;
             transition: all 0.2s ease;
         }
         
-        .action-btn { background: #A39689; }
-        .maps-btn { background: #fff; border: 1px solid rgba(163, 150, 137, 0.4); }
+        .action-btn { background: #A39689; color: #fff; }
+        .maps-btn { background: #fff; border: 1px solid rgba(163, 150, 137, 0.4); color: #000; }
 
-        /* PULSANTE TORNA AI PARTNER */
+        /* PULSANTE BACK */
         .back-btn-container { text-align: center; margin-top: 50px; }
         .back-btn {
             display: inline-flex;
@@ -183,19 +215,24 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
 
-        .material-symbols-outlined { font-variation-settings: 'wght' 200; color: #000; }
+        .material-symbols-outlined { font-variation-settings: 'wght' 200; }
         .back-btn .material-symbols-outlined { color: #fff; margin-right: 8px; font-size: 14px; }
 
         @media (min-width: 768px) {
             .hero-header { height: 280px; }
             .logo-img { max-width: 400px; }
-            .container { margin-top: -40px; max-width: 900px; }
+            .container { margin-top: -40px; }
             .info-section { grid-template-columns: 1fr 1fr; }
             h2 { font-size: 40px; }
         }
     </style>
 </head>
 <body>
+
+    <div class="lang-switcher">
+        <div id="btn-it" class="lang-btn" onclick="setLanguage('it')">ITA</div>
+        <div id="btn-en" class="lang-btn" onclick="setLanguage('en')">ENG</div>
+    </div>
 
     <div class="hero-header">
         <img src="../../assets/images/header.png" alt="Diomede Luxury Logo" class="logo-img">
@@ -204,7 +241,7 @@
 
     <div class="container">
         <div class="header-content">
-            <h2>Beauty e Wellness</h2>
+            <h2 data-it="Beauty & Wellness" data-en="Beauty & Wellness">Beauty & Wellness</h2>
             <div class="divider"></div>
         </div>
 
@@ -213,23 +250,25 @@
                 <div class="promo-header">
                     <div class="brand-info">
                         <img src="../../assets/images/work.png" alt="Beauty" class="brand-logo">
-                        <h3>Slot Libero</h3>
+                        <h3 data-it="Slot Libero" data-en="Free Slot">Slot Libero</h3>
                     </div>
                     <span class="discount-badge">-10%</span>
                 </div>
-                <p class="promo-description">
-                    Inserire qui la descrizione del centro estetico, spa o salone di bellezza partner. Descrivi i servizi esclusivi offerti ai clienti Diomede Luxury.
+                <p class="promo-description" 
+                   data-it="Inserire qui la descrizione del centro estetico, spa o salone di bellezza partner. Descrivi i servizi esclusivi offerti ai clienti Diomede Luxury."
+                   data-en="Insert the description of the partner beauty center, spa or salon here. Describe the exclusive services offered to Diomede Luxury clients.">
                 </p>
                 <div class="address-box">
-                    <span class="material-symbols-outlined" style="font-size: 16px;">location_on</span>
-                    <span>Via da inserire, 1, 72100 Brindisi BR</span>
+                    <span class="material-symbols-outlined" style="font-size: 16px; color:#A39689;">location_on</span>
+                    <span data-it="Via da inserire, 1, 72100 Brindisi" data-en="Address to be inserted, 1, 72100 Brindisi"></span>
                 </div>
-                <div class="promo-offer">
-                    Presentando la convenzione Diomede, ottieni subito uno sconto del 10% sui trattamenti.
+                <div class="promo-offer" 
+                     data-it="Presentando la convenzione Diomede, ottieni subito uno sconto del 10% sui trattamenti."
+                     data-en="By presenting the Diomede agreement, you immediately get a 10% discount on treatments.">
                 </div>
                 <div class="flex-row">
-                    <a href="tel:+390000000000" class="btn action-btn">Prenota</a>
-                    <a href="#" target="_blank" class="btn maps-btn">Mappa</a>
+                    <a href="tel:+390000000000" class="btn action-btn" data-it="Prenota" data-en="Book Now">Prenota</a>
+                    <a href="#" target="_blank" class="btn maps-btn" data-it="Mappa" data-en="Map">Mappa</a>
                 </div>
             </div>
 
@@ -237,33 +276,62 @@
                 <div class="promo-header">
                     <div class="brand-info">
                         <img src="../../assets/images/work.png" alt="Wellness" class="brand-logo">
-                        <h3>Slot Libero</h3>
+                        <h3 data-it="Slot Libero" data-en="Free Slot">Slot Libero</h3>
                     </div>
                     <span class="discount-badge">-15%</span>
                 </div>
-                <p class="promo-description">
-                    Descrizione del secondo partner relativo al benessere. Perfetto per spa, massaggi o percorsi relax dedicati ai nostri ospiti.
+                <p class="promo-description" 
+                   data-it="Descrizione del secondo partner relativo al benessere. Perfetto per spa, massaggi o percorsi relax dedicati ai nostri ospiti."
+                   data-en="Description of the second wellness partner. Perfect for spas, massages or relaxation paths dedicated to our guests.">
                 </p>
                 <div class="address-box">
-                    <span class="material-symbols-outlined" style="font-size: 16px;">location_on</span>
-                    <span>Indirizzo da definire, Brindisi</span>
+                    <span class="material-symbols-outlined" style="font-size: 16px; color:#A39689;">location_on</span>
+                    <span data-it="Indirizzo da definire, Brindisi" data-en="Address to be defined, Brindisi"></span>
                 </div>
-                <div class="promo-offer">
-                    Sconto speciale del 15% riservato esclusivamente ai clienti Diomede Luxury.
+                <div class="promo-offer" 
+                     data-it="Sconto speciale del 15% riservato esclusivamente ai clienti Diomede Luxury."
+                     data-en="Special 15% discount reserved exclusively for Diomede Luxury customers.">
                 </div>
                 <div class="flex-row">
-                    <a href="tel:+390000000000" class="btn action-btn">Chiama</a>
-                    <a href="#" target="_blank" class="btn maps-btn">Posizione</a>
+                    <a href="tel:+390000000000" class="btn action-btn" data-it="Chiama" data-en="Call">Chiama</a>
+                    <a href="#" target="_blank" class="btn maps-btn" data-it="Posizione" data-en="Location">Posizione</a>
                 </div>
             </div>
         </div>
 
         <div class="back-btn-container">
             <a href="../convenzioni.html" class="back-btn">
-                <span class="material-symbols-outlined">arrow_back_ios_new</span> Torna ai partner
+                <span class="material-symbols-outlined">arrow_back_ios_new</span> 
+                <span data-it="Torna ai partner" data-en="Back to partners">Torna ai partner</span>
             </a>
         </div>
     </div>
+
+    <script>
+        function setLanguage(lang) {
+            localStorage.setItem('preferredLang', lang);
+            document.getElementById('btn-it').classList.toggle('active', lang === 'it');
+            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+
+            document.querySelectorAll('[data-it]').forEach(el => {
+                const text = el.getAttribute('data-' + lang);
+                const icon = el.querySelector('.material-symbols-outlined');
+                if (icon) {
+                    const iconClone = icon.cloneNode(true);
+                    el.innerHTML = '';
+                    el.appendChild(iconClone);
+                    el.appendChild(document.createTextNode(' ' + text));
+                } else {
+                    el.textContent = text;
+                }
+            });
+        }
+
+        window.onload = () => {
+            const savedLang = localStorage.getItem('preferredLang') || 'it';
+            setLanguage(savedLang);
+        };
+    </script>
 
 </body>
 </html>

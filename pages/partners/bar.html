@@ -20,7 +20,40 @@
             line-height: 1.4;
         }
 
-        /* HEADER - Identico al CSS comune */
+        /* LINGUA SWITCHER - Allineato a pagina Partner */
+        .lang-switcher {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 8px;
+            z-index: 100;
+        }
+
+        .lang-btn {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: 1px solid rgba(0,0,0,0.1);
+            background: rgba(255,255,255,0.6);
+            color: #1a1a1a;
+            font-size: 10px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+            transition: 0.3s;
+        }
+
+        .lang-btn.active {
+            background: #A39689;
+            color: white;
+            border-color: #A39689;
+        }
+
+        /* HEADER */
         .hero-header {
             width: 100%;
             height: 240px; 
@@ -46,7 +79,7 @@
             background: linear-gradient(to top, #F0EDE9, rgba(240, 237, 233, 0));
         }
 
-        /* CONTAINER - Margini identici al CSS comune */
+        /* CONTAINER */
         .container { 
             width: 100%; 
             max-width: 900px; 
@@ -160,14 +193,13 @@
             font-size: 10px;
             font-weight: 700;
             text-transform: uppercase;
-            color: #000000;
             transition: all 0.2s ease;
         }
         
-        .action-btn { background: #A39689; }
-        .maps-btn { background: #fff; border: 1px solid rgba(163, 150, 137, 0.4); }
+        .action-btn { background: #A39689; color: #fff; }
+        .maps-btn { background: #fff; border: 1px solid rgba(163, 150, 137, 0.4); color: #000; }
 
-        /* PULSANTE TORNA AI PARTNER */
+        /* PULSANTE BACK */
         .back-btn-container { text-align: center; margin-top: 50px; }
         .back-btn {
             display: inline-flex;
@@ -184,7 +216,6 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
 
-        /* MEDIA QUERIES - Allineate al modello */
         @media (min-width: 768px) {
             .hero-header { height: 280px; }
             .logo-img { max-width: 400px; }
@@ -193,11 +224,16 @@
             h2 { font-size: 40px; }
         }
 
-        .material-symbols-outlined { font-variation-settings: 'wght' 200; color: #000; }
-        .back-btn .material-symbols-outlined { color: #fff; margin-right: 8px; font-size: 14px; }
+        .material-symbols-outlined { font-variation-settings: 'wght' 200; }
+        .back-btn .material-symbols-outlined { margin-right: 8px; font-size: 14px; }
     </style>
 </head>
 <body>
+
+    <div class="lang-switcher">
+        <div id="btn-it" class="lang-btn" onclick="setLanguage('it')">ITA</div>
+        <div id="btn-en" class="lang-btn" onclick="setLanguage('en')">ENG</div>
+    </div>
 
     <div class="hero-header">
         <img src="../../assets/images/header.png" alt="Diomede Luxury Logo" class="logo-img">
@@ -206,7 +242,7 @@
 
     <div class="container">
         <div class="header-content">
-            <h2>Café & Gelaterie</h2>
+            <h2 data-it="Café & Gelaterie" data-en="Café & Ice Cream">Café & Gelaterie</h2>
             <div class="divider"></div>
         </div>
 
@@ -215,24 +251,26 @@
                 <div class="promo-header">
                     <div class="brand-info">
                         <img src="../../assets/images/work.png" alt="Bar" class="brand-logo">
-                        <h3>Slot Libero</h3>
+                        <h3 data-it="Slot Libero" data-en="Free Slot">Slot Libero</h3>
                     </div>
                     <span class="discount-badge">-10%</span>
                 </div>
-                <p class="promo-description">
-                    Inserire qui la descrizione del Cafè o della Gelateria partner. Racconta le specialità artigianali, le colazioni o i gelati imperdibili.
+                <p class="promo-description" 
+                   data-it="Inserire qui la descrizione del Cafè o della Gelateria partner. Racconta le specialità artigianali, le colazioni o i gelati imperdibili."
+                   data-en="Insert the description of the partner Café or Ice Cream shop here. Tell us about artisanal specialties, breakfasts, or must-try ice creams.">
                 </p>
                 <div class="address-box">
-                    <span class="material-symbols-outlined" style="font-size: 16px;">local_cafe</span>
-                    <span>Via da inserire, 1, 72100 Brindisi BR</span>
+                    <span class="material-symbols-outlined" style="font-size: 16px; color:#A39689;">local_cafe</span>
+                    <span data-it="Via da inserire, 1, Brindisi" data-en="Address to be inserted, 1, Brindisi"></span>
                 </div>
-                <div class="promo-offer">
-                    Presentando la convenzione Diomede, ottieni subito uno sconto del 10% sulle tue consumazioni.
+                <div class="promo-offer" 
+                     data-it="Presentando la convenzione Diomede, ottieni subito uno sconto del 10% sulle tue consumazioni."
+                     data-en="By presenting the Diomede agreement, you immediately get a 10% discount on your drinks/food.">
                 </div>
                 <div class="flex-row">
-                    <a href="tel:+390000000000" class="btn action-btn">Chiama</a>
-                    <a href="#" class="btn action-btn">Voucher</a>
-                    <a href="#" target="_blank" class="btn maps-btn">Mappa</a>
+                    <a href="tel:+390000000000" class="btn action-btn" data-it="Chiama" data-en="Call">Chiama</a>
+                    <a href="#" class="btn action-btn" data-it="Voucher" data-en="Voucher">Voucher</a>
+                    <a href="#" target="_blank" class="btn maps-btn" data-it="Mappa" data-en="Map">Mappa</a>
                 </div>
             </div>
 
@@ -240,34 +278,63 @@
                 <div class="promo-header">
                     <div class="brand-info">
                         <img src="../../assets/images/work.png" alt="Gelateria" class="brand-logo">
-                        <h3>Slot Libero</h3>
+                        <h3 data-it="Slot Libero" data-en="Free Slot">Slot Libero</h3>
                     </div>
                     <span class="discount-badge">-10%</span>
                 </div>
-                <p class="promo-description">
-                    Secondo slot disponibile per una gelateria o pasticceria partner. Descrivi l'ambiente e i prodotti di punta offerti.
+                <p class="promo-description" 
+                   data-it="Secondo slot disponibile per una gelateria o pasticceria partner. Descrivi l'ambiente e i prodotti di punta offerti."
+                   data-en="Second available slot for a partner ice cream shop or pastry shop. Describe the environment and the top products offered.">
                 </p>
                 <div class="address-box">
-                    <span class="material-symbols-outlined" style="font-size: 16px;">icecream</span>
-                    <span>Indirizzo da definire, Brindisi</span>
+                    <span class="material-symbols-outlined" style="font-size: 16px; color:#A39689;">icecream</span>
+                    <span data-it="Indirizzo da definire, Brindisi" data-en="Address to be defined, Brindisi"></span>
                 </div>
-                <div class="promo-offer">
-                    Sconto del 10% riservato ai clienti Diomede Luxury presentando il coupon digitale.
+                <div class="promo-offer" 
+                     data-it="Sconto del 10% riservato ai clienti Diomede Luxury presentando il coupon digitale."
+                     data-en="10% discount reserved for Diomede Luxury customers upon presentation of the digital coupon.">
                 </div>
                 <div class="flex-row">
-                    <a href="tel:+390000000000" class="btn action-btn">Chiama</a>
-                    <a href="#" class="btn action-btn">Voucher</a>
-                    <a href="#" target="_blank" class="btn maps-btn">Mappa</a>
+                    <a href="tel:+390000000000" class="btn action-btn" data-it="Chiama" data-en="Call">Chiama</a>
+                    <a href="#" class="btn action-btn" data-it="Voucher" data-en="Voucher">Voucher</a>
+                    <a href="#" target="_blank" class="btn maps-btn" data-it="Mappa" data-en="Map">Mappa</a>
                 </div>
             </div>
         </div>
 
         <div class="back-btn-container">
             <a href="../convenzioni.html" class="back-btn">
-                <span class="material-symbols-outlined">arrow_back_ios_new</span> Torna ai partner
+                <span class="material-symbols-outlined">arrow_back_ios_new</span> 
+                <span data-it="Torna ai partner" data-en="Back to partners">Torna ai partner</span>
             </a>
         </div>
     </div>
+
+    <script>
+        function setLanguage(lang) {
+            localStorage.setItem('preferredLang', lang);
+            document.getElementById('btn-it').classList.toggle('active', lang === 'it');
+            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+
+            document.querySelectorAll('[data-it]').forEach(el => {
+                const text = el.getAttribute('data-' + lang);
+                const icon = el.querySelector('.material-symbols-outlined');
+                if (icon) {
+                    const iconClone = icon.cloneNode(true);
+                    el.innerHTML = '';
+                    el.appendChild(iconClone);
+                    el.appendChild(document.createTextNode(' ' + text));
+                } else {
+                    el.textContent = text;
+                }
+            });
+        }
+
+        window.onload = () => {
+            const savedLang = localStorage.getItem('preferredLang') || 'it';
+            setLanguage(savedLang);
+        };
+    </script>
 
 </body>
 </html>

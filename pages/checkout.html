@@ -21,7 +21,39 @@
             text-align: center;
         }
 
-        /* HEADER - Standardizzato con logo centrato */
+        /* PULSANTI LINGUA AGGIUNTI */
+        .lang-switcher {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 8px;
+            z-index: 100;
+        }
+
+        .lang-btn {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: 1px solid rgba(0,0,0,0.2);
+            background: rgba(255,255,255,0.5);
+            color: #1a1a1a;
+            font-size: 10px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+            transition: 0.3s;
+        }
+
+        .lang-btn.active {
+            background: #A39689;
+            color: white;
+            border-color: #A39689;
+        }
+
         .hero-header {
             width: 100%;
             height: 240px; 
@@ -47,7 +79,6 @@
             background: linear-gradient(to top, #F0EDE9, rgba(240, 237, 233, 0));
         }
 
-        /* CONTAINER - Margine -30px e max 900px */
         .container { 
             width: 100%; 
             max-width: 900px; 
@@ -182,63 +213,101 @@
 </head>
 <body>
 
+    <div class="lang-switcher">
+        <div id="btn-it" class="lang-btn" onclick="setLanguage('it')">ITA</div>
+        <div id="btn-en" class="lang-btn" onclick="setLanguage('en')">ENG</div>
+    </div>
+
     <div class="hero-header">
         <img src="../assets/images/header.png" alt="Diomede Luxury Logo" class="logo-img">
         <div class="hero-overlay"></div>
     </div>
 
     <div class="container">
-        <h2>Check Out</h2>
-        <div class="checkout-time">Entro le ore 10:00</div>
+        <h2 data-it="Check Out" data-en="Check Out">Check Out</h2>
+        <div class="checkout-time" data-it="Entro le ore 10:00" data-en="By 10:00 AM">Entro le ore 10:00</div>
         
-        <div class="thanks-message">
+        <div class="thanks-message" data-it="Grazie per aver soggiornato da noi!<br>Speriamo che la vostra permanenza sia stata piacevole." data-en="Thank you for staying with us!<br>We hope your stay was pleasant.">
             Grazie per aver soggiornato da noi!<br>
             Speriamo che la vostra permanenza sia stata piacevole.
         </div>
 
         <div class="divider"></div>
 
-        <p style="font-size: 10px; color: #A39689; margin-bottom: 20px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px;">
+        <p data-it="Prima di lasciare la struttura" data-en="Before leaving the property" style="font-size: 10px; color: #A39689; margin-bottom: 20px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px;">
             Prima di lasciare la struttura
         </p>
 
         <div class="instruction-grid">
             <div class="instruction-card">
                 <div class="icon-circle"><span class="material-symbols-outlined">delete</span></div>
-                <div class="instruction-text">Rimuovi i rifiuti e gli avanzi di cibo.</div>
+                <div class="instruction-text" data-it="Rimuovi i rifiuti e gli avanzi di cibo." data-en="Please remove all trash and food waste.">Rimuovi i rifiuti e gli avanzi di cibo.</div>
             </div>
             <div class="instruction-card">
                 <div class="icon-circle"><span class="material-symbols-outlined">lightbulb</span></div>
-                <div class="instruction-text">Spegni luci e climatizzatore.</div>
+                <div class="instruction-text" data-it="Spegni luci e climatizzatore." data-en="Turn off all lights and air conditioning.">Spegni luci e climatizzatore.</div>
             </div>
             <div class="instruction-card">
                 <div class="icon-circle"><span class="material-symbols-outlined">sensor_window</span></div>
-                <div class="instruction-text">Verifica la chiusura delle finestre.</div>
+                <div class="instruction-text" data-it="Verifica la chiusura delle finestre." data-en="Check that all windows are closed.">Verifica la chiusura delle finestre.</div>
             </div>
             <div class="instruction-card">
                 <div class="icon-circle"><span class="material-symbols-outlined">search</span></div>
-                <div class="instruction-text">Controlla i tuoi oggetti personali.</div>
+                <div class="instruction-text" data-it="Controlla i tuoi oggetti personali." data-en="Check that you have all personal items.">Controlla i tuoi oggetti personali.</div>
             </div>
             <div class="instruction-card">
-                <div class="icon-circle"><span class="material-symbols-outlined">key</span></div>
-                <div class="instruction-text">Lascia le chiavi sul tavolo.</div>
+                <div class="icon-circle"><span class="material-symbols-outlined">lock</span></div>
+                <div class="instruction-text" data-it="Assicurati che la porta sia ben chiusa." data-en="Make sure the front door is securely locked.">Assicurati che la porta sia ben chiusa.</div>
             </div>
         </div>
 
         <div class="confirm-section">
-            <p style="font-size: 14px; margin-bottom: 20px; font-weight: 600; font-family: 'PT Serif', serif; color: #333;">Hai completato tutto?</p>
-            <a href="https://wa.me/393331234567?text=Buongiorno,%20abbiamo%20appena%20effettuato%20il%20check-out" class="confirm-btn">
+            <p data-it="Hai completato tutto?" data-en="Everything done?" style="font-size: 14px; margin-bottom: 20px; font-weight: 600; font-family: 'PT Serif', serif; color: #333;">Hai completato tutto?</p>
+            <a id="wa-btn" href="https://wa.me/393331234567?text=Buongiorno,%20abbiamo%20appena%20effettuato%20il%20check-out" 
+               class="confirm-btn" 
+               data-it="Conferma Check-out" 
+               data-en="Confirm Check-out">
                 Conferma Check-out
             </a>
         </div>
 
         <div class="back-btn-container">
-            <a href="menu.html" class="back-btn">
+            <a href="menu.html" class="back-btn" data-it="Torna al menu" data-en="Back to menu">
                 <span class="material-symbols-outlined">arrow_back_ios_new</span>
                 Torna al menu
             </a>
         </div>
     </div>
 
+    <script>
+        function setLanguage(lang) {
+            // Salva la scelta
+            localStorage.setItem('preferredLang', lang);
+            
+            // Aggiorna grafica pulsanti
+            document.getElementById('btn-it').classList.toggle('active', lang === 'it');
+            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+
+            // Traduci i testi
+            document.querySelectorAll('[data-it]').forEach(el => {
+                el.innerHTML = el.getAttribute('data-' + lang);
+            });
+
+            // Aggiorna link WhatsApp
+            const waBtn = document.getElementById('wa-btn');
+            if (waBtn) {
+                if (lang === 'en') {
+                    waBtn.href = "https://wa.me/393331234567?text=Good%20morning,%20we%20have%20just%20checked%20out";
+                } else {
+                    waBtn.href = "https://wa.me/393331234567?text=Buongiorno,%20abbiamo%20appena%20effettuato%20il%20check-out";
+                }
+            }
+        }
+
+        window.onload = () => {
+            const savedLang = localStorage.getItem('preferredLang') || 'it';
+            setLanguage(savedLang);
+        };
+    </script>
 </body>
 </html>

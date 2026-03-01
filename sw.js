@@ -1,65 +1,75 @@
-const CACHE_NAME = 'diomede-luxury-v5'; // Incrementato a v5 per forzare il refresh
+const CACHE_NAME = 'diomede-luxury-v7'; // Incrementato a v7 per forzare l'aggiornamento della cache
 
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './welcome.html',
-  './logo.png',
-  './logo_start.png',
-  './sfondo.png',
-  './logowelcome.png',
   './manifest.json',
-  './assets/pages/menu.html',
-  './assets/pages/regole.html',
-  './assets/pages/trasporti.html',
-  './assets/pages/contatti.html',
-  './assets/pages/convenzioni.html',
-  './assets/pages/dettagli.html',
-  './assets/pages/istruzioni.html',
-  './assets/pages/turismo.html',
-  './assets/pages/checkout.html',
-  './assets/pages/wifi.html',
-  './assets/images/header.png'
+  './sw.js',
+  // LOGHI E SFONDI PRINCIPALI
+  './logo.png',
+  './logo_start.jpg',
+  './header.png',
+  './menu.png',
+  './logomenu.jpg',
+  // IMMAGINI SERVIZI E APPARTAMENTO
+  './asciugatrice.png',
+  './lavatrice.png',
+  './cassaforte.jpg',
+  './idromassaggio.jpg',
+  './calemone.jpg',
+  // PAGINE (Verifica che i percorsi siano corretti in base alla tua struttura cartelle)
+  './pages/menu.html',
+  './pages/regole.html',
+  './pages/trasporti.html',
+  './pages/contatti.html',
+  './pages/convenzioni.html',
+  './pages/dettagli.html',
+  './pages/istruzioni.html',
+  './pages/turismo.html',
+  './pages/checkout.html',
+  './pages/wifi.html'
 ];
 
-// Installazione: scarica i nuovi file
+// Installazione: scarica e memorizza tutti i file
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return Promise.allSettled(
-        ASSETS_TO_CACHE.map(url => cache.add(url))
-      ).then(() => self.skipWaiting());
-    })
+      // Usiamo addAll per assicurarci che i file critici siano salvati
+      return cache.addAll(ASSETS_TO_CACHE);
+    }).then(() => self.skipWaiting())
   );
 });
 
-// Attivazione: elimina le vecchie cache (v1, v2, v3, v4)
+// Attivazione: elimina le vecchie versioni della cache
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
-        cacheNames.map((cache) => {
-          if (cache !== CACHE_NAME) {
-            console.log('Elimino vecchia cache:', cache);
-            return caches.delete(cache);
-          }
-        })
+        cacheNames.filter(cache => cache !== CACHE_NAME)
+                  .map(cache => caches.delete(cache))
       );
     }).then(() => self.clients.claim())
   );
 });
 
 // Strategia: Stale-while-revalidate
-// Serve il file dalla cache ma aggiorna la cache in background se c'è rete
 self.addEventListener('fetch', (event) => {
+  if (event.request.method !== 'GET') return;
+
   event.respondWith(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.match(event.request).then((response) => {
+      return cache.match(event.request).then((cachedResponse) => {
         const fetchPromise = fetch(event.request).then((networkResponse) => {
-          cache.put(event.request, networkResponse.clone());
+          if (networkResponse && networkResponse.status === 200) {
+            cache.put(event.request, networkResponse.clone());
+          }
           return networkResponse;
+        }).catch(() => {
+          // Fallback se non c'è rete e il file non è in cache
+          return cachedResponse;
         });
-        return response || fetchPromise;
+        return cachedResponse || fetchPromise;
       });
     })
   );

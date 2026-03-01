@@ -21,7 +21,40 @@
             text-align: center;
         }
 
-        /* HEADER - Standardizzato con logo immagine centrato */
+        /* LINGUA SWITCHER */
+        .lang-switcher {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 8px;
+            z-index: 100;
+        }
+
+        .lang-btn {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: 1px solid rgba(0,0,0,0.1);
+            background: rgba(255,255,255,0.6);
+            color: #1a1a1a;
+            font-size: 10px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+            transition: 0.3s;
+        }
+
+        .lang-btn.active {
+            background: #A39689;
+            color: white;
+            border-color: #A39689;
+        }
+
+        /* HEADER */
         .hero-header {
             width: 100%;
             height: 240px; 
@@ -47,7 +80,7 @@
             background: linear-gradient(to top, #F0EDE9, rgba(240, 237, 233, 0));
         }
 
-        /* CONTAINER - Margine negativo -30px e max 900px */
+        /* CONTAINER */
         .container { 
             width: 100%; 
             max-width: 900px; 
@@ -152,7 +185,7 @@
 
         .action-btn:active { transform: scale(0.97); background-color: #f5f5f5; }
 
-        /* PULSANTE BACK - PIENO TORTORA / SCRITTA BIANCA */
+        /* BACK BUTTON */
         .back-btn-container { 
             margin-top: 50px; 
             display: flex;
@@ -189,13 +222,18 @@
 </head>
 <body>
 
+    <div class="lang-switcher">
+        <div id="btn-it" class="lang-btn" onclick="setLanguage('it')">ITA</div>
+        <div id="btn-en" class="lang-btn" onclick="setLanguage('en')">ENG</div>
+    </div>
+
     <div class="hero-header">
         <img src="../assets/images/header.png" alt="Diomede Luxury Logo" class="logo-img">
         <div class="hero-overlay"></div>
     </div>
 
     <div class="container">
-        <h2>Trasporti</h2>
+        <h2 data-it="Trasporti" data-en="Transportation">Trasporti</h2>
         <div class="divider"></div>
 
         <div class="info-grid">
@@ -203,16 +241,16 @@
             <div class="info-card">
                 <div class="card-header">
                     <span class="material-symbols-outlined info-icon">local_taxi</span>
-                    <div class="info-text"><h3>Taxi Privato</h3></div>
+                    <div class="info-text"><h3 data-it="Taxi Privato" data-en="Private Taxi">Taxi Privato</h3></div>
                 </div>
                 <div class="info-text">
-                    <p>Servizio di fiducia. Consigliata la prenotazione.</p>
+                    <p data-it="Servizio di fiducia. Consigliata la prenotazione." data-en="Trusted service. Reservation recommended."></p>
                     <p style="font-size: 15px; color: #1a1a1a; margin-top: 5px; font-weight: 700;">Mario Rossi</p>
                 </div>
                 <div class="flex-row">
                     <a href="tel:+39123456789" class="action-btn">
                         <span class="material-symbols-outlined" style="margin-right: 6px; font-size: 18px;">call</span>
-                        Chiama
+                        <span data-it="Chiama" data-en="Call">Chiama</span>
                     </a>
                     <a href="https://wa.me/39123456789" class="action-btn whatsapp">
                         <span class="material-symbols-outlined" style="margin-right: 6px; font-size: 18px;">chat</span>
@@ -224,15 +262,15 @@
             <div class="info-card">
                 <div class="card-header">
                     <span class="material-symbols-outlined info-icon">flight</span>
-                    <div class="info-text"><h3>Navetta Aeroporto</h3></div>
+                    <div class="info-text"><h3 data-it="Navetta Aeroporto" data-en="Airport Shuttle">Navetta Aeroporto</h3></div>
                 </div>
                 <div class="info-text">
-                    <p>Linea AP: collegamento tra Aeroporto, Stazione FS e Porto Costa Morena.</p>
+                    <p data-it="Linea AP: collegamento tra Aeroporto, Stazione FS e Porto Costa Morena." data-en="AP Line: connection between Airport, Railway Station, and Costa Morena Port."></p>
                 </div>
                 <div class="flex-row">
                     <a href="#" target="_blank" class="action-btn">
                         <span class="material-symbols-outlined" style="margin-right: 6px; font-size: 18px;">location_on</span>
-                        Posizione Fermata
+                        <span data-it="Posizione Fermata" data-en="Stop Location">Posizione Fermata</span>
                     </a>
                 </div>
             </div>
@@ -240,15 +278,15 @@
             <div class="info-card">
                 <div class="card-header">
                     <span class="material-symbols-outlined info-icon">directions_boat</span>
-                    <div class="info-text"><h3>Porto di Brindisi</h3></div>
+                    <div class="info-text"><h3 data-it="Porto di Brindisi" data-en="Brindisi Port">Porto di Brindisi</h3></div>
                 </div>
                 <div class="info-text">
-                    <p>Il lungomare dista 2 min a piedi. Per i grandi traghetti usare bus AP o taxi (15 min).</p>
+                    <p data-it="Il lungomare dista 2 min a piedi. Per i grandi traghetti usare bus AP o taxi (15 min)." data-en="The seafront is a 2-min walk away. For large ferries, use the AP bus or taxi (15 min)."></p>
                 </div>
                 <div class="flex-row">
                     <a href="#" target="_blank" class="action-btn">
                         <span class="material-symbols-outlined" style="margin-right: 6px; font-size: 18px;">location_on</span>
-                        Posizione Porto
+                        <span data-it="Posizione Porto" data-en="Port Location">Posizione Porto</span>
                     </a>
                 </div>
             </div>
@@ -256,15 +294,15 @@
             <div class="info-card">
                 <div class="card-header">
                     <span class="material-symbols-outlined info-icon">train</span>
-                    <div class="info-text"><h3>Stazione Centrale</h3></div>
+                    <div class="info-text"><h3 data-it="Stazione Centrale" data-en="Central Station">Stazione Centrale</h3></div>
                 </div>
                 <div class="info-text">
-                    <p>Raggiungibile in soli 6 min a piedi percorrendo il suggestivo Corso Umberto I.</p>
+                    <p data-it="Raggiungibile in soli 6 min a piedi percorrendo il suggestivo Corso Umberto I." data-en="Reach it in just 6 minutes on foot along the charming Corso Umberto I."></p>
                 </div>
                 <div class="flex-row">
                     <a href="#" target="_blank" class="action-btn">
                         <span class="material-symbols-outlined" style="margin-right: 6px; font-size: 18px;">directions_walk</span>
-                        Percorso a piedi
+                        <span data-it="Percorso a piedi" data-en="Walking Route">Percorso a piedi</span>
                     </a>
                 </div>
             </div>
@@ -274,10 +312,29 @@
         <div class="back-btn-container">
             <a href="menu.html" class="back-btn">
                 <span class="material-symbols-outlined">arrow_back_ios_new</span>
-                Torna alla home
+                <span data-it="Torna alla home" data-en="Back to home">Torna alla home</span>
             </a>
         </div>
     </div>
+
+    <script>
+        function setLanguage(lang) {
+            localStorage.setItem('preferredLang', lang);
+            
+            document.getElementById('btn-it').classList.toggle('active', lang === 'it');
+            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+
+            document.querySelectorAll('[data-it]').forEach(el => {
+                const text = el.getAttribute('data-' + lang);
+                el.textContent = text;
+            });
+        }
+
+        window.onload = () => {
+            const savedLang = localStorage.getItem('preferredLang') || 'it';
+            setLanguage(savedLang);
+        };
+    </script>
 
 </body>
 </html>

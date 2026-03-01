@@ -12,62 +12,130 @@
     <style>
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
-        body { 
-            font-family: 'Open Sans', sans-serif; 
-            margin: 0; padding: 0; 
-            background-color: #C5BCB1; 
-            color: #1a1a1a;
-            text-align: center;
-            overflow-x: hidden;
-        }
-
-        /* HEADER - Logo più grande e centrato */
-        .hero-header {
-            width: 100%;
-            height: 280px; /* Aumentata altezza per ospitare logo più grande */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            padding: 0 20px;
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Open Sans', sans-serif;
+            color: white;
             overflow: hidden;
         }
 
-        .logo-img {
-            width: 90%; /* Occupa più spazio orizzontale su mobile */
-            max-width: 380px; /* Aumentata la dimensione massima */
-            height: auto;
-            z-index: 5;
-            display: block;
-            margin: 0 auto;
+        .bg-container {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                        url('../assets/images/sfondo.png'); 
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
         }
 
-        .hero-overlay {
+        /* --- ANIMAZIONI --- */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes logoFadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .lang-switcher {
             position: absolute;
-            bottom: 0; left: 0; width: 100%; height: 80px;
-            background: linear-gradient(to top, #C5BCB1, rgba(197, 188, 177, 0));
-        }
-
-        /* CONTAINER - Margine negativo bilanciato */
-        .container { 
-            width: 100%; 
-            max-width: 900px; 
-            margin: -10px auto 0; 
-            padding: 0 20px 80px;
-            position: relative;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 8px;
             z-index: 10;
         }
 
-        @media (min-width: 768px) {
-            .hero-header { height: 350px; }
-            .logo-img { max-width: 550px; } /* Ancora più grande su desktop */
-            .container { margin-top: -20px; max-width: 600px; }
+        .lang-btn {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.5);
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+            transition: 0.3s;
         }
-        
+
+        .lang-btn.active {
+            background: white;
+            color: black;
+            border-color: white;
+        }
+
+        .container {
+            padding: 20px 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            justify-content: space-between;
+        }
+
+        .header-section { 
+            text-align: center; 
+            width: 100%; 
+            margin-top: 10px; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* LOGO IDENTICO ALLA PAGINA PARTNER */
+        .logo-img {
+            width: 100%;
+            max-width: 250px; /* Grandezza identica alla pagina partner mobile */
+            height: auto;
+            display: block;
+            margin-bottom: 10px;
+            opacity: 0;
+            animation: logoFadeIn 1s ease-out forwards;
+            animation-delay: 0.2s;
+        }
+
+        @media (min-width: 600px) {
+            .logo-img { max-width: 350px; } /* Grandezza identica alla pagina partner desktop */
+        }
+
+        .welcome-text {
+            font-family: 'PT Serif', serif;
+            font-size: 26px;
+            margin: 0;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+            animation-delay: 0.5s;
+        }
+
+        .subtitle {
+            font-size: 13px;
+            margin: 4px 0 15px;
+            opacity: 0;
+            max-width: 300px;
+            animation: fadeInUp 0.8s ease-out forwards;
+            animation-delay: 0.7s;
+        }
+
         .grid { 
             display: grid; 
             grid-template-columns: repeat(3, 1fr); 
-            gap: 35px 10px; 
+            gap: 15px 10px; 
+            width: 100%;
+            max-width: 400px;
         }
         
         .btn { 
@@ -75,107 +143,173 @@
             display: flex; 
             flex-direction: column; 
             align-items: center;
-            transition: transform 0.2s ease;
+            color: white;
+            opacity: 0;
+            animation: fadeInUp 0.5s ease-out forwards;
         }
+
+        /* Delay incrementale icone */
+        .btn:nth-child(1) { animation-delay: 0.9s; }
+        .btn:nth-child(2) { animation-delay: 1.0s; }
+        .btn:nth-child(3) { animation-delay: 1.1s; }
+        .btn:nth-child(4) { animation-delay: 1.2s; }
+        .btn:nth-child(5) { animation-delay: 1.3s; }
+        .btn:nth-child(6) { animation-delay: 1.4s; }
+        .btn:nth-child(7) { animation-delay: 1.5s; }
+        .btn:nth-child(8) { animation-delay: 1.6s; }
+        .btn:nth-child(9) { animation-delay: 1.7s; }
 
         .circle { 
             width: 75px; 
             height: 75px; 
-            background-color: transparent; 
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
             border-radius: 50%; 
             display: flex; 
             justify-content: center; 
             align-items: center; 
-            margin-bottom: 12px; 
-            color: #1a1a1a;
-            border: 1.5px solid #FFFFFF;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
+            margin-bottom: 5px; 
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            transition: 0.3s;
         }
 
-        .material-symbols-outlined { 
-            font-size: 28px; 
-            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 48;
-        }
+        .material-symbols-outlined { font-size: 30px; } 
         
-        span.label { 
-            font-family: 'Open Sans', sans-serif; 
-            font-size: 9px; 
-            color: #1a1a1a; 
+        .label { 
+            font-size: 8px;
             text-transform: uppercase; 
             font-weight: 700; 
-            letter-spacing: 0.8px;
-            line-height: 1.2;
+            text-align: center;
+            line-height: 1.1;
         }
 
-        .btn:active .circle {
-            transform: scale(0.92);
-            background-color: rgba(255, 255, 255, 0.4);
+        .weather-widget {
+            width: 100%;
+            max-width: 320px;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 8px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+            animation-delay: 1.9s;
         }
+
+        .weather-main { display: flex; align-items: center; gap: 8px; }
+        .temp-val { font-size: 26px; font-weight: 600; font-family: 'PT Serif', serif; }
+        .weather-details { text-align: right; border-left: 1px solid rgba(255,255,255,0.2); padding-left: 10px; }
+        .city-name { display: block; font-size: 10px; font-weight: 700; }
+        .weather-desc { font-size: 10px; opacity: 0.8; }
+
+        .btn:active .circle { transform: scale(0.9); }
     </style>
 </head>
 <body>
 
-    <div class="hero-header">
-        <img src="../assets/images/header.png" alt="Diomede Luxury Logo" class="logo-img">
-        <div class="hero-overlay"></div>
+    <div class="bg-container"></div>
+
+    <div class="lang-switcher">
+        <div class="lang-btn active" onclick="setLanguage('it')">ITA</div>
+        <div class="lang-btn" onclick="setLanguage('en')">ENG</div>
     </div>
 
     <div class="container">
+        <div class="header-section">
+            <img src="../assets/images/header.png" alt="Diomede Luxury Logo" class="logo-img">
+            
+            <h1 class="welcome-text" data-it="Benvenuti" data-en="Welcome">Benvenuti</h1>
+            <p class="subtitle" data-it="Mettetevi comodi e godetevi il soggiorno." data-en="Make yourself comfortable and enjoy your stay.">Mettetevi comodi e godetevi il soggiorno.</p>
+        </div>
+
         <div class="grid">
             <a href="dettagli.html" class="btn">
                 <div class="circle"><span class="material-symbols-outlined">home</span></div>
-                <span class="label">Dotazioni e Servizi</span>
+                <span class="label" data-it="Dotazioni" data-en="Amenities">Dotazioni</span>
             </a>
             <a href="contatti.html" class="btn">
                 <div class="circle"><span class="material-symbols-outlined">call</span></div>
-                <span class="label">Contatti</span>
+                <span class="label" data-it="Contatti" data-en="Contacts">Contatti</span>
             </a>
             <a href="regole.html" class="btn">
                 <div class="circle"><span class="material-symbols-outlined">gavel</span></div>
-                <span class="label">Regole Casa</span>
+                <span class="label" data-it="Regole" data-en="House Rules">Regole</span>
             </a>
             <a href="istruzioni.html" class="btn">
                 <div class="circle"><span class="material-symbols-outlined">menu_book</span></div>
-                <span class="label">Istruzioni</span>
+                <span class="label" data-it="Istruzioni" data-en="Instructions">Istruzioni</span>
             </a>
             <a href="wifi.html" class="btn">
                 <div class="circle"><span class="material-symbols-outlined">wifi</span></div>
-                <span class="label">Wi-Fi</span>
+                <span class="label" data-it="Wi-Fi" data-en="Wi-Fi">Wi-Fi</span>
             </a>
             <a href="trasporti.html" class="btn">
                 <div class="circle"><span class="material-symbols-outlined">directions_bus</span></div>
-                <span class="label">Trasporti</span>
+                <span class="label" data-it="Trasporti" data-en="Transport">Trasporti</span>
             </a>
             <a href="turismo.html" class="btn">
                 <div class="circle"><span class="material-symbols-outlined">explore</span></div>
-                <span class="label">Esplora il Territorio</span>
+                <span class="label" data-it="Territorio" data-en="Explore">Territorio</span>
             </a>
             <a href="convenzioni.html" class="btn">
                 <div class="circle"><span class="material-symbols-outlined">sell</span></div>
-                <span class="label">I Nostri Partner</span>
+                <span class="label" data-it="Partner" data-en="Partners">Partner</span>
             </a>
             <a href="checkout.html" class="btn">
                 <div class="circle"><span class="material-symbols-outlined">logout</span></div>
-                <span class="label">Check-Out</span>
+                <span class="label" data-it="Check-Out" data-en="Check-Out">Check-Out</span>
             </a>
+        </div>
+
+        <div class="weather-widget">
+            <div class="weather-main">
+                <span id="weather-icon" class="material-symbols-outlined" style="font-size: 30px;">cloud</span>
+                <span id="temp" class="temp-val">--°C</span>
+            </div>
+            <div class="weather-details">
+                <span class="city-name">Brindisi</span>
+                <span id="description" class="weather-desc" data-it="Caricamento..." data-en="Loading...">Caricamento...</span>
+            </div>
         </div>
     </div>
 
     <script>
-        let timerInattivita;
-        function resettaTimer() {
-            clearTimeout(timerInattivita);
-            timerInattivita = setTimeout(function() {
-                window.location.href = '../welcome.html';
-            }, 30000); 
+        function setLanguage(lang) {
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.innerText.toLowerCase() === lang);
+            });
+            document.querySelectorAll('[data-it]').forEach(el => {
+                el.innerText = el.getAttribute('data-' + lang);
+            });
+            localStorage.setItem('preferredLang', lang);
+            updateWeather(lang);
         }
-        window.onload = resettaTimer;
-        window.ontouchstart = resettaTimer;
-        window.onclick = resettaTimer;
-        window.onmousemove = resettaTimer;
-        window.onscroll = resettaTimer;
-    </script>
 
+        async function updateWeather(lang = 'it') {
+            const API_KEY = '63d7211ec1f99c154360e7f78c946051'; 
+            const CITY = 'Brindisi,IT';
+            const URL = `https://api.openweathermap.org/data/2.5/weather?q=${CITY}&appid=${API_KEY}&units=metric&lang=${lang}`;
+            try {
+                const response = await fetch(URL);
+                const data = await response.json();
+                if (data.cod === 200) {
+                    document.getElementById('temp').innerText = Math.round(data.main.temp) + '°C';
+                    const desc = data.weather[0].description;
+                    document.getElementById('description').innerText = desc.charAt(0).toUpperCase() + desc.slice(1);
+                    const iconMap = {'01d':'wb_sunny','01n':'nightlight_round','02d':'partly_cloudy_day','02n':'partly_cloudy_night','03d':'cloud','03n':'cloud','04d':'cloudy_filled','04n':'cloudy_filled','09d':'rainy','09n':'rainy','10d':'rainy_light','10n':'rainy_light','11d':'thunderstorm','11n':'thunderstorm','13d':'ac_unit','13n':'ac_unit','50d':'foggy','50n':'foggy'};
+                    document.getElementById('weather-icon').innerText = iconMap[data.weather[0].icon] || 'cloud';
+                }
+            } catch (e) { console.log("Weather error"); }
+        }
+
+        window.onload = () => {
+            const savedLang = localStorage.getItem('preferredLang') || 'it';
+            setLanguage(savedLang);
+            setInterval(() => updateWeather(localStorage.getItem('preferredLang')), 1200000);
+        };
+    </script>
 </body>
 </html>
