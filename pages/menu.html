@@ -11,30 +11,27 @@
 
     <style>
         :root {
-            --glass: rgba(255, 255, 255, 0.2);
-            --glass-border: rgba(255, 255, 255, 0.3);
+            --glass: rgba(255, 255, 255, 0.18);
+            --glass-border: rgba(255, 255, 255, 0.25);
             --bg-overlay: rgba(0, 0, 0, 0.4);
             --primary-font: 'Open Sans', sans-serif;
             --elegant-font: 'PT Serif', serif;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            -webkit-tap-highlight-color: transparent; 
+        }
 
-        /* CONFIGURAZIONE SFONDO DIRETTA */
         body, html {
-            min-height: 100%;
             height: 100dvh;
             font-family: var(--primary-font);
             color: white;
-            background-color: #1a1a1a; /* Colore di emergenza se l'immagine fallisce */
-            
-            /* Sfondo applicato direttamente qui per massima compatibilità */
-            background-image: linear-gradient(var(--bg-overlay), var(--bg-overlay)), 
-                              url('../assets/images/sfondo.png');
-            background-position: center center;
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
+            overflow: hidden;
+            background: linear-gradient(var(--bg-overlay), var(--bg-overlay)), 
+                        url('../assets/images/sfondo.png') center/cover no-repeat fixed;
         }
 
         .container {
@@ -43,64 +40,85 @@
             align-items: center;
             justify-content: space-between;
             height: 100dvh;
-            padding: 10px 15px 20px;
-            position: relative;
-            z-index: 1;
+            padding: 10px 15px 15px;
         }
 
-        /* --- UI Components --- */
-        .header-section { text-align: center; width: 100%; margin-top: 5px; }
-        
+        .header-wrapper {
+            width: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 5px;
+            min-height: 60px;
+        }
+
         .logo-img {
             width: 90%; 
-            max-width: 380px;
+            max-width: 420px;
             height: auto;
-            margin-bottom: 5px;
-            animation: logoFadeIn 1s ease-out forwards 0.2s;
-            opacity: 0;
+            animation: logoFadeIn 1s ease-out forwards;
+        }
+
+        .lang-switcher {
+            position: absolute;
+            right: 0;
+            top: 0;
+            display: flex;
+            gap: 5px;
+            z-index: 10;
+        }
+        
+        .lang-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.4);
+            background: rgba(0,0,0,0.2);
+            color: white;
+            font-size: 8px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            backdrop-filter: blur(8px);
+        }
+
+        .lang-btn.active { 
+            background: white; 
+            color: black; 
+            border-color: white; 
+        }
+
+        .welcome-section { 
+            text-align: center; 
+            margin-top: -50px; 
         }
 
         .welcome-text {
             font-family: var(--elegant-font);
-            font-size: 26px;
+            font-size: 28px;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-            animation: fadeInUp 0.8s forwards 0.5s;
-            opacity: 0;
         }
 
         .subtitle {
             font-family: var(--elegant-font);
-            font-size: 13px;
+            font-size: 14px;
             line-height: 1.3;
-            margin: 5px auto;
-            max-width: 280px;
-            animation: fadeInUp 0.8s forwards 0.7s;
-            opacity: 0;
+            margin: 4px auto;
+            max-width: 300px;
         }
 
-        .lang-switcher { position: absolute; top: 15px; right: 15px; display: flex; gap: 8px; z-index: 100; }
-        
-        .lang-btn {
-            width: 35px; height: 35px; border-radius: 50%;
-            border: 1px solid rgba(255,255,255,0.4);
-            background: rgba(255,255,255,0.1);
-            color: white; font-size: 10px; font-weight: bold;
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer; backdrop-filter: blur(8px);
-        }
-
-        .lang-btn.active { background: white; color: black; }
-
-        /* --- Grid Menu Ottimizzata --- */
         #main-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 12px 10px;
             width: 100%;
-            max-width: 360px;
-            margin: 10px 0;
+            max-width: 380px;
+            margin: 3px 0 4px;
         }
 
         .btn {
@@ -109,56 +127,79 @@
             flex-direction: column;
             align-items: center;
             color: white;
-            animation: fadeInUp 0.5s forwards;
-            opacity: 0;
         }
 
         .circle {
-            width: 60px; height: 60px; /* Compatto per non tagliare il meteo */
+            width: 65px;
+            height: 65px;
             background: var(--glass);
             backdrop-filter: blur(10px);
             border: 1px solid var(--glass-border);
             border-radius: 50%;
-            display: flex; justify-content: center; align-items: center;
-            margin-bottom: 6px; transition: 0.2s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 6px;
+            transition: 0.2s;
         }
 
-        .btn:active .circle { transform: scale(0.9); }
-        .material-symbols-outlined { font-size: 24px; }
-        .label { font-size: 8px; text-transform: uppercase; font-weight: 700; text-align: center; }
+        .material-symbols-outlined { font-size: 26px; }
 
-        /* --- Weather --- */
+        .label { 
+            font-size: 8.5px; 
+            text-transform: uppercase; 
+            font-weight: 700; 
+            text-align: center; 
+        }
+
         .weather-widget {
-            display: flex; align-items: center; gap: 10px;
-            padding: 8px 20px; background: rgba(255,255,255,0.12);
-            backdrop-filter: blur(15px); border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 20px;
+            background: rgba(255,255,255,0.12);
+            backdrop-filter: blur(15px);
+            border-radius: 50px;
             border: 1px solid rgba(255,255,255,0.2);
-            text-decoration: none; color: white;
-            animation: fadeInUp 0.8s forwards 1.2s; opacity: 0;
-            margin-bottom: 10px;
+            text-decoration: none;
+            color: white;
+            margin-bottom: 5px;
         }
 
-        .temp-val { font-size: 16px; font-weight: 600; font-family: var(--elegant-font); }
-        .city-name { font-family: var(--elegant-font); font-size: 13px; border-left: 1px solid rgba(255,255,255,0.3); padding-left: 10px; }
+        .temp-val { 
+            font-size: 16px; 
+            font-weight: 600; 
+            font-family: var(--elegant-font); 
+        }
 
-        /* --- Animations --- */
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes logoFadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
+        .city-name { 
+            font-family: var(--elegant-font); 
+            font-size: 13px; 
+            border-left: 1px solid rgba(255,255,255,0.3); 
+            padding-left: 10px; 
+        }
+
+        @keyframes logoFadeIn { 
+            from { opacity: 0; transform: scale(0.98); } 
+            to { opacity: 1; transform: scale(1); } 
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <nav class="lang-switcher">
-            <div id="btn-it" class="lang-btn" onclick="setLanguage('it')">ITA</div>
-            <div id="btn-en" class="lang-btn" onclick="setLanguage('en')">ENG</div>
-        </nav>
-
-        <header class="header-section">
+        <header class="header-wrapper">
             <img src="../assets/images/header.png" alt="Logo" class="logo-img">
-            <h1 class="welcome-text" data-it="Benvenuti" data-en="Welcome">Benvenuti</h1>
-            <p class="subtitle" data-it="È un piacere avervi qui. Mettetevi comodi e godetevi ogni angolo della casa" data-en="We are delighted to have you stay. Please, enjoy the space">È un piacere avervi qui. Mettetevi comodi e godetevi ogni angolo della casa</p>
+            <nav class="lang-switcher">
+                <div id="btn-it" class="lang-btn" onclick="setLanguage('it')">ITA</div>
+                <div id="btn-en" class="lang-btn" onclick="setLanguage('en')">ENG</div>
+            </nav>
         </header>
+
+        <div class="welcome-section">
+            <h1 class="welcome-text" data-it="Benvenuti" data-en="Welcome">Benvenuti</h1>
+            <p class="subtitle" data-it="È un piacere avervi qui. Mettetevi comodi e godetevi la casa" data-en="We are delighted to have you stay. Please, enjoy the space">È un piacere avervi qui. Mettetevi comodi e godetevi la casa</p>
+        </div>
 
         <nav id="main-grid"></nav>
 
@@ -183,14 +224,18 @@
             { id: 'checkout',    icon: 'logout',         it: 'Check-Out',    en: 'Check-Out' }
         ];
 
-        const weatherMap = { 0: {icon:'wb_sunny', it:'Sereno', en:'Clear'}, 3: {icon:'cloud', it:'Nuvoloso', en:'Cloudy'}, 61: {icon:'rainy', it:'Pioggia', en:'Rain'} };
+        const weatherMap = { 
+            0: {icon:'wb_sunny', it:'Sereno', en:'Clear'}, 
+            3: {icon:'cloud', it:'Nuvoloso', en:'Cloudy'}, 
+            61: {icon:'rainy', it:'Pioggia', en:'Rain'} 
+        };
 
         function renderMenu(lang) {
             const grid = document.getElementById('main-grid');
             grid.innerHTML = '';
-            MENU_ITEMS.forEach((item, index) => {
+            MENU_ITEMS.forEach(item => {
                 const a = document.createElement('a');
-                a.href = `${item.id}.html`; 
+                a.href = `${item.id}.html`;
                 a.className = 'btn';
                 a.innerHTML = `
                     <div class="circle"><span class="material-symbols-outlined">${item.icon}</span></div>
@@ -204,9 +249,7 @@
             localStorage.setItem('preferredLang', lang);
             document.getElementById('btn-it').classList.toggle('active', lang === 'it');
             document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-            document.querySelectorAll('[data-it]').forEach(el => {
-                el.innerText = el.getAttribute('data-' + lang);
-            });
+            document.querySelectorAll('[data-it]').forEach(el => el.innerText = el.getAttribute('data-' + lang));
             renderMenu(lang);
             updateWeather(lang);
         }
