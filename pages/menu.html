@@ -44,7 +44,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 92px;
+            min-height: 126px;
+            padding-top: 30px;
         }
 
         .logo-img {
@@ -57,8 +58,8 @@
 
         .lang-switcher {
             position: absolute;
-            right: 0;
-            top: 0;
+            right: 4px;
+            top: 30px;
             display: flex;
             gap: 5px;
             z-index: 10;
@@ -135,7 +136,7 @@
             backdrop-filter: blur(15px); border-radius: 50px;
             border: 1px solid rgba(255,255,255,0.2);
             text-decoration: none; color: white;
-            margin-bottom: 5px;
+            margin-bottom: 36px;
         }
 
         .temp-val { font-size: 13px; font-weight: 600; font-family: var(--elegant-font); }
@@ -145,13 +146,15 @@
         .weather-widget #description { font-size: 10.5px; }
 
         @media (max-height: 700px) {
-            .header-wrapper { min-height: 72px; }
+            .header-wrapper { min-height: 98px; padding-top: 20px; }
+            .lang-switcher { top: 20px; right: 4px; }
             .logo-img { width: 58%; max-width: 220px; }
             .welcome-section { margin-top: -4px; }
             .welcome-text { font-size: 27px; }
             .subtitle { font-size: 12px; line-height: 1.4; }
             #main-grid { gap: 8px 8px; }
             .circle { width: 58px; height: 58px; }
+            .weather-widget { margin-bottom: 24px; }
         }
 
         @keyframes logoFadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }

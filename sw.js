@@ -1,4 +1,4 @@
-const CACHE_NAME = 'diomede-v53';
+const CACHE_NAME = 'diomede-v59';
 
 const CORE_ASSETS = [
   './assets/images/caffe_espresso.png',
@@ -11,7 +11,6 @@ const CORE_ASSETS = [
   './sfondo.png',
   './assets/images/header.png',
   './assets/images/sfondo.png',
-  './assets/images/idromassaggio-pannello-guida.png',
   './pages/menu.html',
   './pages/dettagli.html',
   './pages/contatti.html',
