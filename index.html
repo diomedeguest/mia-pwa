@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <title>Welcome - Diomede Luxury</title>
+    <meta name="theme-color" content="#000000">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="logo.png">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -65,7 +68,7 @@
             background-color: rgba(255, 255, 255, 0.98); 
             width: 88%; 
             max-width: 380px; 
-            padding: 50px 30px; 
+            padding: 34px 28px 36px; 
             text-align: center; 
             box-shadow: 0 30px 60px rgba(0,0,0,0.4); 
             display: flex; flex-direction: column; align-items: center; 
@@ -78,18 +81,18 @@
             animation: fadeInUp 0.8s ease forwards;
         }
 
-        .logo-inner { width: 160px; height: auto; margin-bottom: 30px; animation-delay: 3.4s; }
-        .title-text { font-family: 'PT Serif', serif; font-size: 42px; color: #000; margin: 0; line-height: 1.1; letter-spacing: -0.5px; }
+        .logo-inner { width: 118px; max-height: 92px; object-fit: contain; height: auto; margin-bottom: 20px; animation-delay: 3.4s; }
+        .title-text { font-family: 'PT Serif', serif; font-size: 38px; color: #000; margin: 0; line-height: 1.1; letter-spacing: -0.5px; }
         .title-container { animation-delay: 3.6s; }
         
         .divider { 
-            width: 40px; height: 1px; background-color: #000; margin: 25px auto; 
+            width: 40px; height: 1px; background-color: #000; margin: 18px auto; 
             animation: scaleDivider 0.8s ease forwards;
             animation-delay: 3.8s;
         }
 
         .subtitle { font-family: 'PT Serif', serif; font-size: 18px; color: #000; margin-bottom: 8px; animation-delay: 4.0s; }
-        .tagline { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: #666; margin-bottom: 40px; animation-delay: 4.2s; }
+        .tagline { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: #666; margin-bottom: 28px; animation-delay: 4.2s; }
         .enter-btn { animation-delay: 4.4s; }
 
         /* Keyframes */
@@ -112,6 +115,15 @@
         }
         .enter-btn span { margin-right: 10px; font-size: 18px; }
         .enter-btn:active { transform: scale(0.95); background-color: #222; }
+    
+        @media (max-height: 700px) {
+            .white-box { padding: 24px 24px 26px; }
+            .logo-inner { width: 96px; max-height: 72px; margin-bottom: 14px; }
+            .title-text { font-size: 34px; }
+            .divider { margin: 13px auto; }
+            .tagline { margin-bottom: 20px; }
+            .enter-btn { padding: 13px 38px; }
+        }
     </style>
 </head>
 <body>
@@ -137,5 +149,10 @@
         </div>
     </div>
 
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js'));
+}
+</script>
 </body>
 </html>
