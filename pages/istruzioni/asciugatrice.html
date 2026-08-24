@@ -40,11 +40,60 @@
 }
 </style>
 
+
+<style id="diomede-instruction-home-style">
+.diomede-home-btn{
+    text-decoration:none;
+    position:fixed;
+    top:max(16px, env(safe-area-inset-top));
+    left:62px;
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    border:1px solid #A39689;
+    background:#A39689;
+    color:#ffffff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:9999;
+    cursor:pointer;
+    -webkit-backdrop-filter:blur(10px);
+    backdrop-filter:blur(10px);
+    box-shadow:0 4px 14px rgba(0,0,0,.08);
+    transition:transform .18s ease, background .18s ease;
+    padding:0;
+}
+.diomede-home-btn:active{
+    transform:scale(.94);
+    background:#8D8378;
+}
+.diomede-home-btn .material-symbols-outlined{
+    text-decoration:none;
+    font-size:24px;
+    line-height:1;
+    font-variation-settings:'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+@media (max-width:480px){
+    .diomede-home-btn{
+        top:max(14px, env(safe-area-inset-top));
+        left:58px;
+        width:36px;
+        height:36px;
+    }
+}
+</style>
+
 </head><body>
 
 <button type="button" class="diomede-global-back" aria-label="Torna alla pagina precedente" title="Indietro" onclick="diomedeGoBack()">
     <span class="material-symbols-outlined">arrow_back_ios_new</span>
 </button>
+
+<a href="../menu.html" class="diomede-home-btn" aria-label="Vai alla Home" title="Home">
+    <span class="material-symbols-outlined">home</span>
+</a>
+
 <div class="lang-switcher"><div id="btn-it" class="lang-btn" onclick="setLanguage('it')">ITA</div><div id="btn-en" class="lang-btn" onclick="setLanguage('en')">ENG</div></div><div class="hero-header"><img src="../../assets/images/header.png" alt="Diomede Luxury Logo" class="logo-img"><div class="hero-overlay"></div></div><div class="container"><div class="header-content"><h2 data-it="Asciugatrice" data-en="Tumble Dryer">Asciugatrice</h2><div class="divider"></div><p style="text-align:center;opacity:.72;margin-top:8px;font-size:.88rem">Candy Smart Pro CRO4 H7A2TE-S · Pompa di calore · 7 kg</p></div><div class="image-container"><img src="../../assets/images/asciugatrice.png" alt="Asciugatrice" class="instruction-image"></div><div class="instruction-section">
 <div class="instruction-card quick-choice"><h3><span class="material-symbols-outlined">recommend</span><span data-it="Se non sai cosa scegliere" data-en="If you are unsure what to choose">Se non sai cosa scegliere</span></h3><p><strong data-it="Per asciugamani e lenzuola usa BIANCHI; per il normale bucato quotidiano usa DAILY PERFECT 59'." data-en="For towels and sheets use WHITES; for normal everyday laundry use DAILY PERFECT 59 min.">Per asciugamani e lenzuola usa BIANCHI; per il normale bucato quotidiano usa DAILY PERFECT 59'.</strong> <span data-it="Per capi sintetici scegli SINTETICI. Controlla sempre prima l'etichetta del capo: deve consentire l'asciugatrice." data-en="For synthetic garments choose SYNTHETICS. Always check the garment label first: tumble drying must be allowed."></span></p></div>
 <div class="instruction-card"><h3><span class="material-symbols-outlined">play_circle</span><span data-it="1. Asciugatura in 5 passaggi" data-en="1. Drying in 5 steps">1. Asciugatura in 5 passaggi</span></h3><ul class="step-list">
