@@ -360,5 +360,22 @@
             }
         });
     </script>
+
+<script id="diomede-orientation-unlock">
+(function () {
+    function unlockOrientation() {
+        try {
+            if (screen.orientation && typeof screen.orientation.unlock === 'function') {
+                screen.orientation.unlock();
+            }
+        } catch (e) {
+            /* Browser/device may not expose the Screen Orientation API. */
+        }
+    }
+    window.addEventListener('DOMContentLoaded', unlockOrientation);
+    window.addEventListener('pageshow', unlockOrientation);
+})();
+</script>
+
 </body>
 </html>

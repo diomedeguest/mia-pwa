@@ -26,5 +26,6 @@
     "standalone"
   ],
   "description": "Welcome guide di Diomede Luxury Apartment Messapia",
-  "lang": "it-IT"
+  "lang": "it-IT",
+  "orientation": "any"
 }
