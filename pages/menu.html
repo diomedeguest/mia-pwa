@@ -160,47 +160,57 @@
 
         /* TABLET LAYOUT */
         @media (min-width: 700px) and (orientation: landscape) {
+            body, html {
+                overflow: hidden;
+            }
+
             .container {
-                padding: 0 34px 24px;
+                padding: 0 28px 18px;
+                justify-content: space-between;
             }
 
             .header-wrapper {
-                min-height: 118px;
-                padding-top: 20px;
+                min-height: 132px;
+                padding-top: 24px;
+                flex-shrink: 0;
             }
 
             .logo-img {
-                width: 42%;
-                max-width: 300px;
+                width: 38%;
+                max-width: 270px;
+                margin-top: 0;
             }
 
             .lang-switcher {
-                top: 22px;
-                right: 12px;
+                top: 26px;
+                right: 10px;
             }
 
             .welcome-section {
-                margin-top: -4px;
+                margin-top: -2px;
                 margin-bottom: 4px;
+                flex-shrink: 0;
             }
 
             .welcome-text {
-                font-size: 30px;
+                font-size: 29px;
             }
 
             .subtitle {
-                max-width: 480px;
-                font-size: 13px;
+                max-width: 500px;
+                font-size: 12.5px;
+                line-height: 1.4;
             }
 
             #main-grid {
-                grid-template-columns: repeat(4, minmax(110px, 1fr));
-                column-gap: 28px;
-                row-gap: 18px;
-                width: min(760px, 92vw);
+                grid-template-columns: repeat(3, minmax(120px, 1fr));
+                column-gap: 36px;
+                row-gap: 14px;
+                width: min(620px, 84vw);
                 max-width: none;
-                margin: 6px auto 8px;
+                margin: 4px auto 6px;
                 align-items: start;
+                flex-shrink: 1;
             }
 
             .btn {
@@ -208,24 +218,25 @@
             }
 
             .circle {
-                width: 76px;
-                height: 76px;
-                margin-bottom: 8px;
+                width: 70px;
+                height: 70px;
+                margin-bottom: 7px;
             }
 
             .material-symbols-outlined {
-                font-size: 30px;
+                font-size: 28px;
             }
 
             .label {
-                font-size: 9.5px;
-                line-height: 1.25;
-                letter-spacing: .35px;
+                font-size: 9px;
+                line-height: 1.2;
+                letter-spacing: .3px;
             }
 
             .weather-widget {
-                margin-bottom: 18px;
-                padding: 6px 16px;
+                margin-bottom: 14px;
+                padding: 5px 14px;
+                flex-shrink: 0;
             }
         }
 
@@ -253,14 +264,14 @@
 
         @media (min-width: 1000px) and (orientation: landscape) {
             #main-grid {
-                width: min(900px, 88vw);
-                column-gap: 42px;
-                row-gap: 20px;
+                width: min(700px, 80vw);
+                column-gap: 46px;
+                row-gap: 16px;
             }
 
             .circle {
-                width: 82px;
-                height: 82px;
+                width: 74px;
+                height: 74px;
             }
         }
 
