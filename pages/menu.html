@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Menu - Diomede Luxury</title>
     <link rel="manifest" href="../manifest.json">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,7 +21,8 @@
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
         body, html {
-            height: 100dvh;
+            height: var(--app-height, 100dvh);
+            min-height: var(--app-height, 100dvh);
             font-family: var(--primary-font);
             color: white;
             overflow: hidden;
@@ -34,8 +35,13 @@
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
-            height: 100dvh;
-            padding: 0 15px 15px; /* Alzato a zero */
+            height: var(--app-height, 100dvh);
+            min-height: var(--app-height, 100dvh);
+            padding:
+                env(safe-area-inset-top)
+                15px
+                max(15px, env(safe-area-inset-bottom))
+                15px;
         }
 
         .header-wrapper {
@@ -160,10 +166,6 @@
 
         /* TABLET LAYOUT */
         @media (min-width: 700px) and (orientation: landscape) {
-            body, html {
-                overflow: hidden;
-            }
-
             .container {
                 padding: 0 28px 18px;
                 justify-content: space-between;
@@ -374,6 +376,48 @@
     }
     window.addEventListener('DOMContentLoaded', unlockOrientation);
     window.addEventListener('pageshow', unlockOrientation);
+})();
+</script>
+
+
+<script id="diomede-viewport-fix">
+(function () {
+    let resizeTimer;
+
+    function actualViewportHeight() {
+        if (window.visualViewport && window.visualViewport.height) {
+            return Math.round(window.visualViewport.height);
+        }
+        return Math.round(window.innerHeight);
+    }
+
+    function setAppHeight() {
+        const h = actualViewportHeight();
+        if (h > 0) {
+            document.documentElement.style.setProperty('--app-height', h + 'px');
+        }
+    }
+
+    function refreshViewport() {
+        setAppHeight();
+        requestAnimationFrame(setAppHeight);
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(setAppHeight, 100);
+        setTimeout(setAppHeight, 300);
+        setTimeout(setAppHeight, 700);
+    }
+
+    refreshViewport();
+
+    document.addEventListener('DOMContentLoaded', refreshViewport);
+    window.addEventListener('load', refreshViewport);
+    window.addEventListener('pageshow', refreshViewport);
+    window.addEventListener('resize', refreshViewport);
+    window.addEventListener('orientationchange', refreshViewport);
+
+    if (window.visualViewport) {
+        window.visualViewport.addEventListener('resize', refreshViewport);
+    }
 })();
 </script>
 
