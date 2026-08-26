@@ -157,6 +157,113 @@
             .weather-widget { margin-bottom: 24px; }
         }
 
+
+        /* TABLET LAYOUT */
+        @media (min-width: 700px) and (orientation: landscape) {
+            .container {
+                padding: 0 34px 24px;
+            }
+
+            .header-wrapper {
+                min-height: 118px;
+                padding-top: 20px;
+            }
+
+            .logo-img {
+                width: 42%;
+                max-width: 300px;
+            }
+
+            .lang-switcher {
+                top: 22px;
+                right: 12px;
+            }
+
+            .welcome-section {
+                margin-top: -4px;
+                margin-bottom: 4px;
+            }
+
+            .welcome-text {
+                font-size: 30px;
+            }
+
+            .subtitle {
+                max-width: 480px;
+                font-size: 13px;
+            }
+
+            #main-grid {
+                grid-template-columns: repeat(4, minmax(110px, 1fr));
+                column-gap: 28px;
+                row-gap: 18px;
+                width: min(760px, 92vw);
+                max-width: none;
+                margin: 6px auto 8px;
+                align-items: start;
+            }
+
+            .btn {
+                min-width: 0;
+            }
+
+            .circle {
+                width: 76px;
+                height: 76px;
+                margin-bottom: 8px;
+            }
+
+            .material-symbols-outlined {
+                font-size: 30px;
+            }
+
+            .label {
+                font-size: 9.5px;
+                line-height: 1.25;
+                letter-spacing: .35px;
+            }
+
+            .weather-widget {
+                margin-bottom: 18px;
+                padding: 6px 16px;
+            }
+        }
+
+        @media (min-width: 700px) and (orientation: portrait) {
+            #main-grid {
+                grid-template-columns: repeat(3, 1fr);
+                width: min(520px, 88vw);
+                gap: 18px 22px;
+                max-width: none;
+            }
+
+            .circle {
+                width: 74px;
+                height: 74px;
+            }
+
+            .label {
+                font-size: 9.2px;
+            }
+
+            .weather-widget {
+                margin-bottom: 24px;
+            }
+        }
+
+        @media (min-width: 1000px) and (orientation: landscape) {
+            #main-grid {
+                width: min(900px, 88vw);
+                column-gap: 42px;
+                row-gap: 20px;
+            }
+
+            .circle {
+                width: 82px;
+                height: 82px;
+            }
+        }
+
         @keyframes logoFadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
     </style>
 </head>
