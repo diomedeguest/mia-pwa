@@ -96,70 +96,75 @@
 }
 </style>
 
+
 <style id="idro-content-layout">
+body.instruction-page .instruction-section{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:14px;
+    align-items:start;
+}
+body.instruction-page .instruction-card{
+    width:100%;
+    min-width:0;
+    box-sizing:border-box;
+}
+body.instruction-page .instruction-card.full-width-tablet{
+    grid-column:1 / -1;
+}
 .idro-manual-image{
-    width:60px;
-    max-width:60px;
+    width:174px;
+    max-width:174px;
     height:auto;
     object-fit:contain;
     display:block;
     margin:0 auto;
 }
-
-/* Same content proportions as the other instruction guides */
-@media(min-width:700px){
-    body.instruction-page .instruction-section{
-        grid-template-columns:repeat(2,minmax(0,1fr));
-        align-items:start;
-    }
-    body.instruction-page .instruction-card{
-        min-width:0;
-    }
-    body.instruction-page .instruction-card.full-width-tablet{
-        grid-column:1 / -1;
-    }
-}
-@media(max-width:699px){
-    body.instruction-page .instruction-section{
-        grid-template-columns:1fr;
-    }
-    body.instruction-page .instruction-card{
-        width:100%;
-    }
-}
-</style>
-
-
-<style id="idro-zoom-style">
-.idro-legend-trigger{
+.idro-legend-trigger,
+.water-controls-trigger{
     position:relative;
     display:block;
     margin:0 auto;
-    padding:5px;
+    padding:4px;
     border:0;
     background:transparent;
     cursor:zoom-in;
-    border-radius:10px;
+    border-radius:12px;
 }
-.idro-legend-trigger:active{transform:scale(.98)}
-
+.idro-legend-trigger{
+    width:180px;
+    max-width:180px;
+}
+.water-controls-trigger{
+    width:250px;
+    max-width:72vw;
+    margin:6px auto 14px;
+}
+.water-controls-legend{
+    display:block;
+    width:100%;
+    height:auto;
+    margin:0 auto;
+    border-radius:10px;
+    object-fit:contain;
+    background:#fff;
+}
 .idro-zoom-icon{
     position:absolute;
-    right:6px;
-    bottom:6px;
-    width:21px;
-    height:21px;
+    right:7px;
+    bottom:7px;
+    width:24px;
+    height:24px;
     border-radius:50%;
     display:flex;
     align-items:center;
     justify-content:center;
-    background:rgba(163,150,137,.92);
+    background:rgba(163,150,137,.94);
     color:#fff;
-    font-size:14px;
-    box-shadow:0 2px 8px rgba(0,0,0,.12);
+    font-size:15px;
+    box-shadow:0 2px 8px rgba(0,0,0,.14);
     pointer-events:none;
 }
-
 .idro-zoom-modal{
     position:fixed;
     inset:0;
@@ -174,14 +179,14 @@
 .idro-zoom-modal.open{display:flex}
 .idro-zoom-content{
     width:96vw;
-    height:90vh;
+    height:88vh;
     display:flex;
     align-items:center;
     justify-content:center;
     overflow:hidden;
     background:#f4eee7;
     border-radius:14px;
-    box-shadow:0 14px 40px rgba(0,0,0,.3);
+    box-shadow:0 14px 40px rgba(0,0,0,.30);
     touch-action:none;
 }
 .idro-zoom-content img{
@@ -189,7 +194,7 @@
     width:auto;
     height:auto;
     max-width:94vw;
-    max-height:86vh;
+    max-height:84vh;
     object-fit:contain;
     transform-origin:center center;
     user-select:none;
@@ -213,38 +218,41 @@
     z-index:12001;
     cursor:pointer;
 }
-.idro-zoom-content{width:96vw;height:88vh}
-    .idro-zoom-content img{max-width:94vw;max-height:84vh}
+@media(min-width:700px){
+    body.instruction-page .instruction-section{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+    .water-controls-trigger{
+        width:300px;
+        max-width:88%;
+    }
+}
+@media(max-width:600px){
+    .idro-legend-trigger{
+        width:160px;
+        max-width:160px;
+    }
+    .idro-manual-image{
+        width:154px;
+        max-width:154px;
+    }
+    .water-controls-trigger{
+        width:225px;
+        max-width:76vw;
+    }
 }
 </style>
 
 
-<style id="idro-thumbnail-definitive-fix">
-body.instruction-page .image-container .idro-legend-trigger{
-    width:180px !important;
-    max-width:180px !important;
-    display:block !important;
-    margin:0 auto 8px !important;
-    padding:3px !important;
-    overflow:hidden !important;
+<style id="panel-legend-card-style">
+.panel-legend-inside-card{
+    display:flex;
+    justify-content:center;
+    width:100%;
+    margin:6px auto 14px;
 }
-body.instruction-page .image-container .idro-legend-trigger .idro-manual-image{
-    width:174px !important;
-    max-width:174px !important;
-    height:auto !important;
-    display:block !important;
+.panel-legend-inside-card .idro-legend-trigger{
     margin:0 auto !important;
-    object-fit:contain !important;
-}
-@media(max-width:600px){
-    body.instruction-page .image-container .idro-legend-trigger{
-        width:160px !important;
-        max-width:160px !important;
-    }
-    body.instruction-page .image-container .idro-legend-trigger .idro-manual-image{
-        width:154px !important;
-        max-width:154px !important;
-    }
 }
 </style>
 
@@ -277,81 +285,94 @@ body.instruction-page .image-container .idro-legend-trigger .idro-manual-image{
         <div class="divider"></div>
     </div>
 
-    <div class="image-container">
-        <button type="button" class="idro-legend-trigger" onclick="openIdroLegend()" aria-label="Ingrandisci legenda pannello">
-            <span class="material-symbols-outlined idro-zoom-icon" aria-hidden="true">zoom_in</span>
-            <img src="../../assets/images/idromassaggio-manuale-it.png?v=59" data-src-it="../../assets/images/idromassaggio-manuale-it.png?v=59" data-src-en="../../assets/images/idromassaggio-manuale-en.png?v=59"
-                 alt="Manuale rapido pannello vasca idromassaggio"
-                 class="instruction-image idro-manual-image">
-        </button>
-    </div>
+    
 
 <div class="instruction-section">
 
-            <div class="instruction-card">
-                <h3><span class="material-symbols-outlined">bathtub</span> <span data-it="1. Prima di iniziare: riempi la vasca" data-en="1. Before starting: fill the tub">1. Prima di iniziare: riempi la vasca</span></h3>
-                <ul class="step-list">
-                    <li><span class="material-symbols-outlined item-icon">water_drop</span><div><strong data-it="Le 3 manopole" data-en="The 3 knobs">Le 3 manopole</strong><span data-it="Troverai una manopola per l'acqua calda, una per l'acqua fredda e una terza manopola che devia l'acqua tra il doccino e il riempimento della vasca." data-en="There is one knob for hot water, one for cold water and a third knob that diverts the water between the hand shower and the bathtub filler."></span></div></li>
-                    <li><span class="material-symbols-outlined item-icon">sync_alt</span><div><strong data-it="IMPORTANTE — Seleziona VASCA (ON)" data-en="IMPORTANT — Select BATH (ON)">IMPORTANTE — Seleziona VASCA (ON)</strong><span data-it="Prima di aprire l'acqua, assicurati che la manopola doccino/vasca sia orientata verso VASCA (ON). In caso contrario l'acqua uscirà dal doccino e la vasca non si riempirà correttamente." data-en="Before turning on the water, make sure the shower/bath selector knob is turned towards BATH (ON). Otherwise water will come from the hand shower and the tub will not fill correctly."></span></div></li>
-                    <li><span class="material-symbols-outlined item-icon">thermostat</span><div><strong data-it="Regola la temperatura" data-en="Adjust the temperature">Regola la temperatura</strong><span data-it="Apri gradualmente acqua calda e fredda e miscelale fino a raggiungere una temperatura confortevole. Evita di riempire la vasca solo con acqua molto fredda." data-en="Gradually open the hot and cold water and mix them until the temperature is comfortable. Avoid filling the tub with very cold water only."></span></div></li>
-                    <li><span class="material-symbols-outlined item-icon">waves</span><div><strong data-it="Livello minimo dell'acqua" data-en="Minimum water level">Livello minimo dell'acqua</strong><span data-it="Prima di attivare l'idromassaggio, l'acqua deve arrivare circa 8 cm sopra il getto più alto. Non avviare mai la pompa con poca acqua." data-en="Before activating the whirlpool, the water must be about 8 cm above the highest jet. Never start the pump with too little water."></span></div></li>
-                    <li><span class="material-symbols-outlined item-icon">water_damage</span><div><strong data-it="NON riempire la vaschetta di scolo" data-en="DO NOT fill the drain tray">NON riempire la vaschetta di scolo</strong><span data-it="La vaschetta di scolo deve rimanere libera: non versare o accumulare acqua al suo interno. Se si riempie, la vasca può andare in protezione/blocco. Assicurati inoltre che lo scarico rimanga libero." data-en="The drain tray must remain clear: do not pour or allow water to collect in it. If it fills, the tub may enter protection/lock mode. Also make sure the drain remains clear."></span></div></li>
-                </ul>
-            </div>
+    <div class="instruction-card">
+        <h3><span class="material-symbols-outlined">bathtub</span> <span data-it="1. Riempi la vasca" data-en="1. Fill the tub">1. Riempi la vasca</span></h3>
 
-            <div class="instruction-card">
-                <h3><span class="material-symbols-outlined">touch_app</span> <span data-it="2. Accendi e avvia l'idromassaggio" data-en="2. Power on and start the whirlpool">2. Accendi e avvia l'idromassaggio</span></h3>
-                <ul class="step-list">
-                    <li><span class="material-symbols-outlined item-icon">power_settings_new</span><div><strong data-it="Accendi il pannello" data-en="Turn on the panel">Accendi il pannello</strong><span data-it="Premi il tasto Power sul pannello touch. Le altre funzioni diventano disponibili dopo l'accensione del display." data-en="Press the Power button on the touch panel. The other functions become available after the display is switched on."></span></div></li>
-                    <li><span class="material-symbols-outlined item-icon">lock_open</span><div><strong data-it="Se i tasti sono bloccati" data-en="If the controls are locked">Se i tasti sono bloccati</strong><span data-it="Se compare il blocco tastiera, tieni premuto il relativo tasto per circa 2 secondi per sbloccare i comandi." data-en="If the keypad lock is active, press and hold the lock control for about 2 seconds to unlock it."></span></div></li>
-                    <li><span class="material-symbols-outlined item-icon">waves</span><div><strong data-it="Getti idromassaggio" data-en="Whirlpool jets">Getti idromassaggio</strong><span data-it="Premi il tasto dell'idromassaggio per avviare i getti laterali. Su alcuni modelli l'intensità può essere modificata premendo nuovamente il tasto o ruotando le bocchette." data-en="Press the whirlpool button to start the side jets. On some models, intensity can be adjusted by pressing the button again or rotating the nozzles."></span></div></li>
-                    <li><span class="material-symbols-outlined item-icon">air</span><div><strong data-it="Massaggio ad aria" data-en="Air massage">Massaggio ad aria</strong><span data-it="Se disponibile sul pannello, premi il tasto della pompa ad aria per attivare o disattivare le bolle d'aria." data-en="If available on the panel, press the air-pump button to switch the air bubbles on or off."></span></div></li>
-                </ul>
-            </div>
+        <button type="button" class="water-controls-trigger"
+                onclick="openIdroLegend(this.querySelector('.water-controls-legend').src, this.querySelector('.water-controls-legend').alt)"
+                aria-label="Ingrandisci comandi dell'acqua">
+            <span class="material-symbols-outlined idro-zoom-icon" aria-hidden="true">zoom_in</span>
+            <img src="../../assets/images/idromassaggio-comandi-acqua.png?v=69"
+                 data-src-it="../../assets/images/idromassaggio-comandi-acqua.png?v=69"
+                 data-src-en="../../assets/images/idromassaggio-comandi-acqua-en.png?v=69"
+                 alt="Comandi acqua calda, acqua fredda, deviatore e doccino"
+                 class="water-controls-legend">
+        </button>
 
-            <div class="instruction-card">
-                <h3><span class="material-symbols-outlined">thermostat</span> <span data-it="3. Temperatura dell'acqua" data-en="3. Water temperature">3. Temperatura dell'acqua</span></h3>
-                <ul class="step-list">
-                    <li><span class="material-symbols-outlined item-icon">device_thermostat</span><div><strong data-it="Acqua calda: AMBIENTE + CALDA" data-en="Hot water: AMBIENT + HOT">Acqua calda: AMBIENTE + CALDA</strong><span data-it="Per attivare l'acqua calda, premi sul pannello prima il pulsante AMBIENTE e poi il pulsante CALDA. Il riscaldamento funziona solo quando la pompa dell'acqua è attiva e il livello dell'acqua nella vasca è sufficiente." data-en="To activate hot water, press the AMBIENT button first and then the HOT button on the panel. Heating works only while the water pump is running and there is enough water in the tub."></span></div></li>
-                    <li><span class="material-symbols-outlined item-icon">slow_motion_video</span><div><strong data-it="Non riscalda rapidamente" data-en="It does not heat quickly">Non riscalda rapidamente</strong><span data-it="Il manuale indica un aumento di circa 1,6 °C all'ora: per questo è importante riempire subito la vasca con acqua già piacevolmente calda, miscelando caldo e freddo." data-en="The manual indicates an increase of about 1.6 °C per hour, so fill the tub with comfortably warm water from the start by mixing hot and cold water."></span></div></li>
-                </ul>
-            </div>
+        <ul class="step-list">
+            <li><span class="material-symbols-outlined item-icon">water_drop</span><div><strong data-it="Acqua calda e fredda" data-en="Hot and cold water">Acqua calda e fredda</strong><span data-it="Apri gradualmente le due manopole e miscelale fino a raggiungere una temperatura confortevole." data-en="Gradually open the two controls and mix the water until you reach a comfortable temperature."></span></div></li>
+            <li><span class="material-symbols-outlined item-icon">sync_alt</span><div><strong data-it="Deviatore vasca / doccino" data-en="Tub / hand-shower diverter">Deviatore vasca / doccino</strong><span data-it="Ruota il deviatore per scegliere se far uscire l'acqua dal riempimento della vasca oppure dal doccino." data-en="Turn the diverter to choose whether the water flows into the tub or through the hand shower."></span></div></li>
+            <li><span class="material-symbols-outlined item-icon">shower</span><div><strong data-it="Doccino" data-en="Hand shower">Doccino</strong><span data-it="Estrai il doccino dal supporto quando serve e riposizionalo correttamente dopo l'uso." data-en="Remove the hand shower from its holder when needed and place it back correctly after use."></span></div></li>
+            <li><span class="material-symbols-outlined item-icon">waves</span><div><strong data-it="Livello minimo dell'acqua" data-en="Minimum water level">Livello minimo dell'acqua</strong><span data-it="Prima di attivare l'idromassaggio, l'acqua deve arrivare circa 8 cm sopra il getto più alto. Non avviare la pompa con poca acqua." data-en="Before starting the whirlpool, the water must reach about 8 cm above the highest jet. Do not run the pump with too little water."></span></div></li>
+        </ul>
+    </div>
 
-            <div class="instruction-card">
-                <h3><span class="material-symbols-outlined">restart_alt</span> <span data-it="4. Se la vasca va in blocco" data-en="4. If the tub locks">4. Se la vasca va in blocco</span></h3>
-                <ul class="step-list">
-                    <li><span class="material-symbols-outlined item-icon">power_settings_new</span><div><strong data-it="1 — Spegni dal pannello" data-en="1 — Switch off at the panel">1 — Spegni dal pannello</strong><span data-it="Premi il pulsante di spegnimento sul pannello touch e attendi qualche secondo." data-en="Press the power button on the touch panel to switch the tub off, then wait a few seconds."></span></div></li>
-                    <li><span class="material-symbols-outlined item-icon">power</span><div><strong data-it="2 — Riaccendi" data-en="2 — Switch it on again">2 — Riaccendi</strong><span data-it="Riaccendi la vasca dal pannello. Se torna a funzionare, puoi riprendere normalmente l'utilizzo." data-en="Switch the tub back on from the panel. If it works again, you can continue using it normally."></span></div></li>
-                    <li><span class="material-symbols-outlined item-icon">restart_alt</span><div><strong data-it="3 — Se resta in protezione" data-en="3 — If protection remains">3 — Se resta in protezione</strong><span data-it="Se la vasca rimane bloccata, non eseguire altre operazioni: interrompi l'uso e contatta la struttura." data-en="If the tub remains locked, do not perform any further operations: stop using the tub and contact the property."></span></div></li>
-                </ul>
-            </div>
-
-            <div class="instruction-card">
-                <h3><span class="material-symbols-outlined">spa</span> <span data-it="5. Funzioni extra" data-en="5. Extra functions">5. Funzioni extra</span></h3>
-                <ul class="step-list">
-                    <li><span class="material-symbols-outlined item-icon">light_mode</span><div><strong data-it="Cromoterapia" data-en="Chromotherapy">Cromoterapia</strong><span data-it="Premi il tasto dedicato per attivare l'illuminazione multicolore a 7 tonalità." data-en="Press the dedicated button to activate the 7-colour multicolour lighting."></span></div></li>
-                    <li><span class="material-symbols-outlined item-icon">radio</span><div><strong data-it="Radio FM" data-en="FM radio">Radio FM</strong><span data-it="Premi il tasto Radio. TUN avvia la ricerca automatica delle stazioni; VOL +/− regola il volume." data-en="Press the Radio button. TUN starts automatic station search; VOL +/− adjusts the volume."></span></div></li>
-                    <li><span class="material-symbols-outlined item-icon">bubble_chart</span><div><strong data-it="Ozono" data-en="Ozone">Ozono</strong><span data-it="Se presente, la funzione O₃ può essere attivata dal pannello e funziona solo con la pompa dell'acqua accesa." data-en="If fitted, the O₃ function can be activated from the panel and works only while the water pump is running."></span></div></li>
-                </ul>
-            </div>
-
-            <div class="instruction-card full-width-tablet">
-                <h3><span class="material-symbols-outlined">warning</span> <span data-it="Attenzione" data-en="Important">Attenzione</span></h3>
-                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;">
-                    <div class="alert-box"><h4 data-it="Acqua troppo fredda" data-en="Water too cold">Acqua troppo fredda</h4><p data-it="Evita di riempire la vasca con sola acqua molto fredda: sotto circa 26 °C il riscaldatore può andare in protezione. Miscela subito acqua calda e fredda." data-en="Avoid filling the tub with very cold water only: below about 26°C the heater may enter protection mode. Mix hot and cold water from the start."></p></div>
-                    <div class="alert-box"><h4 data-it="Mai senza acqua" data-en="Never run without water">Mai senza acqua</h4><p data-it="Non attivare l'idromassaggio finché l'acqua non supera di circa 8 cm il getto più alto: la pompa potrebbe danneggiarsi." data-en="Do not activate the whirlpool until the water is about 8 cm above the highest jet: the pump could be damaged."></p></div>
-                    <div class="alert-box"><h4 data-it="Prima di riempire" data-en="Before filling">Prima di riempire</h4><p data-it="Controlla sempre che il selettore doccino/vasca sia rivolto verso VASCA (ON). È il passaggio più importante per un corretto riempimento." data-en="Always check that the shower/bath selector points towards BATH (ON). This is the most important step for correct filling."></p></div>
-                    <div class="alert-box"><h4 data-it="In caso di problemi" data-en="If something goes wrong">In caso di problemi</h4><p data-it="Non premere ripetutamente i pulsanti. Spegni dal pannello, attendi qualche secondo e riaccendi. Se il problema continua, contatta la struttura." data-en="Do not repeatedly press the buttons. Switch the panel off, wait a few seconds and switch it on again. If the problem continues, contact the property."></p></div>
-                </div>
-            </div>
+    <div class="instruction-card">
+        <h3><span class="material-symbols-outlined">touch_app</span> <span data-it="2. Avvia l'idromassaggio" data-en="2. Start the whirlpool">2. Avvia l'idromassaggio</span></h3>
+        <div class="panel-legend-inside-card">
+<button type="button" class="idro-legend-trigger" onclick="openIdroLegend(document.querySelector('.idro-manual-image').src, document.querySelector('.idro-manual-image').alt)" aria-label="Ingrandisci legenda pannello">
+            <span class="material-symbols-outlined idro-zoom-icon" aria-hidden="true">zoom_in</span>
+            <img src="../../assets/images/idromassaggio-manuale-it.png?v=69" data-src-it="../../assets/images/idromassaggio-manuale-it.png?v=69" data-src-en="../../assets/images/idromassaggio-manuale-en.png?v=69"
+                 alt="Manuale rapido pannello vasca idromassaggio"
+                 class="instruction-image idro-manual-image">
+        </button>
         </div>
+        <ul class="step-list">
+            <li><span class="material-symbols-outlined item-icon">power_settings_new</span><div><strong data-it="Accendi il pannello" data-en="Turn on the panel">Accendi il pannello</strong><span data-it="Premi il tasto Power sul pannello touch. Le altre funzioni diventano disponibili dopo l'accensione del display." data-en="Press the Power button on the touch panel. The other functions become available after the display switches on."></span></div></li>
+            <li><span class="material-symbols-outlined item-icon">lock_open</span><div><strong data-it="Se i tasti sono bloccati" data-en="If the controls are locked">Se i tasti sono bloccati</strong><span data-it="Se compare il blocco tastiera, tieni premuto il relativo tasto per circa 2 secondi per sbloccare i comandi." data-en="If the keypad lock is active, press and hold the lock control for about 2 seconds to unlock it."></span></div></li>
+            <li><span class="material-symbols-outlined item-icon">waves</span><div><strong data-it="Getti idromassaggio" data-en="Whirlpool jets">Getti idromassaggio</strong><span data-it="Premi il tasto dell'idromassaggio per avviare o arrestare i getti laterali." data-en="Press the whirlpool button to start or stop the side jets."></span></div></li>
+            <li><span class="material-symbols-outlined item-icon">air</span><div><strong data-it="Massaggio ad aria" data-en="Air massage">Massaggio ad aria</strong><span data-it="Se presente sul pannello, premi il tasto dedicato per attivare o disattivare le bolle d'aria." data-en="If present on the panel, press the dedicated button to switch the air bubbles on or off."></span></div></li>
+        </ul>
+    </div>
+
+    <div class="instruction-card">
+        <h3><span class="material-symbols-outlined">thermostat</span> <span data-it="3. Temperatura della vasca" data-en="3. Tub temperature">3. Temperatura della vasca</span></h3>
+        <ul class="step-list">
+            <li><span class="material-symbols-outlined item-icon">thermostat</span><div><strong data-it="Parti con acqua già calda" data-en="Start with warm water">Parti con acqua già calda</strong><span data-it="Regola acqua calda e fredda durante il riempimento. Il riscaldatore della vasca serve soprattutto a mantenere o aumentare lentamente la temperatura." data-en="Adjust hot and cold water while filling. The tub heater is mainly intended to maintain or slowly increase the temperature."></span></div></li>
+            <li><span class="material-symbols-outlined item-icon">slow_motion_video</span><div><strong data-it="Riscaldamento lento" data-en="Slow heating">Riscaldamento lento</strong><span data-it="L'aumento indicato dal manuale è di circa 1,6 °C all'ora: non aspettarti che riscaldi rapidamente acqua fredda." data-en="The manual indicates an increase of about 1.6°C per hour, so it will not quickly heat cold water."></span></div></li>
+        </ul>
+    </div>
+
+    <div class="instruction-card">
+        <h3><span class="material-symbols-outlined">spa</span> <span data-it="4. Funzioni extra" data-en="4. Extra functions">4. Funzioni extra</span></h3>
+        <ul class="step-list">
+            <li><span class="material-symbols-outlined item-icon">light_mode</span><div><strong data-it="Cromoterapia" data-en="Chromotherapy">Cromoterapia</strong><span data-it="Premi il tasto dedicato per accendere la luce e cambiare colore." data-en="Press the dedicated button to turn on the light and change colour."></span></div></li>
+            <li><span class="material-symbols-outlined item-icon">radio</span><div><strong data-it="Radio FM" data-en="FM radio">Radio FM</strong><span data-it="Premi il tasto Radio. TUN avvia la ricerca delle stazioni e VOL +/− regola il volume." data-en="Press the Radio button. TUN starts station search and VOL +/− adjusts the volume."></span></div></li>
+            <li><span class="material-symbols-outlined item-icon">bubble_chart</span><div><strong data-it="Ozono" data-en="Ozone">Ozono</strong><span data-it="Se presente, la funzione O₃ si attiva dal pannello e funziona con la pompa dell'acqua in funzione." data-en="If present, the O₃ function is activated from the panel and operates while the water pump is running."></span></div></li>
+        </ul>
+    </div>
+
+    <div class="instruction-card">
+        <h3><span class="material-symbols-outlined">restart_alt</span> <span data-it="5. Se la vasca va in blocco" data-en="5. If the tub locks">5. Se la vasca va in blocco</span></h3>
+        <ul class="step-list">
+            <li><span class="material-symbols-outlined item-icon">power_settings_new</span><div><strong data-it="Spegni dal pannello" data-en="Switch off at the panel">Spegni dal pannello</strong><span data-it="Premi il pulsante di spegnimento e attendi qualche secondo." data-en="Press the power button to switch the tub off and wait a few seconds."></span></div></li>
+            <li><span class="material-symbols-outlined item-icon">power</span><div><strong data-it="Riaccendi una volta" data-en="Switch it on once">Riaccendi una volta</strong><span data-it="Riaccendi dal pannello. Se torna a funzionare puoi proseguire normalmente." data-en="Switch it back on from the panel. If it works again, you can continue normally."></span></div></li>
+            <li><span class="material-symbols-outlined item-icon">support_agent</span><div><strong data-it="Se resta bloccata" data-en="If it remains locked">Se resta bloccata</strong><span data-it="Non fare altri tentativi: interrompi l'uso e contatta la struttura." data-en="Do not make further attempts: stop using the tub and contact the property."></span></div></li>
+        </ul>
+    </div>
+
+    <div class="instruction-card full-width-tablet">
+        <h3><span class="material-symbols-outlined">warning</span> <span data-it="Raccomandazioni importanti" data-en="Important recommendations">Raccomandazioni importanti</span></h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;">
+            <div class="alert-box"><h4 data-it="Mai senza acqua" data-en="Never run without water">Mai senza acqua</h4><p data-it="Attiva l'idromassaggio solo quando il livello supera di circa 8 cm il getto più alto." data-en="Only start the whirlpool when the water is about 8 cm above the highest jet."></p></div>
+            <div class="alert-box"><h4 data-it="Regola gradualmente la temperatura" data-en="Adjust temperature gradually">Regola gradualmente la temperatura</h4><p data-it="Apri acqua calda e fredda poco alla volta per evitare temperature eccessive." data-en="Open hot and cold water gradually to avoid excessive temperatures."></p></div>
+            <div class="alert-box"><h4 data-it="Controlla il deviatore" data-en="Check the diverter">Controlla il deviatore</h4><p data-it="Prima di riempire la vasca verifica che l'acqua sia indirizzata verso la vasca e non verso il doccino." data-en="Before filling, make sure the water is directed to the tub rather than the hand shower."></p></div>
+            <div class="alert-box"><h4 data-it="In caso di problemi" data-en="If something goes wrong">In caso di problemi</h4><p data-it="Evita di premere ripetutamente i comandi. Se il problema continua dopo un riavvio, contatta la struttura." data-en="Avoid repeatedly pressing the controls. If the problem continues after one restart, contact the property."></p></div>
+        </div>
+    </div>
+
+</div>
 
 <div id="idroZoomModal" class="idro-zoom-modal" aria-hidden="true" onclick="closeIdroLegend(event)">
     <button type="button" class="idro-zoom-close" onclick="closeIdroLegend(event)" aria-label="Chiudi">
         <span class="material-symbols-outlined">close</span>
     </button>
     <div class="idro-zoom-content" onclick="event.stopPropagation()">
-        <img id="idroZoomImage" src="../../assets/images/idromassaggio-manuale-it.png?v=59" data-src-it="../../assets/images/idromassaggio-manuale-it.png?v=59" data-src-en="../../assets/images/idromassaggio-manuale-en.png?v=59" alt="Legenda pannello vasca idromassaggio ingrandita" draggable="false">
+        <img id="idroZoomImage" src="../../assets/images/idromassaggio-manuale-it.png?v=69" alt="Immagine ingrandita" draggable="false">
     </div>
 </div>
 
@@ -420,9 +441,12 @@ function idroResetZoom(){
     idroScale=1; idroX=0; idroY=0; idroPanStart=null;
     idroApplyTransform();
 }
-function openIdroLegend(){
+function openIdroLegend(src, alt){
     const modal=document.getElementById('idroZoomModal');
-    if(!modal) return;
+    const img=document.getElementById('idroZoomImage');
+    if(!modal || !img) return;
+    if(src) img.src=src;
+    img.alt=alt || 'Immagine ingrandita';
     idroResetZoom();
     modal.classList.add('open');
     modal.setAttribute('aria-hidden','false');

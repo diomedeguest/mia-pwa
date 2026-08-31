@@ -268,6 +268,54 @@
 }
 </style>
 
+
+<style id="cantine-risveglio-style">
+.brand-logo.risveglio-logo{
+    width:100px;
+    height:54px;
+    border-radius:10px;
+    object-fit:contain;
+    padding:4px 6px;
+    background:#fff;
+}
+.partner-contact{
+    display:flex;
+    align-items:flex-start;
+    gap:8px;
+    font-size:11px;
+    color:#777;
+    margin:-6px 0 18px;
+    font-weight:600;
+}
+.partner-contact a{
+    color:#5D544C;
+    text-decoration:none;
+    font-weight:700;
+}
+@media(max-width:480px){
+    .brand-logo.risveglio-logo{
+        width:88px;
+        height:50px;
+    }
+    .promo-header{gap:10px;}
+}
+</style>
+
+
+<style id="partner-card-equal-height">
+.info-section{
+    align-items:stretch;
+}
+.promo-card{
+    height:100%;
+    display:flex;
+    flex-direction:column;
+}
+.promo-card .promo-offer{
+    margin-top:auto;
+}
+</style>
+
 </head>
 <body>
 
@@ -296,7 +344,7 @@
             <div class="promo-card">
                 <div class="promo-header">
                     <div class="brand-info">
-                        <img src="../../assets/images/calemone.png" alt="Calemone" class="brand-logo">
+                        <img src="../../assets/images/calemone.png" alt="Calemone" class="brand-logo risveglio-logo">
                         <h3>Calemone</h3>
                     </div>
                     <span class="discount-badge">-10%</span>
@@ -309,39 +357,63 @@
                     <span class="material-symbols-outlined" style="font-size: 16px; color:#A39689;">location_on</span>
                     <span>Serranova, 72012 Carovigno BR (Riserva Torre Guaceto)</span>
                 </div>
+                <div class="partner-contact">
+                    <span class="material-symbols-outlined" style="font-size:16px;color:#A39689;">call</span>
+                    <span>
+                        <a href="tel:+390831555807">+39 0831 555807</a><br>
+                        <a href="mailto:info@calemone.it">info@calemone.it</a>
+                    </span>
+                </div>
                 <div class="promo-offer" 
-                     data-it="Approfitta del 10% di sconto sullo shop con il codice DIOMEDE!"
-                     data-en="Get a 10% discount on the shop using the code DIOMEDE!">
+                     data-it="Sconto del 10% sugli acquisti con il codice: DIOMEDE!"
+                     data-en="10% discount on purchases with the code: DIOMEDE!">
                 </div>
                 <div class="flex-row">
-                    <a href="https://www.calemone.it/shop" target="_blank" class="btn action-btn" data-it="Shop" data-en="Shop">Shop</a>
-                    <a href="#" target="_blank" class="btn maps-btn" data-it="Posizione" data-en="Location">Posizione</a>
+                    <a href="https://www.calemone.it/shop" target="_blank" rel="noopener" class="btn action-btn" data-it="Shop" data-en="Shop">Shop</a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Azienda+Agricola+Calemone+Serranova+Carovigno" target="_blank" rel="noopener" class="btn maps-btn" data-it="Posizione" data-en="Location">Posizione</a>
+                    <a href="tel:+390831555807" class="btn maps-btn" data-it="Chiama" data-en="Call">Chiama</a>
+                    <a href="mailto:info@calemone.it" class="btn maps-btn" data-it="Email" data-en="Email">Email</a>
                 </div>
             </div>
 
             <div class="promo-card">
                 <div class="promo-header">
                     <div class="brand-info">
-                        <img src="../../assets/images/work.png" alt="Slot Libero" class="brand-logo">
-                        <h3 data-it="Slot Libero" data-en="Free Slot">Slot Libero</h3>
+                        <img src="../../assets/images/cantine-risveglio.png" alt="Cantine Risveglio" class="brand-logo risveglio-logo">
+                        <h3>Cantine Risveglio</h3>
                     </div>
                     <span class="discount-badge">-10%</span>
                 </div>
-                <p class="promo-description" 
-                   data-it="Inserire qui la descrizione dello Store dedicato ai prodotti tipici e locali. Un'opportunità per i nostri ospiti di scoprire le eccellenze del territorio."
-                   data-en="Insert here the description of the store dedicated to typical and local products. An opportunity for our guests to discover the excellence of the territory.">
+
+                <p class="promo-description"
+                   data-it="Storica realtà vitivinicola brindisina dal 1958, Cantine Risveglio valorizza i vitigni del territorio con vini e spumanti legati alla tradizione locale. Su prenotazione è possibile vivere esperienze in cantina, degustazioni e passeggiate a cavallo."
+                   data-en="A historic Brindisi winery since 1958, Cantine Risveglio celebrates local grape varieties through wines and sparkling wines rooted in local tradition. By reservation, guests can enjoy winery experiences, tastings and horseback rides.">
                 </p>
+
                 <div class="address-box">
-                    <span class="material-symbols-outlined" style="font-size: 16px; color:#A39689;">location_on</span>
-                    <span data-it="Via da inserire, 1, 72012 Brindisi BR" data-en="Address to be inserted, 1, 72012 Brindisi BR"></span>
+                    <span class="material-symbols-outlined" style="font-size:16px;color:#A39689;">location_on</span>
+                    <span>C.da Torre Mozza, SS7 Km 5,700, 72100 Brindisi</span>
                 </div>
-                <div class="promo-offer" 
-                     data-it="Approfitta del 10% di sconto sullo shop con il codice DIOMEDE!"
-                     data-en="Get a 10% discount on the shop using the code DIOMEDE!">
+
+                <div class="partner-contact">
+                    <span class="material-symbols-outlined" style="font-size:16px;color:#A39689;">call</span>
+                    <span>
+                        <span data-it="Degustazioni e passeggiate a cavallo:" data-en="Tastings and horse experiences:"></span>
+                        <a href="tel:+390831519948">+39 0831 519948</a><br>
+                        <a href="mailto:info@cantinerisveglio.it">info@cantinerisveglio.it</a>
+                    </span>
                 </div>
+
+                <div class="promo-offer"
+                     data-it="Sconto del 10% sugli acquisti con il codice: DIOMEDE!"
+                     data-en="10% discount on purchases with the code: DIOMEDE!">
+                </div>
+
                 <div class="flex-row">
-                    <a href="#" target="_blank" class="btn action-btn" data-it="Shop" data-en="Shop">Shop</a>
-                    <a href="#" target="_blank" class="btn maps-btn" data-it="Posizione" data-en="Location">Posizione</a>
+                    <a href="https://cantinerisveglio.it/shop/" target="_blank" rel="noopener" class="btn action-btn" data-it="Shop" data-en="Shop">Shop</a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Cantine+Risveglio+Brindisi" target="_blank" rel="noopener" class="btn maps-btn" data-it="Posizione" data-en="Location">Posizione</a>
+                    <a href="tel:+390831519948" class="btn maps-btn" data-it="Chiama" data-en="Call">Chiama</a>
+                    <a href="mailto:info@cantinerisveglio.it" class="btn maps-btn" data-it="Email" data-en="Email">Email</a>
                 </div>
             </div>
         </div>
