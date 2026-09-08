@@ -1,6 +1,7 @@
-const CACHE_NAME = 'diomede-v109';
+const CACHE_NAME = 'diomede-v110';
 
 const CORE_ASSETS = [
+  "./assets/images/logo-transparent.png",
   "./",
   "./assets/css/style.css",
   "./assets/images/armadio-servizio.png",
