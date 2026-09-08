@@ -117,12 +117,42 @@
         .enter-btn:active { transform: scale(0.95); background-color: #222; }
 
 
-        /* Smartphone portrait: mostra molta più fotografia senza il forte ritaglio di cover */
+        /* Smartphone portrait: immagine completa e pannello Welcome più leggero */
         @media (max-width: 600px) and (orientation: portrait) {
             .bg-image {
-                background-size: 100% auto;
+                background-size: contain;
                 background-position: center center;
+                background-repeat: no-repeat;
                 background-color: #000;
+            }
+
+            .white-box {
+                width: min(82vw, 330px);
+                padding: 24px 22px 26px;
+                background: rgba(255, 255, 255, 0.88);
+                box-sizing: border-box;
+            }
+
+            .logo-inner {
+                width: 92px;
+                max-height: 70px;
+                margin-bottom: 13px;
+            }
+
+            .title-text {
+                font-size: 32px;
+            }
+
+            .divider {
+                margin: 12px auto;
+            }
+
+            .tagline {
+                margin-bottom: 18px;
+            }
+
+            .enter-btn {
+                padding: 13px 34px;
             }
         }
 

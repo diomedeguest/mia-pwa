@@ -1,4 +1,4 @@
-const CACHE_NAME = 'diomede-v107';
+const CACHE_NAME = 'diomede-v108';
 
 const CORE_ASSETS = [
   "./",
