@@ -1,6 +1,33 @@
-const CACHE_NAME = 'diomede-v110';
+const CACHE_NAME = 'diomede-v123';
 
 const CORE_ASSETS = [
+  "./assets/video/letto-scomparsa-cartoon-realistico-framebyframe.mp4",
+  "./assets/images/letto-video-poster-realistico.jpg",
+
+  "./assets/images/letto-step-1-def.jpg",
+  "./assets/images/letto-step-2-def.jpg",
+  "./assets/images/letto-step-3-def.jpg",
+
+  "./assets/images/letto-step-1-pulito.jpg",
+  "./assets/images/letto-step-2-pulito.jpg",
+  "./assets/images/letto-step-3-pulito.jpg",
+
+  "./assets/images/letto-passaggio-1-tenue.jpg",
+  "./assets/images/letto-passaggio-2-tenue.jpg",
+  "./assets/images/letto-passaggio-3-tenue.jpg",
+
+  "./assets/images/letto-mobile-chiuso-illustrazione.jpg",
+  "./assets/images/letto-step-apertura-illustrazione.jpg",
+  "./assets/images/letto-step-discesa-illustrazione.jpg",
+  "./assets/images/letto-mobile-aperto-illustrazione.jpg",
+
+  "./assets/images/letto-mobile-chiuso-disegno.jpg",
+  "./assets/images/letto-step-1-disegno.jpg",
+  "./assets/images/letto-step-2-disegno.jpg",
+  "./assets/images/letto-step-3-disegno.jpg",
+  "./assets/images/letto-mobile-aperto-disegno.jpg",
+
+  "./pages/istruzioni/letto-scomparsa.html",\n  "./assets/images/letto-mobile-chiuso.jpg",\n  "./assets/images/letto-mobile-aperto.jpg",\n  "./assets/images/letto-step-1.jpg",\n  "./assets/images/letto-step-2.jpg",\n  "./assets/images/letto-step-3.jpg",\n
   "./assets/images/logo-transparent.png",
   "./",
   "./assets/css/style.css",

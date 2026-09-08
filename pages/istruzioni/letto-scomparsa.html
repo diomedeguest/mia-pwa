@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0,user-scalable=yes">
+<title>Letto a scomparsa - Diomede Luxury</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=Open+Sans:wght@300;400;600&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,200,0,0&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<style>
+.bed-intro{font-size:.94rem;line-height:1.65;margin:0}
+.bed-hero{margin:18px 0 22px;background:rgba(255,255,255,.52);border:1px solid rgba(163,150,137,.28);border-radius:20px;padding:10px;box-shadow:0 4px 15px rgba(0,0,0,.03)}
+.bed-hero img{display:block;width:100%;height:auto;max-height:520px;object-fit:contain;background:#f3eee7;border-radius:14px;cursor:zoom-in}
+.steps{display:grid;grid-template-columns:1fr;gap:14px}
+.step-card{overflow:hidden;background:rgba(255,255,255,.5);border:1px solid rgba(163,150,137,.3);border-radius:20px;padding:12px;box-shadow:0 4px 15px rgba(0,0,0,.03);text-align:left}
+.step-card img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#f3eee7;border-radius:14px;margin-bottom:13px;cursor:zoom-in}
+.step-head{display:flex;align-items:center;gap:10px;margin:0 3px 7px}
+.step-number{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#A39689;color:#fff;font-size:12px;font-weight:700;flex:0 0 28px}
+.step-title{font-family:'PT Serif',serif;font-size:17px;color:#5D544C}
+.step-text{font-size:.88rem;line-height:1.55;margin:0 3px 4px;color:#333}
+.tip-note{margin-top:16px;padding:14px 16px;border-left:4px solid #A39689;background:rgba(255,255,255,.43);border-radius:0 14px 14px 0;font-size:.86rem;line-height:1.55;text-align:left}
+.final-image{margin-top:16px}
+@media(min-width:720px){.steps{grid-template-columns:repeat(3,1fr)}.bed-hero{padding:14px}.step-card{padding:14px}}
+.image-modal{display:none;position:fixed;inset:0;z-index:12000;background:rgba(20,18,16,.92);align-items:center;justify-content:center;padding:18px}
+.image-modal.open{display:flex}
+.image-modal img{max-width:96vw;max-height:92vh;object-fit:contain;border-radius:10px}
+.image-modal-close{position:fixed;top:max(18px,env(safe-area-inset-top));right:18px;width:40px;height:40px;border:0;border-radius:50%;background:#A39689;color:#fff;font-size:24px;display:flex;align-items:center;justify-content:center}
+
+
+
+
+/* Illustrazioni letto: dimensioni identiche e visualizzazione completa */
+.steps{align-items:stretch;}
+.step-card{display:flex;flex-direction:column;height:100%;overflow:hidden;}
+.step-card img{
+    display:block;
+    width:100%;
+    height:auto;
+    aspect-ratio:415 / 430;
+    object-fit:contain;
+    object-position:center;
+    background:#f7efe5;
+    border-radius:14px;
+    margin:0 0 13px;
+}
+.step-head{min-height:34px;align-items:center;}
+@media(min-width:720px){
+    .steps{grid-template-columns:repeat(3,minmax(0,1fr));}
+}
+
+
+.video-guide-card{
+    margin-top:18px;
+    padding:14px;
+    background:rgba(255,255,255,.52);
+    border:1px solid rgba(163,150,137,.30);
+    border-radius:20px;
+    box-shadow:0 4px 15px rgba(0,0,0,.03);
+    text-align:left;
+}
+.video-guide-title{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    margin:0 0 10px;
+    font-family:'PT Serif',serif;
+    color:#5D544C;
+    font-size:17px;
+}
+.video-guide-title .material-symbols-outlined{font-size:21px;color:#A39689;}
+.video-guide-card video{
+    display:block;
+    width:100%;
+    max-height:480px;
+    border-radius:14px;
+    background:#f3eee7;
+    object-fit:contain;
+}
+.video-guide-hint{
+    margin:9px 2px 0;
+    font-size:.82rem;
+    line-height:1.45;
+    color:#777;
+}
+
+</style>
+<style id="diomede-global-back-style">
+.diomede-global-back{position:fixed;top:max(16px,env(safe-area-inset-top));left:16px;width:38px;height:38px;border-radius:50%;border:1px solid #A39689;background:#A39689;color:#fff;display:flex;align-items:center;justify-content:center;z-index:9999;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.08);padding:0}
+.diomede-global-back .material-symbols-outlined{font-size:20px}
+.diomede-home-btn{text-decoration:none;position:fixed;top:max(16px,env(safe-area-inset-top));left:62px;width:38px;height:38px;border-radius:50%;border:1px solid #A39689;background:#A39689;color:#fff;display:flex;align-items:center;justify-content:center;z-index:9999;box-shadow:0 4px 14px rgba(0,0,0,.08)}
+.diomede-home-btn .material-symbols-outlined{font-size:24px}
+@media(max-width:480px){.diomede-global-back{top:max(14px,env(safe-area-inset-top));left:14px;width:36px;height:36px}.diomede-home-btn{top:max(14px,env(safe-area-inset-top));left:58px;width:36px;height:36px}}
+</style>
+</head>
+<body class="instruction-page">
+<button type="button" class="diomede-global-back" aria-label="Indietro" onclick="diomedeGoBack()"><span class="material-symbols-outlined">arrow_back_ios_new</span></button>
+<a href="../menu.html" class="diomede-home-btn" aria-label="Home"><span class="material-symbols-outlined">home</span></a>
+
+<div class="lang-switcher"><div id="btn-it" class="lang-btn" onclick="setLanguage('it')">ITA</div><div id="btn-en" class="lang-btn" onclick="setLanguage('en')">ENG</div></div>
+<div class="hero-header"><img src="../../assets/images/header.png" alt="Diomede Luxury Logo" class="logo-img"><div class="hero-overlay"></div></div>
+
+<div class="container">
+  <div class="header-content">
+    <h2 data-it="Letto a scomparsa" data-en="Murphy Bed">Letto a scomparsa</h2>
+    <div class="divider"></div>
+  </div>
+
+  <div class="instruction-section">
+    <div class="instruction-card">
+      <h3><span class="material-symbols-outlined">bed</span><span data-it="Dove si trova" data-en="Where to find it">Dove si trova</span></h3>
+      <p class="bed-intro" data-it="Il letto matrimoniale è integrato nel mobile della zona TV." data-en="The double bed is built into the TV wall unit.">Il letto matrimoniale è integrato nel mobile della zona TV.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step-card">
+        <img src="../../assets/images/letto-step-1-def.jpg" alt="Apertura del pannello laterale" onclick="openImage(this.src)">
+        <div class="step-head"><span class="step-number">1</span><span class="step-title" data-it="Apri il pannello laterale" data-en="Open the side panel">Apri il pannello laterale</span></div>
+        <p class="step-text" data-it="Apri delicatamente il pannello verticale sul lato destro del mobile." data-en="Gently open the vertical panel on the right-hand side of the unit.">Apri delicatamente il pannello verticale sul lato destro del mobile.</p>
+      </div>
+
+      <div class="step-card">
+        <img src="../../assets/images/letto-step-2-def.jpg" alt="Rotazione del modulo letto" onclick="openImage(this.src)">
+        <div class="step-head"><span class="step-number">2</span><span class="step-title" data-it="Ruota il modulo" data-en="Rotate the unit">Ruota il modulo</span></div>
+        <p class="step-text" data-it="Accompagna il modulo nella rotazione verso la stanza, senza forzare." data-en="Gently rotate the unit towards the room without forcing it.">Accompagna il modulo nella rotazione verso la stanza, senza forzare.</p>
+      </div>
+
+      <div class="step-card">
+        <img src="../../assets/images/letto-step-3-def.jpg" alt="Discesa del letto" onclick="openImage(this.src)">
+        <div class="step-head"><span class="step-number">3</span><span class="step-title" data-it="Abbassa il letto" data-en="Lower the bed">Abbassa il letto</span></div>
+        <p class="step-text" data-it="Accompagna lentamente il letto verso il pavimento fino alla completa apertura." data-en="Gently lower the bed towards the floor until it is fully open.">Accompagna lentamente il letto verso il pavimento fino alla completa apertura.</p>
+      </div>
+    </div>
+
+
+    <div class="video-guide-card">
+      <div class="video-guide-title">
+        <span class="material-symbols-outlined">play_circle</span>
+        <span data-it="Guarda come si apre" data-en="See how to open it">Guarda come si apre</span>
+      </div>
+      <video controls playsinline preload="metadata" poster="../../assets/images/letto-video-poster-realistico.jpg">
+        <source src="../../assets/video/letto-scomparsa-cartoon-realistico-framebyframe.mp4" type="video/mp4">
+      </video>
+      <p class="video-guide-hint"
+         data-it="Guarda l'animazione: mostra l'apertura dello sportello, la discesa del letto e la chiusura in ordine inverso."
+         data-en="Watch the animation: it shows the panel opening, the bed lowering, and the closing sequence in reverse order.">Guarda l'animazione: mostra l'apertura dello sportello, la discesa del letto e la chiusura in ordine inverso.</p>
+    </div>
+
+    <div class="tip-note">
+      <strong data-it="Importante:" data-en="Important:">Importante:</strong>
+      <span data-it="accompagna sempre il movimento del mobile e del letto senza forzare. Per richiuderlo, esegui i passaggi in ordine inverso." data-en="always guide the movement of the unit and bed without forcing. To close it, follow the steps in reverse order."> accompagna sempre il movimento del mobile e del letto senza forzare. Per richiuderlo, esegui i passaggi in ordine inverso.</span>
+    </div>
+  </div>
+
+  <div class="back-btn-container"><a href="../istruzioni.html" class="back-btn"><span class="material-symbols-outlined">arrow_back_ios_new</span><span data-it="Torna alle istruzioni" data-en="Back to instructions">Torna alle istruzioni</span></a></div>
+</div>
+
+<div id="imageModal" class="image-modal" onclick="closeImage(event)">
+  <button type="button" class="image-modal-close" aria-label="Chiudi" onclick="closeImage(event)">×</button>
+  <img id="modalImage" src="" alt="">
+</div>
+
+<script>
+function setLanguage(lang){
+  localStorage.setItem('preferredLang',lang);
+  document.getElementById('btn-it')?.classList.toggle('active',lang==='it');
+  document.getElementById('btn-en')?.classList.toggle('active',lang==='en');
+  document.querySelectorAll('[data-it]').forEach(el=>{const t=el.getAttribute('data-'+lang);if(t!==null)el.textContent=t;});
+}
+function openImage(src){document.getElementById('modalImage').src=src;document.getElementById('imageModal').classList.add('open');}
+function closeImage(e){if(e.target.id==='modalImage')return;document.getElementById('imageModal').classList.remove('open');}
+window.onload=()=>setLanguage(localStorage.getItem('preferredLang')||'it');
+function diomedeGoBack(){if(window.history.length>1){window.history.back();}else{window.location.href='../istruzioni.html';}}
+</script>
+</body>
+</html>
