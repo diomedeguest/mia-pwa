@@ -7,11 +7,11 @@
     <meta name="theme-color" content="#F0EDE9">
     <link rel="manifest" href="../manifest.json">
     <link rel="apple-touch-icon" href="../logo.png">
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=Open+Sans:wght@400;600&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,200,0,0&display=swap" rel="stylesheet">
-    
+
     <style>
         :root {
             --primary-accent: #A39689;
@@ -40,7 +40,7 @@
         .container { width: 100%; max-width: 900px; margin: -30px auto 0; padding: 0 20px 80px; position: relative; z-index: 10; }
         h2 { font-family: 'PT Serif', serif; font-size: 34px; color: #2c2c2c; }
         .divider { width: 50px; height: 1px; background-color: var(--primary-accent); margin: 10px auto 30px; }
-        
+
         .destinations-grid { display: grid; grid-template-columns: 1fr; gap: 12px; text-align: left; }
         @media (min-width: 768px) { .destinations-grid { grid-template-columns: 1fr 1fr; } }
 
@@ -177,7 +177,7 @@
         function renderDestinations(lang) {
             const grid = document.getElementById('destinations-grid');
             grid.innerHTML = '';
-            
+
             DESTINATIONS.forEach(dest => {
                 grid.innerHTML += `
                     <div class="destination-card">
@@ -186,7 +186,7 @@
                             <span class="distance-tag">${dest.time}</span>
                         </div>
                         <p class="dest-description">${dest[lang]}</p>
-                        <a href="${dest.link}" target="_blank" class="maps-btn">
+                        <a href="${dest.link}" target="_blank" class="maps-btn" rel="noopener">
                             <span class="material-symbols-outlined" style="margin-right: 6px; font-size: 16px;">location_on</span>
                             <span>${lang === 'it' ? 'Posizione' : 'Location'}</span>
                         </a>
@@ -203,7 +203,7 @@
             document.querySelectorAll('[data-it]').forEach(el => {
                 el.textContent = el.getAttribute('data-' + lang);
             });
-            
+
             renderDestinations(lang);
         }
 

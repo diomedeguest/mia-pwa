@@ -7,18 +7,18 @@
     <meta name="theme-color" content="#F0EDE9">
     <link rel="manifest" href="../manifest.json">
     <link rel="apple-touch-icon" href="../logo.png">
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=Open+Sans:wght@400;600&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,200,0,0&display=swap" rel="stylesheet">
-    
+
     <style>
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        
-        body { 
-            font-family: 'Open Sans', sans-serif; 
-            margin: 0; padding: 0; 
-            background-color: #F0EDE9; 
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0; padding: 0;
+            background-color: #F0EDE9;
             color: #1a1a1a;
             line-height: 1.4;
             text-align: center;
@@ -60,7 +60,7 @@
         /* HEADER */
         .hero-header {
             width: 100%;
-            height: 240px; 
+            height: 240px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -71,7 +71,7 @@
 
         .logo-img {
             width: 100%;
-            max-width: 300px; 
+            max-width: 300px;
             height: auto;
             z-index: 5;
             display: block;
@@ -84,24 +84,24 @@
         }
 
         /* CONTAINER */
-        .container { 
-            width: 100%; 
-            max-width: 900px; 
-            margin: -30px auto 0; 
+        .container {
+            width: 100%;
+            max-width: 900px;
+            margin: -30px auto 0;
             padding: 0 20px 80px;
             position: relative;
             z-index: 10;
         }
 
-        h2 { 
-            font-family: 'PT Serif', serif; 
-            font-size: 34px; 
-            margin: 0; 
+        h2 {
+            font-family: 'PT Serif', serif;
+            font-size: 34px;
+            margin: 0;
             font-weight: 400;
             letter-spacing: 0.5px;
             color: #2c2c2c;
         }
-        
+
         .divider { width: 50px; height: 1px; background-color: #A39689; margin: 15px auto 35px; }
 
         /* Griglia dei Trasporti */
@@ -189,19 +189,19 @@
         .action-btn:active { transform: scale(0.97); background-color: #f5f5f5; }
 
         /* BACK BUTTON */
-        .back-btn-container { 
-            margin-top: 50px; 
+        .back-btn-container {
+            margin-top: 50px;
             display: flex;
             justify-content: center;
         }
-        
+
         .back-btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             padding: 16px 40px;
-            background-color: #A39689; 
-            color: #ffffff; 
+            background-color: #A39689;
+            color: #ffffff;
             text-decoration: none;
             text-transform: uppercase;
             font-size: 11px;
@@ -287,7 +287,7 @@
         <div class="divider"></div>
 
         <div class="info-grid">
-            
+
             <div class="info-card">
                 <div class="card-header">
                     <span class="material-symbols-outlined info-icon">local_taxi</span>
@@ -318,7 +318,7 @@
                     <p data-it="Linea AP: collegamento tra Aeroporto, Stazione FS e Porto Costa Morena." data-en="AP Line: connection between Airport, Railway Station, and Costa Morena Port."></p>
                 </div>
                 <div class="flex-row">
-                    <a href="#" target="_blank" class="action-btn">
+                    <a href="#" target="_blank" class="action-btn" rel="noopener">
                         <span class="material-symbols-outlined" style="margin-right: 6px; font-size: 18px;">location_on</span>
                         <span data-it="Posizione Fermata" data-en="Stop Location">Posizione Fermata</span>
                     </a>
@@ -334,7 +334,7 @@
                     <p data-it="Il lungomare dista 2 min a piedi. Per i grandi traghetti usare bus AP o taxi (15 min)." data-en="The seafront is a 2-min walk away. For large ferries, use the AP bus or taxi (15 min)."></p>
                 </div>
                 <div class="flex-row">
-                    <a href="#" target="_blank" class="action-btn">
+                    <a href="#" target="_blank" class="action-btn" rel="noopener">
                         <span class="material-symbols-outlined" style="margin-right: 6px; font-size: 18px;">location_on</span>
                         <span data-it="Posizione Porto" data-en="Port Location">Posizione Porto</span>
                     </a>
@@ -350,7 +350,7 @@
                     <p data-it="Raggiungibile in soli 6 min a piedi percorrendo il suggestivo Corso Umberto I." data-en="Reach it in just 6 minutes on foot along the charming Corso Umberto I."></p>
                 </div>
                 <div class="flex-row">
-                    <a href="#" target="_blank" class="action-btn">
+                    <a href="#" target="_blank" class="action-btn" rel="noopener">
                         <span class="material-symbols-outlined" style="margin-right: 6px; font-size: 18px;">directions_walk</span>
                         <span data-it="Percorso a piedi" data-en="Walking Route">Percorso a piedi</span>
                     </a>
@@ -370,7 +370,7 @@
     <script>
         function setLanguage(lang) {
             localStorage.setItem('preferredLang', lang);
-            
+
             document.getElementById('btn-it').classList.toggle('active', lang === 'it');
             document.getElementById('btn-en').classList.toggle('active', lang === 'en');
 

@@ -1,16 +1,16 @@
 /* style.css - Configurazione Diomede Luxury */
 
 /* 1. RESET E BASI */
-* { 
-    box-sizing: border-box; 
-    -webkit-tap-highlight-color: transparent; 
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
 }
 
-body { 
-    font-family: 'Open Sans', sans-serif; 
-    margin: 0; 
-    padding: 0; 
-    background-color: #F0EDE9; 
+body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #F0EDE9;
     color: #1a1a1a;
     line-height: 1.4;
 }
@@ -51,7 +51,7 @@ body {
 /* 3. HEADER & LOGO */
 .hero-header {
     width: 100%;
-    height: 240px; 
+    height: 240px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -62,7 +62,7 @@ body {
 
 .logo-img {
     width: 100%;
-    max-width: 300px; 
+    max-width: 300px;
     height: auto;
     z-index: 5;
     display: block;
@@ -70,61 +70,61 @@ body {
 
 .hero-overlay {
     position: absolute;
-    bottom: 0; 
-    left: 0; 
-    width: 100%; 
+    bottom: 0;
+    left: 0;
+    width: 100%;
     height: 60px;
     background: linear-gradient(to top, #F0EDE9, rgba(240, 237, 233, 0));
 }
 
 /* 4. LAYOUT E CONTENUTI */
-.container { 
-    width: 100%; 
-    max-width: 900px; 
-    margin: -30px auto 0; 
+.container {
+    width: 100%;
+    max-width: 900px;
+    margin: -30px auto 0;
     padding: 0 20px 80px;
     position: relative;
     z-index: 10;
 }
 
-.header-content { 
-    text-align: center; 
-    margin-bottom: 30px; 
+.header-content {
+    text-align: center;
+    margin-bottom: 30px;
 }
 
-h2 { 
-    font-family: 'PT Serif', serif; 
-    font-size: 34px; 
+h2 {
+    font-family: 'PT Serif', serif;
+    font-size: 34px;
     margin: 0;
     font-weight: 400;
     letter-spacing: 0.5px;
     color: #2c2c2c;
 }
 
-.divider { 
-    width: 50px; 
-    height: 1px; 
-    background-color: #A39689; 
-    margin: 10px auto; 
+.divider {
+    width: 50px;
+    height: 1px;
+    background-color: #A39689;
+    margin: 10px auto;
 }
 
-.image-container { 
-    text-align: center; 
-    margin-bottom: 35px; 
+.image-container {
+    text-align: center;
+    margin-bottom: 35px;
 }
 
-.instruction-image { 
-    width: 100%; 
-    max-width: 200px; 
-    height: auto; 
-    filter: drop-shadow(0 15px 30px rgba(0,0,0,0.08)); 
+.instruction-image {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    filter: drop-shadow(0 15px 30px rgba(0,0,0,0.08));
 }
 
 /* 5. GRIGLIA E CARDS */
-.instruction-section { 
-    display: grid; 
-    grid-template-columns: 1fr; 
-    gap: 20px; 
+.instruction-section {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
     text-align: left;
 }
 
@@ -151,59 +151,59 @@ h2 {
 }
 
 /* 6. LISTE E DETTAGLI */
-.step-list { 
-    list-style: none; 
-    padding: 0; 
-    margin: 0; 
+.step-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-.step-list li { 
-    font-size: 14px; 
-    margin-bottom: 15px; 
-    color: #444; 
-    display: flex; 
-    gap: 12px; 
+.step-list li {
+    font-size: 14px;
+    margin-bottom: 15px;
+    color: #444;
+    display: flex;
+    gap: 12px;
 }
 
-.step-list li .item-icon { 
-    color: #A39689; 
-    font-size: 18px; 
-    flex-shrink: 0; 
+.step-list li .item-icon {
+    color: #A39689;
+    font-size: 18px;
+    flex-shrink: 0;
 }
 
-.step-list li strong { 
-    color: #000; 
-    display: block; 
-    margin-bottom: 2px; 
+.step-list li strong {
+    color: #000;
+    display: block;
+    margin-bottom: 2px;
 }
 
 /* 7. BOX ATTENZIONE (ALERT) */
-.alert-box { 
-    background: rgba(163, 150, 137, 0.1); 
-    border-left: 2px solid #A39689; 
-    padding: 15px; 
-    border-radius: 0 12px 12px 0; 
+.alert-box {
+    background: rgba(163, 150, 137, 0.1);
+    border-left: 2px solid #A39689;
+    padding: 15px;
+    border-radius: 0 12px 12px 0;
     margin-top: 10px;
 }
 
-.alert-box h4 { 
-    margin: 0 0 5px 0; 
-    font-size: 11px; 
-    text-transform: uppercase; 
-    color: #5D544C; 
+.alert-box h4 {
+    margin: 0 0 5px 0;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #5D544C;
 }
 
-.alert-box p { 
-    font-size: 12px; 
-    margin: 0; 
-    color: #6d645d; 
-    line-height: 1.5; 
+.alert-box p {
+    font-size: 12px;
+    margin: 0;
+    color: #6d645d;
+    line-height: 1.5;
 }
 
 /* 8. BOTTONE INDIETRO */
-.back-btn-container { 
-    text-align: center; 
-    margin-top: 50px; 
+.back-btn-container {
+    text-align: center;
+    margin-top: 50px;
 }
 
 .back-btn {
@@ -211,8 +211,8 @@ h2 {
     align-items: center;
     justify-content: center;
     padding: 16px 40px;
-    background-color: #A39689; 
-    color: #ffffff; 
+    background-color: #A39689;
+    color: #ffffff;
     text-decoration: none;
     text-transform: uppercase;
     font-size: 11px;
@@ -223,15 +223,15 @@ h2 {
     transition: all 0.3s ease;
 }
 
-.back-btn:active { 
-    transform: scale(0.96); 
-    background-color: #8D8378; 
+.back-btn:active {
+    transform: scale(0.96);
+    background-color: #8D8378;
 }
 
-.back-btn .material-symbols-outlined { 
-    color: #fff; 
-    font-size: 16px; 
-    margin-right: 10px; 
+.back-btn .material-symbols-outlined {
+    color: #fff;
+    font-size: 16px;
+    margin-right: 10px;
 }
 
 /* 9. RESPONSIVITÀ TABLET/DESKTOP */
