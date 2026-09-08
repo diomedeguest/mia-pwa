@@ -116,6 +116,16 @@
         .enter-btn span { margin-right: 10px; font-size: 18px; }
         .enter-btn:active { transform: scale(0.95); background-color: #222; }
 
+
+        /* Smartphone portrait: mostra molta più fotografia senza il forte ritaglio di cover */
+        @media (max-width: 600px) and (orientation: portrait) {
+            .bg-image {
+                background-size: 100% auto;
+                background-position: center center;
+                background-color: #000;
+            }
+        }
+
         @media (max-height: 700px) {
             .white-box { padding: 24px 24px 26px; }
             .logo-inner { width: 96px; max-height: 72px; margin-bottom: 14px; }
