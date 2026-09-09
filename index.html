@@ -43,6 +43,7 @@
             align-items: center;
             justify-content: center;
             z-index: 9999;
+            pointer-events: none;
             animation: fadeOutSplash .42s ease-in-out .78s forwards;
         }
 
@@ -56,6 +57,8 @@
 
         /* --- 2. Main Content --- */
         #main-content {
+            position: relative;
+            z-index: 2;
             height: 100%; width: 100%;
             display: flex;
             align-items: center;
@@ -69,6 +72,7 @@
             background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.3)), url('logo_start.png') no-repeat center center;
             background-size: cover;
             z-index: 1;
+            pointer-events: none;
             animation: slowZoom 24s infinite alternate ease-in-out;
         }
 
@@ -224,6 +228,32 @@
     }
 }
 
+
+/* Fix definitivo ingresso mobile: il CTA usa il normale comportamento del link. */
+#main-content,
+.white-box,
+.enter-btn {
+    pointer-events: auto;
+}
+#splash-screen,
+.bg-image {
+    pointer-events: none !important;
+}
+.enter-btn {
+    cursor: pointer;
+    -webkit-touch-callout: none;
+}
+
+
+/* Logo iniziale: comparsa più lenta e morbida */
+@media (prefers-reduced-motion: no-preference) {
+    .logo-inner {
+        animation-duration: 1.8s !important;
+        animation-delay: .75s !important;
+        animation-timing-function: cubic-bezier(.22,.61,.36,1) !important;
+    }
+}
+
 </style>
     <link rel="stylesheet" href="assets/css/wow.css">
 </head>
@@ -242,7 +272,7 @@
             <div class="divider"></div>
             <div class="subtitle">Diomede Luxury Apartment</div>
             <div class="tagline">Sentitevi a casa</div>
-            <a href="pages/menu.html" class="enter-btn" id="enter-diomedeguide">
+            <a href="./pages/menu.html" class="enter-btn" id="enter-diomedeguide">
                 <span class="material-symbols-outlined">login</span>
                 Entra
             </a>
@@ -250,36 +280,11 @@
     </div>
 
 <script>
-(function () {
-    const enter = document.getElementById('enter-diomedeguide');
-    let navigating = false;
-
-    function openMenu(event) {
-        if (event) event.preventDefault();
-        if (navigating) return false;
-        navigating = true;
-
-        // Immediate navigation: no delayed WOW transition on the entry screen.
-        window.location.href = 'pages/menu.html';
-        return false;
-    }
-
-    if (enter) {
-        enter.addEventListener('click', openMenu, { passive: false });
-
-        // Explicit mobile/PWA fallback for touch-based WebViews.
-        enter.addEventListener('touchend', function (event) {
-            event.preventDefault();
-            openMenu(event);
-        }, { passive: false });
-    }
-
-    // Keep Service Worker registration even though common.js is not loaded on index.
-    window.addEventListener('load', function () {
-        if (!('serviceWorker' in navigator)) return;
+window.addEventListener('load', function () {
+    if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('./sw.js', { scope: './' }).catch(function () {});
-    });
-})();
+    }
+});
 </script>
 </body>
 </html>

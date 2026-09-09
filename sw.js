@@ -1,4 +1,4 @@
-const CACHE_NAME = 'diomede-v203-splashslow';
+const CACHE_NAME = 'diomede-v205-logo-splash-slow';
 
 const APP_SHELL = [
   './',
