@@ -74,7 +74,8 @@
 
         .white-box {
             position: relative;
-            z-index: 2;
+            z-index: 3;
+            pointer-events: auto;
             background-color: rgba(255, 255, 255, 0.88);
             width: 88%;
             max-width: 380px;
@@ -106,7 +107,15 @@
 
         .subtitle { font-family: 'PT Serif', serif; font-size: 18px; color: #000; margin-bottom: 8px; animation-delay: 1.20s; }
         .tagline { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: #666; margin-bottom: 28px; animation-delay: 1.28s; }
-        .enter-btn { animation-delay: 1.36s; }
+        .enter-btn {
+            animation-delay: 1.28s;
+            position: relative;
+            z-index: 10;
+            pointer-events: auto;
+            touch-action: manipulation;
+            -webkit-user-select: none;
+            user-select: none;
+        }
 
         /* Keyframes */
         @keyframes logoEntrata { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
@@ -187,7 +196,35 @@
             .tagline { margin-bottom: 20px; }
             .enter-btn { padding: 13px 38px; }
         }
-    </style>
+    
+/* Splash Diomede: ingresso più lento e cinematografico */
+@media (prefers-reduced-motion: no-preference) {
+    .bg-image {
+        animation-duration: 10s !important;
+    }
+    .white-box {
+        animation-duration: 1.15s !important;
+        animation-delay: .30s !important;
+    }
+    .logo-inner {
+        animation-duration: 1.0s !important;
+        animation-delay: .55s !important;
+    }
+    .title-text {
+        animation-duration: 1.0s !important;
+        animation-delay: .78s !important;
+    }
+    .tagline {
+        animation-duration: .95s !important;
+        animation-delay: 1.00s !important;
+    }
+    .enter-btn {
+        animation-duration: .95s !important;
+        animation-delay: 1.22s !important;
+    }
+}
+
+</style>
     <link rel="stylesheet" href="assets/css/wow.css">
 </head>
 <body>
@@ -205,13 +242,44 @@
             <div class="divider"></div>
             <div class="subtitle">Diomede Luxury Apartment</div>
             <div class="tagline">Sentitevi a casa</div>
-            <a href="pages/menu.html" class="enter-btn">
+            <a href="pages/menu.html" class="enter-btn" id="enter-diomedeguide">
                 <span class="material-symbols-outlined">login</span>
                 Entra
             </a>
         </div>
     </div>
 
-<script src="assets/js/common.js"></script>
+<script>
+(function () {
+    const enter = document.getElementById('enter-diomedeguide');
+    let navigating = false;
+
+    function openMenu(event) {
+        if (event) event.preventDefault();
+        if (navigating) return false;
+        navigating = true;
+
+        // Immediate navigation: no delayed WOW transition on the entry screen.
+        window.location.href = 'pages/menu.html';
+        return false;
+    }
+
+    if (enter) {
+        enter.addEventListener('click', openMenu, { passive: false });
+
+        // Explicit mobile/PWA fallback for touch-based WebViews.
+        enter.addEventListener('touchend', function (event) {
+            event.preventDefault();
+            openMenu(event);
+        }, { passive: false });
+    }
+
+    // Keep Service Worker registration even though common.js is not loaded on index.
+    window.addEventListener('load', function () {
+        if (!('serviceWorker' in navigator)) return;
+        navigator.serviceWorker.register('./sw.js', { scope: './' }).catch(function () {});
+    });
+})();
+</script>
 </body>
 </html>
