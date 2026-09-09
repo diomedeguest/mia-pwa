@@ -2,7 +2,8 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="robots" content="noindex,nofollow,noarchive">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Istruzioni - Diomede Luxury</title>
     <meta name="theme-color" content="#F0EDE9">
     <link rel="manifest" href="../manifest.json">
@@ -390,28 +391,7 @@
             setLanguage(savedLang);
         };
     </script>
-<script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => navigator.serviceWorker.register('../sw.js'));
-}
-</script>
 
-<script id="diomede-global-back-script">
-function diomedeGoBack(){
-    if (window.history.length > 1) {
-        window.history.back();
-    } else {
-        const path = window.location.pathname;
-        if (path.includes('/pages/istruzioni/')) {
-            window.location.href = '../istruzioni.html';
-        } else if (path.includes('/pages/')) {
-            window.location.href = 'menu.html';
-        } else {
-            window.location.href = 'pages/menu.html';
-        }
-    }
-}
-</script>
-
+<script src="../assets/js/common.js"></script>
 </body>
 </html>

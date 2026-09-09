@@ -2,7 +2,8 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="robots" content="noindex,nofollow,noarchive">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Check Out - Diomede Luxury</title>
     <meta name="theme-color" content="#F0EDE9">
     <link rel="manifest" href="../manifest.json">
@@ -313,7 +314,7 @@
 
         <div class="confirm-section">
             <p data-it="Hai completato tutto?" data-en="Everything done?" style="font-size: 14px; margin-bottom: 20px; font-weight: 600; font-family: 'PT Serif', serif; color: #333;">Hai completato tutto?</p>
-            <a id="wa-btn" href="https://wa.me/393331234567?text=Buongiorno,%20abbiamo%20appena%20effettuato%20il%20check-out"
+            <a id="wa-btn" href="https://wa.me/393515377828?text=Buongiorno,%20abbiamo%20appena%20effettuato%20il%20check-out"
                class="confirm-btn"
                data-it="Conferma Check-out"
                data-en="Confirm Check-out">
@@ -322,9 +323,9 @@
         </div>
 
         <div class="back-btn-container">
-            <a href="menu.html" class="back-btn" data-it="Torna al menu" data-en="Back to menu">
+            <a href="menu.html" class="back-btn">
                 <span class="material-symbols-outlined">arrow_back_ios_new</span>
-                Torna al menu
+                <span data-it="Torna al menu" data-en="Back to menu">Torna al menu</span>
             </a>
         </div>
     </div>
@@ -347,9 +348,9 @@
             const waBtn = document.getElementById('wa-btn');
             if (waBtn) {
                 if (lang === 'en') {
-                    waBtn.href = "https://wa.me/393331234567?text=Good%20morning,%20we%20have%20just%20checked%20out";
+                    waBtn.href = "https://wa.me/393515377828?text=Good%20morning,%20we%20have%20just%20checked%20out";
                 } else {
-                    waBtn.href = "https://wa.me/393331234567?text=Buongiorno,%20abbiamo%20appena%20effettuato%20il%20check-out";
+                    waBtn.href = "https://wa.me/393515377828?text=Buongiorno,%20abbiamo%20appena%20effettuato%20il%20check-out";
                 }
             }
         }
@@ -359,28 +360,7 @@
             setLanguage(savedLang);
         };
     </script>
-<script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => navigator.serviceWorker.register('../sw.js'));
-}
-</script>
 
-<script id="diomede-global-back-script">
-function diomedeGoBack(){
-    if (window.history.length > 1) {
-        window.history.back();
-    } else {
-        const path = window.location.pathname;
-        if (path.includes('/pages/istruzioni/')) {
-            window.location.href = '../istruzioni.html';
-        } else if (path.includes('/pages/')) {
-            window.location.href = 'menu.html';
-        } else {
-            window.location.href = 'pages/menu.html';
-        }
-    }
-}
-</script>
-
+<script src="../assets/js/common.js"></script>
 </body>
 </html>

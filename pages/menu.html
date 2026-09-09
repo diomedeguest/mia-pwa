@@ -2,7 +2,8 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Menu - Diomede Luxury</title>
     <link rel="manifest" href="../manifest.json">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -308,11 +309,11 @@
 
     <script>
         const MENU_ITEMS = [
-            { id: 'dettagli',    icon: 'home',           it: 'Dotazioni',    en: 'Amenities' },
-            { id: 'contatti',    icon: 'call',           it: 'Contatti',     en: 'Contacts' },
-            { id: 'regole',      icon: 'gavel',          it: 'Regole',       en: 'House Rules' },
-            { id: 'istruzioni',  icon: 'menu_book',      it: 'Istruzioni',   en: 'Instructions' },
             { id: 'wifi',        icon: 'wifi',           it: 'Wi-Fi',        en: 'Wi-Fi' },
+            { id: 'istruzioni',  icon: 'menu_book',      it: 'Istruzioni',   en: 'Instructions' },
+            { id: 'contatti',    icon: 'call',           it: 'Contatti',     en: 'Contacts' },
+            { id: 'dettagli',    icon: 'home',           it: 'Dotazioni',    en: 'Amenities' },
+            { id: 'regole',      icon: 'gavel',          it: 'Regole',       en: 'House Rules' },
             { id: 'trasporti',   icon: 'directions_bus', it: 'Trasporti',    en: 'Transport' },
             { id: 'turismo',     icon: 'explore',        it: 'Territorio',   en: 'Explore' },
             { id: 'convenzioni', icon: 'sell',           it: 'Partner',      en: 'Partners' },
@@ -357,27 +358,8 @@
         window.addEventListener('DOMContentLoaded', () => {
             const lang = localStorage.getItem('preferredLang') || 'it';
             setLanguage(lang);
-            if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('../sw.js');
-            }
         });
     </script>
-
-<script id="diomede-orientation-unlock">
-(function () {
-    function unlockOrientation() {
-        try {
-            if (screen.orientation && typeof screen.orientation.unlock === 'function') {
-                screen.orientation.unlock();
-            }
-        } catch (e) {
-            /* Browser/device may not expose the Screen Orientation API. */
-        }
-    }
-    window.addEventListener('DOMContentLoaded', unlockOrientation);
-    window.addEventListener('pageshow', unlockOrientation);
-})();
-</script>
 
 
 <script id="diomede-viewport-fix">
@@ -421,5 +403,6 @@
 })();
 </script>
 
+<script src="../assets/js/common.js"></script>
 </body>
 </html>

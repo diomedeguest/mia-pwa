@@ -382,3 +382,11 @@ body.instruction-page .idro-manual-image{
         border-radius:8px;
     }
 }
+
+
+/* FINAL MOBILE REFINEMENT */
+@media (max-width: 600px) {
+    body.instruction-page .hero-header { height: 205px !important; }
+    body.instruction-page .logo-img { max-width: 245px !important; }
+    body.instruction-page .container { margin-top: -24px !important; }
+}

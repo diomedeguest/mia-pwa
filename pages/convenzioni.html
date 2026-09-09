@@ -2,7 +2,8 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="robots" content="noindex,nofollow,noarchive">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Partner - Diomede Luxury</title>
     <meta name="theme-color" content="#F0EDE9">
     <link rel="manifest" href="../manifest.json">
@@ -276,22 +277,6 @@
                 <span class="material-symbols-outlined touch-icon">arrow_forward_ios</span>
             </a>
 
-            <a href="../pages/partners/bar.html" class="category-card">
-                <div class="left-content">
-                    <span class="material-symbols-outlined main-icon">local_cafe</span>
-                    <span class="card-title" data-it="Café & Gelaterie" data-en="Café & Gelaterie">Café & Gelaterie</span>
-                </div>
-                <span class="material-symbols-outlined touch-icon">arrow_forward_ios</span>
-            </a>
-
-            <a href="../pages/partners/beauty.html" class="category-card">
-                <div class="left-content">
-                    <span class="material-symbols-outlined main-icon">spa</span>
-                    <span class="card-title" data-it="Beauty & Wellness" data-en="Beauty & Wellness">Beauty & Wellness</span>
-                </div>
-                <span class="material-symbols-outlined touch-icon">arrow_forward_ios</span>
-            </a>
-
             <a href="../pages/partners/stores.html" class="category-card">
                 <div class="left-content">
                     <span class="material-symbols-outlined main-icon">shopping_bag</span>
@@ -300,20 +285,12 @@
                 <span class="material-symbols-outlined touch-icon">arrow_forward_ios</span>
             </a>
 
-            <a href="../pages/partners/lavanderia.html" class="category-card">
-                <div class="left-content">
-                    <span class="material-symbols-outlined main-icon">local_laundry_service</span>
-                    <span class="card-title" data-it="Lavanderia & Sartoria" data-en="Laundry & Tailoring">Lavanderia & Sartoria</span>
-                </div>
-                <span class="material-symbols-outlined touch-icon">arrow_forward_ios</span>
-            </a>
-
         </div>
 
         <div class="back-btn-container">
-            <a href="menu.html" class="back-btn" data-it="Torna alla home" data-en="Back to home">
+            <a href="menu.html" class="back-btn">
                 <span class="material-symbols-outlined">arrow_back_ios_new</span>
-                Torna alla home
+                <span data-it="Torna alla home" data-en="Back to home">Torna alla home</span>
             </a>
         </div>
     </div>
@@ -333,28 +310,7 @@
             setLanguage(savedLang);
         };
     </script>
-<script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => navigator.serviceWorker.register('../sw.js'));
-}
-</script>
 
-<script id="diomede-global-back-script">
-function diomedeGoBack(){
-    if (window.history.length > 1) {
-        window.history.back();
-    } else {
-        const path = window.location.pathname;
-        if (path.includes('/pages/istruzioni/')) {
-            window.location.href = '../istruzioni.html';
-        } else if (path.includes('/pages/')) {
-            window.location.href = 'menu.html';
-        } else {
-            window.location.href = 'pages/menu.html';
-        }
-    }
-}
-</script>
-
+<script src="../assets/js/common.js"></script>
 </body>
 </html>

@@ -2,11 +2,21 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow,noarchive">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover>
     <title>Welcome - Diomede Luxury</title>
+    <script>
+    try {
+        if (sessionStorage.getItem('diomede-session-visited')) {
+            document.documentElement.classList.add('returning-guest');
+        } else {
+            sessionStorage.setItem('diomede-session-visited', '1');
+        }
+    } catch (_) {}
+    </script>
     <meta name="theme-color" content="#000000">
     <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="logo.png">
+    <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -155,6 +165,17 @@
             }
         }
 
+        html.returning-guest #splash-screen { display: none; }
+        html.returning-guest #main-content { opacity: 1; animation: none; }
+        html.returning-guest .logo-inner,
+        html.returning-guest .title-container,
+        html.returning-guest .divider,
+        html.returning-guest .subtitle,
+        html.returning-guest .tagline,
+        html.returning-guest .enter-btn {
+            opacity: 1; transform: none; animation: none;
+        }
+
         @media (max-height: 700px) {
             .white-box { padding: 24px 24px 26px; }
             .logo-inner { width: 96px; max-height: 72px; margin-bottom: 14px; }
@@ -187,27 +208,6 @@
         </div>
     </div>
 
-<script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js'));
-}
-</script>
-
-<script id="diomede-orientation-unlock">
-(function () {
-    function unlockOrientation() {
-        try {
-            if (screen.orientation && typeof screen.orientation.unlock === 'function') {
-                screen.orientation.unlock();
-            }
-        } catch (e) {
-            /* Browser/device may not expose the Screen Orientation API. */
-        }
-    }
-    window.addEventListener('DOMContentLoaded', unlockOrientation);
-    window.addEventListener('pageshow', unlockOrientation);
-})();
-</script>
-
+<script src="assets/js/common.js"></script>
 </body>
 </html>

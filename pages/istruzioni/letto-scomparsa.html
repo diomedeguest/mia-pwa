@@ -2,7 +2,8 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0,user-scalable=yes">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Letto a scomparsa - Diomede Luxury</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -170,7 +171,7 @@ function setLanguage(lang){
 function openImage(src){document.getElementById('modalImage').src=src;document.getElementById('imageModal').classList.add('open');}
 function closeImage(e){if(e.target.id==='modalImage')return;document.getElementById('imageModal').classList.remove('open');}
 window.onload=()=>setLanguage(localStorage.getItem('preferredLang')||'it');
-function diomedeGoBack(){if(window.history.length>1){window.history.back();}else{window.location.href='../istruzioni.html';}}
 </script>
+<script src="../../assets/js/common.js"></script>
 </body>
 </html>

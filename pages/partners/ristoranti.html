@@ -2,7 +2,8 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="robots" content="noindex,nofollow,noarchive">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Ristoranti Partner - Diomede Luxury</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -315,38 +316,11 @@
                 </div>
                 <div class="flex-row">
                     <a href="tel:+390831525126" class="btn action-btn" data-it="Chiama" data-en="Call">Chiama</a>
-                    <a href="#" onclick="event.preventDefault(); alert('Voucher non ancora disponibile');" class="btn action-btn" data-it="Voucher" data-en="Voucher">Voucher</a>
                     <a href="https://www.google.com/maps/search/?api=1&query=Molo+33+Brindisi" target="_blank" class="btn maps-btn" data-it="Mappa" data-en="Map" rel="noopener">Mappa</a>
                 </div>
             </div>
 
-            <div class="promo-card">
-                <div class="promo-header">
-                    <div class="brand-info">
-                        <img src="../../assets/images/work.png" alt="Partner" class="brand-logo">
-                        <h3 data-it="Slot Libero" data-en="Free Slot">Slot Libero</h3>
                     </div>
-                    <span class="discount-badge">-10%</span>
-                </div>
-                <p class="promo-description"
-                   data-it="Ristorante e pizzeria da aggiungere per completare la lista dei tuoi partner convenzionati sul territorio."
-                   data-en="Restaurant and pizzeria to be added to complete your list of partner agreements in the area.">
-                </p>
-                <div class="address-box">
-                    <span class="material-symbols-outlined" style="font-size: 16px; color:#A39689;">location_on</span>
-                    <span data-it="Indirizzo da configurare, Brindisi" data-en="Address to be configured, Brindisi"></span>
-                </div>
-                <div class="promo-offer"
-                     data-it="Mostra la convenzione Diomede per ricevere lo sconto del 10% sul totale."
-                     data-en="Show the Diomede agreement to receive a 10% discount on the total bill.">
-                </div>
-                <div class="flex-row">
-                    <a href="tel:+39111111111" class="btn action-btn" data-it="Chiama" data-en="Call">Chiama</a>
-                    <a href="#" class="btn action-btn" data-it="Voucher" data-en="Voucher">Voucher</a>
-                    <a href="#" target="_blank" class="btn maps-btn" data-it="Mappa" data-en="Map" rel="noopener">Mappa</a>
-                </div>
-            </div>
-        </div>
 
         <div class="back-btn-container">
             <a href="../convenzioni.html" class="back-btn">
@@ -383,23 +357,6 @@
         };
     </script>
 
-
-<script id="diomede-global-back-script">
-function diomedeGoBack(){
-    if (window.history.length > 1) {
-        window.history.back();
-    } else {
-        const path = window.location.pathname;
-        if (path.includes('/pages/istruzioni/')) {
-            window.location.href = '../istruzioni.html';
-        } else if (path.includes('/pages/')) {
-            window.location.href = 'menu.html';
-        } else {
-            window.location.href = 'pages/menu.html';
-        }
-    }
-}
-</script>
-
+<script src="../../assets/js/common.js"></script>
 </body>
 </html>
