@@ -1,4 +1,4 @@
-const CACHE_NAME = 'diomede-v200';
+const CACHE_NAME = 'diomede-v201-wow';
 
 const APP_SHELL = [
   './',
@@ -6,6 +6,7 @@ const APP_SHELL = [
   './pages/menu.html',
   './manifest.json',
   './assets/css/style.css',
+  './assets/css/wow.css',
   './assets/js/common.js',
   './assets/images/header.png',
   './assets/images/logo-transparent.png',

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
 <meta name="robots" content="noindex,nofollow,noarchive">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0,user-scalable=yes,viewport-fit=cover>
     <title>Welcome - Diomede Luxury</title>
     <script>
     try {
@@ -43,15 +43,15 @@
             align-items: center;
             justify-content: center;
             z-index: 9999;
-            animation: fadeOutSplash 1s ease-in-out 2.5s forwards;
+            animation: fadeOutSplash .42s ease-in-out .78s forwards;
         }
 
         .splash-logo {
             width: 180px; height: auto;
             opacity: 0;
             animation:
-                logoEntrata 0.8s ease-out 0.2s forwards,
-                logoPulsazione 1.5s ease-in-out 1s infinite;
+                logoEntrata .48s ease-out .08s forwards,
+                logoPulsazione 1.2s ease-in-out .52s 1;
         }
 
         /* --- 2. Main Content --- */
@@ -61,7 +61,7 @@
             align-items: center;
             justify-content: center;
             opacity: 0;
-            animation: fadeInMain 1s ease-in-out 3s forwards;
+            animation: fadeInMain .58s ease-in-out .82s forwards;
         }
 
         .bg-image {
@@ -69,41 +69,44 @@
             background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.3)), url('logo_start.png') no-repeat center center;
             background-size: cover;
             z-index: 1;
-            animation: slowZoom 20s infinite alternate linear;
+            animation: slowZoom 24s infinite alternate ease-in-out;
         }
 
         .white-box {
             position: relative;
             z-index: 2;
-            background-color: rgba(255, 255, 255, 0.98);
+            background-color: rgba(255, 255, 255, 0.88);
             width: 88%;
             max-width: 380px;
             padding: 34px 28px 36px;
             text-align: center;
             box-shadow: 0 30px 60px rgba(0,0,0,0.4);
             display: flex; flex-direction: column; align-items: center;
-            border-radius: 2px;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,.52);
+            -webkit-backdrop-filter: blur(12px) saturate(108%);
+            backdrop-filter: blur(12px) saturate(108%);
         }
 
         /* --- 3. Elementi e Animazioni --- */
         .logo-inner, .title-container, .divider, .subtitle, .tagline, .enter-btn {
             opacity: 0;
-            animation: fadeInUp 0.8s ease forwards;
+            animation: fadeInUp .48s ease forwards;
         }
 
-        .logo-inner { width: 118px; max-height: 92px; object-fit: contain; height: auto; margin-bottom: 20px; animation-delay: 3.4s; }
+        .logo-inner { width: 118px; max-height: 92px; object-fit: contain; height: auto; margin-bottom: 20px; animation-delay: .96s; }
         .title-text { font-family: 'PT Serif', serif; font-size: 38px; color: #000; margin: 0; line-height: 1.1; letter-spacing: -0.5px; }
-        .title-container { animation-delay: 3.6s; }
+        .title-container { animation-delay: 1.04s; }
 
         .divider {
             width: 40px; height: 1px; background-color: #000; margin: 18px auto;
             animation: scaleDivider 0.8s ease forwards;
-            animation-delay: 3.8s;
+            animation-delay: 1.12s;
         }
 
-        .subtitle { font-family: 'PT Serif', serif; font-size: 18px; color: #000; margin-bottom: 8px; animation-delay: 4.0s; }
-        .tagline { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: #666; margin-bottom: 28px; animation-delay: 4.2s; }
-        .enter-btn { animation-delay: 4.4s; }
+        .subtitle { font-family: 'PT Serif', serif; font-size: 18px; color: #000; margin-bottom: 8px; animation-delay: 1.20s; }
+        .tagline { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: #666; margin-bottom: 28px; animation-delay: 1.28s; }
+        .enter-btn { animation-delay: 1.36s; }
 
         /* Keyframes */
         @keyframes logoEntrata { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
@@ -138,7 +141,7 @@
             .white-box {
                 width: min(82vw, 330px);
                 padding: 24px 22px 26px;
-                background: rgba(255, 255, 255, 0.78);
+                background: rgba(255, 255, 255, 0.72);
                 box-sizing: border-box;
             }
 
@@ -185,6 +188,7 @@
             .enter-btn { padding: 13px 38px; }
         }
     </style>
+    <link rel="stylesheet" href="assets/css/wow.css">
 </head>
 <body>
 <div id="splash-screen">

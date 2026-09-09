@@ -1,0 +1,218 @@
+/* ==========================================================
+   DIOMEDE LUXURY — WOW PACK
+   Microinterazioni, transizioni e profondità premium.
+   Tutto volutamente discreto per preservare il design esistente.
+   ========================================================== */
+
+:root{
+    --diomede-ease:cubic-bezier(.22,.61,.36,1);
+    --diomede-fast:180ms;
+    --diomede-medium:320ms;
+    --diomede-glass:rgba(255,255,255,.54);
+    --diomede-border:rgba(163,150,137,.34);
+    --diomede-shadow:0 10px 32px rgba(64,52,42,.075);
+}
+
+/* Entrata/uscita tra pagine: volutamente breve, tipo app nativa. */
+body.diomede-page-enter{
+    animation:diomedePageIn .38s var(--diomede-ease) both;
+}
+body.diomede-page-leave{
+    animation:diomedePageOut .17s ease both !important;
+    pointer-events:none;
+}
+body.diomede-page-leave-back{
+    animation:diomedePageOutBack .17s ease both !important;
+    pointer-events:none;
+}
+@keyframes diomedePageIn{
+    from{opacity:.01;transform:translateY(7px)}
+    to{opacity:1;transform:none}
+}
+@keyframes diomedePageOut{
+    from{opacity:1;transform:none}
+    to{opacity:.01;transform:translateY(-4px)}
+}
+@keyframes diomedePageOutBack{
+    from{opacity:1;transform:none}
+    to{opacity:.01;transform:translateY(5px)}
+}
+
+/* Firma visiva Diomede: la linea sotto il titolo si disegna all'ingresso. */
+.divider{
+    transform-origin:center;
+}
+body.diomede-page-enter .divider{
+    animation:diomedeLineSignature .72s var(--diomede-ease) .13s both;
+}
+@keyframes diomedeLineSignature{
+    from{opacity:.15;transform:scaleX(.08)}
+    to{opacity:1;transform:scaleX(1)}
+}
+
+/* Reveal progressivo delle sezioni mentre scorrono nella viewport. */
+.diomede-reveal{
+    opacity:0;
+    transform:translateY(13px);
+    transition:opacity .46s var(--diomede-ease),transform .46s var(--diomede-ease);
+    will-change:opacity,transform;
+}
+.diomede-reveal.diomede-visible{
+    opacity:1;
+    transform:none;
+}
+
+/* Card più profonde, ma sempre nella palette originale. */
+.instruction-card,
+.info-card,
+.contact-card,
+.category-card,
+.destination-card,
+.promo-card,
+.wifi-card,
+.video-guide-card,
+.tip-note,
+.qr-card{
+    -webkit-backdrop-filter:blur(11px) saturate(112%);
+    backdrop-filter:blur(11px) saturate(112%);
+    box-shadow:var(--diomede-shadow);
+    transition:transform var(--diomede-fast) var(--diomede-ease),
+               box-shadow var(--diomede-medium) ease,
+               border-color var(--diomede-medium) ease,
+               background-color var(--diomede-medium) ease;
+}
+.instruction-card:hover,
+.info-card:hover,
+.contact-card:hover,
+.category-card:hover,
+.destination-card:hover,
+.promo-card:hover,
+.wifi-card:hover{
+    border-color:rgba(163,150,137,.46);
+    box-shadow:0 14px 36px rgba(64,52,42,.10);
+}
+.instruction-card:active,
+.info-card:active,
+.contact-card:active,
+.category-card:active,
+.destination-card:active,
+.promo-card:active,
+.wifi-card:active{
+    transform:scale(.988);
+}
+
+/* Pulsanti e controlli: feedback fisico molto leggero. */
+a,.back-btn,.action-btn,.maps-btn,.confirm-btn,.lang-btn,
+.diomede-global-back,.diomede-home-btn,.idro-legend-trigger,.water-controls-trigger{
+    transition:transform var(--diomede-fast) var(--diomede-ease),
+               box-shadow var(--diomede-medium) ease,
+               opacity var(--diomede-fast) ease,
+               background-color var(--diomede-medium) ease;
+}
+.back-btn:hover,.action-btn:hover,.maps-btn:hover,.confirm-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 9px 24px rgba(64,52,42,.16);
+}
+.back-btn:active,.action-btn:active,.maps-btn:active,.confirm-btn:active,
+.diomede-global-back:active,.diomede-home-btn:active{
+    transform:scale(.96);
+}
+.lang-btn{
+    box-shadow:0 4px 14px rgba(64,52,42,.06);
+}
+.lang-btn.active{
+    transform:scale(1.045);
+}
+
+/* Header delle guide: si compatta dolcemente durante lo scroll. */
+body.instruction-page .hero-header,
+body.instruction-page .hero-header .logo-img{
+    transition:height .34s var(--diomede-ease),
+               max-width .34s var(--diomede-ease),
+               transform .34s var(--diomede-ease),
+               opacity .34s ease;
+}
+body.instruction-page.diomede-scrolled .hero-header{
+    height:180px !important;
+}
+body.instruction-page.diomede-scrolled .hero-header .logo-img{
+    max-width:220px !important;
+    transform:translateY(-4px) scale(.94);
+    opacity:.94;
+}
+
+/* Menu: vetro più raffinato e priorità visiva ai primi tre accessi. */
+body.diomede-menu-page .circle{
+    position:relative;
+    overflow:hidden;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.20),0 8px 24px rgba(0,0,0,.10);
+    transition:transform .22s var(--diomede-ease),background-color .28s ease,
+               border-color .28s ease,box-shadow .28s ease;
+}
+body.diomede-menu-page .circle::after{
+    content:'';
+    position:absolute;
+    inset:1px 8px auto 8px;
+    height:35%;
+    border-radius:999px;
+    background:linear-gradient(to bottom,rgba(255,255,255,.18),rgba(255,255,255,0));
+    pointer-events:none;
+}
+body.diomede-menu-page #main-grid .btn:nth-child(-n+3) .circle{
+    background:rgba(255,255,255,.245);
+    border-color:rgba(255,255,255,.42);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.28),0 10px 28px rgba(0,0,0,.13);
+}
+body.diomede-menu-page .btn:hover .circle{
+    transform:translateY(-3px) scale(1.025);
+}
+body.diomede-menu-page .btn:active .circle{
+    transform:scale(.94);
+}
+body.diomede-menu-page .welcome-section{
+    animation:diomedeMenuWelcome .65s var(--diomede-ease) both;
+}
+@keyframes diomedeMenuWelcome{
+    from{opacity:0;transform:translateY(8px)}
+    to{opacity:1;transform:none}
+}
+body.diomede-menu-page .weather-widget{
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.15),0 7px 22px rgba(0,0,0,.09);
+    transition:transform .2s var(--diomede-ease),background-color .25s ease;
+}
+body.diomede-menu-page .weather-widget:hover{transform:translateY(-2px);background:rgba(255,255,255,.16)}
+
+/* Immagini delle guide: minuscolo sollevamento al tocco/hover, non decorativo. */
+body.instruction-page .image-container img,
+body.instruction-page .water-controls-legend,
+body.instruction-page .idro-manual-image,
+body.instruction-page .step-card img{
+    transition:transform .28s var(--diomede-ease),filter .28s ease;
+}
+body.instruction-page .image-container img:hover,
+body.instruction-page .water-controls-trigger:hover img,
+body.instruction-page .idro-legend-trigger:hover img{
+    transform:translateY(-2px);
+}
+
+/* Focus visibile e premium per tastiera/accessibilità. */
+a:focus-visible,button:focus-visible,[role='button']:focus-visible{
+    outline:2px solid rgba(163,150,137,.85);
+    outline-offset:3px;
+}
+
+@media(max-width:600px){
+    body.instruction-page.diomede-scrolled .hero-header{height:170px !important}
+    body.instruction-page.diomede-scrolled .hero-header .logo-img{max-width:205px !important}
+}
+
+/* Nessun effetto invadente se l'utente preferisce ridurre le animazioni. */
+@media(prefers-reduced-motion:reduce){
+    *,*::before,*::after{
+        scroll-behavior:auto !important;
+        animation-duration:.001ms !important;
+        animation-iteration-count:1 !important;
+        transition-duration:.001ms !important;
+    }
+    .diomede-reveal{opacity:1 !important;transform:none !important}
+}
