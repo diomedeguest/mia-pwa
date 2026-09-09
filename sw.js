@@ -1,4 +1,4 @@
-const CACHE_NAME = 'diomede-v209-idro-modal-fix';
+const CACHE_NAME = 'diomede-v210-wow-menu-animations-plus';
 
 const APP_SHELL = [
   './',
