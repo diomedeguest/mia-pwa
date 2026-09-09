@@ -283,224 +283,542 @@
     
 
         /* ==========================================================
-           SOLO SMARTPHONE IN LANDSCAPE
-           Il portrait resta identico alla versione precedente.
+           MOBILE LANDSCAPE DEFINITIVO
+           Applicato SOLO quando JS rileva un telefono in orizzontale.
+           Il portrait non viene toccato.
            ========================================================== */
-        @media (orientation: landscape) and (max-height: 500px) and (pointer: coarse) {
-            body, html {
-                overflow: hidden;
-            }
-
-            .container {
-                display: grid;
-                grid-template-columns: clamp(145px, 26vw, 190px) minmax(0, 1fr);
-                grid-template-rows: auto auto auto 1fr;
-                grid-template-areas:
-                    "brand menu"
-                    "welcome menu"
-                    "weather menu"
-                    ". menu";
-                width: 100%;
-                height: var(--app-height, 100dvh);
-                min-height: var(--app-height, 100dvh);
-                padding:
-                    max(6px, env(safe-area-inset-top))
-                    max(12px, env(safe-area-inset-right))
-                    max(6px, env(safe-area-inset-bottom))
-                    max(12px, env(safe-area-inset-left));
-                column-gap: clamp(10px, 2vw, 18px);
-                row-gap: 3px;
-                align-items: center;
-            }
-
-            /* Nessun pannello opaco: solo logo pulito */
-            .header-wrapper {
-                grid-area: brand;
-                width: 100%;
-                min-height: 0;
-                height: auto;
-                padding: 0;
-                margin: 0;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                background: transparent;
-                border: 0;
-                box-shadow: none;
-                backdrop-filter: none;
-                -webkit-backdrop-filter: none;
-            }
-
-            .logo-img {
-                width: min(92%, 168px);
-                max-width: 168px;
-                max-height: 76px;
-                height: auto;
-                object-fit: contain;
-                margin: 0;
-                filter: drop-shadow(0 4px 12px rgba(0,0,0,.20));
-            }
-
-            /* Saluto subito sotto il logo */
-            .welcome-section {
-                grid-area: welcome;
-                width: 100%;
-                margin: 0;
-                padding: 0 2px;
-                text-align: center;
-            }
-
-            .welcome-text {
-                font-size: clamp(18px, 5vh, 23px);
-                line-height: 1;
-                margin: 0;
-            }
-
-            .subtitle {
-                max-width: 185px;
-                margin: 3px auto 0;
-                font-size: clamp(7.4px, 1.9vh, 9px);
-                line-height: 1.16;
-            }
-
-            /* Meteo compatto nella colonna sinistra */
-            .weather-widget {
-                grid-area: weather;
-                justify-self: center;
-                margin: 4px 0 0;
-                padding: 4px 8px;
-                gap: 5px;
-                max-width: 185px;
-            }
-
-            .weather-widget .material-symbols-outlined {
-                font-size: 15px;
-            }
-
-            .weather-widget #description,
-            .city-name {
-                font-size: 7.8px;
-            }
-
-            .temp-val {
-                font-size: 10px;
-            }
-
-            /* Griglia 3x3 come in verticale, ma più raccolta */
-            #main-grid {
-                grid-area: menu;
-                display: grid;
-                grid-template-columns: repeat(3, minmax(82px, 100px));
-                grid-template-rows: repeat(3, minmax(0, 1fr));
-                justify-content: center;
-                align-content: stretch;
-                place-items: center;
-                width: 100%;
-                max-width: 420px;
-                height: 100%;
-                min-height: 0;
-                margin: 0 auto;
-                padding: 0;
-                column-gap: clamp(10px, 1.7vw, 16px);
-                row-gap: 2px;
-            }
-
-            #main-grid .btn {
-                width: 100%;
-                height: 100%;
-                min-width: 0;
-                min-height: 0;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .circle {
-                width: clamp(52px, 14vh, 60px);
-                height: clamp(52px, 14vh, 60px);
-                margin: 0 0 4px;
-                flex: 0 0 auto;
-                background: rgba(255,255,255,.17);
-                border: 1px solid rgba(255,255,255,.34);
-                box-shadow: 0 7px 20px rgba(0,0,0,.17);
-            }
-
-            #main-grid .material-symbols-outlined {
-                font-size: clamp(23px, 6.3vh, 27px);
-            }
-
-            .label {
-                font-size: clamp(7px, 1.75vh, 8.3px);
-                line-height: 1.07;
-                letter-spacing: .16px;
-                min-height: 0;
-                max-width: 100%;
-                white-space: normal;
-            }
-
-            /* Lingua separata dal logo e sempre accessibile */
-            .lang-switcher {
-                position: fixed;
-                top: max(7px, env(safe-area-inset-top));
-                right: max(9px, env(safe-area-inset-right));
-                left: auto;
-                z-index: 60;
-            }
-
-            .lang-btn {
-                width: 29px;
-                height: 29px;
-                font-size: 7.3px;
-            }
+        body.diomede-mobile-landscape,
+        body.diomede-mobile-landscape html {
+            overflow: hidden !important;
         }
 
-        /* Telefoni landscape particolarmente stretti */
-        @media (orientation: landscape) and (max-height: 390px) and (pointer: coarse) {
-            .container {
-                grid-template-columns: clamp(132px, 24vw, 170px) minmax(0, 1fr);
-                column-gap: 8px;
-            }
+        body.diomede-mobile-landscape .container {
+            display: grid !important;
+            grid-template-columns: clamp(138px, 23vw, 180px) minmax(0, 1fr) !important;
+            grid-template-rows: 1fr auto auto auto 1fr !important;
+            grid-template-areas:
+                ". menu"
+                "brand menu"
+                "welcome menu"
+                "weather menu"
+                ". menu" !important;
+            width: 100% !important;
+            height: 100dvh !important;
+            min-height: 0 !important;
+            max-height: 100dvh !important;
+            padding:
+                max(6px, env(safe-area-inset-top))
+                max(11px, env(safe-area-inset-right))
+                max(6px, env(safe-area-inset-bottom))
+                max(11px, env(safe-area-inset-left)) !important;
+            column-gap: clamp(8px, 1.7vw, 14px) !important;
+            row-gap: 2px !important;
+            align-items: center !important;
+            justify-items: center !important;
+            overflow: hidden !important;
+        }
 
-            .logo-img {
-                width: min(92%, 150px);
-                max-width: 150px;
-                max-height: 63px;
-            }
+        /* Brand a sinistra, completamente trasparente */
+        body.diomede-mobile-landscape .header-wrapper {
+            grid-area: brand !important;
+            position: relative !important;
+            width: 100% !important;
+            height: auto !important;
+            min-height: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            background: transparent !important;
+            border: 0 !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+        }
 
-            .welcome-text {
-                font-size: clamp(17px, 5vh, 21px);
-            }
+        body.diomede-mobile-landscape .logo-img {
+            display: block !important;
+            width: min(92%, 156px) !important;
+            max-width: 156px !important;
+            max-height: 66px !important;
+            height: auto !important;
+            object-fit: contain !important;
+            margin: 0 !important;
+            filter: drop-shadow(0 4px 11px rgba(0,0,0,.20)) !important;
+        }
 
-            .subtitle {
-                max-width: 165px;
-                font-size: clamp(6.9px, 1.85vh, 8px);
-            }
+        /* Saluto direttamente sotto il logo */
+        body.diomede-mobile-landscape .welcome-section {
+            grid-area: welcome !important;
+            width: 100% !important;
+            margin: 0 !important;
+            padding: 0 2px !important;
+            text-align: center !important;
+        }
 
-            #main-grid {
-                grid-template-columns: repeat(3, minmax(76px, 94px));
-                max-width: 390px;
-                column-gap: 8px;
-            }
+        body.diomede-mobile-landscape .welcome-text {
+            margin: 0 !important;
+            font-size: clamp(16.5px, 5.1vh, 21px) !important;
+            line-height: 1 !important;
+        }
 
-            .circle {
-                width: clamp(47px, 13.8vh, 54px);
-                height: clamp(47px, 13.8vh, 54px);
-                margin-bottom: 3px;
-            }
+        body.diomede-mobile-landscape .subtitle {
+            max-width: 166px !important;
+            margin: 3px auto 0 !important;
+            font-size: clamp(6.8px, 1.82vh, 8.2px) !important;
+            line-height: 1.13 !important;
+        }
 
-            #main-grid .material-symbols-outlined {
-                font-size: clamp(21px, 6.1vh, 25px);
-            }
+        /* Meteo compatto sotto il saluto */
+        body.diomede-mobile-landscape .weather-widget {
+            grid-area: weather !important;
+            align-self: center !important;
+            justify-self: center !important;
+            margin: 3px 0 0 !important;
+            padding: 3px 7px !important;
+            gap: 5px !important;
+            max-width: 168px !important;
+        }
 
-            .label {
-                font-size: clamp(6.6px, 1.72vh, 7.7px);
-            }
+        body.diomede-mobile-landscape .weather-widget .material-symbols-outlined {
+            font-size: 14px !important;
+        }
 
-            .weather-widget {
-                padding: 3px 7px;
-                margin-top: 2px;
-            }
+        body.diomede-mobile-landscape .weather-widget #description,
+        body.diomede-mobile-landscape .city-name {
+            font-size: 7.4px !important;
+        }
+
+        body.diomede-mobile-landscape .temp-val {
+            font-size: 9.7px !important;
+        }
+
+        /* 3 x 3 compatto: tutte e 9 le icone restano dentro il viewport */
+        body.diomede-mobile-landscape #main-grid {
+            grid-area: menu !important;
+            display: grid !important;
+            grid-template-columns: repeat(3, minmax(74px, 92px)) !important;
+            grid-template-rows: repeat(3, minmax(0, 1fr)) !important;
+            justify-content: center !important;
+            align-content: stretch !important;
+            place-items: center !important;
+            width: min(100%, 326px) !important;
+            max-width: 326px !important;
+            height: min(82vh, 300px) !important;
+            min-height: 0 !important;
+            max-height: 300px !important;
+            margin: 0 auto !important;
+            padding: 0 !important;
+            column-gap: clamp(7px, 1.25vw, 11px) !important;
+            row-gap: 0 !important;
+            overflow: visible !important;
+            align-self: center !important;
+            justify-self: center !important;
+        }
+
+        body.diomede-mobile-landscape #main-grid .btn {
+            width: 100% !important;
+            height: 100% !important;
+            min-width: 0 !important;
+            min-height: 0 !important;
+            margin: 0 !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+
+        body.diomede-mobile-landscape .circle {
+            width: clamp(46px, 14vh, 58px) !important;
+            height: clamp(46px, 14vh, 58px) !important;
+            margin: 0 0 3px !important;
+            flex: 0 0 auto !important;
+            background: rgba(255,255,255,.17) !important;
+            border: 1px solid rgba(255,255,255,.34) !important;
+            box-shadow: 0 7px 19px rgba(0,0,0,.17) !important;
+        }
+
+        body.diomede-mobile-landscape #main-grid .material-symbols-outlined {
+            font-size: clamp(20px, 6vh, 25px) !important;
+        }
+
+        body.diomede-mobile-landscape .label {
+            max-width: 100% !important;
+            min-height: 0 !important;
+            font-size: clamp(6.3px, 1.65vh, 7.6px) !important;
+            line-height: 1.04 !important;
+            letter-spacing: .12px !important;
+            white-space: normal !important;
+        }
+
+        /* Lingua indipendente dal layout */
+        body.diomede-mobile-landscape .lang-switcher {
+            position: fixed !important;
+            top: max(7px, env(safe-area-inset-top)) !important;
+            right: max(9px, env(safe-area-inset-right)) !important;
+            left: auto !important;
+            z-index: 60 !important;
+        }
+
+        body.diomede-mobile-landscape .lang-btn {
+            width: 28px !important;
+            height: 28px !important;
+            font-size: 7px !important;
+        }
+
+        /* Per telefoni molto bassi (es. 320–360 px di altezza) */
+        body.diomede-mobile-landscape.diomede-landscape-short .container {
+            grid-template-columns: clamp(126px, 22vw, 158px) minmax(0, 1fr) !important;
+            column-gap: 6px !important;
+        }
+
+        body.diomede-mobile-landscape.diomede-landscape-short .logo-img {
+            width: min(92%, 140px) !important;
+            max-width: 140px !important;
+            max-height: 58px !important;
+        }
+
+        body.diomede-mobile-landscape.diomede-landscape-short .welcome-text {
+            font-size: clamp(15.5px, 5vh, 19px) !important;
+        }
+
+        body.diomede-mobile-landscape.diomede-landscape-short .subtitle {
+            max-width: 150px !important;
+            margin-top: 2px !important;
+            font-size: clamp(6.3px, 1.78vh, 7.4px) !important;
+        }
+
+        body.diomede-mobile-landscape.diomede-landscape-short #main-grid {
+            grid-template-columns: repeat(3, minmax(70px, 86px)) !important;
+            width: min(100%, 300px) !important;
+            max-width: 300px !important;
+            height: min(80vh, 270px) !important;
+            max-height: 270px !important;
+            column-gap: 6px !important;
+        }
+
+        body.diomede-mobile-landscape.diomede-landscape-short .circle {
+            width: clamp(43px, 13.5vh, 49px) !important;
+            height: clamp(43px, 13.5vh, 49px) !important;
+        }
+
+        body.diomede-mobile-landscape.diomede-landscape-short #main-grid .material-symbols-outlined {
+            font-size: clamp(19px, 5.8vh, 23px) !important;
+        }
+
+        body.diomede-mobile-landscape.diomede-landscape-short .label {
+            font-size: clamp(6.1px, 1.62vh, 7px) !important;
+        }
+
+
+
+        /* ==========================================================
+           OVERRIDE richiesto: in landscape mobile
+           - logo e scritta "Buonasera" a sinistra, centrati verticalmente
+           - solo 9 icone a destra, tutte visibili
+           - il portrait resta invariato
+           ========================================================== */
+        body.diomede-mobile-landscape .container {
+            grid-template-columns: clamp(118px, 21vw, 150px) minmax(0, 1fr) !important;
+            grid-template-rows: 1fr !important;
+            grid-template-areas: "brandbox menu" !important;
+            column-gap: clamp(8px, 1.4vw, 12px) !important;
+            row-gap: 0 !important;
+            align-items: center !important;
+            justify-items: center !important;
+        }
+
+        /* Creo un blocco sinistro compatto usando elementi esistenti */
+        body.diomede-mobile-landscape .header-wrapper {
+            grid-area: brandbox !important;
+            align-self: center !important;
+            justify-self: center !important;
+            width: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        body.diomede-mobile-landscape .welcome-section {
+            grid-area: brandbox !important;
+            align-self: center !important;
+            justify-self: center !important;
+            width: 100% !important;
+            margin-top: 62px !important;
+            padding: 0 !important;
+            text-align: center !important;
+            pointer-events: none !important;
+        }
+
+        body.diomede-mobile-landscape .logo-img {
+            width: min(88%, 130px) !important;
+            max-width: 130px !important;
+            max-height: 54px !important;
+            margin: 0 auto !important;
+        }
+
+        body.diomede-mobile-landscape .welcome-text {
+            margin: 6px 0 0 !important;
+            font-size: clamp(15px, 4.6vh, 19px) !important;
+            line-height: 1.05 !important;
+        }
+
+        /* Tolgo sottotitolo e meteo in landscape per recuperare spazio */
+        body.diomede-mobile-landscape .subtitle,
+        body.diomede-mobile-landscape .weather-widget {
+            display: none !important;
+        }
+
+        body.diomede-mobile-landscape #main-grid {
+            grid-area: menu !important;
+            width: min(100%, 326px) !important;
+            max-width: 326px !important;
+            height: min(84vh, 305px) !important;
+            max-height: 305px !important;
+            grid-template-columns: repeat(3, minmax(74px, 92px)) !important;
+            grid-template-rows: repeat(3, minmax(0, 1fr)) !important;
+            column-gap: clamp(7px, 1.2vw, 10px) !important;
+            row-gap: 0 !important;
+            align-self: center !important;
+            justify-self: center !important;
+        }
+
+        body.diomede-mobile-landscape .circle {
+            width: clamp(46px, 13.8vh, 56px) !important;
+            height: clamp(46px, 13.8vh, 56px) !important;
+            margin: 0 0 3px !important;
+        }
+
+        body.diomede-mobile-landscape #main-grid .material-symbols-outlined {
+            font-size: clamp(20px, 5.8vh, 24px) !important;
+        }
+
+        body.diomede-mobile-landscape .label {
+            font-size: clamp(6.3px, 1.6vh, 7.5px) !important;
+            line-height: 1.05 !important;
+        }
+
+        body.diomede-mobile-landscape .lang-switcher {
+            top: max(8px, env(safe-area-inset-top)) !important;
+            right: max(8px, env(safe-area-inset-right)) !important;
+            z-index: 60 !important;
+        }
+
+        /* Telefoni molto bassi */
+        body.diomede-mobile-landscape.diomede-landscape-short .container {
+            grid-template-columns: 112px minmax(0, 1fr) !important;
+            column-gap: 6px !important;
+        }
+
+        body.diomede-mobile-landscape.diomede-landscape-short .logo-img {
+            max-width: 118px !important;
+            max-height: 48px !important;
+        }
+
+        body.diomede-mobile-landscape.diomede-landscape-short .welcome-section {
+            margin-top: 56px !important;
+        }
+
+        body.diomede-mobile-landscape.diomede-landscape-short .welcome-text {
+            font-size: clamp(14px, 4.4vh, 17px) !important;
+        }
+
+        body.diomede-mobile-landscape.diomede-landscape-short #main-grid {
+            width: min(100%, 300px) !important;
+            max-width: 300px !important;
+            height: min(82vh, 272px) !important;
+            max-height: 272px !important;
+            grid-template-columns: repeat(3, minmax(69px, 86px)) !important;
+            column-gap: 6px !important;
+        }
+
+        body.diomede-mobile-landscape.diomede-landscape-short .circle {
+            width: clamp(42px, 13vh, 49px) !important;
+            height: clamp(42px, 13vh, 49px) !important;
+        }
+
+        body.diomede-mobile-landscape.diomede-landscape-short .label {
+            font-size: clamp(6px, 1.55vh, 6.9px) !important;
+        }
+
+
+
+        /* ==========================================================
+           LANDSCAPE PREMIUM FINALE — solo mobile orizzontale
+           Portrait completamente invariato.
+           ========================================================== */
+
+        body.diomede-mobile-landscape .container {
+            grid-template-columns: clamp(120px, 20vw, 146px) minmax(0, 1fr) !important;
+            grid-template-rows: 1fr !important;
+            grid-template-areas: "brandbox menu" !important;
+            column-gap: clamp(10px, 1.7vw, 14px) !important;
+            align-items: center !important;
+            justify-items: center !important;
+            padding-left: max(12px, env(safe-area-inset-left)) !important;
+            padding-right: max(12px, env(safe-area-inset-right)) !important;
+        }
+
+        /* Blocco sinistro più equilibrato e centrato realmente in altezza */
+        body.diomede-mobile-landscape .header-wrapper {
+            grid-area: brandbox !important;
+            align-self: center !important;
+            justify-self: center !important;
+            width: 100% !important;
+            transform: translateY(-18px);
+        }
+
+        body.diomede-mobile-landscape .welcome-section {
+            grid-area: brandbox !important;
+            align-self: center !important;
+            justify-self: center !important;
+            width: 100% !important;
+            margin: 64px 0 0 !important;
+            padding: 0 2px !important;
+            transform: translateY(-18px);
+        }
+
+        body.diomede-mobile-landscape .logo-img {
+            width: min(94%, 138px) !important;
+            max-width: 138px !important;
+            max-height: 58px !important;
+            margin: 0 auto !important;
+            filter: drop-shadow(0 4px 13px rgba(0,0,0,.24)) !important;
+        }
+
+        body.diomede-mobile-landscape .welcome-text {
+            margin: 7px 0 0 !important;
+            font-size: clamp(16px, 4.8vh, 20px) !important;
+            line-height: 1 !important;
+            letter-spacing: .25px !important;
+            text-shadow: 0 2px 9px rgba(0,0,0,.44) !important;
+        }
+
+        /* Nel landscape mobile lasciamo solo ciò che serve davvero */
+        body.diomede-mobile-landscape .subtitle,
+        body.diomede-mobile-landscape .weather-widget {
+            display: none !important;
+        }
+
+        /* Griglia 3x3: più grande ma molto più compatta e regolare */
+        body.diomede-mobile-landscape #main-grid {
+            grid-area: menu !important;
+            display: grid !important;
+            grid-template-columns: repeat(3, minmax(82px, 104px)) !important;
+            grid-template-rows: repeat(3, minmax(0, 1fr)) !important;
+            width: min(100%, 354px) !important;
+            max-width: 354px !important;
+            height: min(86vh, 310px) !important;
+            max-height: 310px !important;
+            margin: 0 auto !important;
+            padding: 0 !important;
+            column-gap: clamp(8px, 1.25vw, 11px) !important;
+            row-gap: 0 !important;
+            place-items: center !important;
+            align-self: center !important;
+            justify-self: center !important;
+        }
+
+        body.diomede-mobile-landscape #main-grid .btn {
+            width: 100% !important;
+            height: 100% !important;
+            min-width: 0 !important;
+            min-height: 0 !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+
+        body.diomede-mobile-landscape .circle {
+            width: clamp(50px, 14.6vh, 61px) !important;
+            height: clamp(50px, 14.6vh, 61px) !important;
+            margin: 0 0 4px !important;
+            background: rgba(255,255,255,.18) !important;
+            border: 1px solid rgba(255,255,255,.38) !important;
+            box-shadow:
+                0 8px 21px rgba(0,0,0,.18),
+                inset 0 1px 0 rgba(255,255,255,.13) !important;
+            backdrop-filter: blur(10px) !important;
+            -webkit-backdrop-filter: blur(10px) !important;
+        }
+
+        body.diomede-mobile-landscape #main-grid .material-symbols-outlined {
+            font-size: clamp(22px, 6.2vh, 27px) !important;
+        }
+
+        body.diomede-mobile-landscape .label {
+            font-size: clamp(6.6px, 1.72vh, 8px) !important;
+            line-height: 1.06 !important;
+            letter-spacing: .16px !important;
+            max-width: 100% !important;
+            min-height: 0 !important;
+            white-space: normal !important;
+            text-shadow: 0 1px 7px rgba(0,0,0,.45) !important;
+        }
+
+        body.diomede-mobile-landscape #main-grid .btn:active .circle {
+            transform: scale(.96) !important;
+        }
+
+        /* Lingua più discreta, fuori dalla griglia */
+        body.diomede-mobile-landscape .lang-switcher {
+            top: max(7px, env(safe-area-inset-top)) !important;
+            right: max(8px, env(safe-area-inset-right)) !important;
+        }
+
+        body.diomede-mobile-landscape .lang-btn {
+            width: 27px !important;
+            height: 27px !important;
+            font-size: 6.9px !important;
+        }
+
+        /* Landscape molto basso: tutto resta visibile senza tagli */
+        body.diomede-mobile-landscape.diomede-landscape-short .container {
+            grid-template-columns: 112px minmax(0, 1fr) !important;
+            column-gap: 7px !important;
+        }
+
+        body.diomede-mobile-landscape.diomede-landscape-short .header-wrapper,
+        body.diomede-mobile-landscape.diomede-landscape-short .welcome-section {
+            transform: translateY(-13px) !important;
+        }
+
+        body.diomede-mobile-landscape.diomede-landscape-short .logo-img {
+            max-width: 122px !important;
+            max-height: 50px !important;
+        }
+
+        body.diomede-mobile-landscape.diomede-landscape-short .welcome-section {
+            margin-top: 57px !important;
+        }
+
+        body.diomede-mobile-landscape.diomede-landscape-short .welcome-text {
+            font-size: clamp(14.5px, 4.5vh, 17.5px) !important;
+        }
+
+        body.diomede-mobile-landscape.diomede-landscape-short #main-grid {
+            grid-template-columns: repeat(3, minmax(74px, 91px)) !important;
+            width: min(100%, 315px) !important;
+            max-width: 315px !important;
+            height: min(83vh, 278px) !important;
+            max-height: 278px !important;
+            column-gap: 6px !important;
+        }
+
+        body.diomede-mobile-landscape.diomede-landscape-short .circle {
+            width: clamp(45px, 13.3vh, 51px) !important;
+            height: clamp(45px, 13.3vh, 51px) !important;
+            margin-bottom: 3px !important;
+        }
+
+        body.diomede-mobile-landscape.diomede-landscape-short #main-grid .material-symbols-outlined {
+            font-size: clamp(20px, 5.8vh, 23px) !important;
+        }
+
+        body.diomede-mobile-landscape.diomede-landscape-short .label {
+            font-size: clamp(6.1px, 1.58vh, 7px) !important;
         }
 
 </style>
@@ -586,6 +904,46 @@
         });
     </script>
 
+
+
+<script id="diomede-mobile-landscape-layout">
+(function () {
+    function viewportSize() {
+        const vv = window.visualViewport;
+        return {
+            w: Math.round(vv && vv.width ? vv.width : window.innerWidth),
+            h: Math.round(vv && vv.height ? vv.height : window.innerHeight)
+        };
+    }
+
+    function updateLandscapeLayout() {
+        const size = viewportSize();
+        const isLandscape = size.w > size.h;
+        const isPhoneLandscape = isLandscape && size.h <= 520 && size.w <= 1000;
+
+        document.body.classList.toggle('diomede-mobile-landscape', isPhoneLandscape);
+        document.body.classList.toggle(
+            'diomede-landscape-short',
+            isPhoneLandscape && size.h <= 370
+        );
+    }
+
+    updateLandscapeLayout();
+    document.addEventListener('DOMContentLoaded', updateLandscapeLayout);
+    window.addEventListener('load', updateLandscapeLayout);
+    window.addEventListener('resize', updateLandscapeLayout);
+    window.addEventListener('orientationchange', function () {
+        updateLandscapeLayout();
+        requestAnimationFrame(updateLandscapeLayout);
+        setTimeout(updateLandscapeLayout, 120);
+        setTimeout(updateLandscapeLayout, 400);
+    });
+
+    if (window.visualViewport) {
+        window.visualViewport.addEventListener('resize', updateLandscapeLayout);
+    }
+})();
+</script>
 
 <script id="diomede-viewport-fix">
 (function () {

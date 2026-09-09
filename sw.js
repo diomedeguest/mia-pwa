@@ -1,4 +1,4 @@
-const CACHE_NAME = 'diomede-v216-mobile-landscape-only';
+const CACHE_NAME = 'diomede-v220-landscape-premium-final';
 
 const APP_SHELL = [
   './',
