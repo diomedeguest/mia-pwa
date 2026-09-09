@@ -1,4 +1,4 @@
-const CACHE_NAME = 'diomede-v210-wow-menu-animations-plus';
+const CACHE_NAME = 'diomede-v211-menu-alignment-fix';
 
 const APP_SHELL = [
   './',

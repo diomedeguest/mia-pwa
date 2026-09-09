@@ -197,15 +197,11 @@
                 if (el.dataset.diomedeRevealReady === '1') return;
                 el.dataset.diomedeRevealReady = '1';
                 el.classList.add('diomede-reveal');
+                el.classList.remove('diomede-from-left','diomede-from-right');
 
                 const index = document.querySelectorAll('[data-diomede-reveal-ready="1"]').length - 1;
                 const delay = Math.min(index % 7, 6) * 82;
                 el.style.transitionDelay = delay + 'ms';
-
-                if (document.body.classList.contains('diomede-menu-child-page')) {
-                    if (index % 3 === 1) el.classList.add('diomede-from-left');
-                    if (index % 3 === 2) el.classList.add('diomede-from-right');
-                }
 
                 if (reduceMotion || !('IntersectionObserver' in window)) {
                     el.classList.add('diomede-visible');
