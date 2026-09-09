@@ -1,4 +1,4 @@
-const CACHE_NAME = 'diomede-v213-landscape-logo-left-3x3';
+const CACHE_NAME = 'diomede-v216-mobile-landscape-only';
 
 const APP_SHELL = [
   './',
