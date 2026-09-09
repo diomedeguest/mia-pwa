@@ -44,15 +44,15 @@
             justify-content: center;
             z-index: 9999;
             pointer-events: none;
-            animation: fadeOutSplash .42s ease-in-out .78s forwards;
+            animation: fadeOutSplash 1.00s cubic-bezier(.22,.61,.36,1) 4.20s forwards;
         }
 
         .splash-logo {
             width: 180px; height: auto;
             opacity: 0;
             animation:
-                logoEntrata .48s ease-out .08s forwards,
-                logoPulsazione 1.2s ease-in-out .52s 1;
+                logoEntrata 1.05s cubic-bezier(.22,.61,.36,1) .18s forwards,
+                logoPulsazione 1.65s ease-in-out 1.20s 1;
         }
 
         /* --- 2. Main Content --- */
@@ -64,7 +64,7 @@
             align-items: center;
             justify-content: center;
             opacity: 0;
-            animation: fadeInMain .58s ease-in-out .82s forwards;
+            animation: fadeInMain .95s cubic-bezier(.22,.61,.36,1) 4.45s forwards;
         }
 
         .bg-image {
@@ -245,12 +245,20 @@
 }
 
 
-/* Logo iniziale: comparsa più lenta e morbida */
+
+
+/* Splash iniziale Diomede: versione più lenta e scenografica */
 @media (prefers-reduced-motion: no-preference) {
-    .logo-inner {
-        animation-duration: 1.8s !important;
-        animation-delay: .75s !important;
-        animation-timing-function: cubic-bezier(.22,.61,.36,1) !important;
+    #splash-screen {
+        animation: fadeOutSplash 1.00s cubic-bezier(.22,.61,.36,1) 4.20s forwards !important;
+    }
+    .splash-logo {
+        animation:
+            logoEntrata 1.45s cubic-bezier(.22,.61,.36,1) .30s forwards,
+            logoPulsazione 2.10s ease-in-out 1.65s 1 !important;
+    }
+    #main-content {
+        animation: fadeInMain .95s cubic-bezier(.22,.61,.36,1) 4.45s forwards !important;
     }
 }
 

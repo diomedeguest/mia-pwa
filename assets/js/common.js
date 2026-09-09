@@ -10,11 +10,36 @@
         catch (_) { return null; }
     }
 
+    function transitionVeil() {
+        let veil = document.querySelector('.diomede-transition-veil');
+        if (!veil) {
+            veil = document.createElement('div');
+            veil.className = 'diomede-transition-veil';
+            document.body.appendChild(veil);
+        }
+        return veil;
+    }
+
+    function rememberDirection(direction) {
+        try { sessionStorage.setItem('diomede-transition-direction', direction); } catch (_) {}
+    }
+
     function playExit(direction, action) {
         if (reduceMotion) { action(); return; }
-        document.body.classList.remove('diomede-page-enter');
+
+        rememberDirection(direction);
+        document.body.classList.remove(
+            'diomede-page-enter',
+            'diomede-page-enter-forward',
+            'diomede-page-enter-back'
+        );
         document.body.classList.add(direction === 'back' ? 'diomede-page-leave-back' : 'diomede-page-leave');
-        window.setTimeout(action, 165);
+
+        const veil = transitionVeil();
+        veil.classList.remove('diomede-veil-in');
+        veil.classList.add('diomede-veil-out');
+
+        window.setTimeout(action, 405);
     }
 
     window.diomedeGoBack = function () {
@@ -96,8 +121,24 @@
 
     function setupPageEntrance() {
         if (reduceMotion) return;
-        document.body.classList.add('diomede-page-enter');
-        window.setTimeout(() => document.body.classList.remove('diomede-page-enter'), 520);
+
+        let direction = 'forward';
+        try {
+            direction = sessionStorage.getItem('diomede-transition-direction') || 'forward';
+            sessionStorage.removeItem('diomede-transition-direction');
+        } catch (_) {}
+
+        const enterClass = direction === 'back' ? 'diomede-page-enter-back' : 'diomede-page-enter-forward';
+        document.body.classList.add(enterClass);
+
+        const veil = transitionVeil();
+        veil.classList.remove('diomede-veil-out');
+        veil.classList.add('diomede-veil-in');
+
+        window.setTimeout(() => {
+            document.body.classList.remove(enterClass);
+            veil.classList.remove('diomede-veil-in');
+        }, 620);
     }
 
     function isNavigableInternalLink(a) {
@@ -202,7 +243,12 @@
     });
     window.addEventListener('pageshow', event => {
         unlockOrientation();
-        document.body.classList.remove('diomede-page-leave', 'diomede-page-leave-back');
+        document.body.classList.remove(
+            'diomede-page-leave',
+            'diomede-page-leave-back',
+            'diomede-page-enter-forward',
+            'diomede-page-enter-back'
+        );
         if (event.persisted && !reduceMotion) setupPageEntrance();
         updateMenuGreeting();
     });

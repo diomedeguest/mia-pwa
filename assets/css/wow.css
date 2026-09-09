@@ -13,29 +13,69 @@
     --diomede-shadow:0 10px 32px rgba(64,52,42,.075);
 }
 
-/* Entrata/uscita tra pagine: volutamente breve, tipo app nativa. */
+/* Transizioni premium tra pagine.
+   Avanti: la pagina scorre leggermente verso sinistra.
+   Indietro: movimento speculare. */
+body.diomede-page-enter-forward{
+    animation:diomedePageInForward .60s var(--diomede-ease) both;
+}
+body.diomede-page-enter-back{
+    animation:diomedePageInBack .60s var(--diomede-ease) both;
+}
 body.diomede-page-enter{
-    animation:diomedePageIn .38s var(--diomede-ease) both;
+    animation:diomedePageInForward .60s var(--diomede-ease) both;
 }
 body.diomede-page-leave{
-    animation:diomedePageOut .17s ease both !important;
+    animation:diomedePageOutForward .40s cubic-bezier(.4,0,.2,1) both !important;
     pointer-events:none;
 }
 body.diomede-page-leave-back{
-    animation:diomedePageOutBack .17s ease both !important;
+    animation:diomedePageOutBack .40s cubic-bezier(.4,0,.2,1) both !important;
     pointer-events:none;
 }
-@keyframes diomedePageIn{
-    from{opacity:.01;transform:translateY(7px)}
-    to{opacity:1;transform:none}
+
+@keyframes diomedePageInForward{
+    from{opacity:.05;transform:translateX(18px) scale(.995)}
+    to{opacity:1;transform:translateX(0) scale(1)}
 }
-@keyframes diomedePageOut{
-    from{opacity:1;transform:none}
-    to{opacity:.01;transform:translateY(-4px)}
+@keyframes diomedePageInBack{
+    from{opacity:.05;transform:translateX(-18px) scale(.995)}
+    to{opacity:1;transform:translateX(0) scale(1)}
+}
+@keyframes diomedePageOutForward{
+    from{opacity:1;transform:translateX(0) scale(1)}
+    to{opacity:.06;transform:translateX(-14px) scale(.997)}
 }
 @keyframes diomedePageOutBack{
-    from{opacity:1;transform:none}
-    to{opacity:.01;transform:translateY(5px)}
+    from{opacity:1;transform:translateX(0) scale(1)}
+    to{opacity:.06;transform:translateX(14px) scale(.997)}
+}
+
+/* Velo caldo durante il passaggio: dà continuità senza coprire i comandi. */
+.diomede-transition-veil{
+    position:fixed;
+    inset:0;
+    z-index:2147483000;
+    pointer-events:none;
+    background:rgba(240,237,233,.96);
+    opacity:0;
+    visibility:hidden;
+}
+.diomede-transition-veil.diomede-veil-out{
+    visibility:visible;
+    animation:diomedeVeilIn .40s ease both;
+}
+.diomede-transition-veil.diomede-veil-in{
+    visibility:visible;
+    animation:diomedeVeilOut .60s ease both;
+}
+@keyframes diomedeVeilIn{
+    from{opacity:0}
+    to{opacity:.62}
+}
+@keyframes diomedeVeilOut{
+    from{opacity:.48}
+    to{opacity:0}
 }
 
 /* Firma visiva Diomede: la linea sotto il titolo si disegna all'ingresso. */
