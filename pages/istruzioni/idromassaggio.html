@@ -169,7 +169,7 @@ body.instruction-page .instruction-card.full-width-tablet{
 .idro-zoom-modal{
     position:fixed;
     inset:0;
-    z-index:12000;
+    z-index:2147483600;
     display:none;
     align-items:center;
     justify-content:center;
@@ -216,7 +216,7 @@ body.instruction-page .instruction-card.full-width-tablet{
     display:flex;
     align-items:center;
     justify-content:center;
-    z-index:12001;
+    z-index:2147483601;
     cursor:pointer;
 }
 @media(min-width:700px){
@@ -255,6 +255,42 @@ body.instruction-page .instruction-card.full-width-tablet{
 .panel-legend-inside-card .idro-legend-trigger{
     margin:0 auto !important;
 }
+
+/* Fullscreen zoom: lascia visibile solo la X.
+   Evita sovrapposizioni con ITA/ENG e con i pulsanti di navigazione su mobile. */
+body.idro-modal-open .lang-switcher,
+body.idro-modal-open .diomede-global-back,
+body.idro-modal-open .diomede-home-btn {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    transform: translateY(-6px) scale(.96);
+}
+
+.lang-switcher,
+.diomede-global-back,
+.diomede-home-btn {
+    transition:
+        opacity .18s ease,
+        visibility .18s ease,
+        transform .18s ease;
+}
+
+body.idro-modal-open .idro-zoom-close {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+}
+
+@media (max-width: 699px) {
+    .idro-zoom-close {
+        top: max(18px, env(safe-area-inset-top));
+        right: max(16px, env(safe-area-inset-right));
+        width: 44px;
+        height: 44px;
+    }
+}
+
 </style>
 
     <link rel="stylesheet" href="../../assets/css/wow.css">
@@ -369,7 +405,7 @@ body.instruction-page .instruction-card.full-width-tablet{
 
 </div>
 
-<div id="idroZoomModal" class="idro-zoom-modal" aria-hidden="true" onclick="closeIdroLegend(event)">
+<div id="idroZoomModal" class="idro-zoom-modal" role="dialog" aria-modal="true" aria-label="Immagine ingrandita" aria-hidden="true" onclick="closeIdroLegend(event)">
     <button type="button" class="idro-zoom-close" onclick="closeIdroLegend(event)" aria-label="Chiudi">
         <span class="material-symbols-outlined">close</span>
     </button>
@@ -416,6 +452,7 @@ body.instruction-page .instruction-card.full-width-tablet{
 let idroScale=1, idroStartScale=1;
 let idroX=0, idroY=0, idroStartX=0, idroStartY=0;
 let idroPinchDistance=0, idroPanStart=null;
+let idroLastTrigger=null;
 
 function idroApplyTransform(){
     const img=document.getElementById('idroZoomImage');
@@ -429,21 +466,35 @@ function openIdroLegend(src, alt){
     const modal=document.getElementById('idroZoomModal');
     const img=document.getElementById('idroZoomImage');
     if(!modal || !img) return;
+
+    idroLastTrigger = document.activeElement;
     if(src) img.src=src;
     img.alt=alt || 'Immagine ingrandita';
     idroResetZoom();
+
+    document.body.classList.add('idro-modal-open');
     modal.classList.add('open');
     modal.setAttribute('aria-hidden','false');
     document.body.style.overflow='hidden';
+
+    const closeBtn=modal.querySelector('.idro-zoom-close');
+    if(closeBtn) window.setTimeout(()=>closeBtn.focus({preventScroll:true}), 20);
 }
 function closeIdroLegend(event){
     if(event) event.stopPropagation();
     const modal=document.getElementById('idroZoomModal');
     if(!modal) return;
+
     modal.classList.remove('open');
     modal.setAttribute('aria-hidden','true');
+    document.body.classList.remove('idro-modal-open');
     document.body.style.overflow='';
     idroResetZoom();
+
+    if(idroLastTrigger && typeof idroLastTrigger.focus==='function'){
+        window.setTimeout(()=>idroLastTrigger.focus({preventScroll:true}), 20);
+    }
+    idroLastTrigger=null;
 }
 function idroDistance(touches){
     const dx=touches[0].clientX-touches[1].clientX;

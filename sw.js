@@ -1,4 +1,4 @@
-const CACHE_NAME = 'diomede-v208-splash-slower-1s-transitions';
+const CACHE_NAME = 'diomede-v209-idro-modal-fix';
 
 const APP_SHELL = [
   './',
