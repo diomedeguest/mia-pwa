@@ -821,6 +821,856 @@
             font-size: clamp(6.1px, 1.58vh, 7px) !important;
         }
 
+
+
+        /* ==========================================================
+           FIX LINGUA — solo smartphone in landscape
+           ITA/ENG è indipendente dal blocco logo.
+           ========================================================== */
+        body.diomede-mobile-landscape .container {
+            position: relative !important;
+        }
+
+        body.diomede-mobile-landscape .header-wrapper {
+            position: static !important;
+        }
+
+        body.diomede-mobile-landscape .lang-switcher {
+            position: fixed !important;
+            top: max(8px, env(safe-area-inset-top)) !important;
+            right: max(10px, env(safe-area-inset-right)) !important;
+            bottom: auto !important;
+            left: auto !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            transform: none !important;
+            display: flex !important;
+            gap: 5px !important;
+            z-index: 2147482500 !important;
+            pointer-events: auto !important;
+        }
+
+        body.diomede-mobile-landscape .lang-btn {
+            width: 27px !important;
+            height: 27px !important;
+            min-width: 27px !important;
+            min-height: 27px !important;
+            font-size: 6.8px !important;
+            flex: 0 0 27px !important;
+            background: rgba(0,0,0,.24) !important;
+            border: 1px solid rgba(255,255,255,.42) !important;
+            backdrop-filter: blur(8px) !important;
+            -webkit-backdrop-filter: blur(8px) !important;
+            box-shadow: 0 3px 10px rgba(0,0,0,.16) !important;
+        }
+
+        body.diomede-mobile-landscape .lang-btn.active {
+            background: rgba(255,255,255,.96) !important;
+            color: #28231f !important;
+            border-color: rgba(255,255,255,.96) !important;
+        }
+
+        body.diomede-mobile-landscape #main-grid {
+            padding-top: 8px !important;
+        }
+
+        body.diomede-mobile-landscape.diomede-landscape-short .lang-switcher {
+            top: max(6px, env(safe-area-inset-top)) !important;
+            right: max(7px, env(safe-area-inset-right)) !important;
+            gap: 4px !important;
+        }
+
+        body.diomede-mobile-landscape.diomede-landscape-short .lang-btn {
+            width: 25px !important;
+            height: 25px !important;
+            min-width: 25px !important;
+            min-height: 25px !important;
+            flex-basis: 25px !important;
+            font-size: 6.4px !important;
+        }
+
+
+
+        /* ==========================================================
+           DIOMEDE MENU — LUXURY INTERIOR WOW
+           ========================================================== */
+
+        /* Il vecchio sfondo viene sostituito solo nella pagina Menu. */
+        body, html {
+            background: #211a16 !important;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: -2.5%;
+            z-index: 0;
+            pointer-events: none;
+            background-image: url('../assets/images/menu-luxury-portrait.webp');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            transform: scale(1.035);
+            animation: diomedeLuxuryScene 7s cubic-bezier(.22,.61,.36,1) both;
+            will-change: transform, opacity;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(circle at 50% 18%, rgba(255,248,241,.09) 0%, rgba(255,248,241,0) 36%),
+                linear-gradient(
+                    180deg,
+                    rgba(24,18,15,.48) 0%,
+                    rgba(24,18,15,.25) 36%,
+                    rgba(24,18,15,.31) 62%,
+                    rgba(24,18,15,.57) 100%
+                );
+        }
+
+        @keyframes diomedeLuxuryScene {
+            0%   { opacity: .82; transform: scale(1.065); }
+            100% { opacity: 1; transform: scale(1.035); }
+        }
+
+        .container {
+            position: relative !important;
+            z-index: 1 !important;
+        }
+
+        /* Logo menu più importante, più basso e con più respiro. */
+        @media (orientation: portrait) {
+            .header-wrapper {
+                min-height: 158px !important;
+                padding-top: 46px !important;
+            }
+
+            .logo-img {
+                width: 80% !important;
+                max-width: 300px !important;
+                margin-top: 5px !important;
+                filter:
+                    drop-shadow(0 5px 16px rgba(0,0,0,.30))
+                    drop-shadow(0 0 16px rgba(255,245,235,.17));
+            }
+
+            .welcome-section {
+                margin-top: -2px !important;
+            }
+
+            .welcome-text {
+                text-shadow: 0 2px 14px rgba(0,0,0,.58) !important;
+            }
+
+            .subtitle {
+                text-shadow: 0 2px 10px rgba(0,0,0,.58) !important;
+            }
+
+            /* Glass più leggero: il nuovo sfondo rimane visibile. */
+            .circle {
+                background: rgba(255,255,255,.15) !important;
+                border-color: rgba(255,255,255,.34) !important;
+                backdrop-filter: blur(12px) saturate(112%) !important;
+                -webkit-backdrop-filter: blur(12px) saturate(112%) !important;
+                box-shadow:
+                    0 9px 24px rgba(0,0,0,.19),
+                    inset 0 1px 0 rgba(255,255,255,.13) !important;
+            }
+
+            .weather-widget {
+                background: rgba(21,16,13,.24) !important;
+                border-color: rgba(255,255,255,.24) !important;
+                box-shadow: 0 7px 20px rgba(0,0,0,.14) !important;
+            }
+        }
+
+        /* Schermi verticali meno alti: logo comunque più grande di prima
+           senza rubare spazio alle 9 funzioni. */
+        @media (orientation: portrait) and (max-height: 700px) {
+            .header-wrapper {
+                min-height: 116px !important;
+                padding-top: 29px !important;
+            }
+
+            .logo-img {
+                width: 68% !important;
+                max-width: 250px !important;
+            }
+
+            .welcome-section {
+                margin-top: -3px !important;
+            }
+        }
+
+        /* Landscape: stesso nuovo sfondo, mentre resta attivo il layout
+           mobile orizzontale già costruito nei passaggi precedenti. */
+        @media (orientation: landscape) {
+            body::before {
+                background-image: url('../assets/images/menu-luxury-landscape.webp');
+                background-position: center 48%;
+            }
+
+            body::after {
+                background:
+                    linear-gradient(
+                        90deg,
+                        rgba(22,17,14,.47) 0%,
+                        rgba(22,17,14,.30) 27%,
+                        rgba(22,17,14,.25) 55%,
+                        rgba(22,17,14,.38) 100%
+                    ),
+                    linear-gradient(
+                        180deg,
+                        rgba(17,13,11,.18) 0%,
+                        rgba(17,13,11,.15) 62%,
+                        rgba(17,13,11,.38) 100%
+                    );
+            }
+
+            body.diomede-mobile-landscape .logo-img {
+                filter:
+                    drop-shadow(0 5px 15px rgba(0,0,0,.31))
+                    drop-shadow(0 0 13px rgba(255,245,235,.15)) !important;
+            }
+
+            body.diomede-mobile-landscape .circle {
+                background: rgba(255,255,255,.16) !important;
+                border-color: rgba(255,255,255,.37) !important;
+                backdrop-filter: blur(11px) saturate(112%) !important;
+                -webkit-backdrop-filter: blur(11px) saturate(112%) !important;
+            }
+        }
+
+        /* Micro-interazioni premium, senza spostare il layout. */
+        .circle {
+            transition:
+                transform .18s cubic-bezier(.2,.8,.2,1),
+                background .22s ease,
+                border-color .22s ease,
+                box-shadow .22s ease !important;
+        }
+
+        .btn:active .circle {
+            transform: scale(.955) !important;
+            background: rgba(255,255,255,.23) !important;
+            border-color: rgba(255,255,255,.48) !important;
+        }
+
+        @media (hover:hover) and (pointer:fine) {
+            .btn:hover .circle {
+                transform: translateY(-3px) scale(1.025);
+                background: rgba(255,255,255,.22) !important;
+                border-color: rgba(255,255,255,.47) !important;
+                box-shadow:
+                    0 13px 30px rgba(0,0,0,.22),
+                    inset 0 1px 0 rgba(255,255,255,.16) !important;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            body::before {
+                animation: none !important;
+                transform: scale(1.035) !important;
+            }
+        }
+
+
+
+        /* ==========================================================
+           MENU COERENTE CON LE ALTRE PAGINE DIOMEDE
+           Sfondo neutro + logo con la stessa scala visiva.
+           ========================================================== */
+
+        body, html {
+            background: #F0EDE9 !important;
+            color: #1a1a1a !important;
+        }
+
+        body::before,
+        body::after {
+            display: none !important;
+            content: none !important;
+            background: none !important;
+            animation: none !important;
+        }
+
+        .container {
+            background: #F0EDE9 !important;
+        }
+
+        /* Ritrova la stessa presenza del logo usata nelle altre pagine. */
+        @media (orientation: portrait) {
+            .header-wrapper {
+                min-height: 210px !important;
+                padding-top: 28px !important;
+                background: transparent !important;
+                border: 0 !important;
+                box-shadow: none !important;
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+            }
+
+            .logo-img {
+                width: 100% !important;
+                max-width: 300px !important;
+                height: auto !important;
+                margin: 0 auto !important;
+                filter: none !important;
+            }
+
+            .welcome-section {
+                margin-top: -12px !important;
+            }
+        }
+
+        @media (orientation: portrait) and (max-height: 700px) {
+            .header-wrapper {
+                min-height: 150px !important;
+                padding-top: 20px !important;
+            }
+
+            .logo-img {
+                max-width: 250px !important;
+            }
+
+            .welcome-section {
+                margin-top: -8px !important;
+            }
+        }
+
+        .welcome-text {
+            color: #5D544C !important;
+            text-shadow: none !important;
+        }
+
+        .subtitle {
+            color: #6F665E !important;
+            text-shadow: none !important;
+            opacity: .96 !important;
+        }
+
+        /* Icone nello stesso linguaggio soft delle card interne. */
+        .circle {
+            background: rgba(255,255,255,.62) !important;
+            border: 1px solid rgba(163,150,137,.34) !important;
+            color: #5D544C !important;
+            backdrop-filter: blur(8px) !important;
+            -webkit-backdrop-filter: blur(8px) !important;
+            box-shadow:
+                0 7px 20px rgba(70,58,48,.07),
+                inset 0 1px 0 rgba(255,255,255,.72) !important;
+        }
+
+        .btn {
+            color: #5D544C !important;
+        }
+
+        .label {
+            color: #5D544C !important;
+            text-shadow: none !important;
+        }
+
+        .btn:active .circle {
+            background: rgba(255,255,255,.88) !important;
+            border-color: rgba(163,150,137,.52) !important;
+        }
+
+        @media (hover:hover) and (pointer:fine) {
+            .btn:hover .circle {
+                background: rgba(255,255,255,.82) !important;
+                border-color: rgba(163,150,137,.48) !important;
+                box-shadow:
+                    0 10px 24px rgba(70,58,48,.10),
+                    inset 0 1px 0 rgba(255,255,255,.80) !important;
+            }
+        }
+
+        /* Selettore lingua uguale alle altre pagine. */
+        .lang-btn {
+            border: 1px solid rgba(0,0,0,.10) !important;
+            background: rgba(255,255,255,.66) !important;
+            color: #1a1a1a !important;
+            backdrop-filter: blur(5px) !important;
+            -webkit-backdrop-filter: blur(5px) !important;
+            box-shadow: none !important;
+        }
+
+        .lang-btn.active {
+            background: #A39689 !important;
+            color: #fff !important;
+            border-color: #A39689 !important;
+        }
+
+        .weather-widget {
+            background: rgba(255,255,255,.58) !important;
+            color: #5D544C !important;
+            border: 1px solid rgba(163,150,137,.28) !important;
+            box-shadow: 0 5px 16px rgba(70,58,48,.06) !important;
+            backdrop-filter: blur(8px) !important;
+            -webkit-backdrop-filter: blur(8px) !important;
+        }
+
+        .city-name {
+            border-left-color: rgba(93,84,76,.22) !important;
+        }
+
+        /* Landscape mobile: stesso sfondo neutro.
+           Il layout specifico già approvato resta attivo. */
+        body.diomede-mobile-landscape,
+        body.diomede-mobile-landscape .container {
+            background: #F0EDE9 !important;
+            color: #1a1a1a !important;
+        }
+
+        body.diomede-mobile-landscape .logo-img {
+            filter: none !important;
+        }
+
+        body.diomede-mobile-landscape .welcome-text,
+        body.diomede-mobile-landscape .label {
+            color: #5D544C !important;
+            text-shadow: none !important;
+        }
+
+        body.diomede-mobile-landscape .circle {
+            background: rgba(255,255,255,.64) !important;
+            border-color: rgba(163,150,137,.34) !important;
+            color: #5D544C !important;
+            box-shadow: 0 6px 18px rgba(70,58,48,.07) !important;
+        }
+
+        /* Nessuna animazione cinematografica sullo sfondo neutro. */
+        @media (prefers-reduced-motion: no-preference) {
+            body::before {
+                animation: none !important;
+            }
+        }
+
+
+
+        /* ==========================================================
+           MENU SFONDO CON FOTO CARICATA DALL'UTENTE
+           - sostituisce il fondo neutro con una foto coerente col brand
+           - mantiene il layout attuale, incluso il landscape mobile
+           ========================================================== */
+
+        body, html {
+            background: #241d19 !important;
+            color: #ffffff !important;
+        }
+
+        body::before {
+            display: block !important;
+            content: "" !important;
+            position: fixed !important;
+            inset: -2% !important;
+            z-index: 0 !important;
+            pointer-events: none !important;
+            background-image: url('../assets/images/menu-custom-portrait.webp') !important;
+            background-size: cover !important;
+            background-position: center center !important;
+            background-repeat: no-repeat !important;
+            transform: scale(1.03) !important;
+            opacity: 1 !important;
+            animation: none !important;
+        }
+
+        body::after {
+            display: block !important;
+            content: "" !important;
+            position: fixed !important;
+            inset: 0 !important;
+            z-index: 0 !important;
+            pointer-events: none !important;
+            background:
+                radial-gradient(circle at 50% 22%, rgba(255,248,243,.15) 0%, rgba(255,248,243,0) 32%),
+                linear-gradient(180deg,
+                    rgba(26,19,16,.42) 0%,
+                    rgba(26,19,16,.28) 30%,
+                    rgba(26,19,16,.32) 64%,
+                    rgba(26,19,16,.56) 100%) !important;
+        }
+
+        @media (orientation: landscape) {
+            body::before {
+                background-image: url('../assets/images/menu-custom-landscape.webp') !important;
+                background-position: center center !important;
+            }
+        }
+
+        .container {
+            position: relative !important;
+            z-index: 1 !important;
+            background: transparent !important;
+        }
+
+        /* Stesso logo pulito e leggibile, senza rovinarlo. */
+        @media (orientation: portrait) {
+            .header-wrapper {
+                min-height: 155px !important;
+                padding-top: 34px !important;
+                background: transparent !important;
+                border: 0 !important;
+                box-shadow: none !important;
+            }
+
+            .logo-img {
+                width: 80% !important;
+                max-width: 300px !important;
+                height: auto !important;
+                margin: 0 auto !important;
+                filter: drop-shadow(0 4px 12px rgba(0,0,0,.22)) !important;
+            }
+
+            .welcome-section {
+                margin-top: -2px !important;
+            }
+        }
+
+        @media (orientation: portrait) and (max-height: 700px) {
+            .header-wrapper {
+                min-height: 126px !important;
+                padding-top: 24px !important;
+            }
+
+            .logo-img {
+                width: 74% !important;
+                max-width: 255px !important;
+            }
+        }
+
+        .welcome-text,
+        .subtitle,
+        .label,
+        .temp-val,
+        .city-name,
+        .weather-widget #description,
+        .btn {
+            color: #ffffff !important;
+        }
+
+        .welcome-text,
+        .subtitle,
+        .label {
+            text-shadow: 0 2px 10px rgba(0,0,0,.42) !important;
+        }
+
+        .circle {
+            background: rgba(255,255,255,.16) !important;
+            border: 1px solid rgba(255,255,255,.34) !important;
+            backdrop-filter: blur(11px) !important;
+            -webkit-backdrop-filter: blur(11px) !important;
+            box-shadow:
+                0 8px 22px rgba(0,0,0,.16),
+                inset 0 1px 0 rgba(255,255,255,.10) !important;
+        }
+
+        .weather-widget {
+            background: rgba(255,255,255,.13) !important;
+            border: 1px solid rgba(255,255,255,.22) !important;
+            box-shadow: 0 6px 18px rgba(0,0,0,.12) !important;
+            backdrop-filter: blur(10px) !important;
+            -webkit-backdrop-filter: blur(10px) !important;
+            color: #fff !important;
+        }
+
+        .lang-btn {
+            background: rgba(255,255,255,.22) !important;
+            border: 1px solid rgba(255,255,255,.38) !important;
+            color: #fff !important;
+            box-shadow: 0 4px 12px rgba(0,0,0,.12) !important;
+        }
+
+        .lang-btn.active {
+            background: rgba(255,255,255,.97) !important;
+            color: #2a231e !important;
+            border-color: rgba(255,255,255,.97) !important;
+        }
+
+        /* Mantiene il layout landscape mobile, ma col nuovo sfondo. */
+        body.diomede-mobile-landscape,
+        body.diomede-mobile-landscape .container {
+            background: transparent !important;
+        }
+
+        body.diomede-mobile-landscape .logo-img {
+            filter: drop-shadow(0 4px 12px rgba(0,0,0,.24)) !important;
+        }
+
+        body.diomede-mobile-landscape .circle {
+            background: rgba(255,255,255,.18) !important;
+            border-color: rgba(255,255,255,.36) !important;
+        }
+
+        body.diomede-mobile-landscape .lang-btn {
+            background: rgba(0,0,0,.22) !important;
+            border-color: rgba(255,255,255,.42) !important;
+        }
+
+
+
+        /* Sfondo caldo/luxury integrato nella PWA - layout invariato */
+        body::before {
+            background-image: url('../assets/images/menu-custom-portrait.webp') !important;
+            background-size: cover !important;
+            background-position: center center !important;
+            background-repeat: no-repeat !important;
+            opacity: 1 !important;
+        }
+
+        body::after {
+            content: "" !important;
+            display: block !important;
+            position: fixed !important;
+            inset: 0 !important;
+            z-index: 0 !important;
+            pointer-events: none !important;
+            background:
+                radial-gradient(circle at 50% 18%, rgba(255,245,232,.11) 0%, rgba(255,245,232,0) 34%),
+                linear-gradient(
+                    180deg,
+                    rgba(32,22,16,.36) 0%,
+                    rgba(32,22,16,.22) 34%,
+                    rgba(32,22,16,.28) 66%,
+                    rgba(32,22,16,.46) 100%
+                ) !important;
+        }
+
+        @media (orientation: landscape) {
+            body::before {
+                background-image: url('../assets/images/menu-custom-landscape.webp') !important;
+                background-position: center center !important;
+            }
+
+            body::after {
+                background:
+                    linear-gradient(
+                        90deg,
+                        rgba(31,21,15,.38) 0%,
+                        rgba(31,21,15,.24) 26%,
+                        rgba(31,21,15,.19) 58%,
+                        rgba(31,21,15,.34) 100%
+                    ),
+                    linear-gradient(
+                        180deg,
+                        rgba(28,19,14,.12) 0%,
+                        rgba(28,19,14,.12) 65%,
+                        rgba(28,19,14,.35) 100%
+                    ) !important;
+            }
+        }
+
+        /* Il logo rimane quello originale, senza filtri che lo alterano */
+        .logo-img,
+        body.diomede-mobile-landscape .logo-img {
+            filter: none !important;
+        }
+
+
+
+        /* ==========================================================
+           LEGGIBILITÀ FINALE — logo e pulsanti più riconoscibili
+           - mantiene lo sfondo caldo/luxury
+           - aumenta contrasto senza cambiare il layout approvato
+           ========================================================== */
+
+        .header-wrapper {
+            isolation: isolate !important;
+        }
+
+        .header-wrapper::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: min(88vw, 340px);
+            height: calc(100% - 14px);
+            border-radius: 26px;
+            background: linear-gradient(180deg, rgba(34,24,18,.34) 0%, rgba(34,24,18,.16) 100%);
+            border: 1px solid rgba(255,255,255,.16);
+            box-shadow:
+                0 14px 38px rgba(0,0,0,.18),
+                inset 0 1px 0 rgba(255,255,255,.12);
+            backdrop-filter: blur(10px) saturate(112%);
+            -webkit-backdrop-filter: blur(10px) saturate(112%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .logo-img {
+            position: relative !important;
+            z-index: 1 !important;
+            filter: drop-shadow(0 5px 16px rgba(0,0,0,.32)) !important;
+        }
+
+        .welcome-text {
+            text-shadow: 0 3px 16px rgba(0,0,0,.50) !important;
+        }
+
+        .subtitle {
+            text-shadow: 0 2px 12px rgba(0,0,0,.42) !important;
+        }
+
+        .circle {
+            background: rgba(37,27,20,.44) !important;
+            border: 1.5px solid rgba(255,255,255,.52) !important;
+            color: #ffffff !important;
+            box-shadow:
+                0 12px 30px rgba(0,0,0,.23),
+                inset 0 1px 0 rgba(255,255,255,.13) !important;
+            backdrop-filter: blur(12px) saturate(118%) !important;
+            -webkit-backdrop-filter: blur(12px) saturate(118%) !important;
+        }
+
+        .material-symbols-outlined {
+            color: #ffffff !important;
+            text-shadow: 0 2px 10px rgba(0,0,0,.42) !important;
+        }
+
+        .btn {
+            color: #ffffff !important;
+        }
+
+        .label {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            min-height: 22px;
+            padding: 4px 9px !important;
+            border-radius: 999px !important;
+            background: rgba(28,20,15,.42) !important;
+            border: 1px solid rgba(255,255,255,.14) !important;
+            box-shadow: 0 6px 18px rgba(0,0,0,.12) !important;
+            backdrop-filter: blur(7px) !important;
+            -webkit-backdrop-filter: blur(7px) !important;
+            color: #ffffff !important;
+            text-shadow: 0 1px 8px rgba(0,0,0,.38) !important;
+            letter-spacing: .25px !important;
+            font-weight: 700 !important;
+        }
+
+        .lang-btn {
+            background: rgba(32,23,18,.48) !important;
+            border: 1px solid rgba(255,255,255,.46) !important;
+            color: #ffffff !important;
+            box-shadow: 0 6px 18px rgba(0,0,0,.14) !important;
+            backdrop-filter: blur(10px) !important;
+            -webkit-backdrop-filter: blur(10px) !important;
+        }
+
+        .lang-btn.active {
+            background: rgba(255,255,255,.97) !important;
+            color: #2b241f !important;
+            border-color: rgba(255,255,255,.97) !important;
+        }
+
+        .weather-widget {
+            background: rgba(30,22,17,.36) !important;
+            border: 1px solid rgba(255,255,255,.22) !important;
+            color: #ffffff !important;
+            box-shadow: 0 8px 22px rgba(0,0,0,.14) !important;
+        }
+
+        @media (orientation: portrait) {
+            .header-wrapper {
+                min-height: 168px !important;
+                padding-top: 34px !important;
+            }
+
+            .logo-img {
+                width: 82% !important;
+                max-width: 300px !important;
+            }
+
+            #main-grid {
+                gap: 14px 12px !important;
+            }
+
+            .circle {
+                width: 68px !important;
+                height: 68px !important;
+            }
+
+            .label {
+                font-size: 8.8px !important;
+            }
+        }
+
+        @media (orientation: portrait) and (max-height: 700px) {
+            .header-wrapper {
+                min-height: 132px !important;
+                padding-top: 24px !important;
+            }
+
+            .header-wrapper::before {
+                height: calc(100% - 8px);
+            }
+
+            .logo-img {
+                width: 74% !important;
+                max-width: 255px !important;
+            }
+        }
+
+        @media (orientation: landscape) {
+            body::after {
+                background:
+                    linear-gradient(90deg, rgba(24,17,13,.46) 0%, rgba(24,17,13,.30) 26%, rgba(24,17,13,.24) 56%, rgba(24,17,13,.39) 100%),
+                    linear-gradient(180deg, rgba(19,14,11,.16) 0%, rgba(19,14,11,.14) 64%, rgba(19,14,11,.34) 100%) !important;
+            }
+        }
+
+        body.diomede-mobile-landscape .header-wrapper::before {
+            width: min(100%, 150px) !important;
+            height: 114px !important;
+            border-radius: 24px !important;
+            background: linear-gradient(180deg, rgba(34,24,18,.42) 0%, rgba(34,24,18,.20) 100%) !important;
+            border: 1px solid rgba(255,255,255,.18) !important;
+            box-shadow: 0 10px 28px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.10) !important;
+        }
+
+        body.diomede-mobile-landscape .logo-img {
+            width: min(94%, 136px) !important;
+            max-width: 136px !important;
+            max-height: 58px !important;
+        }
+
+        body.diomede-mobile-landscape .welcome-text {
+            text-shadow: 0 2px 12px rgba(0,0,0,.48) !important;
+        }
+
+        body.diomede-mobile-landscape .circle {
+            background: rgba(35,26,20,.48) !important;
+            border-color: rgba(255,255,255,.54) !important;
+            box-shadow: 0 10px 26px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.11) !important;
+        }
+
+        body.diomede-mobile-landscape .label {
+            min-height: 18px !important;
+            padding: 3px 7px !important;
+            font-size: clamp(6.4px, 1.7vh, 7.7px) !important;
+            background: rgba(27,20,15,.48) !important;
+            border-color: rgba(255,255,255,.15) !important;
+        }
+
+        body.diomede-mobile-landscape .lang-btn {
+            background: rgba(32,23,18,.54) !important;
+        }
+
+        body.diomede-mobile-landscape.diomede-landscape-short .header-wrapper::before {
+            height: 102px !important;
+        }
+
+        body.diomede-mobile-landscape.diomede-landscape-short .label {
+            padding: 2px 6px !important;
+            font-size: clamp(6px, 1.55vh, 7px) !important;
+        }
+
 </style>
     <link rel="stylesheet" href="../assets/css/wow.css">
 </head>
