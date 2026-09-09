@@ -1,4 +1,4 @@
-const CACHE_NAME = 'diomede-v211-menu-alignment-fix';
+const CACHE_NAME = 'diomede-v213-landscape-logo-left-3x3';
 
 const APP_SHELL = [
   './',

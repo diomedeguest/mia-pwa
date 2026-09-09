@@ -280,7 +280,498 @@
         }
 
         @keyframes logoFadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
-    </style>
+
+        /* ==========================================================
+           MENU ORIZZONTALE — layout dedicato
+           In landscape il logo passa nella colonna destra e le
+           9 funzioni diventano 5 + 4, recuperando spazio verticale.
+           ========================================================== */
+        @media (orientation: landscape) {
+            body, html {
+                overflow: hidden;
+            }
+
+            .container {
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) minmax(180px, 30vw);
+                grid-template-rows: auto 1fr auto;
+                grid-template-areas:
+                    "welcome brand"
+                    "menu brand"
+                    "weather brand";
+                align-items: center;
+                justify-items: stretch;
+                column-gap: clamp(14px, 2.8vw, 34px);
+                row-gap: 3px;
+                width: 100%;
+                height: var(--app-height, 100dvh);
+                min-height: var(--app-height, 100dvh);
+                padding:
+                    max(9px, env(safe-area-inset-top))
+                    max(14px, env(safe-area-inset-right))
+                    max(9px, env(safe-area-inset-bottom))
+                    max(14px, env(safe-area-inset-left));
+            }
+
+            /* Colonna destra: logo + lingua */
+            .header-wrapper {
+                grid-area: brand;
+                width: 100%;
+                height: 100%;
+                min-height: 0;
+                padding: 0 0 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                align-self: stretch;
+                position: relative;
+                border-radius: 28px;
+                background: rgba(255,255,255,.055);
+                border: 1px solid rgba(255,255,255,.11);
+                backdrop-filter: blur(4px);
+                -webkit-backdrop-filter: blur(4px);
+            }
+
+            .logo-img {
+                width: min(91%, 280px);
+                max-width: 280px;
+                max-height: min(45vh, 255px);
+                object-fit: contain;
+                margin: 0;
+            }
+
+            .lang-switcher {
+                top: 10px;
+                right: 10px;
+            }
+
+            /* Saluto in alto nella colonna sinistra */
+            .welcome-section {
+                grid-area: welcome;
+                width: 100%;
+                margin: 0;
+                align-self: end;
+                text-align: center;
+            }
+
+            .welcome-text {
+                font-size: clamp(23px, 5.7vh, 32px);
+                line-height: 1;
+            }
+
+            .subtitle {
+                max-width: 620px;
+                font-size: clamp(10.5px, 2.55vh, 13px);
+                line-height: 1.25;
+                margin: 5px auto 0;
+            }
+
+            /* 5 icone nella prima riga + 4 nella seconda */
+            #main-grid {
+                grid-area: menu;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-content: center;
+                width: 100%;
+                max-width: none;
+                margin: 0;
+                gap: clamp(7px, 1.7vh, 13px) 0;
+                align-self: center;
+            }
+
+            #main-grid .btn {
+                flex: 0 0 20%;
+                min-width: 0;
+            }
+
+            .circle {
+                width: clamp(44px, 13vh, 66px);
+                height: clamp(44px, 13vh, 66px);
+                margin-bottom: 4px;
+            }
+
+            .material-symbols-outlined {
+                font-size: clamp(22px, 6vh, 29px);
+            }
+
+            .label {
+                font-size: clamp(7.3px, 1.95vh, 9px);
+                line-height: 1.08;
+                min-height: 10px;
+                white-space: normal;
+            }
+
+            /* Meteo sotto il logo, senza occupare altezza a sinistra */
+            .weather-widget {
+                grid-area: brand;
+                align-self: end;
+                justify-self: center;
+                z-index: 3;
+                margin: 0 0 10px;
+                padding: 5px 11px;
+                max-width: calc(100% - 16px);
+            }
+        }
+
+        /* Smartphone in landscape: ulteriore compattazione */
+        @media (orientation: landscape) and (max-height: 430px) {
+            .container {
+                grid-template-columns: minmax(0, 1fr) minmax(160px, 29vw);
+                column-gap: 11px;
+                padding-top: max(6px, env(safe-area-inset-top));
+                padding-bottom: max(6px, env(safe-area-inset-bottom));
+            }
+
+            .header-wrapper {
+                padding-bottom: 39px;
+                border-radius: 22px;
+            }
+
+            .logo-img {
+                width: min(90%, 220px);
+                max-height: 39vh;
+            }
+
+            .lang-switcher {
+                top: 7px;
+                right: 7px;
+            }
+
+            .lang-btn {
+                width: 29px;
+                height: 29px;
+                font-size: 7.5px;
+            }
+
+            .welcome-text {
+                font-size: clamp(21px, 6vh, 27px);
+            }
+
+            .subtitle {
+                font-size: clamp(9.4px, 2.65vh, 11px);
+                line-height: 1.18;
+                margin-top: 3px;
+            }
+
+            #main-grid {
+                gap: 5px 0;
+            }
+
+            .circle {
+                width: clamp(40px, 12.4vh, 50px);
+                height: clamp(40px, 12.4vh, 50px);
+                margin-bottom: 3px;
+            }
+
+            .material-symbols-outlined {
+                font-size: clamp(20px, 6vh, 25px);
+            }
+
+            .label {
+                font-size: clamp(6.9px, 2.05vh, 8px);
+            }
+
+            .weather-widget {
+                margin-bottom: 7px;
+                padding: 4px 8px;
+                gap: 5px;
+            }
+
+            .weather-widget .material-symbols-outlined {
+                font-size: 16px;
+            }
+
+            .weather-widget #description,
+            .city-name {
+                font-size: 8.5px;
+            }
+
+            .temp-val {
+                font-size: 11px;
+            }
+        }
+
+        /* Landscape molto stretto: il logo resta a destra ma la
+           colonna viene ridotta al minimo per lasciare aria alle icone. */
+        @media (orientation: landscape) and (max-width: 700px) {
+            .container {
+                grid-template-columns: minmax(0, 1fr) minmax(145px, 27vw);
+                column-gap: 9px;
+            }
+
+            .header-wrapper {
+                padding-bottom: 36px;
+            }
+
+            .logo-img {
+                width: 94%;
+            }
+
+            #main-grid .btn {
+                flex-basis: 20%;
+            }
+        }
+
+    
+
+        /* ==========================================================
+           LANDSCAPE V2 — logo a sinistra, menu 3x3 a tutta altezza
+           ========================================================== */
+        @media (orientation: landscape) {
+            body, html {
+                overflow: hidden;
+            }
+
+            .container {
+                display: grid !important;
+                grid-template-columns: clamp(165px, 27vw, 300px) minmax(0, 1fr) !important;
+                grid-template-rows: auto minmax(0, 1fr) auto !important;
+                grid-template-areas:
+                    "brand welcome"
+                    "brand menu"
+                    "brand weather" !important;
+                column-gap: clamp(14px, 2.6vw, 34px) !important;
+                row-gap: clamp(3px, 1vh, 8px) !important;
+                align-items: stretch !important;
+                justify-items: stretch !important;
+                width: 100% !important;
+                height: var(--app-height, 100dvh) !important;
+                min-height: var(--app-height, 100dvh) !important;
+                padding:
+                    max(8px, env(safe-area-inset-top))
+                    max(14px, env(safe-area-inset-right))
+                    max(8px, env(safe-area-inset-bottom))
+                    max(14px, env(safe-area-inset-left)) !important;
+            }
+
+            /* Colonna dedicata al brand: logo esattamente al centro */
+            .header-wrapper {
+                grid-area: brand !important;
+                position: relative !important;
+                width: 100% !important;
+                height: 100% !important;
+                min-height: 0 !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                align-self: stretch !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                border-radius: 28px;
+                background: rgba(255,255,255,.055);
+                border: 1px solid rgba(255,255,255,.11);
+                backdrop-filter: blur(5px);
+                -webkit-backdrop-filter: blur(5px);
+            }
+
+            .logo-img {
+                display: block !important;
+                width: min(88%, 255px) !important;
+                max-width: 255px !important;
+                max-height: min(54vh, 270px) !important;
+                height: auto !important;
+                object-fit: contain !important;
+                margin: 0 !important;
+            }
+
+            /* Lingua resta in alto a destra della pagina e non sottrae spazio */
+            .lang-switcher {
+                position: fixed !important;
+                top: max(10px, env(safe-area-inset-top)) !important;
+                right: max(12px, env(safe-area-inset-right)) !important;
+                left: auto !important;
+                z-index: 50 !important;
+            }
+
+            /* Parte destra: saluto in alto */
+            .welcome-section {
+                grid-area: welcome !important;
+                width: 100% !important;
+                min-width: 0 !important;
+                margin: 0 !important;
+                padding: 1px 72px 0 0 !important;
+                align-self: center !important;
+                text-align: center !important;
+            }
+
+            .welcome-text {
+                font-size: clamp(22px, 5.4vh, 31px) !important;
+                line-height: 1.02 !important;
+            }
+
+            .subtitle {
+                max-width: 660px !important;
+                margin: 4px auto 0 !important;
+                font-size: clamp(9.5px, 2.25vh, 12.5px) !important;
+                line-height: 1.22 !important;
+            }
+
+            /* Le 9 icone conservano esattamente la logica verticale: 3 x 3.
+               L'area menu occupa tutta l'altezza centrale disponibile. */
+            #main-grid {
+                grid-area: menu !important;
+                display: grid !important;
+                grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+                grid-template-rows: repeat(3, minmax(0, 1fr)) !important;
+                place-items: center !important;
+                align-content: stretch !important;
+                justify-content: stretch !important;
+                width: min(100%, 760px) !important;
+                max-width: 760px !important;
+                height: 100% !important;
+                min-height: 0 !important;
+                margin: 0 auto !important;
+                gap: clamp(3px, 1vh, 10px) clamp(12px, 2.4vw, 34px) !important;
+            }
+
+            #main-grid .btn {
+                width: 100% !important;
+                min-width: 0 !important;
+                height: 100% !important;
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                justify-content: center !important;
+            }
+
+            .circle {
+                width: clamp(44px, 12.2vh, 68px) !important;
+                height: clamp(44px, 12.2vh, 68px) !important;
+                margin: 0 0 clamp(3px, .9vh, 6px) !important;
+                flex: 0 0 auto !important;
+            }
+
+            #main-grid .material-symbols-outlined {
+                font-size: clamp(21px, 5.7vh, 28px) !important;
+            }
+
+            .label {
+                max-width: 100% !important;
+                min-height: 0 !important;
+                font-size: clamp(7.1px, 1.85vh, 9px) !important;
+                line-height: 1.12 !important;
+                white-space: normal !important;
+            }
+
+            /* Meteo centrato sotto la griglia */
+            .weather-widget {
+                grid-area: weather !important;
+                align-self: center !important;
+                justify-self: center !important;
+                margin: 0 !important;
+                padding: 5px 13px !important;
+                max-width: calc(100% - 80px) !important;
+            }
+        }
+
+        /* Telefono molto basso in landscape:
+           nessun taglio, riduciamo solo ciò che serve. */
+        @media (orientation: landscape) and (max-height: 430px) {
+            .container {
+                grid-template-columns: clamp(145px, 25vw, 210px) minmax(0, 1fr) !important;
+                column-gap: 10px !important;
+                row-gap: 2px !important;
+                padding-top: max(5px, env(safe-area-inset-top)) !important;
+                padding-bottom: max(5px, env(safe-area-inset-bottom)) !important;
+            }
+
+            .header-wrapper {
+                border-radius: 22px !important;
+            }
+
+            .logo-img {
+                width: min(88%, 190px) !important;
+                max-height: 48vh !important;
+            }
+
+            .lang-switcher {
+                top: max(6px, env(safe-area-inset-top)) !important;
+                right: max(8px, env(safe-area-inset-right)) !important;
+            }
+
+            .lang-btn {
+                width: 29px !important;
+                height: 29px !important;
+                font-size: 7.5px !important;
+            }
+
+            .welcome-section {
+                padding-right: 66px !important;
+            }
+
+            .welcome-text {
+                font-size: clamp(19px, 5.8vh, 25px) !important;
+            }
+
+            .subtitle {
+                margin-top: 2px !important;
+                font-size: clamp(8.4px, 2.25vh, 10px) !important;
+                line-height: 1.14 !important;
+            }
+
+            #main-grid {
+                gap: 2px clamp(8px, 1.8vw, 18px) !important;
+            }
+
+            .circle {
+                width: clamp(38px, 11.6vh, 48px) !important;
+                height: clamp(38px, 11.6vh, 48px) !important;
+                margin-bottom: 2px !important;
+            }
+
+            #main-grid .material-symbols-outlined {
+                font-size: clamp(19px, 5.5vh, 24px) !important;
+            }
+
+            .label {
+                font-size: clamp(6.5px, 1.85vh, 7.8px) !important;
+                line-height: 1.06 !important;
+            }
+
+            .weather-widget {
+                padding: 3px 9px !important;
+                max-width: calc(100% - 70px) !important;
+            }
+
+            .weather-widget .material-symbols-outlined {
+                font-size: 15px !important;
+            }
+
+            .weather-widget #description,
+            .city-name {
+                font-size: 8px !important;
+            }
+
+            .temp-val {
+                font-size: 10.5px !important;
+            }
+        }
+
+        /* Tablet / schermi landscape alti: icone più grandi,
+           ma sempre nella stessa griglia 3x3. */
+        @media (orientation: landscape) and (min-height: 520px) {
+            .container {
+                grid-template-columns: clamp(220px, 28vw, 330px) minmax(0, 1fr) !important;
+            }
+
+            .logo-img {
+                width: min(88%, 285px) !important;
+                max-width: 285px !important;
+                max-height: 50vh !important;
+            }
+
+            .circle {
+                width: clamp(62px, 11.6vh, 78px) !important;
+                height: clamp(62px, 11.6vh, 78px) !important;
+            }
+
+            .label {
+                font-size: clamp(8.4px, 1.45vh, 9.6px) !important;
+            }
+        }
+
+</style>
     <link rel="stylesheet" href="../assets/css/wow.css">
 </head>
 <body>
