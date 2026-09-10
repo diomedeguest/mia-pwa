@@ -1671,6 +1671,950 @@
             font-size: clamp(6px, 1.55vh, 7px) !important;
         }
 
+
+
+        /* ==========================================================
+           LOGO COMPATTO + BADGE BIANCO
+           Mantiene i colori originali del logo e recupera spazio
+           verticale per il meteo.
+           ========================================================== */
+
+        @media (orientation: portrait) {
+            .header-wrapper {
+                min-height: 126px !important;
+                padding-top: 20px !important;
+                overflow: visible !important;
+            }
+
+            /* Il vecchio pannello viene trasformato in un vero badge circolare */
+            .header-wrapper::before {
+                width: 104px !important;
+                height: 104px !important;
+                min-width: 104px !important;
+                min-height: 104px !important;
+                border-radius: 50% !important;
+                top: 19px !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+                background: rgba(255,255,255,.94) !important;
+                border: 1px solid rgba(255,255,255,.98) !important;
+                box-shadow:
+                    0 8px 24px rgba(51,37,27,.18),
+                    0 0 0 1px rgba(163,150,137,.10) !important;
+                backdrop-filter: blur(3px) !important;
+                -webkit-backdrop-filter: blur(3px) !important;
+                z-index: 0 !important;
+            }
+
+            .logo-img {
+                width: 92px !important;
+                max-width: 92px !important;
+                max-height: 92px !important;
+                height: auto !important;
+                margin: 0 auto !important;
+                position: relative !important;
+                z-index: 1 !important;
+                object-fit: contain !important;
+                filter: none !important;
+            }
+
+            .welcome-section {
+                margin-top: -4px !important;
+            }
+
+            #main-grid {
+                gap: 9px 10px !important;
+                margin-top: 1px !important;
+                margin-bottom: 2px !important;
+            }
+
+            .circle {
+                width: 62px !important;
+                height: 62px !important;
+            }
+
+            .label {
+                min-height: 18px !important;
+                padding: 3px 8px !important;
+            }
+
+            .weather-widget {
+                margin-bottom: 18px !important;
+                padding: 5px 12px !important;
+            }
+        }
+
+        /* Telefoni verticali con poca altezza */
+        @media (orientation: portrait) and (max-height: 700px) {
+            .header-wrapper {
+                min-height: 108px !important;
+                padding-top: 14px !important;
+            }
+
+            .header-wrapper::before {
+                width: 88px !important;
+                height: 88px !important;
+                min-width: 88px !important;
+                min-height: 88px !important;
+                top: 12px !important;
+            }
+
+            .logo-img {
+                width: 78px !important;
+                max-width: 78px !important;
+                max-height: 78px !important;
+            }
+
+            .welcome-section {
+                margin-top: -2px !important;
+            }
+
+            .welcome-text {
+                font-size: 26px !important;
+            }
+
+            .subtitle {
+                font-size: 11.5px !important;
+                margin-top: 5px !important;
+                margin-bottom: 2px !important;
+            }
+
+            #main-grid {
+                gap: 7px 8px !important;
+            }
+
+            .circle {
+                width: 55px !important;
+                height: 55px !important;
+            }
+
+            .label {
+                min-height: 16px !important;
+                padding: 2px 7px !important;
+                font-size: 8px !important;
+            }
+
+            .weather-widget {
+                margin-bottom: 12px !important;
+                padding: 4px 10px !important;
+            }
+        }
+
+        /* In landscape il badge rimane compatto e non invade la griglia */
+        body.diomede-mobile-landscape .header-wrapper::before {
+            width: 82px !important;
+            height: 82px !important;
+            min-width: 82px !important;
+            min-height: 82px !important;
+            border-radius: 50% !important;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            background: rgba(255,255,255,.94) !important;
+            border: 1px solid rgba(255,255,255,.98) !important;
+            box-shadow: 0 7px 20px rgba(51,37,27,.17) !important;
+        }
+
+        body.diomede-mobile-landscape .logo-img {
+            width: 72px !important;
+            max-width: 72px !important;
+            max-height: 72px !important;
+            filter: none !important;
+        }
+
+        body.diomede-mobile-landscape.diomede-landscape-short .header-wrapper::before {
+            width: 72px !important;
+            height: 72px !important;
+            min-width: 72px !important;
+            min-height: 72px !important;
+        }
+
+        body.diomede-mobile-landscape.diomede-landscape-short .logo-img {
+            width: 63px !important;
+            max-width: 63px !important;
+            max-height: 63px !important;
+        }
+
+
+
+        /* ==========================================================
+           MODIFICA MINIMA SULLA PWA PREFERITA
+           Logo menu senza badge/sfondo bianco.
+           ========================================================== */
+        .header-wrapper::before,
+        body.diomede-mobile-landscape .header-wrapper::before,
+        body.diomede-mobile-landscape.diomede-landscape-short .header-wrapper::before {
+            display: none !important;
+            content: none !important;
+            background: transparent !important;
+            border: 0 !important;
+            box-shadow: none !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+        }
+
+        .logo-img,
+        body.diomede-mobile-landscape .logo-img,
+        body.diomede-mobile-landscape.diomede-landscape-short .logo-img {
+            background: transparent !important;
+            border: 0 !important;
+            box-shadow: none !important;
+            filter: drop-shadow(0 3px 9px rgba(0,0,0,.28)) !important;
+        }
+
+
+        /* ==========================================================
+           OVERRIDE FINALE — logo menu personalizzato + desktop compatto
+           - usa il nuovo logo luxury solo nella pagina menu
+           - comprime la vista desktop per non tagliare il meteo
+           ========================================================== */
+        body.diomede-menu-page .logo-img {
+            width: min(66%, 260px);
+            max-width: 260px;
+            max-height: 110px;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 6px 16px rgba(0,0,0,.26));
+        }
+
+        @media (min-width: 900px) and (hover: hover) and (pointer: fine) {
+            body.diomede-menu-page .container {
+                padding-top: max(10px, env(safe-area-inset-top));
+                padding-right: 22px;
+                padding-bottom: 10px;
+                padding-left: 22px;
+                justify-content: space-between;
+            }
+
+            body.diomede-menu-page .header-wrapper {
+                min-height: 100px;
+                padding-top: 14px;
+            }
+
+            body.diomede-menu-page .logo-img {
+                width: auto;
+                max-width: min(17vw, 188px);
+                max-height: 82px;
+                margin-top: 0;
+            }
+
+            body.diomede-menu-page .lang-switcher {
+                top: 14px;
+                right: 12px;
+            }
+
+            body.diomede-menu-page .welcome-section {
+                margin-top: -2px;
+                margin-bottom: 2px;
+            }
+
+            body.diomede-menu-page .welcome-text {
+                font-size: 27px;
+                line-height: 1.02;
+            }
+
+            body.diomede-menu-page .subtitle {
+                margin: 5px auto 1px;
+                max-width: 500px;
+                font-size: 11px;
+                line-height: 1.32;
+            }
+
+            body.diomede-menu-page #main-grid {
+                width: min(590px, 68vw);
+                max-width: none;
+                grid-template-columns: repeat(3, minmax(110px, 1fr));
+                column-gap: 22px;
+                row-gap: 8px;
+                margin: 0 auto 2px;
+            }
+
+            body.diomede-menu-page .circle {
+                width: 58px;
+                height: 58px;
+                margin-bottom: 5px;
+            }
+
+            body.diomede-menu-page .material-symbols-outlined {
+                font-size: 24px;
+            }
+
+            body.diomede-menu-page .label {
+                font-size: 8px;
+                line-height: 1.1;
+            }
+
+            body.diomede-menu-page .weather-widget {
+                margin-bottom: 6px;
+                padding: 4px 11px;
+                gap: 6px;
+            }
+
+            body.diomede-menu-page .weather-widget .material-symbols-outlined {
+                font-size: 17px;
+            }
+
+            body.diomede-menu-page .weather-widget #description,
+            body.diomede-menu-page .city-name {
+                font-size: 10px;
+            }
+
+            body.diomede-menu-page .temp-val {
+                font-size: 12px;
+            }
+        }
+
+        @media (min-width: 900px) and (max-height: 820px) and (hover: hover) and (pointer: fine) {
+            body.diomede-menu-page .header-wrapper {
+                min-height: 90px;
+                padding-top: 10px;
+            }
+
+            body.diomede-menu-page .logo-img {
+                max-width: min(15vw, 170px);
+                max-height: 72px;
+            }
+
+            body.diomede-menu-page .welcome-text {
+                font-size: 24px;
+            }
+
+            body.diomede-menu-page .subtitle {
+                font-size: 10px;
+                margin-top: 4px;
+            }
+
+            body.diomede-menu-page #main-grid {
+                width: min(550px, 66vw);
+                column-gap: 18px;
+                row-gap: 6px;
+            }
+
+            body.diomede-menu-page .circle {
+                width: 54px;
+                height: 54px;
+            }
+
+            body.diomede-menu-page .label {
+                font-size: 7.6px;
+            }
+        }
+
+
+
+        /* ==========================================================
+           OVERRIDE XXL FINALE — logo e icone più grandi ma meteo visibile
+           Applica il layout più leggibile soprattutto su desktop.
+           Mobile resta invariato.
+           ========================================================== */
+        @media (min-width: 900px) and (hover: hover) and (pointer: fine) {
+            body.diomede-menu-page .container {
+                padding-top: max(8px, env(safe-area-inset-top)) !important;
+                padding-right: 24px !important;
+                padding-bottom: 8px !important;
+                padding-left: 24px !important;
+                justify-content: space-between !important;
+            }
+
+            body.diomede-menu-page .header-wrapper {
+                min-height: 116px !important;
+                padding-top: 10px !important;
+                margin-bottom: 0 !important;
+            }
+
+            body.diomede-menu-page .logo-img {
+                width: auto !important;
+                max-width: min(22vw, 245px) !important;
+                max-height: 102px !important;
+                height: auto !important;
+                object-fit: contain !important;
+                margin-top: 0 !important;
+            }
+
+            body.diomede-menu-page .lang-switcher {
+                top: 12px !important;
+                right: 12px !important;
+            }
+
+            body.diomede-menu-page .welcome-section {
+                margin-top: -10px !important;
+                margin-bottom: 2px !important;
+            }
+
+            body.diomede-menu-page .welcome-text {
+                font-size: 26px !important;
+                line-height: 1.02 !important;
+            }
+
+            body.diomede-menu-page .subtitle {
+                max-width: 520px !important;
+                margin: 4px auto 0 !important;
+                font-size: 10.5px !important;
+                line-height: 1.26 !important;
+            }
+
+            body.diomede-menu-page #main-grid {
+                width: min(640px, 74vw) !important;
+                max-width: none !important;
+                grid-template-columns: repeat(3, minmax(120px, 1fr)) !important;
+                column-gap: 18px !important;
+                row-gap: 8px !important;
+                margin: 0 auto 2px !important;
+            }
+
+            body.diomede-menu-page .circle {
+                width: 70px !important;
+                height: 70px !important;
+                margin-bottom: 6px !important;
+            }
+
+            body.diomede-menu-page .material-symbols-outlined {
+                font-size: 29px !important;
+            }
+
+            body.diomede-menu-page .label {
+                min-height: 20px !important;
+                padding: 3px 8px !important;
+                font-size: 8.4px !important;
+                line-height: 1.12 !important;
+            }
+
+            body.diomede-menu-page .weather-widget {
+                margin-bottom: 6px !important;
+                padding: 4px 12px !important;
+                gap: 6px !important;
+            }
+
+            body.diomede-menu-page .weather-widget .material-symbols-outlined {
+                font-size: 18px !important;
+            }
+
+            body.diomede-menu-page .weather-widget #description,
+            body.diomede-menu-page .city-name {
+                font-size: 10px !important;
+            }
+
+            body.diomede-menu-page .temp-val {
+                font-size: 12.5px !important;
+            }
+        }
+
+        @media (min-width: 900px) and (max-height: 820px) and (hover: hover) and (pointer: fine) {
+            body.diomede-menu-page .header-wrapper {
+                min-height: 104px !important;
+                padding-top: 8px !important;
+            }
+
+            body.diomede-menu-page .logo-img {
+                max-width: min(20vw, 225px) !important;
+                max-height: 92px !important;
+            }
+
+            body.diomede-menu-page .welcome-section {
+                margin-top: -12px !important;
+            }
+
+            body.diomede-menu-page .welcome-text {
+                font-size: 24px !important;
+            }
+
+            body.diomede-menu-page .subtitle {
+                font-size: 10px !important;
+                margin-top: 3px !important;
+            }
+
+            body.diomede-menu-page #main-grid {
+                width: min(610px, 72vw) !important;
+                column-gap: 16px !important;
+                row-gap: 6px !important;
+            }
+
+            body.diomede-menu-page .circle {
+                width: 66px !important;
+                height: 66px !important;
+            }
+
+            body.diomede-menu-page .material-symbols-outlined {
+                font-size: 27px !important;
+            }
+
+            body.diomede-menu-page .label {
+                font-size: 8px !important;
+            }
+
+            body.diomede-menu-page .weather-widget {
+                margin-bottom: 4px !important;
+            }
+        }
+
+
+
+        /* ==========================================================
+           DESKTOP XL — logo e icone molto più grandi, meteo sempre visibile
+           Il layout mobile resta invariato.
+           ========================================================== */
+        @media (min-width: 900px) and (hover: hover) and (pointer: fine) {
+            body.diomede-menu-page .container {
+                display: grid !important;
+                grid-template-rows: auto auto minmax(0, 1fr) auto !important;
+                grid-template-columns: 1fr !important;
+                justify-items: center !important;
+                align-items: center !important;
+                width: 100% !important;
+                height: 100dvh !important;
+                min-height: 100dvh !important;
+                max-height: 100dvh !important;
+                overflow: hidden !important;
+                padding:
+                    max(6px, env(safe-area-inset-top))
+                    26px
+                    max(8px, env(safe-area-inset-bottom))
+                    26px !important;
+                row-gap: 2px !important;
+            }
+
+            body.diomede-menu-page .header-wrapper {
+                width: 100% !important;
+                min-height: 0 !important;
+                height: auto !important;
+                padding-top: 2px !important;
+                margin: 0 !important;
+                flex-shrink: 0 !important;
+            }
+
+            body.diomede-menu-page .logo-img {
+                width: clamp(255px, 21vw, 315px) !important;
+                max-width: 315px !important;
+                max-height: none !important;
+                height: auto !important;
+                object-fit: contain !important;
+                margin: 0 auto !important;
+                filter: drop-shadow(0 6px 18px rgba(0,0,0,.28)) !important;
+            }
+
+            body.diomede-menu-page .lang-switcher {
+                top: 10px !important;
+                right: 14px !important;
+            }
+
+            body.diomede-menu-page .lang-btn {
+                width: 34px !important;
+                height: 34px !important;
+                font-size: 8px !important;
+            }
+
+            body.diomede-menu-page .welcome-section {
+                width: 100% !important;
+                margin: -14px 0 0 !important;
+                padding: 0 !important;
+            }
+
+            body.diomede-menu-page .welcome-text {
+                font-size: 28px !important;
+                line-height: 1 !important;
+            }
+
+            body.diomede-menu-page .subtitle {
+                max-width: 560px !important;
+                margin: 4px auto 0 !important;
+                font-size: 10.5px !important;
+                line-height: 1.2 !important;
+            }
+
+            body.diomede-menu-page #main-grid {
+                align-self: stretch !important;
+                display: grid !important;
+                grid-template-columns: repeat(3, minmax(150px, 1fr)) !important;
+                grid-template-rows: repeat(3, minmax(0, 1fr)) !important;
+                place-items: center !important;
+                width: min(760px, 78vw) !important;
+                max-width: 760px !important;
+                height: 100% !important;
+                min-height: 0 !important;
+                margin: 0 auto !important;
+                padding: 0 !important;
+                column-gap: 24px !important;
+                row-gap: 2px !important;
+            }
+
+            body.diomede-menu-page #main-grid .btn {
+                width: 100% !important;
+                height: 100% !important;
+                min-height: 0 !important;
+                justify-content: center !important;
+            }
+
+            body.diomede-menu-page .circle {
+                width: clamp(78px, 10.5vh, 92px) !important;
+                height: clamp(78px, 10.5vh, 92px) !important;
+                margin-bottom: 6px !important;
+            }
+
+            body.diomede-menu-page #main-grid .material-symbols-outlined {
+                font-size: clamp(31px, 4.3vh, 37px) !important;
+            }
+
+            body.diomede-menu-page .label {
+                min-height: 22px !important;
+                padding: 4px 10px !important;
+                font-size: 9px !important;
+                line-height: 1.08 !important;
+            }
+
+            body.diomede-menu-page .weather-widget {
+                align-self: end !important;
+                flex-shrink: 0 !important;
+                margin: 2px 0 0 !important;
+                padding: 5px 14px !important;
+                gap: 7px !important;
+                transform: none !important;
+            }
+
+            body.diomede-menu-page .weather-widget .material-symbols-outlined {
+                font-size: 19px !important;
+            }
+
+            body.diomede-menu-page .weather-widget #description,
+            body.diomede-menu-page .city-name {
+                font-size: 10.5px !important;
+            }
+
+            body.diomede-menu-page .temp-val {
+                font-size: 13px !important;
+            }
+        }
+
+        /* Desktop con altezza ridotta: resta grande ma si adatta senza tagliare il meteo. */
+        @media (min-width: 900px) and (max-height: 760px) and (hover: hover) and (pointer: fine) {
+            body.diomede-menu-page .logo-img {
+                width: clamp(230px, 18vw, 275px) !important;
+                max-width: 275px !important;
+            }
+
+            body.diomede-menu-page .welcome-section {
+                margin-top: -12px !important;
+            }
+
+            body.diomede-menu-page .welcome-text {
+                font-size: 25px !important;
+            }
+
+            body.diomede-menu-page .subtitle {
+                font-size: 9.8px !important;
+                margin-top: 3px !important;
+            }
+
+            body.diomede-menu-page #main-grid {
+                width: min(700px, 76vw) !important;
+                max-width: 700px !important;
+                column-gap: 20px !important;
+            }
+
+            body.diomede-menu-page .circle {
+                width: clamp(70px, 9.8vh, 80px) !important;
+                height: clamp(70px, 9.8vh, 80px) !important;
+                margin-bottom: 4px !important;
+            }
+
+            body.diomede-menu-page #main-grid .material-symbols-outlined {
+                font-size: clamp(28px, 4vh, 33px) !important;
+            }
+
+            body.diomede-menu-page .label {
+                min-height: 20px !important;
+                padding: 3px 9px !important;
+                font-size: 8.4px !important;
+            }
+
+            body.diomede-menu-page .weather-widget {
+                padding: 4px 12px !important;
+            }
+        }
+
+
+
+        /* ==========================================================
+           MENU ESSENZIALE — SOLO LOGO + 9 ICONE + METEO
+           Nessun saluto/sottotitolo.
+           ========================================================== */
+
+        .welcome-section {
+            display: none !important;
+        }
+
+        /* PORTRAIT / MOBILE */
+        @media (orientation: portrait) {
+            .container {
+                display: grid !important;
+                grid-template-rows: auto minmax(0, 1fr) auto !important;
+                grid-template-areas:
+                    "brand"
+                    "menu"
+                    "weather" !important;
+                align-items: center !important;
+                justify-items: center !important;
+                height: var(--app-height, 100dvh) !important;
+                min-height: var(--app-height, 100dvh) !important;
+                padding:
+                    max(10px, env(safe-area-inset-top))
+                    14px
+                    max(10px, env(safe-area-inset-bottom))
+                    14px !important;
+                row-gap: 4px !important;
+            }
+
+            .header-wrapper {
+                grid-area: brand !important;
+                width: 100% !important;
+                min-height: 148px !important;
+                height: auto !important;
+                padding-top: 8px !important;
+                padding-bottom: 0 !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+            }
+
+            .logo-img {
+                width: min(62vw, 230px) !important;
+                max-width: 230px !important;
+                max-height: 138px !important;
+                height: auto !important;
+                margin: 0 auto !important;
+                object-fit: contain !important;
+            }
+
+            #main-grid {
+                grid-area: menu !important;
+                display: grid !important;
+                grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+                align-self: stretch !important;
+                align-content: center !important;
+                justify-items: center !important;
+                width: min(100%, 430px) !important;
+                max-width: 430px !important;
+                margin: 0 auto !important;
+                gap: clamp(8px, 1.6vh, 14px) 10px !important;
+            }
+
+            .circle {
+                width: clamp(64px, 9.2vh, 78px) !important;
+                height: clamp(64px, 9.2vh, 78px) !important;
+                margin-bottom: 5px !important;
+            }
+
+            #main-grid .material-symbols-outlined {
+                font-size: clamp(27px, 3.9vh, 32px) !important;
+            }
+
+            .label {
+                font-size: clamp(8px, 1.2vh, 9.2px) !important;
+                min-height: 18px !important;
+                padding: 3px 8px !important;
+            }
+
+            .weather-widget {
+                grid-area: weather !important;
+                align-self: end !important;
+                justify-self: center !important;
+                flex-shrink: 0 !important;
+                margin: 0 0 max(2px, env(safe-area-inset-bottom)) !important;
+                padding: 5px 12px !important;
+            }
+        }
+
+        /* Smartphone verticali bassi: resta tutto visibile. */
+        @media (orientation: portrait) and (max-height: 700px) {
+            .header-wrapper {
+                min-height: 112px !important;
+                padding-top: 4px !important;
+            }
+
+            .logo-img {
+                width: min(50vw, 180px) !important;
+                max-width: 180px !important;
+                max-height: 100px !important;
+            }
+
+            #main-grid {
+                gap: 6px 8px !important;
+            }
+
+            .circle {
+                width: clamp(55px, 8.4vh, 64px) !important;
+                height: clamp(55px, 8.4vh, 64px) !important;
+                margin-bottom: 3px !important;
+            }
+
+            #main-grid .material-symbols-outlined {
+                font-size: clamp(24px, 3.7vh, 28px) !important;
+            }
+
+            .label {
+                font-size: 7.7px !important;
+                min-height: 15px !important;
+                padding: 2px 7px !important;
+            }
+
+            .weather-widget {
+                padding: 4px 10px !important;
+                margin-bottom: max(1px, env(safe-area-inset-bottom)) !important;
+            }
+        }
+
+        /* DESKTOP: logo e icone molto più grandi.
+           Il meteo ha una riga propria e quindi non viene mai spinto fuori. */
+        @media (min-width: 900px) and (hover: hover) and (pointer: fine) {
+            .container {
+                display: grid !important;
+                grid-template-rows: minmax(128px, 22vh) minmax(0, 1fr) 38px !important;
+                grid-template-areas:
+                    "brand"
+                    "menu"
+                    "weather" !important;
+                align-items: center !important;
+                justify-items: center !important;
+                height: var(--app-height, 100dvh) !important;
+                min-height: var(--app-height, 100dvh) !important;
+                padding:
+                    max(8px, env(safe-area-inset-top))
+                    24px
+                    max(8px, env(safe-area-inset-bottom))
+                    24px !important;
+                row-gap: 2px !important;
+            }
+
+            .header-wrapper {
+                grid-area: brand !important;
+                min-height: 0 !important;
+                height: 100% !important;
+                padding: 0 !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+            }
+
+            .logo-img {
+                width: auto !important;
+                max-width: min(30vw, 350px) !important;
+                max-height: min(20vh, 190px) !important;
+                height: auto !important;
+                object-fit: contain !important;
+                margin: 0 !important;
+            }
+
+            #main-grid {
+                grid-area: menu !important;
+                display: grid !important;
+                grid-template-columns: repeat(3, minmax(150px, 1fr)) !important;
+                grid-template-rows: repeat(3, minmax(0, 1fr)) !important;
+                align-self: stretch !important;
+                align-content: stretch !important;
+                place-items: center !important;
+                width: min(820px, 82vw) !important;
+                max-width: 820px !important;
+                height: 100% !important;
+                margin: 0 auto !important;
+                padding: 2px 0 !important;
+                column-gap: clamp(16px, 2.6vw, 34px) !important;
+                row-gap: clamp(5px, 1.1vh, 12px) !important;
+            }
+
+            #main-grid .btn {
+                width: 100% !important;
+                height: 100% !important;
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                justify-content: center !important;
+            }
+
+            .circle {
+                width: clamp(78px, 10.2vh, 104px) !important;
+                height: clamp(78px, 10.2vh, 104px) !important;
+                margin-bottom: clamp(4px, .7vh, 7px) !important;
+            }
+
+            #main-grid .material-symbols-outlined {
+                font-size: clamp(32px, 4.2vh, 41px) !important;
+            }
+
+            .label {
+                min-height: 21px !important;
+                padding: 3px 10px !important;
+                font-size: clamp(8.8px, 1.15vh, 10px) !important;
+                line-height: 1.08 !important;
+            }
+
+            .weather-widget {
+                grid-area: weather !important;
+                align-self: end !important;
+                justify-self: center !important;
+                margin: 0 !important;
+                padding: 5px 13px !important;
+                flex-shrink: 0 !important;
+            }
+        }
+
+        /* Desktop con poca altezza: grandi, ma sempre entro il viewport. */
+        @media (min-width: 900px) and (max-height: 760px) and (hover: hover) and (pointer: fine) {
+            .container {
+                grid-template-rows: 112px minmax(0, 1fr) 36px !important;
+                padding-top: 5px !important;
+                padding-bottom: 5px !important;
+            }
+
+            .logo-img {
+                max-width: min(25vw, 280px) !important;
+                max-height: 100px !important;
+            }
+
+            #main-grid {
+                width: min(740px, 80vw) !important;
+                column-gap: 18px !important;
+                row-gap: 4px !important;
+            }
+
+            .circle {
+                width: clamp(70px, 9.6vh, 82px) !important;
+                height: clamp(70px, 9.6vh, 82px) !important;
+            }
+
+            #main-grid .material-symbols-outlined {
+                font-size: clamp(29px, 4vh, 34px) !important;
+            }
+
+            .label {
+                font-size: 8.5px !important;
+                min-height: 18px !important;
+                padding: 2px 8px !important;
+            }
+
+            .weather-widget {
+                padding: 4px 11px !important;
+            }
+        }
+
+        /* Landscape mobile: tolto il saluto, logo centrato nella colonna sinistra. */
+        body.diomede-mobile-landscape .container {
+            grid-template-areas: "brandbox menu" !important;
+        }
+
+        body.diomede-mobile-landscape .welcome-section {
+            display: none !important;
+        }
+
+        body.diomede-mobile-landscape .header-wrapper {
+            align-self: center !important;
+            transform: none !important;
+        }
+
+        body.diomede-mobile-landscape .logo-img {
+            width: min(96%, 150px) !important;
+            max-width: 150px !important;
+            max-height: 92px !important;
+        }
+
 </style>
     <link rel="stylesheet" href="../assets/css/wow.css">
 </head>
@@ -1678,19 +2622,14 @@
 
     <div class="container">
         <header class="header-wrapper">
-            <img src="../assets/images/header.png" alt="Logo" class="logo-img">
+            <img src="../assets/images/menu-logo-luxury.png" alt="Logo" class="logo-img">
             <nav class="lang-switcher">
                 <div id="btn-it" class="lang-btn" onclick="setLanguage('it')">ITA</div>
                 <div id="btn-en" class="lang-btn" onclick="setLanguage('en')">ENG</div>
             </nav>
         </header>
 
-        <div class="welcome-section">
-            <h1 class="welcome-text" data-it="Benvenuti" data-en="Welcome">Benvenuti</h1>
-            <p class="subtitle" data-it="È un piacere avervi qui. Mettetevi comodi e godetevi la casa" data-en="We are delighted to have you stay. Please, enjoy the space">È un piacere avervi qui. Mettetevi comodi e godetevi la casa</p>
-        </div>
-
-        <nav id="main-grid"></nav>
+<nav id="main-grid"></nav>
 
         <a href="https://www.google.com/search?q=meteo+brindisi" target="_blank" class="weather-widget" rel="noopener">
             <span id="weather-icon" class="material-symbols-outlined">cloud</span>

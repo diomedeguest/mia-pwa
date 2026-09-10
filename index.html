@@ -262,6 +262,54 @@
     }
 }
 
+
+
+/* ==========================================================
+   WELCOME INDEX — LOGO XXXL
+   Logo ancora più grande e leggibile nel riquadro iniziale.
+   ========================================================== */
+.white-box {
+    max-width: 460px !important;
+    padding-top: 30px !important;
+}
+
+.logo-inner {
+    width: 300px !important;
+    max-width: 88% !important;
+    max-height: 215px !important;
+    height: auto !important;
+    margin-bottom: 18px !important;
+    object-fit: contain !important;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,.10)) !important;
+}
+
+@media (max-width: 600px) and (orientation: portrait) {
+    .white-box {
+        width: min(90vw, 390px) !important;
+        padding: 22px 20px 26px !important;
+    }
+
+    .logo-inner {
+        width: 245px !important;
+        max-width: 86% !important;
+        max-height: 175px !important;
+        margin-bottom: 14px !important;
+    }
+}
+
+@media (max-height: 700px) {
+    .white-box {
+        padding-top: 19px !important;
+    }
+
+    .logo-inner {
+        width: 215px !important;
+        max-width: 82% !important;
+        max-height: 150px !important;
+        margin-bottom: 12px !important;
+    }
+}
+
 </style>
     <link rel="stylesheet" href="assets/css/wow.css">
 </head>

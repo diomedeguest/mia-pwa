@@ -1,4 +1,4 @@
-const CACHE_NAME = 'diomede-v226-readable-menu';
+const CACHE_NAME = 'diomede-v239-index-welcome-logo-xxxl';
 
 const APP_SHELL = [
   './',
@@ -9,6 +9,7 @@ const APP_SHELL = [
   './assets/css/wow.css',
   './assets/js/common.js',
   './assets/images/header.png',
+  './assets/images/menu-logo-luxury.png',
   './assets/images/menu-custom-landscape.webp',
   './assets/images/menu-custom-portrait.webp',
   './assets/images/logo-transparent.png',
