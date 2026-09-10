@@ -38,6 +38,24 @@
     }
     applyModeClass();
 
+    function preserveModeInInternalLink(a) {
+        if (!a || !isKioskMode) return;
+        const raw = (a.getAttribute('href') || '').trim();
+        if (!raw || raw === '#' || raw.startsWith('#') || /^(javascript:|mailto:|tel:|sms:|geo:|whatsapp:)/i.test(raw)) return;
+        try {
+            const u = new URL(raw, window.location.href);
+            if (u.origin !== window.location.origin) return;
+            u.searchParams.set('mode', 'kiosk');
+            a.href = u.href;
+        } catch (_) {}
+    }
+
+    function preserveModeOnInternalLinks(rootNode) {
+        if (!isKioskMode) return;
+        const root = rootNode && rootNode.querySelectorAll ? rootNode : document;
+        root.querySelectorAll('a[href]').forEach(preserveModeInInternalLink);
+    }
+
     function isExternalActionHref(rawHref) {
         const raw = (rawHref || '').trim();
         if (!raw || raw === '#' || raw.startsWith('#') || /^javascript:/i.test(raw)) return false;
@@ -189,10 +207,18 @@
     function setupKioskMode() {
         applyModeClass();
         if (!isKioskMode) return;
+        preserveModeOnInternalLinks(document);
         markKioskLinks();
 
         /* Pagine come Territorio possono creare i link dopo il caricamento. */
-        new MutationObserver(markKioskLinks).observe(document.body, { childList: true, subtree: true });
+        new MutationObserver(mutations => {
+            mutations.forEach(m => m.addedNodes.forEach(node => {
+                if (!node || node.nodeType !== 1) return;
+                if (node.matches && node.matches('a[href]')) preserveModeInInternalLink(node);
+                preserveModeOnInternalLinks(node);
+            }));
+            markKioskLinks();
+        }).observe(document.body, { childList: true, subtree: true });
 
         /* Capture: nessun link esterno può sfuggire al kiosk. */
         document.addEventListener('click', event => {

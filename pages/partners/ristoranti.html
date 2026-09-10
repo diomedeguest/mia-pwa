@@ -226,6 +226,93 @@
             .info-section { grid-template-columns: 1fr 1fr; }
             h2 { font-size: 40px; }
         }
+
+        /* KIOSK ZERO-TOUCH PARTNER EXPERIENCE */
+        .kiosk-site-panel, .kiosk-partner-site, .kiosk-site-url, .kiosk-site-qrbox { display:none; }
+        body.diomede-kiosk-mode .promo-card {
+            padding: 24px;
+            gap: 0;
+        }
+        body.diomede-kiosk-mode .flex-row,
+        body.diomede-kiosk-mode .action-btn,
+        body.diomede-kiosk-mode .maps-btn {
+            display:none !important;
+        }
+        body.diomede-kiosk-mode .address-box {
+            margin-bottom: 12px;
+            color:#5d544c;
+        }
+        body.diomede-kiosk-mode .promo-description {
+            margin-bottom: 14px;
+        }
+        body.diomede-kiosk-mode .partner-contact {
+            margin: 0 0 14px;
+        }
+        body.diomede-kiosk-mode .kiosk-site-panel {
+            display:grid;
+            grid-template-columns: 1.15fr .9fr;
+            gap: 18px;
+            align-items: center;
+            margin-top: 4px;
+            padding: 16px;
+            background: rgba(255,255,255,0.82);
+            border: 1px solid rgba(163,150,137,0.22);
+            border-radius: 18px;
+        }
+        body.diomede-kiosk-mode .kiosk-partner-site { display:block; }
+        body.diomede-kiosk-mode .kiosk-site-panel .eyebrow {
+            display:block;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1.3px;
+            text-transform: uppercase;
+            color: #8D8378;
+            margin-bottom: 7px;
+        }
+        body.diomede-kiosk-mode .kiosk-site-url {
+            display:block;
+            font-size: 13px;
+            line-height: 1.55;
+            color:#433d38;
+            word-break: break-word;
+            font-weight:700;
+        }
+        body.diomede-kiosk-mode .kiosk-site-note {
+            margin-top: 10px;
+            font-size: 11px;
+            line-height: 1.5;
+            color:#6d655d;
+        }
+        body.diomede-kiosk-mode .kiosk-site-qrbox {
+            display:block;
+            text-align:center;
+            background: rgba(255,255,255,0.92);
+            border-radius: 16px;
+            padding: 12px;
+            box-shadow: inset 0 0 0 1px rgba(0,0,0,0.04);
+        }
+        body.diomede-kiosk-mode .kiosk-site-qr-title {
+            font-size: 10px;
+            font-weight:700;
+            letter-spacing: 1.1px;
+            text-transform: uppercase;
+            color:#4d463f;
+            margin-bottom:10px;
+        }
+        body.diomede-kiosk-mode .kiosk-site-qr {
+            width:min(170px,100%);
+            margin:0 auto;
+            background:#fff;
+            border-radius:14px;
+            padding:10px;
+        }
+        body.diomede-kiosk-mode .kiosk-site-qr svg { width:100%; height:auto; display:block; }
+        @media (max-width: 620px) {
+            body.diomede-kiosk-mode .kiosk-site-panel {
+                grid-template-columns: 1fr;
+            }
+        }
+
     </style>
 
 <style id="diomede-global-back-style">
@@ -319,6 +406,17 @@
                     <a href="tel:+390831525126" class="btn action-btn" data-it="Chiama" data-en="Call">Chiama</a>
                     <a href="https://www.google.com/maps/search/?api=1&query=Molo+33+Brindisi" target="_blank" class="btn maps-btn" data-it="Mappa" data-en="Map" rel="noopener">Mappa</a>
                 </div>
+                <div class="kiosk-site-panel">
+                    <div class="kiosk-partner-site">
+                        <span class="eyebrow" data-it="Scheda web" data-en="Web page">Scheda web</span>
+                        <span class="kiosk-site-url">Molo 33 · scheda online</span>
+                        <div class="kiosk-site-note" data-it="Indirizzo e contatto restano visibili sul tablet. Il QR code apre la scheda online sullo smartphone dell'ospite." data-en="Address and contact stay visible on the tablet. The QR code opens the online page on the guest's smartphone.">Indirizzo e contatto restano visibili sul tablet. Il QR code apre la scheda online sullo smartphone dell'ospite.</div>
+                    </div>
+                    <div class="kiosk-site-qrbox">
+                        <div class="kiosk-site-qr-title" data-it="Apri sul telefono" data-en="Open on phone">Apri sul telefono</div>
+                        <div class="kiosk-site-qr" data-qr="https://www.google.com/maps/search/?api=1&query=Molo+33+Brindisi"><span class="kiosk-qr-loading">QR…</span></div>
+                    </div>
+                </div>
             </div>
 
                     </div>
@@ -356,6 +454,21 @@
             const savedLang = localStorage.getItem('preferredLang') || 'it';
             setLanguage(savedLang);
         };
+    </script>
+
+
+    <script src="../../assets/js/qrcode-local.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.DiomedeMode !== 'kiosk') return;
+            const holders = document.querySelectorAll('[data-qr]');
+            if (!holders.length) return;
+            const qr = window.DiomedeQR;
+            holders.forEach(holder => {
+                const value = holder.getAttribute('data-qr');
+                holder.innerHTML = qr && qr.createSvg ? qr.createSvg(value, { quiet: 4 }) : '<span class="kiosk-qr-loading">QR non disponibile</span>';
+            });
+        });
     </script>
 
 <script src="../../assets/js/common.js"></script>

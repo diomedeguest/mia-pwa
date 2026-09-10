@@ -19,3 +19,8 @@ La scelta viene memorizzata nel browser/PWA del tablet. I link interni continuan
 Il QR viene generato localmente dalla PWA e non richiede un servizio QR esterno.
 
 Se i dati dell'app/browser vengono cancellati dal sistema MDM, riaprire l'URL con `?mode=kiosk`.
+
+
+## Layout kiosk zero-touch
+- Contatti: numero visibile e QR WhatsApp già mostrato in pagina.
+- Convenzioni: indirizzo e sito visibili, nessun pulsante superfluo, un solo QR code per aprire il sito dal telefono dell'ospite.

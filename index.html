@@ -579,6 +579,30 @@
         </div>
     </div>
 
+<script id="diomede-mode-forward-index">
+(function(){
+  function currentMode(){
+    try {
+      const p=new URLSearchParams(location.search);
+      const q=(p.get('mode')||'').toLowerCase();
+      if(q==='kiosk') localStorage.setItem('diomedeMode','kiosk');
+      if(q==='guest') localStorage.removeItem('diomedeMode');
+      return localStorage.getItem('diomedeMode')==='kiosk'?'kiosk':'guest';
+    } catch(_) { return 'guest'; }
+  }
+  function apply(){
+    const mode=currentMode();
+    const btn=document.getElementById('enter-diomedeguide');
+    if(!btn) return;
+    const u=new URL('./pages/menu.html', location.href);
+    if(mode==='kiosk') u.searchParams.set('mode','kiosk');
+    btn.href=u.href;
+  }
+  document.addEventListener('DOMContentLoaded', apply);
+  window.addEventListener('pageshow', apply);
+})();
+</script>
+
 <script>
 window.addEventListener('load', function () {
     if ('serviceWorker' in navigator) {

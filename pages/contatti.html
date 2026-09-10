@@ -211,6 +211,108 @@
             .container { margin-top: -40px; }
             h2 { font-size: 40px; }
         }
+
+        /* KIOSK ZERO-TOUCH */
+        body.diomede-kiosk-mode .contact-group {
+            margin-bottom: 36px;
+        }
+        body.diomede-kiosk-mode .host-name {
+            display: none;
+        }
+        body.diomede-kiosk-mode .contact-group .flex-row {
+            display: none;
+        }
+        .kiosk-contact-card {
+            display: none;
+        }
+        body.diomede-kiosk-mode .kiosk-contact-card {
+            display: grid;
+            grid-template-columns: 1.2fr .9fr;
+            gap: 20px;
+            align-items: center;
+            background: rgba(255,255,255,0.72);
+            border: 1px solid rgba(163,150,137,0.28);
+            border-radius: 24px;
+            padding: 22px;
+            box-shadow: 0 10px 28px rgba(0,0,0,0.05);
+            text-align: left;
+        }
+        .kiosk-contact-details .eyebrow {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+            color: #8D8378;
+            margin-bottom: 10px;
+        }
+        .kiosk-contact-details .contact-name {
+            font-family: 'PT Serif', serif;
+            font-size: 26px;
+            line-height: 1.15;
+            color: #1f1f1f;
+            margin-bottom: 10px;
+        }
+        .kiosk-contact-details .contact-role {
+            font-size: 13px;
+            color: #6a625b;
+            margin-bottom: 14px;
+        }
+        .kiosk-contact-details .contact-number {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            border-radius: 999px;
+            background: rgba(163,150,137,0.12);
+            color: #433d38;
+            font-weight: 700;
+            font-size: 17px;
+            text-decoration: none;
+        }
+        .kiosk-contact-details .contact-note {
+            margin-top: 14px;
+            font-size: 12px;
+            line-height: 1.55;
+            color: #6e675f;
+        }
+        .kiosk-contact-qrbox {
+            background: rgba(255,255,255,0.88);
+            border: 1px solid rgba(163,150,137,0.26);
+            border-radius: 22px;
+            padding: 16px;
+            text-align: center;
+        }
+        .kiosk-contact-qr-title {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: #4d463f;
+            margin-bottom: 12px;
+        }
+        .kiosk-contact-qr {
+            width: min(190px, 100%);
+            margin: 0 auto 10px;
+            background: #fff;
+            border-radius: 18px;
+            padding: 10px;
+            box-shadow: inset 0 0 0 1px rgba(0,0,0,0.04);
+        }
+        .kiosk-contact-qr svg { width: 100%; height: auto; display: block; }
+        .kiosk-contact-qr-caption {
+            font-size: 12px;
+            color: #6b645c;
+            line-height: 1.45;
+        }
+        @media (max-width: 620px) {
+            body.diomede-kiosk-mode .kiosk-contact-card {
+                grid-template-columns: 1fr;
+            }
+            .kiosk-contact-details { text-align: center; }
+            .kiosk-contact-details .contact-number { justify-content: center; }
+        }
+
     </style>
 
 <style id="diomede-global-back-style">
@@ -294,6 +396,20 @@
                         <span class="btn-label">WhatsApp</span>
                     </a>
                 </div>
+                <div class="kiosk-contact-card" aria-label="Contatto host kiosk">
+                    <div class="kiosk-contact-details">
+                        <div class="eyebrow" data-it="Host di riferimento" data-en="Your host">Host di riferimento</div>
+                        <div class="contact-name">Davide Marolo</div>
+                        <div class="contact-role" data-it="Per assistenza durante il soggiorno" data-en="For assistance during your stay">Per assistenza durante il soggiorno</div>
+                        <a href="tel:+393515377828" class="contact-number">+39 351 5377 828</a>
+                        <div class="contact-note" data-it="Sul tablet il numero è già visibile. Per scrivere su WhatsApp basta scansionare il QR code qui a fianco." data-en="On the kiosk tablet the phone number is already visible. To chat on WhatsApp, simply scan the QR code beside it.">Sul tablet il numero è già visibile. Per scrivere su WhatsApp basta scansionare il QR code qui a fianco.</div>
+                    </div>
+                    <div class="kiosk-contact-qrbox">
+                        <div class="kiosk-contact-qr-title" data-it="WhatsApp diretto" data-en="Direct WhatsApp">WhatsApp diretto</div>
+                        <div class="kiosk-contact-qr" data-qr="https://wa.me/393515377828"><span class="kiosk-qr-loading">QR…</span></div>
+                        <div class="kiosk-contact-qr-caption" data-it="Scansiona e apri subito la chat sul tuo smartphone." data-en="Scan to instantly open the chat on your smartphone.">Scansiona e apri subito la chat sul tuo smartphone.</div>
+                    </div>
+                </div>
             </div>
 
             <div class="section-title" data-it="Emergenze" data-en="Emergencies">Emergenze</div>
@@ -356,6 +472,21 @@
             const savedLang = localStorage.getItem('preferredLang') || 'it';
             setLanguage(savedLang);
         };
+    </script>
+
+
+    <script src="../assets/js/qrcode-local.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.DiomedeMode !== 'kiosk') return;
+            const holders = document.querySelectorAll('[data-qr]');
+            if (!holders.length) return;
+            const qr = window.DiomedeQR;
+            holders.forEach(holder => {
+                const value = holder.getAttribute('data-qr');
+                holder.innerHTML = qr && qr.createSvg ? qr.createSvg(value, { quiet: 4 }) : '<span class="kiosk-qr-loading">QR non disponibile</span>';
+            });
+        });
     </script>
 
 <script src="../assets/js/common.js"></script>
