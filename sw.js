@@ -1,4 +1,4 @@
-const CACHE_NAME = 'diomede-v248-wifi-refine';
+const CACHE_NAME = 'diomede-v250-kiosk-startup-reload-fix';
 
 const APP_SHELL = [
   './',
