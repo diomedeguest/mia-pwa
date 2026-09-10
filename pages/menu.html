@@ -3104,22 +3104,42 @@
         @media (max-width: 699px) and (orientation: portrait) {
             .header-wrapper {
                 top: 0 !important;
+                min-height: 178px !important;
+                padding-top: 10px !important;
             }
 
             .header-wrapper .logo-img {
                 position: relative !important;
-                top: 40px !important;
-                width: min(68vw, 250px) !important;
-                max-width: 250px !important;
-                max-height: 150px !important;
+                top: 62px !important;
+                width: min(72vw, 270px) !important;
+                max-width: 270px !important;
+                max-height: 168px !important;
                 height: auto !important;
                 object-fit: contain !important;
             }
         }
 
-        @media (max-width: 699px) and (orientation: portrait) and (max-height: 700px) {
+        @media (max-width: 699px) and (orientation: portrait) and (max-height: 760px) {
+            .header-wrapper {
+                min-height: 168px !important;
+            }
+
             .header-wrapper .logo-img {
-                top: 27px !important;
+                top: 54px !important;
+                width: min(68vw, 248px) !important;
+                max-width: 248px !important;
+                max-height: 150px !important;
+            }
+        }
+
+        @media (max-width: 699px) and (orientation: portrait) and (max-height: 700px) {
+            .header-wrapper {
+                min-height: 152px !important;
+                padding-top: 8px !important;
+            }
+
+            .header-wrapper .logo-img {
+                top: 38px !important;
                 width: min(62vw, 220px) !important;
                 max-width: 220px !important;
                 max-height: 132px !important;
