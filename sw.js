@@ -1,4 +1,4 @@
-const CACHE_NAME = 'diomede-v242-kiosk-zero-touch';
+const CACHE_NAME = 'diomede-v243-opinione-conta';
 
 const APP_SHELL = [
   './',

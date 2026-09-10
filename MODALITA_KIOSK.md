@@ -24,3 +24,7 @@ Se i dati dell'app/browser vengono cancellati dal sistema MDM, riaprire l'URL co
 ## Layout kiosk zero-touch
 - Contatti: numero visibile e QR WhatsApp già mostrato in pagina.
 - Convenzioni: indirizzo e sito visibili, nessun pulsante superfluo, un solo QR code per aprire il sito dal telefono dell'ospite.
+
+
+## Invio recensioni via email
+La pagina Recensione invia voto e commento a `diomedeguest@gmail.com` tramite FormSubmit, senza aprire app esterne. Oggetto: `[Recensione] Diomede Luxury – X/5`. Al primo invio FormSubmit richiede una conferma una tantum via email.

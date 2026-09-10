@@ -283,6 +283,30 @@
             line-height: 1.5;
             color:#6d655d;
         }
+
+body.diomede-kiosk-mode .kiosk-detail-list {
+    display:grid;
+    gap:10px;
+    margin-top: 4px;
+}
+body.diomede-kiosk-mode .kiosk-detail-row {
+    display:grid;
+    gap:2px;
+}
+body.diomede-kiosk-mode .kiosk-detail-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color:#8D8378;
+}
+body.diomede-kiosk-mode .kiosk-detail-value {
+    font-size: 13px;
+    line-height: 1.5;
+    color:#433d38;
+    word-break: break-word;
+    font-weight:600;
+}
         body.diomede-kiosk-mode .kiosk-site-qrbox {
             display:block;
             text-align:center;
@@ -465,12 +489,24 @@
                 </div>
                 <div class="kiosk-site-panel">
                     <div class="kiosk-partner-site">
-                        <span class="eyebrow" data-it="Sito web" data-en="Website">Sito web</span>
-                        <span class="kiosk-site-url">www.calemone.it/shop</span>
-                        <div class="kiosk-site-note" data-it="Sul tablet kiosk tutto resta pulito: indirizzo e sito sono visibili, mentre il QR code apre direttamente la pagina sullo smartphone dell'ospite." data-en="On the kiosk tablet everything stays clean: address and website are visible, while the QR code opens the page directly on the guest's smartphone.">Sul tablet kiosk tutto resta pulito: indirizzo e sito sono visibili, mentre il QR code apre direttamente la pagina sullo smartphone dell'ospite.</div>
+                        <span class="eyebrow" data-it="Informazioni utili" data-en="Useful information">Informazioni utili</span>
+                        <div class="kiosk-detail-list">
+                            <div class="kiosk-detail-row">
+                                <span class="kiosk-detail-label" data-it="Indirizzo" data-en="Address">Indirizzo</span>
+                                <span class="kiosk-detail-value">Serranova, 72012 Carovigno BR (Riserva Torre Guaceto)</span>
+                            </div>
+                            <div class="kiosk-detail-row">
+                                <span class="kiosk-detail-label" data-it="Telefono" data-en="Phone">Telefono</span>
+                                <span class="kiosk-detail-value">+39 0831 555807</span>
+                            </div>
+                            <div class="kiosk-detail-row">
+                                <span class="kiosk-detail-label" data-it="Sito web" data-en="Website">Sito web</span>
+                                <span class="kiosk-detail-value">www.calemone.it/shop</span>
+                            </div>
+                        </div>
                     </div>
                     <div class="kiosk-site-qrbox">
-                        <div class="kiosk-site-qr-title" data-it="Apri sul telefono" data-en="Open on phone">Apri sul telefono</div>
+                        <div class="kiosk-site-qr-title" data-it="Scansiona il QR code con il tuo smartphone" data-en="Scan the QR code with your smartphone">Scansiona il QR code con il tuo smartphone</div>
                         <div class="kiosk-site-qr" data-qr="https://www.calemone.it/shop"><span class="kiosk-qr-loading">QR…</span></div>
                     </div>
                 </div>
@@ -517,12 +553,24 @@
                 </div>
                 <div class="kiosk-site-panel">
                     <div class="kiosk-partner-site">
-                        <span class="eyebrow" data-it="Sito web" data-en="Website">Sito web</span>
-                        <span class="kiosk-site-url">cantinerisveglio.it/shop</span>
-                        <div class="kiosk-site-note" data-it="Per l'ospite del kiosk mostriamo subito le informazioni utili e un solo QR code per aprire il sito sul proprio smartphone." data-en="For kiosk guests we immediately show the useful information and a single QR code to open the website on their smartphone.">Per l'ospite del kiosk mostriamo subito le informazioni utili e un solo QR code per aprire il sito sul proprio smartphone.</div>
+                        <span class="eyebrow" data-it="Informazioni utili" data-en="Useful information">Informazioni utili</span>
+                        <div class="kiosk-detail-list">
+                            <div class="kiosk-detail-row">
+                                <span class="kiosk-detail-label" data-it="Indirizzo" data-en="Address">Indirizzo</span>
+                                <span class="kiosk-detail-value">C.da Torre Mozza, SS7 Km 5,700, 72100 Brindisi</span>
+                            </div>
+                            <div class="kiosk-detail-row">
+                                <span class="kiosk-detail-label" data-it="Telefono" data-en="Phone">Telefono</span>
+                                <span class="kiosk-detail-value">+39 0831 519948</span>
+                            </div>
+                            <div class="kiosk-detail-row">
+                                <span class="kiosk-detail-label" data-it="Sito web" data-en="Website">Sito web</span>
+                                <span class="kiosk-detail-value">cantinerisveglio.it/shop</span>
+                            </div>
+                        </div>
                     </div>
                     <div class="kiosk-site-qrbox">
-                        <div class="kiosk-site-qr-title" data-it="Apri sul telefono" data-en="Open on phone">Apri sul telefono</div>
+                        <div class="kiosk-site-qr-title" data-it="Scansiona il QR code con il tuo smartphone" data-en="Scan the QR code with your smartphone">Scansiona il QR code con il tuo smartphone</div>
                         <div class="kiosk-site-qr" data-qr="https://cantinerisveglio.it/shop/"><span class="kiosk-qr-loading">QR…</span></div>
                     </div>
                 </div>
