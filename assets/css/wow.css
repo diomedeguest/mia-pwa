@@ -1,0 +1,642 @@
+/* ==========================================================
+   DIOMEDE LUXURY — WOW PACK
+   Microinterazioni, transizioni e profondità premium.
+   Tutto volutamente discreto per preservare il design esistente.
+   ========================================================== */
+
+:root{
+    --diomede-ease:cubic-bezier(.22,.61,.36,1);
+    --diomede-fast:180ms;
+    --diomede-medium:320ms;
+    --diomede-glass:rgba(255,255,255,.54);
+    --diomede-border:rgba(163,150,137,.34);
+    --diomede-shadow:0 10px 32px rgba(64,52,42,.075);
+}
+
+/* Transizioni premium tra pagine.
+   Avanti: la pagina scorre leggermente verso sinistra.
+   Indietro: movimento speculare. */
+body.diomede-page-enter-forward{
+    animation:diomedePageInForward .60s var(--diomede-ease) both;
+}
+body.diomede-page-enter-back{
+    animation:diomedePageInBack .60s var(--diomede-ease) both;
+}
+body.diomede-page-enter{
+    animation:diomedePageInForward .60s var(--diomede-ease) both;
+}
+body.diomede-page-leave{
+    animation:diomedePageOutForward .40s cubic-bezier(.4,0,.2,1) both !important;
+    pointer-events:none;
+}
+body.diomede-page-leave-back{
+    animation:diomedePageOutBack .40s cubic-bezier(.4,0,.2,1) both !important;
+    pointer-events:none;
+}
+
+@keyframes diomedePageInForward{
+    from{opacity:.05;transform:translateX(18px) scale(.995)}
+    to{opacity:1;transform:translateX(0) scale(1)}
+}
+@keyframes diomedePageInBack{
+    from{opacity:.05;transform:translateX(-18px) scale(.995)}
+    to{opacity:1;transform:translateX(0) scale(1)}
+}
+@keyframes diomedePageOutForward{
+    from{opacity:1;transform:translateX(0) scale(1)}
+    to{opacity:.06;transform:translateX(-14px) scale(.997)}
+}
+@keyframes diomedePageOutBack{
+    from{opacity:1;transform:translateX(0) scale(1)}
+    to{opacity:.06;transform:translateX(14px) scale(.997)}
+}
+
+/* Velo caldo durante il passaggio: dà continuità senza coprire i comandi. */
+.diomede-transition-veil{
+    position:fixed;
+    inset:0;
+    z-index:2147483000;
+    pointer-events:none;
+    background:rgba(240,237,233,.96);
+    opacity:0;
+    visibility:hidden;
+}
+.diomede-transition-veil.diomede-veil-out{
+    visibility:visible;
+    animation:diomedeVeilIn .40s ease both;
+}
+.diomede-transition-veil.diomede-veil-in{
+    visibility:visible;
+    animation:diomedeVeilOut .60s ease both;
+}
+@keyframes diomedeVeilIn{
+    from{opacity:0}
+    to{opacity:.62}
+}
+@keyframes diomedeVeilOut{
+    from{opacity:.48}
+    to{opacity:0}
+}
+
+/* Firma visiva Diomede: la linea sotto il titolo si disegna all'ingresso. */
+.divider{
+    transform-origin:center;
+}
+body.diomede-page-enter .divider{
+    animation:diomedeLineSignature .72s var(--diomede-ease) .13s both;
+}
+@keyframes diomedeLineSignature{
+    from{opacity:.15;transform:scaleX(.08)}
+    to{opacity:1;transform:scaleX(1)}
+}
+
+/* Reveal progressivo delle sezioni mentre scorrono nella viewport. */
+.diomede-reveal{
+    opacity:0;
+    transform:translateY(13px);
+    transition:opacity .46s var(--diomede-ease),transform .46s var(--diomede-ease);
+    will-change:opacity,transform;
+}
+.diomede-reveal.diomede-visible{
+    opacity:1;
+    transform:none;
+}
+
+/* Card più profonde, ma sempre nella palette originale. */
+.instruction-card,
+.info-card,
+.contact-card,
+.category-card,
+.destination-card,
+.promo-card,
+.wifi-card,
+.video-guide-card,
+.tip-note,
+.qr-card{
+    -webkit-backdrop-filter:blur(11px) saturate(112%);
+    backdrop-filter:blur(11px) saturate(112%);
+    box-shadow:var(--diomede-shadow);
+    transition:transform var(--diomede-fast) var(--diomede-ease),
+               box-shadow var(--diomede-medium) ease,
+               border-color var(--diomede-medium) ease,
+               background-color var(--diomede-medium) ease;
+}
+.instruction-card:hover,
+.info-card:hover,
+.contact-card:hover,
+.category-card:hover,
+.destination-card:hover,
+.promo-card:hover,
+.wifi-card:hover{
+    border-color:rgba(163,150,137,.46);
+    box-shadow:0 14px 36px rgba(64,52,42,.10);
+}
+.instruction-card:active,
+.info-card:active,
+.contact-card:active,
+.category-card:active,
+.destination-card:active,
+.promo-card:active,
+.wifi-card:active{
+    transform:scale(.988);
+}
+
+/* Pulsanti e controlli: feedback fisico molto leggero. */
+a,.back-btn,.action-btn,.maps-btn,.confirm-btn,.lang-btn,
+.diomede-global-back,.diomede-home-btn,.idro-legend-trigger,.water-controls-trigger{
+    transition:transform var(--diomede-fast) var(--diomede-ease),
+               box-shadow var(--diomede-medium) ease,
+               opacity var(--diomede-fast) ease,
+               background-color var(--diomede-medium) ease;
+}
+.back-btn:hover,.action-btn:hover,.maps-btn:hover,.confirm-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 9px 24px rgba(64,52,42,.16);
+}
+.back-btn:active,.action-btn:active,.maps-btn:active,.confirm-btn:active,
+.diomede-global-back:active,.diomede-home-btn:active{
+    transform:scale(.96);
+}
+.lang-btn{
+    box-shadow:0 4px 14px rgba(64,52,42,.06);
+}
+.lang-btn.active{
+    transform:scale(1.045);
+}
+
+/* Header delle guide: si compatta dolcemente durante lo scroll. */
+body.instruction-page .hero-header,
+body.instruction-page .hero-header .logo-img{
+    transition:height .34s var(--diomede-ease),
+               max-width .34s var(--diomede-ease),
+               transform .34s var(--diomede-ease),
+               opacity .34s ease;
+}
+body.instruction-page.diomede-scrolled .hero-header{
+    height:180px !important;
+}
+body.instruction-page.diomede-scrolled .hero-header .logo-img{
+    max-width:220px !important;
+    transform:translateY(-4px) scale(.94);
+    opacity:.94;
+}
+
+/* Menu: vetro più raffinato e priorità visiva ai primi tre accessi. */
+body.diomede-menu-page .circle{
+    position:relative;
+    overflow:hidden;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.20),0 8px 24px rgba(0,0,0,.10);
+    transition:transform .22s var(--diomede-ease),background-color .28s ease,
+               border-color .28s ease,box-shadow .28s ease;
+}
+body.diomede-menu-page .circle::after{
+    content:'';
+    position:absolute;
+    inset:1px 8px auto 8px;
+    height:35%;
+    border-radius:999px;
+    background:linear-gradient(to bottom,rgba(255,255,255,.18),rgba(255,255,255,0));
+    pointer-events:none;
+}
+body.diomede-menu-page #main-grid .btn:nth-child(-n+3) .circle{
+    background:rgba(255,255,255,.245);
+    border-color:rgba(255,255,255,.42);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.28),0 10px 28px rgba(0,0,0,.13);
+}
+body.diomede-menu-page .btn:hover .circle{
+    transform:translateY(-3px) scale(1.025);
+}
+body.diomede-menu-page .btn:active .circle{
+    transform:scale(.94);
+}
+body.diomede-menu-page .welcome-section{
+    animation:diomedeMenuWelcome .65s var(--diomede-ease) both;
+}
+@keyframes diomedeMenuWelcome{
+    from{opacity:0;transform:translateY(8px)}
+    to{opacity:1;transform:none}
+}
+body.diomede-menu-page .weather-widget{
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.15),0 7px 22px rgba(0,0,0,.09);
+    transition:transform .2s var(--diomede-ease),background-color .25s ease;
+}
+body.diomede-menu-page .weather-widget:hover{transform:translateY(-2px);background:rgba(255,255,255,.16)}
+
+/* Immagini delle guide: minuscolo sollevamento al tocco/hover, non decorativo. */
+body.instruction-page .image-container img,
+body.instruction-page .water-controls-legend,
+body.instruction-page .idro-manual-image,
+body.instruction-page .step-card img{
+    transition:transform .28s var(--diomede-ease),filter .28s ease;
+}
+body.instruction-page .image-container img:hover,
+body.instruction-page .water-controls-trigger:hover img,
+body.instruction-page .idro-legend-trigger:hover img{
+    transform:translateY(-2px);
+}
+
+/* Focus visibile e premium per tastiera/accessibilità. */
+a:focus-visible,button:focus-visible,[role='button']:focus-visible{
+    outline:2px solid rgba(163,150,137,.85);
+    outline-offset:3px;
+}
+
+@media(max-width:600px){
+    body.instruction-page.diomede-scrolled .hero-header{height:170px !important}
+    body.instruction-page.diomede-scrolled .hero-header .logo-img{max-width:205px !important}
+}
+
+/* Nessun effetto invadente se l'utente preferisce ridurre le animazioni. */
+@media(prefers-reduced-motion:reduce){
+    *,*::before,*::after{
+        scroll-behavior:auto !important;
+        animation-duration:.001ms !important;
+        animation-iteration-count:1 !important;
+        transition-duration:.001ms !important;
+    }
+    .diomede-reveal{opacity:1 !important;transform:none !important}
+}
+
+
+
+/* ==========================================================
+   WOW PLUS — versione allineata
+   Animazioni percepibili senza alterare l'asse orizzontale
+   ========================================================== */
+
+html, body{
+    overflow-x:clip;
+}
+
+/* HOME MENU */
+body.diomede-menu-page .header-wrapper .logo-img{
+    animation:diomedeMenuLogoIn .95s cubic-bezier(.22,.61,.36,1) both;
+}
+@keyframes diomedeMenuLogoIn{
+    from{opacity:0;transform:translateY(-12px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+body.diomede-menu-page .welcome-section{
+    animation:diomedeMenuWelcomePlus .82s cubic-bezier(.22,.61,.36,1) .16s both;
+}
+@keyframes diomedeMenuWelcomePlus{
+    from{opacity:0;transform:translateY(16px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+body.diomede-menu-page #main-grid .btn{
+    opacity:0;
+    animation:diomedeMenuButtonIn .66s cubic-bezier(.2,.8,.2,1) both;
+    animation-delay:calc(.34s + (var(--diomede-menu-index, 0) * 82ms));
+}
+@keyframes diomedeMenuButtonIn{
+    0%{opacity:0;transform:translateY(20px)}
+    72%{opacity:1;transform:translateY(-2px)}
+    100%{opacity:1;transform:translateY(0)}
+}
+
+body.diomede-menu-page #main-grid .btn .material-symbols-outlined{
+    transform-origin:center;
+    animation:diomedeIconSettle .50s cubic-bezier(.2,.8,.2,1) both;
+    animation-delay:calc(.56s + (var(--diomede-menu-index, 0) * 82ms));
+}
+@keyframes diomedeIconSettle{
+    0%{opacity:.2;transform:scale(.82)}
+    72%{opacity:1;transform:scale(1.07)}
+    100%{opacity:1;transform:scale(1)}
+}
+
+body.diomede-menu-page .weather-widget{
+    opacity:0;
+    animation:diomedeWeatherIn .72s cubic-bezier(.22,.61,.36,1) 1.08s both;
+}
+@keyframes diomedeWeatherIn{
+    from{opacity:0;transform:translateY(14px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+body.diomede-menu-page .lang-switcher{
+    animation:diomedeLangIn .62s cubic-bezier(.22,.61,.36,1) .20s both;
+}
+@keyframes diomedeLangIn{
+    from{opacity:0;transform:translateY(-8px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+/* PAGINE PRINCIPALI DEL MENU:
+   tutto resta centrato nello stesso asse dall'inizio alla fine. */
+body.diomede-menu-child-page .hero-header{
+    overflow:hidden;
+}
+body.diomede-menu-child-page .hero-header .logo-img{
+    animation:diomedeChildHeroLogo .92s cubic-bezier(.22,.61,.36,1) .08s both;
+}
+@keyframes diomedeChildHeroLogo{
+    from{opacity:0;transform:translateY(-10px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+body.diomede-menu-child-page .lang-switcher{
+    animation:diomedeLangIn .62s cubic-bezier(.22,.61,.36,1) .20s both;
+}
+
+body.diomede-menu-child-page .diomede-global-back{
+    animation:diomedeBackIn .58s cubic-bezier(.22,.61,.36,1) .18s both;
+}
+@keyframes diomedeBackIn{
+    from{opacity:0;transform:translateY(-7px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+body.diomede-menu-child-page .container > h2,
+body.diomede-menu-child-page .container > .header-content{
+    animation:diomedeTitleIn .72s cubic-bezier(.22,.61,.36,1) .22s both;
+}
+@keyframes diomedeTitleIn{
+    from{opacity:0;transform:translateY(15px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+body.diomede-menu-child-page .container > .divider,
+body.diomede-menu-child-page .header-content .divider{
+    transform-origin:center;
+    animation:diomedeLinePlus .82s cubic-bezier(.22,.61,.36,1) .40s both;
+}
+@keyframes diomedeLinePlus{
+    from{opacity:.08;transform:scaleX(.04)}
+    to{opacity:1;transform:scaleX(1)}
+}
+
+/* Reveal verticale: niente più entrate da sinistra/destra. */
+body.diomede-menu-child-page .diomede-reveal{
+    opacity:0;
+    transform:translateY(22px);
+    transition:
+        opacity .64s cubic-bezier(.22,.61,.36,1),
+        transform .64s cubic-bezier(.22,.61,.36,1);
+    will-change:opacity,transform;
+}
+
+body.diomede-menu-child-page .diomede-reveal.diomede-from-left,
+body.diomede-menu-child-page .diomede-reveal.diomede-from-right{
+    transform:translateY(22px);
+}
+
+body.diomede-menu-child-page .diomede-reveal.diomede-visible,
+body.diomede-menu-child-page .diomede-reveal.diomede-visible.diomede-from-left,
+body.diomede-menu-child-page .diomede-reveal.diomede-visible.diomede-from-right{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* Icone animate ma senza spostare le card */
+body.diomede-menu-child-page .diomede-reveal.diomede-visible .main-icon,
+body.diomede-menu-child-page .diomede-reveal.diomede-visible .info-icon,
+body.diomede-menu-child-page .diomede-reveal.diomede-visible .icon-circle,
+body.diomede-menu-child-page .diomede-reveal.diomede-visible .category-icon{
+    animation:diomedeCardIconPop .48s cubic-bezier(.2,.8,.2,1) .10s both;
+}
+@keyframes diomedeCardIconPop{
+    0%{opacity:.35;transform:scale(.82)}
+    72%{opacity:1;transform:scale(1.06)}
+    100%{opacity:1;transform:scale(1)}
+}
+
+/* Mantiene esattamente le larghezze originali durante e dopo le animazioni */
+body.diomede-menu-child-page .instruction-card,
+body.diomede-menu-child-page .info-card,
+body.diomede-menu-child-page .contact-card,
+body.diomede-menu-child-page .category-card,
+body.diomede-menu-child-page .destination-card,
+body.diomede-menu-child-page .promo-card,
+body.diomede-menu-child-page .wifi-card,
+body.diomede-menu-child-page .info-section,
+body.diomede-menu-child-page .category-section,
+body.diomede-menu-child-page .video-guide-card,
+body.diomede-menu-child-page .tip-note{
+    box-sizing:border-box;
+    max-width:100%;
+}
+
+/* Feedback tattile: scala minima, senza spostamento */
+body.diomede-menu-child-page .instruction-card:active,
+body.diomede-menu-child-page .info-card:active,
+body.diomede-menu-child-page .contact-card:active,
+body.diomede-menu-child-page .category-card:active,
+body.diomede-menu-child-page .destination-card:active,
+body.diomede-menu-child-page .wifi-card:active{
+    transform:scale(.985);
+    transition-duration:90ms;
+}
+
+/* Riduci movimento */
+@media(prefers-reduced-motion:reduce){
+    body.diomede-menu-page #main-grid .btn,
+    body.diomede-menu-page #main-grid .btn .material-symbols-outlined,
+    body.diomede-menu-page .weather-widget,
+    body.diomede-menu-page .header-wrapper .logo-img,
+    body.diomede-menu-page .welcome-section,
+    body.diomede-menu-page .lang-switcher,
+    body.diomede-menu-child-page .hero-header .logo-img,
+    body.diomede-menu-child-page .lang-switcher,
+    body.diomede-menu-child-page .diomede-global-back,
+    body.diomede-menu-child-page .container > h2,
+    body.diomede-menu-child-page .container > .header-content,
+    body.diomede-menu-child-page .diomede-reveal{
+        opacity:1 !important;
+        transform:none !important;
+        animation:none !important;
+        transition:none !important;
+    }
+}
+
+
+/* ==========================================================
+   DIOMEDE KIOSK MODE
+   Sul tablet i link esterni non aprono browser/app: mostrano un QR.
+   ========================================================== */
+html.diomede-kiosk-mode,
+body.diomede-kiosk-mode {
+    overscroll-behavior: none;
+}
+
+body.diomede-kiosk-mode a.diomede-kiosk-external {
+    cursor: pointer;
+}
+
+body.diomede-kiosk-mode a.diomede-kiosk-external.action-btn,
+body.diomede-kiosk-mode a.diomede-kiosk-external.maps-btn,
+body.diomede-kiosk-mode a.diomede-kiosk-external.confirm-btn {
+    position: relative;
+}
+
+body.diomede-kiosk-mode a.diomede-kiosk-external.action-btn::after,
+body.diomede-kiosk-mode a.diomede-kiosk-external.maps-btn::after,
+body.diomede-kiosk-mode a.diomede-kiosk-external.confirm-btn::after {
+    content: 'QR';
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 22px;
+    height: 16px;
+    margin-left: 7px;
+    padding: 0 5px;
+    border-radius: 999px;
+    font-size: 8px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: .7px;
+    background: rgba(255,255,255,.72);
+    color: #64594f;
+    border: 1px solid rgba(163,150,137,.22);
+}
+
+.diomede-kiosk-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2147483600;
+    display: grid;
+    place-items: center;
+    padding: max(18px, env(safe-area-inset-top)) 18px max(18px, env(safe-area-inset-bottom));
+    background: rgba(28,22,18,.58);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity .22s ease, visibility .22s ease;
+}
+
+.diomede-kiosk-overlay.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.diomede-kiosk-modal {
+    position: relative;
+    width: min(92vw, 430px);
+    max-height: min(88vh, 650px);
+    overflow: auto;
+    padding: 26px 24px 22px;
+    border-radius: 26px;
+    text-align: center;
+    background: rgba(249,247,244,.97);
+    color: #312b27;
+    border: 1px solid rgba(255,255,255,.88);
+    box-shadow: 0 28px 75px rgba(0,0,0,.26);
+    -webkit-backdrop-filter: blur(18px) saturate(108%);
+    backdrop-filter: blur(18px) saturate(108%);
+    transform: translateY(10px) scale(.985);
+    transition: transform .24s cubic-bezier(.22,.61,.36,1);
+}
+
+.diomede-kiosk-overlay.is-open .diomede-kiosk-modal {
+    transform: translateY(0) scale(1);
+}
+
+.diomede-kiosk-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 38px;
+    height: 38px;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(93,84,76,.08);
+    color: #4c443e;
+    font-size: 26px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.diomede-kiosk-symbol {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 10px;
+    display: grid;
+    place-items: center;
+    border-radius: 16px;
+    background: rgba(163,150,137,.13);
+    color: #786b60;
+}
+
+.diomede-kiosk-symbol .material-symbols-outlined { font-size: 29px; }
+
+.diomede-kiosk-modal h2 {
+    margin: 0 auto 7px;
+    max-width: 330px;
+    font-family: 'PT Serif', serif;
+    font-size: clamp(22px, 4vw, 30px);
+    font-weight: 400;
+    line-height: 1.08;
+    color: #332c27;
+}
+
+.diomede-kiosk-subtitle {
+    margin: 0 auto 18px;
+    max-width: 340px;
+    font-size: 13px;
+    line-height: 1.45;
+    color: #6c625a;
+}
+
+.diomede-kiosk-qr {
+    width: min(62vw, 250px);
+    aspect-ratio: 1;
+    margin: 0 auto 13px;
+    padding: 10px;
+    display: grid;
+    place-items: center;
+    border-radius: 20px;
+    background: #fff;
+    box-shadow: 0 10px 28px rgba(49,40,33,.09);
+    border: 1px solid rgba(163,150,137,.18);
+}
+
+.diomede-kiosk-qr svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.diomede-kiosk-loading {
+    font-size: 12px;
+    color: #85786e;
+}
+
+.diomede-kiosk-destination {
+    margin: 0 auto 17px;
+    max-width: 330px;
+    padding: 8px 11px;
+    border-radius: 12px;
+    background: rgba(163,150,137,.08);
+    color: #62584f;
+    font-size: 11px;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+}
+
+.diomede-kiosk-done {
+    min-width: 150px;
+    min-height: 42px;
+    padding: 11px 22px;
+    border: 0;
+    border-radius: 999px;
+    background: #2f2925;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .8px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+body.diomede-kiosk-modal-open { overflow: hidden !important; }
+body.idro-modal-open .diomede-kiosk-overlay { z-index: 2147483640; }
+
+@media (min-width: 700px) {
+    .diomede-kiosk-modal { width: min(76vw, 470px); padding: 30px 30px 25px; }
+    .diomede-kiosk-qr { width: 260px; }
+}
