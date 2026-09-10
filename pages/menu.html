@@ -3056,6 +3056,45 @@
             }
         }
 
+
+
+        /* ==========================================================
+           MOBILE PORTRAIT — COMPOSIZIONE VERTICALE ORDINATA
+           Logo più vicino alla griglia e meteo più vicino ai pulsanti.
+           Dimensioni e centratura dei 9 pulsanti restano invariate.
+           ========================================================== */
+        @media (max-width: 699px) and (orientation: portrait) {
+            .header-wrapper {
+                position: relative !important;
+                top: 16px !important;
+            }
+
+            #main-grid {
+                row-gap: clamp(13px, 1.9vh, 17px) !important;
+            }
+
+            .weather-widget.weather-3day {
+                position: relative !important;
+                top: -26px !important;
+            }
+        }
+
+        /* Telefoni più bassi: stesso equilibrio, con spostamenti ridotti
+           per evitare qualsiasi sovrapposizione. */
+        @media (max-width: 699px) and (orientation: portrait) and (max-height: 700px) {
+            .header-wrapper {
+                top: 10px !important;
+            }
+
+            #main-grid {
+                row-gap: 11px !important;
+            }
+
+            .weather-widget.weather-3day {
+                top: -16px !important;
+            }
+        }
+
 </style>
     <link rel="stylesheet" href="../assets/css/wow.css">
 </head>

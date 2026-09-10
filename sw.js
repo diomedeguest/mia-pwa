@@ -1,4 +1,4 @@
-const CACHE_NAME = 'diomede-v241-compact-weather-welcome';
+const CACHE_NAME = 'diomede-v242-menu-mobile-spacing-order';
 
 const APP_SHELL = [
   './',
