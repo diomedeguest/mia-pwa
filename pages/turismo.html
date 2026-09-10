@@ -1,220 +1,40 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-<meta name="robots" content="noindex,nofollow,noarchive">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Turismo - Diomede Luxury</title>
-    <meta name="theme-color" content="#F0EDE9">
-    <link rel="manifest" href="../manifest.json">
-    <link rel="apple-touch-icon" href="../logo.png">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=Open+Sans:wght@400;600&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,200,0,0&display=swap" rel="stylesheet">
-
-    <style>
-        :root {
-            --primary-accent: #A39689;
-            --bg-color: #F0EDE9;
-            --text-dark: #1a1a1a;
-        }
-
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { font-family: 'Open Sans', sans-serif; margin: 0; background-color: var(--bg-color); color: var(--text-dark); line-height: 1.4; text-align: center; }
-
-        /* LINGUA */
-        .lang-switcher { position: absolute; top: 15px; right: 15px; display: flex; gap: 8px; z-index: 100; }
-        .lang-btn {
-            width: 35px; height: 35px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.1);
-            background: rgba(255,255,255,0.6); font-size: 10px; font-weight: bold;
-            display: flex; align-items: center; justify-content: center; cursor: pointer; backdrop-filter: blur(5px);
-        }
-        .lang-btn.active { background: var(--primary-accent); color: white; border-color: var(--primary-accent); }
-
-        /* HEADER */
-        .hero-header { width: 100%; height: 240px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
-        .logo-img { width: 100%; max-width: 300px; z-index: 5; }
-        .hero-overlay { position: absolute; bottom: 0; left: 0; width: 100%; height: 60px; background: linear-gradient(to top, var(--bg-color), transparent); }
-
-        /* GRID */
-        .container { width: 100%; max-width: 900px; margin: -30px auto 0; padding: 0 20px 80px; position: relative; z-index: 10; }
-        h2 { font-family: 'PT Serif', serif; font-size: 34px; color: #2c2c2c; }
-        .divider { width: 50px; height: 1px; background-color: var(--primary-accent); margin: 10px auto 30px; }
-
-        .destinations-grid { display: grid; grid-template-columns: 1fr; gap: 12px; text-align: left; }
-        @media (min-width: 768px) { .destinations-grid { grid-template-columns: 1fr 1fr; } }
-
-        .destination-card {
-            background-color: rgba(255, 255, 255, 0.5);
-            border: 1px solid rgba(163, 150, 137, 0.3);
-            border-radius: 15px; padding: 20px; display: flex; flex-direction: column;
-        }
-        .dest-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-        .dest-header h3 { font-family: 'PT Serif', serif; font-size: 20px; margin: 0; }
-        .distance-tag { font-size: 9px; background: var(--primary-accent); padding: 4px 10px; border-radius: 50px; color: white; font-weight: 700; }
-        .dest-description { font-size: 13px; margin-bottom: 15px; flex-grow: 1; }
-
-        .maps-btn {
-            display: inline-flex; align-items: center; background: white; border: 1px solid var(--primary-accent);
-            border-radius: 10px; padding: 8px 15px; text-decoration: none; color: var(--text-dark);
-            font-size: 10px; font-weight: 700; text-transform: uppercase; width: fit-content;
-        }
-        .maps-btn:active { background: var(--primary-accent); color: white; }
-
-        /* BACK */
-        .back-btn {
-            display: inline-flex; align-items: center; background: var(--primary-accent); color: white;
-            text-decoration: none; padding: 16px 40px; border-radius: 50px; font-size: 12px; font-weight: 700;
-            margin-top: 50px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-    </style>
-
-<style id="diomede-global-back-style">
-.diomede-global-back{
-    position:fixed;
-    top:max(16px, env(safe-area-inset-top));
-    left:16px;
-    width:38px;
-    height:38px;
-    border-radius:50%;
-    border:1px solid #A39689;
-    background:#A39689;
-    color:#ffffff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    z-index:9999;
-    cursor:pointer;
-    -webkit-backdrop-filter:blur(10px);
-    backdrop-filter:blur(10px);
-    box-shadow:0 4px 14px rgba(0,0,0,.08);
-    transition:transform .18s ease, background .18s ease;
-    padding:0;
-}
-.diomede-global-back:active{
-    transform:scale(.94);
-    background:#8D8378;
-}
-.diomede-global-back .material-symbols-outlined{
-    font-size:20px;
-    line-height:1;
-    font-variation-settings:'wght' 300;
-}
-@media (max-width:480px){
-    .diomede-global-back{
-        top:max(14px, env(safe-area-inset-top));
-        left:14px;
-        width:36px;
-        height:36px;
-    }
-}
-</style>
-
-    <link rel="stylesheet" href="../assets/css/wow.css">
+<meta charset="UTF-8"><meta name="robots" content="noindex,nofollow,noarchive"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Scopri il territorio - Diomede Luxury</title><meta name="theme-color" content="#F0EDE9"><link rel="manifest" href="../manifest.json"><link rel="apple-touch-icon" href="../logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=Open+Sans:wght@400;600;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,200,0,0&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}:root{--accent:#A39689;--bg:#F0EDE9;--text:#1a1a1a;--muted:#6d655e;--border:rgba(163,150,137,.28)}body{font-family:'Open Sans',sans-serif;margin:0;background:var(--bg);color:var(--text);line-height:1.45;text-align:center}.lang-switcher{position:absolute;top:15px;right:15px;display:flex;gap:8px;z-index:100}.lang-btn{width:35px;height:35px;border-radius:50%;border:1px solid rgba(0,0,0,.1);background:rgba(255,255,255,.6);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;cursor:pointer}.lang-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}.hero-header{width:100%;height:240px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}.logo-img{width:100%;max-width:300px;z-index:5}.hero-overlay{position:absolute;bottom:0;left:0;width:100%;height:60px;background:linear-gradient(to top,var(--bg),transparent)}.container{width:100%;max-width:960px;margin:-30px auto 0;padding:0 20px 80px;position:relative;z-index:10}.header-content{margin-bottom:26px}h2{font-family:'PT Serif',serif;font-size:34px;margin:0;font-weight:400;color:#2c2c2c}.intro{font-size:13px;line-height:1.65;color:var(--muted);max-width:650px;margin:10px auto 0}.divider{width:50px;height:1px;background:var(--accent);margin:12px auto 30px}.section-heading{display:flex;align-items:center;gap:12px;text-align:left;margin:30px 0 13px}.section-heading:first-of-type{margin-top:0}.section-heading .material-symbols-outlined{color:var(--accent);font-size:20px}.section-heading h3{font-family:'PT Serif',serif;font-size:22px;font-weight:400;margin:0}.section-heading span.note{font-size:10px;text-transform:uppercase;letter-spacing:1.15px;color:#897e75;font-weight:700}.destinations-grid{display:grid;grid-template-columns:1fr;gap:14px;text-align:left}.destination-card{background:rgba(255,255,255,.55);border:1px solid var(--border);border-radius:20px;padding:20px;display:flex;flex-direction:column;box-shadow:0 4px 15px rgba(0,0,0,.03)}.dest-header{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:10px}.dest-header h4{font-family:'PT Serif',serif;font-size:21px;margin:0;color:#2c2c2c}.distance-tag{font-size:9px;background:var(--accent);padding:5px 10px;border-radius:50px;color:#fff;font-weight:700;white-space:nowrap}.dest-description{font-size:13px;line-height:1.62;color:#4e4843;margin:0 0 11px}.ideal{font-size:11px;color:#746a61;margin:0 0 12px}.ideal strong{color:#4e4843}.special-box{margin:3px 0 12px;padding:12px 13px;background:rgba(163,150,137,.10);border-left:2px solid var(--accent);font-size:11px;line-height:1.55;color:#5d544c}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}.link-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-width:120px;flex:1;padding:10px 12px;border-radius:11px;border:1px solid rgba(163,150,137,.42);background:#fff;color:#2f2a26;text-decoration:none;font-size:9px;text-transform:uppercase;letter-spacing:.55px;font-weight:700}.link-btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}.kiosk-actions{display:none}.diomede-kiosk-mode .actions{display:none}.diomede-kiosk-mode .kiosk-actions{display:flex;align-items:center;gap:13px;margin-top:auto;padding-top:12px}.kiosk-qr{width:106px;padding:7px;background:#fff;border-radius:11px}.kiosk-qr svg{display:block;width:100%;height:auto}.kiosk-label{font-size:10px;line-height:1.5;color:#665d56}.kiosk-label strong{display:block;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#4c453f;margin-bottom:3px}.back-btn{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;text-decoration:none;padding:14px 34px;border-radius:50px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.4px;margin-top:45px}.diomede-global-back{position:fixed;top:max(16px,env(safe-area-inset-top));left:16px;width:38px;height:38px;border-radius:50%;border:1px solid var(--accent);background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;z-index:9999;padding:0}.diomede-global-back .material-symbols-outlined{font-size:20px}@media(min-width:768px){.hero-header{height:280px}.logo-img{max-width:400px}.container{margin-top:-40px}.destinations-grid{grid-template-columns:1fr 1fr;gap:18px}h2{font-size:40px}}@media(max-width:480px){.diomede-kiosk-mode .kiosk-actions{align-items:flex-start}.kiosk-qr{width:96px;flex:0 0 96px}}
+</style><link rel="stylesheet" href="../assets/css/wow.css">
 </head>
 <body>
-
-<button type="button" class="diomede-global-back" aria-label="Torna alla pagina precedente" title="Indietro" onclick="diomedeGoBack()">
-    <span class="material-symbols-outlined">arrow_back_ios_new</span>
-</button>
-
-
-    <div class="lang-switcher">
-        <div id="btn-it" class="lang-btn" onclick="setLanguage('it')">ITA</div>
-        <div id="btn-en" class="lang-btn" onclick="setLanguage('en')">ENG</div>
-    </div>
-
-    <div class="hero-header">
-        <img src="../assets/images/header.png" alt="Logo" class="logo-img">
-        <div class="hero-overlay"></div>
-    </div>
-
-    <div class="container">
-        <h2 data-it="Esplora il Territorio" data-en="Explore the Area">Esplora il Territorio</h2>
-        <div class="divider"></div>
-
-        <div id="destinations-grid" class="destinations-grid">
-            </div>
-
-        <a href="menu.html" class="back-btn">
-            <span class="material-symbols-outlined" style="margin-right:10px; font-size:16px;">arrow_back_ios_new</span>
-            <span data-it="Torna alla home" data-en="Back to home">Torna alla home</span>
-        </a>
-    </div>
-
-    <script>
-        // CONFIGURAZIONE DESTINAZIONI: Aggiungile qui facilmente
-        const DESTINATIONS = [
-            {
-                name: "Brindisi",
-                time: "0 min",
-                it: "Il porto naturale, la scalinata monumentale e le Colonne Romane.",
-                en: "The natural harbor, the monumental staircase, and the Roman Columns.",
-                link: "https://www.google.com/maps/search/?api=1&query=Brindisi+Centro"
-            },
-            {
-                name: "Mesagne",
-                time: "15 min",
-                it: "Il centro storico a forma di cuore e l'imponente Castello Svevo.",
-                en: "The heart-shaped historic center and the imposing Swabian Castle.",
-                link: "https://www.google.com/maps/search/?api=1&query=Castello+Svevo+Mesagne"
-            },
-            {
-                name: "Torre Guaceto",
-                time: "20 min",
-                it: "Oasi protetta con spiagge selvagge e acque cristalline.",
-                en: "Protected oasis with wild beaches and crystal-clear waters.",
-                link: "https://www.google.com/maps/search/?api=1&query=Riserva+Naturale+Torre+Guaceto"
-            },
-            {
-                name: "Lecce",
-                time: "30 min",
-                it: "La 'Firenze del Sud', trionfo del Barocco e dell'arte.",
-                en: "The 'Florence of the South', a triumph of Baroque art and architecture.",
-                link: "https://www.google.com/maps/search/?api=1&query=Lecce+Centro"
-            }
-        ];
-
-        function renderDestinations(lang) {
-            const grid = document.getElementById('destinations-grid');
-            grid.innerHTML = '';
-
-            DESTINATIONS.forEach(dest => {
-                grid.innerHTML += `
-                    <div class="destination-card">
-                        <div class="dest-header">
-                            <h3>${dest.name}</h3>
-                            <span class="distance-tag">${dest.time}</span>
-                        </div>
-                        <p class="dest-description">${dest[lang]}</p>
-                        <a href="${dest.link}" target="_blank" class="maps-btn" rel="noopener">
-                            <span class="material-symbols-outlined" style="margin-right: 6px; font-size: 16px;">location_on</span>
-                            <span>${lang === 'it' ? 'Posizione' : 'Location'}</span>
-                        </a>
-                    </div>
-                `;
-            });
-        }
-
-        function setLanguage(lang) {
-            localStorage.setItem('preferredLang', lang);
-            document.getElementById('btn-it').classList.toggle('active', lang === 'it');
-            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-
-            document.querySelectorAll('[data-it]').forEach(el => {
-                el.textContent = el.getAttribute('data-' + lang);
-            });
-
-            renderDestinations(lang);
-        }
-
-        window.onload = () => {
-            const savedLang = localStorage.getItem('preferredLang') || 'it';
-            setLanguage(savedLang);
-        };
-    </script>
-
-<script src="../assets/js/common.js"></script>
-</body>
-</html>
+<button type="button" class="diomede-global-back" aria-label="Torna alla pagina precedente" onclick="diomedeGoBack()"><span class="material-symbols-outlined">arrow_back_ios_new</span></button>
+<div class="lang-switcher"><div id="btn-it" class="lang-btn" onclick="setLanguage('it')">ITA</div><div id="btn-en" class="lang-btn" onclick="setLanguage('en')">ENG</div></div>
+<div class="hero-header"><img src="../assets/images/header.png" alt="Diomede Luxury Logo" class="logo-img"><div class="hero-overlay"></div></div>
+<div class="container"><div class="header-content"><h2 data-it="Scopri il territorio" data-en="Explore the area">Scopri il territorio</h2><p class="intro" data-it="Una selezione di luoghi che meritano davvero una visita durante il soggiorno, dalle spiagge più vicine alle gite di un'intera giornata." data-en="A selection of places truly worth visiting during your stay, from nearby beaches to full-day trips.">Una selezione di luoghi che meritano davvero una visita durante il soggiorno, dalle spiagge più vicine alle gite di un'intera giornata.</p><div class="divider"></div></div>
+<div class="section-heading"><span class="material-symbols-outlined">near_me</span><div><h3 data-it="Da non perdere nei dintorni" data-en="Don't miss nearby">Da non perdere nei dintorni</h3><span class="note" data-it="Facili da raggiungere" data-en="Easy to reach">Facili da raggiungere</span></div></div>
+<div id="near-grid" class="destinations-grid"></div>
+<div class="section-heading"><span class="material-symbols-outlined">explore</span><div><h3 data-it="Gite in giornata" data-en="Day trips">Gite in giornata</h3><span class="note" data-it="Per chi vuole esplorare di più" data-en="For a longer adventure">Per chi vuole esplorare di più</span></div></div>
+<div id="day-grid" class="destinations-grid"></div>
+<a href="menu.html" class="back-btn"><span class="material-symbols-outlined">arrow_back_ios_new</span><span data-it="Torna al menu" data-en="Back to menu">Torna al menu</span></a></div>
+<script>
+const DESTINATIONS=[
+{group:'near',name:'Brindisi',time:'0–10 min',it:'Porto naturale, lungomare, centro storico e la Scalinata Virgilio con le Colonne Romane.',en:'Natural harbour, seafront, historic centre and the Scalinata Virgilio with the Roman Columns.',idealIt:'passeggiata, aperitivo e tramonto',idealEn:'walking, aperitivo and sunset',map:'https://www.google.com/maps/search/?api=1&query=Centro+Storico+Brindisi'},
+{group:'near',name:'Mesagne',time:'15–20 min',it:'Un centro storico raccolto e suggestivo, con vicoli bianchi, piazze e il Castello Normanno-Svevo.',en:'A compact and atmospheric old town with white alleys, squares and the Norman-Swabian Castle.',idealIt:'cena e passeggiata serale',idealEn:'dinner and an evening stroll',map:'https://www.google.com/maps/search/?api=1&query=Centro+Storico+Mesagne'},
+{group:'near',name:'Torre Guaceto',time:'20–25 min',it:'Riserva naturale protetta con dune, macchia mediterranea e un tratto di costa tra i più belli dell’Adriatico pugliese.',en:'Protected nature reserve with dunes, Mediterranean scrub and one of the most beautiful stretches of the Adriatic coast in Puglia.',idealIt:'mare, natura e relax',idealEn:'sea, nature and relaxation',map:'https://www.google.com/maps/search/?api=1&query=Riserva+Naturale+Torre+Guaceto',site:'https://riservaditorreguaceto.it/',siteName:'Riserva Torre Guaceto',specialIt:'In stagione sono disponibili servizi navetta per gli accessi di Boa Gialla e Punta Penna Grossa. Per Punta Penna Grossa il servizio ufficiale Park & Ride collega il parcheggio “Porta della Riserva” alla spiaggia. Orari e modalità possono cambiare: controlla sempre il sito ufficiale.',specialEn:'Seasonal shuttle services are available for the Boa Gialla and Punta Penna Grossa access points. For Punta Penna Grossa, the official Park & Ride links the “Porta della Riserva” car park with the beach. Times and arrangements can change: always check the official website.'},
+{group:'near',name:'Ostuni',time:'35–40 min',it:'La Città Bianca: vicoli, terrazze panoramiche e una bellissima atmosfera soprattutto dal tardo pomeriggio.',en:'The White City: alleys, panoramic terraces and a beautiful atmosphere, especially from late afternoon.',idealIt:'fotografie, aperitivo e cena',idealEn:'photos, aperitivo and dinner',map:'https://www.google.com/maps/search/?api=1&query=Centro+Storico+Ostuni'},
+{group:'near',name:'Lecce',time:'35–45 min',it:'Uno dei centri storici più eleganti del Sud, celebre per il Barocco leccese e le sue piazze scenografiche.',en:'One of southern Italy’s most elegant historic centres, famous for Lecce Baroque and its beautiful squares.',idealIt:'arte, cultura e passeggiata serale',idealEn:'art, culture and an evening stroll',map:'https://www.google.com/maps/search/?api=1&query=Centro+Storico+Lecce'},
+{group:'near',name:'Cisternino',time:'50–55 min',it:'Borgo bianco della Valle d’Itria, piccolo e molto piacevole da vivere senza fretta.',en:'A whitewashed village in the Itria Valley, small and perfect for a relaxed visit.',idealIt:'borgo, carne alla brace e atmosfera',idealEn:'village life, grilled meat and atmosphere',map:'https://www.google.com/maps/search/?api=1&query=Centro+Storico+Cisternino'},
+{group:'day',name:'Alberobello',time:'~1 h',it:'Il paese dei trulli, unico nel suo genere e ideale da abbinare a una giornata nella Valle d’Itria.',en:'The town of trulli, unique in its kind and perfect for a day exploring the Itria Valley.',idealIt:'architettura e fotografie',idealEn:'architecture and photos',map:'https://www.google.com/maps/search/?api=1&query=Alberobello+Trulli'},
+{group:'day',name:'Bari',time:'~1 h 15',it:'Bari Vecchia, il lungomare, la Basilica di San Nicola e una cucina di strada che vale il viaggio.',en:'Bari Vecchia, the seafront, Basilica of Saint Nicholas and street food that is worth the trip.',idealIt:'città, cultura e street food',idealEn:'city life, culture and street food',map:'https://www.google.com/maps/search/?api=1&query=Bari+Vecchia',site:'https://www.viaggiareinpuglia.it/',siteName:'Viaggiare in Puglia'},
+{group:'day',name:'Otranto',time:'~1 h 15',it:'Borgo sul mare con Castello Aragonese, centro storico e uno dei tratti di costa più affascinanti del Salento.',en:'A seaside town with the Aragonese Castle, historic centre and one of Salento’s most fascinating stretches of coastline.',idealIt:'mare, cultura e passeggiata',idealEn:'sea, culture and walking',map:'https://www.google.com/maps/search/?api=1&query=Centro+Storico+Otranto',site:'https://comune.otranto.le.it/vivere-il-comune/luoghi/discover-otranto/',siteName:'Discover Otranto'},
+{group:'day',name:'Santa Maria di Leuca',time:'~1 h 45',it:'Il punto più a sud del Salento: faro, santuario, ville storiche e il grande panorama dal promontorio.',en:'The southern tip of Salento: lighthouse, sanctuary, historic villas and wide views from the headland.',idealIt:'panorami, costa e giornata on the road',idealEn:'views, coastline and a road-trip day',map:'https://www.google.com/maps/search/?api=1&query=Santa+Maria+di+Leuca',site:'https://www.comune.castrignanodelcapo.le.it/argomento/turismo/',siteName:'Turismo · Comune'}
+];
+function card(dest,lang){const d=document.createElement('article');d.className='destination-card';const desc=lang==='en'?dest.en:dest.it;const ideal=lang==='en'?dest.idealEn:dest.idealIt;const special=lang==='en'?dest.specialEn:dest.specialIt;const siteBtn=dest.site?`<a class="link-btn" href="${dest.site}" target="_blank" rel="noopener"><span class="material-symbols-outlined">language</span>${dest.siteName}</a>`:'';const qrTarget=dest.site||dest.map;d.innerHTML=`<div class="dest-header"><h4>${dest.name}</h4><span class="distance-tag">${dest.time}</span></div><p class="dest-description">${desc}</p><p class="ideal"><strong>${lang==='en'?'Ideal for:':'Ideale per:'}</strong> ${ideal}</p>${special?`<div class="special-box">${special}</div>`:''}<div class="actions"><a class="link-btn primary" href="${dest.map}" target="_blank" rel="noopener"><span class="material-symbols-outlined">location_on</span>${lang==='en'?'Map':'Mappa'}</a>${siteBtn}</div><div class="kiosk-actions"><div class="kiosk-qr" data-qr="${qrTarget}">QR…</div><div class="kiosk-label"><strong>${lang==='en'?'Continue on your phone':'Continua sul tuo smartphone'}</strong>${lang==='en'?'Scan the QR code to open the official information or destination.':'Scansiona il QR code con il tuo smartphone per aprire il sito ufficiale o la destinazione.'}</div></div>`;return d}
+function render(lang){const n=document.getElementById('near-grid'),g=document.getElementById('day-grid');n.innerHTML='';g.innerHTML='';DESTINATIONS.forEach(x=>(x.group==='near'?n:g).appendChild(card(x,lang)));renderKioskQr()}
+function renderKioskQr(){if(window.DiomedeMode!=='kiosk'||!window.DiomedeQR)return;document.querySelectorAll('[data-qr]').forEach(el=>{el.innerHTML=window.DiomedeQR.createSvg(el.getAttribute('data-qr'),{quiet:4})})}
+function setLanguage(lang){localStorage.setItem('preferredLang',lang);document.getElementById('btn-it').classList.toggle('active',lang==='it');document.getElementById('btn-en').classList.toggle('active',lang==='en');document.querySelectorAll('[data-it]').forEach(el=>{const v=el.getAttribute('data-'+lang);if(v)el.textContent=v});render(lang)}
+</script>
+<script src="../assets/js/common.js"></script><script src="../assets/js/qrcode-local.js"></script><script>document.addEventListener('DOMContentLoaded',()=>setLanguage(localStorage.getItem('preferredLang')||'it'));</script>
+</body></html>

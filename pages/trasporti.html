@@ -1,415 +1,112 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-    <title>Trasporti - Diomede Luxury</title>
-    <meta name="theme-color" content="#F0EDE9">
-    <link rel="manifest" href="../manifest.json">
-    <link rel="apple-touch-icon" href="../logo.png">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=Open+Sans:wght@400;600&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,200,0,0&display=swap" rel="stylesheet">
-
-    <style>
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-
-        body {
-            font-family: 'Open Sans', sans-serif;
-            margin: 0; padding: 0;
-            background-color: #F0EDE9;
-            color: #1a1a1a;
-            line-height: 1.4;
-            text-align: center;
-        }
-
-        /* LINGUA SWITCHER */
-        .lang-switcher {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            display: flex;
-            gap: 8px;
-            z-index: 100;
-        }
-
-        .lang-btn {
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            border: 1px solid rgba(0,0,0,0.1);
-            background: rgba(255,255,255,0.6);
-            color: #1a1a1a;
-            font-size: 10px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            backdrop-filter: blur(5px);
-            transition: 0.3s;
-        }
-
-        .lang-btn.active {
-            background: #A39689;
-            color: white;
-            border-color: #A39689;
-        }
-
-        /* HEADER */
-        .hero-header {
-            width: 100%;
-            height: 240px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            padding: 10px 20px;
-            overflow: hidden;
-        }
-
-        .logo-img {
-            width: 100%;
-            max-width: 300px;
-            height: auto;
-            z-index: 5;
-            display: block;
-        }
-
-        .hero-overlay {
-            position: absolute;
-            bottom: 0; left: 0; width: 100%; height: 60px;
-            background: linear-gradient(to top, #F0EDE9, rgba(240, 237, 233, 0));
-        }
-
-        /* CONTAINER */
-        .container {
-            width: 100%;
-            max-width: 900px;
-            margin: -30px auto 0;
-            padding: 0 20px 80px;
-            position: relative;
-            z-index: 10;
-        }
-
-        h2 {
-            font-family: 'PT Serif', serif;
-            font-size: 34px;
-            margin: 0;
-            font-weight: 400;
-            letter-spacing: 0.5px;
-            color: #2c2c2c;
-        }
-
-        .divider { width: 50px; height: 1px; background-color: #A39689; margin: 15px auto 35px; }
-
-        /* Griglia dei Trasporti */
-        .info-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px;
-            text-align: left;
-            margin-top: 10px;
-        }
-
-        @media (min-width: 768px) {
-            .hero-header { height: 280px; }
-            .logo-img { max-width: 400px; }
-            .container { margin-top: -40px; }
-            .info-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
-            h2 { font-size: 40px; }
-        }
-
-        /* CARD TRASPORTI */
-        .info-card {
-            background-color: rgba(255, 255, 255, 0.5);
-            border: 1px solid rgba(163, 150, 137, 0.3);
-            border-radius: 20px;
-            padding: 25px;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
-        }
-
-        .card-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-
-        .info-icon {
-            margin-right: 15px;
-            font-size: 26px;
-            color: #A39689;
-            font-variation-settings: 'wght' 200;
-        }
-
-        .info-text h3 {
-            margin: 0;
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 1.2px;
-            font-weight: 700;
-            color: #888;
-        }
-
-        .info-text p {
-            margin: 8px 0 0;
-            font-size: 14px;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        .flex-row { display: flex; gap: 10px; margin-top: 18px; }
-
-        .action-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #ffffff;
-            border: 1px solid #A39689;
-            border-radius: 12px;
-            padding: 10px;
-            text-decoration: none;
-            color: #1a1a1a;
-            flex: 1;
-            transition: all 0.2s ease;
-            font-size: 10px;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-
-        .action-btn.whatsapp {
-            background-color: rgba(37, 211, 102, 0.05);
-            border-color: #25D366;
-            color: #128C7E;
-        }
-
-        .action-btn:active { transform: scale(0.97); background-color: #f5f5f5; }
-
-        /* BACK BUTTON */
-        .back-btn-container {
-            margin-top: 50px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 16px 40px;
-            background-color: #A39689;
-            color: #ffffff;
-            text-decoration: none;
-            text-transform: uppercase;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            border-radius: 50px;
-            border: none;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-        }
-
-        .back-btn:active { transform: scale(0.96); background-color: #8D8378; }
-
-        .back-btn .material-symbols-outlined {
-            margin-right: 10px;
-            font-size: 16px;
-            color: #ffffff;
-            font-variation-settings: 'wght' 500;
-        }
-    </style>
-
-<style id="diomede-global-back-style">
-.diomede-global-back{
-    position:fixed;
-    top:max(16px, env(safe-area-inset-top));
-    left:16px;
-    width:38px;
-    height:38px;
-    border-radius:50%;
-    border:1px solid #A39689;
-    background:#A39689;
-    color:#ffffff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    z-index:9999;
-    cursor:pointer;
-    -webkit-backdrop-filter:blur(10px);
-    backdrop-filter:blur(10px);
-    box-shadow:0 4px 14px rgba(0,0,0,.08);
-    transition:transform .18s ease, background .18s ease;
-    padding:0;
-}
-.diomede-global-back:active{
-    transform:scale(.94);
-    background:#8D8378;
-}
-.diomede-global-back .material-symbols-outlined{
-    font-size:20px;
-    line-height:1;
-    font-variation-settings:'wght' 300;
-}
-@media (max-width:480px){
-    .diomede-global-back{
-        top:max(14px, env(safe-area-inset-top));
-        left:14px;
-        width:36px;
-        height:36px;
-    }
-}
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Trasporti - Diomede Luxury</title>
+<meta name="theme-color" content="#F0EDE9">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=Open+Sans:wght@400;600;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,200,0,0&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{--accent:#A39689;--accent-dark:#8D8378;--bg:#F0EDE9;--text:#1a1a1a;--muted:#6d655e;--border:rgba(163,150,137,.28)}
+body{font-family:'Open Sans',sans-serif;margin:0;background:var(--bg);color:var(--text);line-height:1.45;text-align:center}
+.lang-switcher{position:absolute;top:15px;right:15px;display:flex;gap:8px;z-index:100}
+.lang-btn{width:35px;height:35px;border-radius:50%;border:1px solid rgba(0,0,0,.1);background:rgba(255,255,255,.6);color:#1a1a1a;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(5px)}
+.lang-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.hero-header{width:100%;height:240px;display:flex;align-items:center;justify-content:center;position:relative;padding:10px 20px;overflow:hidden}
+.logo-img{width:100%;max-width:300px;height:auto;z-index:5;display:block}.hero-overlay{position:absolute;bottom:0;left:0;width:100%;height:60px;background:linear-gradient(to top,var(--bg),rgba(240,237,233,0))}
+.container{width:100%;max-width:920px;margin:-30px auto 0;padding:0 20px 80px;position:relative;z-index:10}
+.header-content{margin-bottom:28px}h2{font-family:'PT Serif',serif;font-size:34px;margin:0;font-weight:400;color:#2c2c2c}.intro{max-width:610px;margin:10px auto 0;font-size:13px;line-height:1.65;color:var(--muted)}
+.divider{width:50px;height:1px;background:var(--accent);margin:12px auto 30px}
+.quick-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:0 auto 22px;text-align:center}.quick-item{background:rgba(255,255,255,.46);border:1px solid var(--border);border-radius:16px;padding:13px 10px}.quick-item strong{display:block;font-family:'PT Serif',serif;font-size:17px;font-weight:400}.quick-item span{display:block;margin-top:3px;font-size:9px;text-transform:uppercase;letter-spacing:1.1px;color:#81776e;font-weight:700}
+.info-grid{display:grid;grid-template-columns:1fr;gap:15px;text-align:left}.info-card{background:rgba(255,255,255,.56);border:1px solid var(--border);border-radius:20px;padding:22px;box-shadow:0 4px 15px rgba(0,0,0,.03);display:flex;flex-direction:column}.card-header{display:flex;align-items:flex-start;gap:14px;margin-bottom:10px}.icon-wrap{width:42px;height:42px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;flex:0 0 42px}.info-icon{font-size:23px;color:var(--accent);font-variation-settings:'wght' 250}.card-title{font-family:'PT Serif',serif;font-size:21px;margin:0;color:#2c2c2c}.card-kicker{display:block;font-size:9px;text-transform:uppercase;letter-spacing:1.25px;font-weight:700;color:#8c8177;margin-top:3px}.card-copy{font-size:13px;line-height:1.65;color:#4f4944;margin:3px 0 0}.detail-list{display:grid;gap:9px;margin:14px 0 0}.detail-row{display:flex;align-items:flex-start;gap:9px;font-size:12px;color:#504943}.detail-row .material-symbols-outlined{font-size:16px;color:var(--accent);margin-top:1px}.detail-row strong{font-weight:700}
+.tip{margin-top:14px;padding:11px 13px;background:rgba(163,150,137,.10);border-left:2px solid var(--accent);font-size:11px;line-height:1.55;color:#5d544c}.guest-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto;padding-top:17px}.action-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;flex:1;min-width:125px;padding:11px 12px;border-radius:12px;border:1px solid rgba(163,150,137,.42);background:#fff;color:#292521;text-decoration:none;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}.action-btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.kiosk-panel{display:none}.diomede-kiosk-mode .guest-actions{display:none}.diomede-kiosk-mode .kiosk-panel{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;margin-top:16px;padding:14px;background:rgba(255,255,255,.78);border:1px solid rgba(163,150,137,.22);border-radius:16px}.kiosk-copy-title{font-size:10px;text-transform:uppercase;letter-spacing:1.15px;font-weight:700;color:#766d65;margin-bottom:4px}.kiosk-copy{font-size:11px;line-height:1.5;color:#5f5750}.kiosk-qr{width:118px;background:#fff;border-radius:12px;padding:8px}.kiosk-qr svg{display:block;width:100%;height:auto}
+.back-btn-container{margin-top:45px;display:flex;justify-content:center}.back-btn{display:inline-flex;align-items:center;gap:8px;padding:14px 34px;background:var(--accent);color:#fff;text-decoration:none;text-transform:uppercase;font-size:10px;font-weight:700;letter-spacing:1.4px;border-radius:50px;box-shadow:0 4px 12px rgba(0,0,0,.08)}
+.diomede-global-back{position:fixed;top:max(16px,env(safe-area-inset-top));left:16px;width:38px;height:38px;border-radius:50%;border:1px solid var(--accent);background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;z-index:9999;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.08);padding:0}.diomede-global-back .material-symbols-outlined{font-size:20px}
+@media(min-width:768px){.hero-header{height:280px}.logo-img{max-width:400px}.container{margin-top:-40px}.info-grid{grid-template-columns:1fr 1fr;gap:20px}h2{font-size:40px}.quick-strip{max-width:650px}}
+@media(max-width:560px){.quick-strip{grid-template-columns:1fr}.diomede-kiosk-mode .kiosk-panel{grid-template-columns:1fr;text-align:center}.kiosk-qr{margin:0 auto;width:135px}}
 </style>
-
-    <link rel="stylesheet" href="../assets/css/wow.css">
+<link rel="stylesheet" href="../assets/css/wow.css">
 </head>
 <body>
+<button type="button" class="diomede-global-back" aria-label="Torna alla pagina precedente" onclick="diomedeGoBack()"><span class="material-symbols-outlined">arrow_back_ios_new</span></button>
+<div class="lang-switcher"><div id="btn-it" class="lang-btn" onclick="setLanguage('it')">ITA</div><div id="btn-en" class="lang-btn" onclick="setLanguage('en')">ENG</div></div>
+<div class="hero-header"><img src="../assets/images/header.png" alt="Diomede Luxury Logo" class="logo-img"><div class="hero-overlay"></div></div>
+<div class="container">
+  <div class="header-content">
+    <h2 data-it="Come muoversi" data-en="Getting around">Come muoversi</h2>
+    <p class="intro" data-it="Le informazioni essenziali per aeroporto, stazione, porto e trasporto pubblico, senza perdere tempo durante il soggiorno." data-en="Essential information for the airport, railway station, port and public transport, so you can move around easily during your stay.">Le informazioni essenziali per aeroporto, stazione, porto e trasporto pubblico, senza perdere tempo durante il soggiorno.</p>
+    <div class="divider"></div>
+  </div>
 
-<button type="button" class="diomede-global-back" aria-label="Torna alla pagina precedente" title="Indietro" onclick="diomedeGoBack()">
-    <span class="material-symbols-outlined">arrow_back_ios_new</span>
-</button>
+  <div class="quick-strip">
+    <div class="quick-item"><strong>~6 min</strong><span data-it="Stazione a piedi" data-en="Walk to station">Stazione a piedi</span></div>
+    <div class="quick-item"><strong>10–15 min</strong><span data-it="Aeroporto → Stazione" data-en="Airport → Station">Aeroporto → Stazione</span></div>
+    <div class="quick-item"><strong>30 min</strong><span data-it="Frequenza linea AP" data-en="AP line frequency">Frequenza linea AP</span></div>
+  </div>
 
+  <div class="info-grid">
+    <section class="info-card">
+      <div class="card-header"><div class="icon-wrap"><span class="material-symbols-outlined info-icon">flight</span></div><div><h3 class="card-title" data-it="Aeroporto del Salento" data-en="Salento Airport">Aeroporto del Salento</h3><span class="card-kicker" data-it="Brindisi · BDS" data-en="Brindisi · BDS">Brindisi · BDS</span></div></div>
+      <p class="card-copy" data-it="La linea AP di STP collega ogni giorno l'aeroporto con la Stazione FS, il centro e Costa Morena." data-en="STP's AP line connects the airport every day with the railway station, city centre and Costa Morena.">La linea AP di STP collega ogni giorno l'aeroporto con la Stazione FS, il centro e Costa Morena.</p>
+      <div class="detail-list"><div class="detail-row"><span class="material-symbols-outlined">schedule</span><span data-it="Corse generalmente ogni 30 minuti." data-en="Services generally run every 30 minutes.">Corse generalmente ogni 30 minuti.</span></div><div class="detail-row"><span class="material-symbols-outlined">route</span><span data-it="Aeroporto → Stazione FS: circa 10–15 minuti, traffico permettendo." data-en="Airport → Railway station: about 10–15 minutes depending on traffic.">Aeroporto → Stazione FS: circa 10–15 minuti, traffico permettendo.</span></div></div>
+      <div class="tip" data-it="Per gli orari aggiornati consulta sempre STP Brindisi prima di partire." data-en="Always check STP Brindisi for the latest timetable before travelling.">Per gli orari aggiornati consulta sempre STP Brindisi prima di partire.</div>
+      <div class="guest-actions"><a class="action-btn primary" href="https://www.stpbrindisi.it/index.php/servizi/bus-aeroporto-stazione-fs-costa-morena" target="_blank" rel="noopener"><span class="material-symbols-outlined">schedule</span><span data-it="Orari STP" data-en="STP timetable">Orari STP</span></a><a class="action-btn" href="https://brindisi.airports.aeroportidipuglia.it/" target="_blank" rel="noopener"><span class="material-symbols-outlined">language</span><span data-it="Aeroporto" data-en="Airport">Aeroporto</span></a></div>
+      <div class="kiosk-panel"><div><div class="kiosk-copy-title" data-it="Orari aggiornati" data-en="Latest timetable">Orari aggiornati</div><div class="kiosk-copy" data-it="Scansiona il QR code con il tuo smartphone per consultare la linea AP." data-en="Scan the QR code with your smartphone to view the AP line timetable.">Scansiona il QR code con il tuo smartphone per consultare la linea AP.</div></div><div class="kiosk-qr" data-qr="https://www.stpbrindisi.it/index.php/servizi/bus-aeroporto-stazione-fs-costa-morena">QR…</div></div>
+    </section>
 
-    <div class="lang-switcher">
-        <div id="btn-it" class="lang-btn" onclick="setLanguage('it')">ITA</div>
-        <div id="btn-en" class="lang-btn" onclick="setLanguage('en')">ENG</div>
-    </div>
+    <section class="info-card">
+      <div class="card-header"><div class="icon-wrap"><span class="material-symbols-outlined info-icon">train</span></div><div><h3 class="card-title" data-it="Stazione Brindisi Centrale" data-en="Brindisi Central Station">Stazione Brindisi Centrale</h3><span class="card-kicker" data-it="Vicino all'appartamento" data-en="Close to the apartment">Vicino all'appartamento</span></div></div>
+      <p class="card-copy" data-it="La stazione è raggiungibile comodamente a piedi attraverso il centro. È il punto più pratico per Lecce, Bari e molte altre località pugliesi." data-en="The station is an easy walk through the city centre. It is the most convenient starting point for Lecce, Bari and many other destinations in Puglia.">La stazione è raggiungibile comodamente a piedi attraverso il centro. È il punto più pratico per Lecce, Bari e molte altre località pugliesi.</p>
+      <div class="detail-list"><div class="detail-row"><span class="material-symbols-outlined">directions_walk</span><span data-it="Circa 6 minuti a piedi dalla struttura." data-en="About a 6-minute walk from the property.">Circa 6 minuti a piedi dalla struttura.</span></div><div class="detail-row"><span class="material-symbols-outlined">confirmation_number</span><span data-it="Per orari e biglietti usa Trenitalia o il servizio ferroviario scelto." data-en="Use Trenitalia or your chosen rail operator for times and tickets.">Per orari e biglietti usa Trenitalia o il servizio ferroviario scelto.</span></div></div>
+      <div class="guest-actions"><a class="action-btn primary" href="https://www.google.com/maps/dir/?api=1&destination=Stazione+Brindisi+Centrale" target="_blank" rel="noopener"><span class="material-symbols-outlined">directions_walk</span><span data-it="Percorso" data-en="Route">Percorso</span></a><a class="action-btn" href="https://www.trenitalia.com/" target="_blank" rel="noopener"><span class="material-symbols-outlined">train</span>Trenitalia</a></div>
+      <div class="kiosk-panel"><div><div class="kiosk-copy-title" data-it="Percorso a piedi" data-en="Walking route">Percorso a piedi</div><div class="kiosk-copy" data-it="Scansiona il QR code con il tuo smartphone per aprire il percorso verso la stazione." data-en="Scan the QR code with your smartphone to open the walking route to the station.">Scansiona il QR code con il tuo smartphone per aprire il percorso verso la stazione.</div></div><div class="kiosk-qr" data-qr="https://www.google.com/maps/dir/?api=1&destination=Stazione+Brindisi+Centrale">QR…</div></div>
+    </section>
 
-    <div class="hero-header">
-        <img src="../assets/images/header.png" alt="Diomede Luxury Logo" class="logo-img">
-        <div class="hero-overlay"></div>
-    </div>
+    <section class="info-card">
+      <div class="card-header"><div class="icon-wrap"><span class="material-symbols-outlined info-icon">directions_boat</span></div><div><h3 class="card-title" data-it="Porto e Costa Morena" data-en="Port & Costa Morena">Porto e Costa Morena</h3><span class="card-kicker" data-it="Imbarchi e traghetti" data-en="Ferries and departures">Imbarchi e traghetti</span></div></div>
+      <p class="card-copy" data-it="Il lungomare e il porto interno sono vicini alla struttura. Per gli imbarchi dei grandi traghetti a Costa Morena puoi utilizzare la linea AP oppure un taxi." data-en="The seafront and inner harbour are close to the property. For major ferry departures at Costa Morena you can use the AP bus or a taxi.">Il lungomare e il porto interno sono vicini alla struttura. Per gli imbarchi dei grandi traghetti a Costa Morena puoi utilizzare la linea AP oppure un taxi.</p>
+      <div class="detail-list"><div class="detail-row"><span class="material-symbols-outlined">directions_walk</span><span data-it="Lungomare: pochi minuti a piedi." data-en="Seafront: only a few minutes on foot.">Lungomare: pochi minuti a piedi.</span></div><div class="detail-row"><span class="material-symbols-outlined">airport_shuttle</span><span data-it="La linea AP serve Costa Morena nelle fasce previste dall'orario STP." data-en="The AP line serves Costa Morena during the times shown in the STP timetable.">La linea AP serve Costa Morena nelle fasce previste dall'orario STP.</span></div></div>
+      <div class="guest-actions"><a class="action-btn primary" href="https://www.google.com/maps/search/?api=1&query=Costa+Morena+Brindisi" target="_blank" rel="noopener"><span class="material-symbols-outlined">location_on</span><span data-it="Costa Morena" data-en="Costa Morena">Costa Morena</span></a><a class="action-btn" href="https://www.stpbrindisi.it/index.php/servizi/bus-aeroporto-stazione-fs-costa-morena" target="_blank" rel="noopener"><span class="material-symbols-outlined">schedule</span><span data-it="Linea AP" data-en="AP line">Linea AP</span></a></div>
+      <div class="kiosk-panel"><div><div class="kiosk-copy-title" data-it="Costa Morena" data-en="Costa Morena">Costa Morena</div><div class="kiosk-copy" data-it="Scansiona il QR code con il tuo smartphone per aprire la posizione degli imbarchi." data-en="Scan the QR code with your smartphone to open the ferry terminal location.">Scansiona il QR code con il tuo smartphone per aprire la posizione degli imbarchi.</div></div><div class="kiosk-qr" data-qr="https://www.google.com/maps/search/?api=1&query=Costa+Morena+Brindisi">QR…</div></div>
+    </section>
 
-    <div class="container">
-        <h2 data-it="Trasporti" data-en="Transportation">Trasporti</h2>
-        <div class="divider"></div>
+    <section class="info-card">
+      <div class="card-header"><div class="icon-wrap"><span class="material-symbols-outlined info-icon">directions_bus</span></div><div><h3 class="card-title" data-it="Autobus urbani ed extraurbani" data-en="Local & regional buses">Autobus urbani ed extraurbani</h3><span class="card-kicker">STP Brindisi</span></div></div>
+      <p class="card-copy" data-it="STP gestisce i collegamenti urbani e numerose linee verso i comuni della provincia, tra cui Ostuni, Mesagne, Cisternino e altre destinazioni." data-en="STP operates local services and many routes across the province, including Ostuni, Mesagne, Cisternino and other destinations.">STP gestisce i collegamenti urbani e numerose linee verso i comuni della provincia, tra cui Ostuni, Mesagne, Cisternino e altre destinazioni.</p>
+      <div class="detail-list"><div class="detail-row"><span class="material-symbols-outlined">info</span><span data-it="Controlla sempre fermata e orario prima di partire: alcune linee cambiano nei festivi o in estate." data-en="Always check the stop and timetable before travelling: some services change on holidays or in summer.">Controlla sempre fermata e orario prima di partire: alcune linee cambiano nei festivi o in estate.</span></div></div>
+      <div class="guest-actions"><a class="action-btn primary" href="https://www.stpbrindisi.it/" target="_blank" rel="noopener"><span class="material-symbols-outlined">language</span><span data-it="Sito STP" data-en="STP website">Sito STP</span></a></div>
+      <div class="kiosk-panel"><div><div class="kiosk-copy-title" data-it="Orari STP" data-en="STP timetables">Orari STP</div><div class="kiosk-copy" data-it="Scansiona il QR code con il tuo smartphone per consultare linee e orari." data-en="Scan the QR code with your smartphone to view routes and timetables.">Scansiona il QR code con il tuo smartphone per consultare linee e orari.</div></div><div class="kiosk-qr" data-qr="https://www.stpbrindisi.it/">QR…</div></div>
+    </section>
 
-        <div class="info-grid">
+    <section class="info-card">
+      <div class="card-header"><div class="icon-wrap"><span class="material-symbols-outlined info-icon">local_taxi</span></div><div><h3 class="card-title" data-it="Taxi" data-en="Taxi">Taxi</h3><span class="card-kicker" data-it="Stazione · Aeroporto · Porto" data-en="Station · Airport · Port">Stazione · Aeroporto · Porto</span></div></div>
+      <p class="card-copy" data-it="A Brindisi trovi posteggi taxi presso la stazione, l'aeroporto e altre aree centrali. Per partenze molto presto o arrivi serali è consigliabile organizzarsi in anticipo." data-en="Taxi ranks are available at the railway station, airport and other central locations in Brindisi. For very early departures or late arrivals, arranging a taxi in advance is recommended.">A Brindisi trovi posteggi taxi presso la stazione, l'aeroporto e altre aree centrali. Per partenze molto presto o arrivi serali è consigliabile organizzarsi in anticipo.</p>
+      <div class="tip" data-it="Abbiamo rimosso il vecchio contatto taxi non verificato: meglio mostrare solo informazioni affidabili." data-en="We removed the previous unverified taxi contact and now show only reliable information.">Abbiamo rimosso il vecchio contatto taxi non verificato: meglio mostrare solo informazioni affidabili.</div>
+      <div class="guest-actions"><a class="action-btn primary" href="https://brindisi.airports.aeroportidipuglia.it/" target="_blank" rel="noopener"><span class="material-symbols-outlined">local_taxi</span><span data-it="Taxi aeroporto" data-en="Airport taxi">Taxi aeroporto</span></a></div>
+      <div class="kiosk-panel"><div><div class="kiosk-copy-title" data-it="Taxi dall'aeroporto" data-en="Airport taxi">Taxi dall'aeroporto</div><div class="kiosk-copy" data-it="Scansiona il QR code con il tuo smartphone per consultare i servizi ufficiali dell'aeroporto." data-en="Scan the QR code with your smartphone to view official airport transport information.">Scansiona il QR code con il tuo smartphone per consultare i servizi ufficiali dell'aeroporto.</div></div><div class="kiosk-qr" data-qr="https://brindisi.airports.aeroportidipuglia.it/">QR…</div></div>
+    </section>
 
-            <div class="info-card">
-                <div class="card-header">
-                    <span class="material-symbols-outlined info-icon">local_taxi</span>
-                    <div class="info-text"><h3 data-it="Taxi Privato" data-en="Private Taxi">Taxi Privato</h3></div>
-                </div>
-                <div class="info-text">
-                    <p data-it="Servizio di fiducia. Consigliata la prenotazione." data-en="Trusted service. Reservation recommended."></p>
-                    <p style="font-size: 15px; color: #1a1a1a; margin-top: 5px; font-weight: 700;">Mario Rossi</p>
-                </div>
-                <div class="flex-row">
-                    <a href="tel:+39123456789" class="action-btn">
-                        <span class="material-symbols-outlined" style="margin-right: 6px; font-size: 18px;">call</span>
-                        <span data-it="Chiama" data-en="Call">Chiama</span>
-                    </a>
-                    <a href="https://wa.me/39123456789" class="action-btn whatsapp">
-                        <span class="material-symbols-outlined" style="margin-right: 6px; font-size: 18px;">chat</span>
-                        WhatsApp
-                    </a>
-                </div>
-            </div>
-
-            <div class="info-card">
-                <div class="card-header">
-                    <span class="material-symbols-outlined info-icon">flight</span>
-                    <div class="info-text"><h3 data-it="Navetta Aeroporto" data-en="Airport Shuttle">Navetta Aeroporto</h3></div>
-                </div>
-                <div class="info-text">
-                    <p data-it="Linea AP: collegamento tra Aeroporto, Stazione FS e Porto Costa Morena." data-en="AP Line: connection between Airport, Railway Station, and Costa Morena Port."></p>
-                </div>
-                <div class="flex-row">
-                    <a href="#" target="_blank" class="action-btn" rel="noopener">
-                        <span class="material-symbols-outlined" style="margin-right: 6px; font-size: 18px;">location_on</span>
-                        <span data-it="Posizione Fermata" data-en="Stop Location">Posizione Fermata</span>
-                    </a>
-                </div>
-            </div>
-
-            <div class="info-card">
-                <div class="card-header">
-                    <span class="material-symbols-outlined info-icon">directions_boat</span>
-                    <div class="info-text"><h3 data-it="Porto di Brindisi" data-en="Brindisi Port">Porto di Brindisi</h3></div>
-                </div>
-                <div class="info-text">
-                    <p data-it="Il lungomare dista 2 min a piedi. Per i grandi traghetti usare bus AP o taxi (15 min)." data-en="The seafront is a 2-min walk away. For large ferries, use the AP bus or taxi (15 min)."></p>
-                </div>
-                <div class="flex-row">
-                    <a href="#" target="_blank" class="action-btn" rel="noopener">
-                        <span class="material-symbols-outlined" style="margin-right: 6px; font-size: 18px;">location_on</span>
-                        <span data-it="Posizione Porto" data-en="Port Location">Posizione Porto</span>
-                    </a>
-                </div>
-            </div>
-
-            <div class="info-card">
-                <div class="card-header">
-                    <span class="material-symbols-outlined info-icon">train</span>
-                    <div class="info-text"><h3 data-it="Stazione Centrale" data-en="Central Station">Stazione Centrale</h3></div>
-                </div>
-                <div class="info-text">
-                    <p data-it="Raggiungibile in soli 6 min a piedi percorrendo il suggestivo Corso Umberto I." data-en="Reach it in just 6 minutes on foot along the charming Corso Umberto I."></p>
-                </div>
-                <div class="flex-row">
-                    <a href="#" target="_blank" class="action-btn" rel="noopener">
-                        <span class="material-symbols-outlined" style="margin-right: 6px; font-size: 18px;">directions_walk</span>
-                        <span data-it="Percorso a piedi" data-en="Walking Route">Percorso a piedi</span>
-                    </a>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="back-btn-container">
-            <a href="menu.html" class="back-btn">
-                <span class="material-symbols-outlined">arrow_back_ios_new</span>
-                <span data-it="Torna alla home" data-en="Back to home">Torna alla home</span>
-            </a>
-        </div>
-    </div>
-
-    <script>
-        function setLanguage(lang) {
-            localStorage.setItem('preferredLang', lang);
-
-            document.getElementById('btn-it').classList.toggle('active', lang === 'it');
-            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-
-            document.querySelectorAll('[data-it]').forEach(el => {
-                const text = el.getAttribute('data-' + lang);
-                el.textContent = text;
-            });
-        }
-
-        window.onload = () => {
-            const savedLang = localStorage.getItem('preferredLang') || 'it';
-            setLanguage(savedLang);
-        };
-    </script>
-
-<script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => navigator.serviceWorker.register('../sw.js'));
-}
-</script>
-
-<script id="diomede-global-back-script">
-function diomedeGoBack(){
-    if (window.history.length > 1) {
-        window.history.back();
-    } else {
-        const path = window.location.pathname;
-        if (path.includes('/pages/istruzioni/')) {
-            window.location.href = '../istruzioni.html';
-        } else if (path.includes('/pages/')) {
-            window.location.href = 'menu.html';
-        } else {
-            window.location.href = 'pages/menu.html';
-        }
-    }
-}
-</script>
-
+    <section class="info-card">
+      <div class="card-header"><div class="icon-wrap"><span class="material-symbols-outlined info-icon">directions_car</span></div><div><h3 class="card-title" data-it="In auto" data-en="By car">In auto</h3><span class="card-kicker" data-it="Per esplorare il territorio" data-en="For exploring the area">Per esplorare il territorio</span></div></div>
+      <p class="card-copy" data-it="Per Torre Guaceto, Ostuni, Otranto e Santa Maria di Leuca l'auto offre la massima libertà. Nella pagina “Scopri il territorio” trovi le mete consigliate e i collegamenti utili." data-en="For Torre Guaceto, Ostuni, Otranto and Santa Maria di Leuca, a car gives you the most flexibility. See “Explore the area” for recommended destinations and useful links.">Per Torre Guaceto, Ostuni, Otranto e Santa Maria di Leuca l'auto offre la massima libertà. Nella pagina “Scopri il territorio” trovi le mete consigliate e i collegamenti utili.</p>
+      <div class="guest-actions"><a class="action-btn primary" href="turismo.html"><span class="material-symbols-outlined">explore</span><span data-it="Scopri le mete" data-en="Explore places">Scopri le mete</span></a></div>
+    </section>
+  </div>
+  <div class="back-btn-container"><a href="menu.html" class="back-btn"><span class="material-symbols-outlined">arrow_back_ios_new</span><span data-it="Torna al menu" data-en="Back to menu">Torna al menu</span></a></div>
+</div>
 <script src="../assets/js/common.js"></script>
+<script src="../assets/js/qrcode-local.js"></script>
+<script>
+function renderKioskQr(){if(window.DiomedeMode!=='kiosk'||!window.DiomedeQR)return;document.querySelectorAll('[data-qr]').forEach(el=>{el.innerHTML=window.DiomedeQR.createSvg(el.getAttribute('data-qr'),{quiet:4})})}
+function setLanguage(lang){localStorage.setItem('preferredLang',lang);document.getElementById('btn-it').classList.toggle('active',lang==='it');document.getElementById('btn-en').classList.toggle('active',lang==='en');document.querySelectorAll('[data-it]').forEach(el=>{const v=el.getAttribute('data-'+lang);if(v)el.textContent=v})}
+document.addEventListener('DOMContentLoaded',()=>{setLanguage(localStorage.getItem('preferredLang')||'it');renderKioskQr()});
+</script>
 </body>
 </html>
