@@ -1,4 +1,4 @@
-const CACHE_NAME = 'diomede-v241-index-compact-glass';
+const CACHE_NAME = 'diomede-v241-compact-weather-welcome';
 
 const APP_SHELL = [
   './',

@@ -402,6 +402,60 @@
     }
 }
 
+
+
+/* ==========================================================
+   INDEX WELCOME — EXTRA COMPACT + PIÙ TRASPARENTE
+   Mantiene INVARIATE le dimensioni di logo e testi.
+   ========================================================== */
+.white-box {
+    width: min(82vw, 350px) !important;
+    min-width: 0 !important;
+    max-width: 350px !important;
+    padding: 12px 16px 15px !important;
+    background: rgba(255,255,255,.34) !important;
+    border: 1px solid rgba(255,255,255,.36) !important;
+    border-radius: 15px !important;
+    box-shadow: 0 14px 34px rgba(0,0,0,.20) !important;
+    -webkit-backdrop-filter: blur(4px) saturate(104%) !important;
+    backdrop-filter: blur(4px) saturate(104%) !important;
+}
+
+/* Solo spazi: logo e tipografia restano delle dimensioni già approvate. */
+.logo-inner { margin-bottom: 5px !important; }
+.divider { margin: 7px auto !important; }
+.subtitle { margin-bottom: 2px !important; }
+.tagline { margin-bottom: 10px !important; }
+
+@media (max-width: 600px) and (orientation: portrait) {
+    .white-box {
+        width: min(82vw, 320px) !important;
+        max-width: 320px !important;
+        padding: 11px 12px 14px !important;
+        background: rgba(255,255,255,.29) !important;
+        border-color: rgba(255,255,255,.32) !important;
+        box-shadow: 0 12px 28px rgba(0,0,0,.18) !important;
+        -webkit-backdrop-filter: blur(3px) saturate(103%) !important;
+        backdrop-filter: blur(3px) saturate(103%) !important;
+    }
+
+    .logo-inner { margin-bottom: 4px !important; }
+    .divider { margin: 6px auto !important; }
+    .subtitle { margin-bottom: 2px !important; }
+    .tagline { margin-bottom: 9px !important; }
+}
+
+@media (max-height: 700px) {
+    .white-box {
+        padding-top: 9px !important;
+        padding-bottom: 11px !important;
+        background: rgba(255,255,255,.27) !important;
+    }
+    .logo-inner { margin-bottom: 3px !important; }
+    .divider { margin: 5px auto !important; }
+    .tagline { margin-bottom: 7px !important; }
+}
+
 </style>
     <link rel="stylesheet" href="assets/css/wow.css">
 </head>

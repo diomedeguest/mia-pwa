@@ -2824,6 +2824,238 @@
                 padding: 8px 12px !important;
             }
         }
+
+
+        /* ==========================================================
+           FIX MOBILE — GRIGLIA MENU PERFETTAMENTE CENTRATA
+           ========================================================== */
+        @media (max-width: 699px) and (orientation: portrait) {
+            #main-grid {
+                width: min(94vw, 390px) !important;
+                max-width: 390px !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+                grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+                justify-content: center !important;
+                justify-items: center !important;
+                align-items: start !important;
+                place-items: start center !important;
+                column-gap: clamp(14px, 4vw, 22px) !important;
+            }
+
+            #main-grid .btn {
+                width: min(100%, 104px) !important;
+                max-width: 104px !important;
+                min-width: 0 !important;
+                justify-self: center !important;
+                align-self: start !important;
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                justify-content: flex-start !important;
+                text-align: center !important;
+            }
+
+            #main-grid .circle {
+                margin-left: auto !important;
+                margin-right: auto !important;
+            }
+
+            #main-grid .label {
+                width: auto !important;
+                max-width: 104px !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+                text-align: center !important;
+                align-self: center !important;
+            }
+        }
+
+        @media (max-width: 380px) and (orientation: portrait) {
+            #main-grid {
+                width: min(96vw, 356px) !important;
+                column-gap: 10px !important;
+            }
+
+            #main-grid .btn {
+                max-width: 96px !important;
+            }
+
+            #main-grid .label {
+                max-width: 96px !important;
+            }
+        }
+
+
+
+        /* ==========================================================
+           METEO 3 GIORNI — SUPER COMPATTO ED ESSENZIALE
+           Un'unica barra: Brindisi + Oggi/Domani/3° giorno + max/min.
+           ========================================================== */
+        .weather-widget.weather-3day {
+            display: grid !important;
+            grid-template-columns: auto minmax(0, 1fr) !important;
+            align-items: center !important;
+            gap: 7px !important;
+            width: min(94vw, 500px) !important;
+            min-height: 0 !important;
+            padding: 5px 8px !important;
+            margin: 0 !important;
+            border-radius: 16px !important;
+            background: rgba(24,18,14,.30) !important;
+            border: 1px solid rgba(255,255,255,.19) !important;
+            box-shadow: 0 5px 14px rgba(0,0,0,.10) !important;
+            -webkit-backdrop-filter: blur(8px) !important;
+            backdrop-filter: blur(8px) !important;
+        }
+
+        .weather-widget.weather-3day .weather-topline {
+            display: flex !important;
+            align-items: center !important;
+            width: auto !important;
+            padding-right: 7px !important;
+            border-right: 1px solid rgba(255,255,255,.18) !important;
+        }
+
+        .weather-widget.weather-3day .city-name-static {
+            border: 0 !important;
+            padding: 0 !important;
+            font-size: 9.5px !important;
+            font-weight: 700 !important;
+            line-height: 1 !important;
+            letter-spacing: .12px !important;
+            white-space: nowrap !important;
+        }
+
+        .weather-widget.weather-3day .weather-note,
+        .weather-widget.weather-3day .forecast-desc {
+            display: none !important;
+        }
+
+        .weather-widget.weather-3day .forecast-grid {
+            display: grid !important;
+            grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+            gap: 0 !important;
+            width: 100% !important;
+            min-width: 0 !important;
+        }
+
+        .weather-widget.weather-3day .forecast-day {
+            display: grid !important;
+            grid-template-columns: auto auto auto !important;
+            justify-content: center !important;
+            align-items: center !important;
+            gap: 3px !important;
+            min-width: 0 !important;
+            padding: 2px 5px !important;
+            border: 0 !important;
+            border-radius: 0 !important;
+            background: transparent !important;
+        }
+
+        .weather-widget.weather-3day .forecast-day + .forecast-day {
+            border-left: 1px solid rgba(255,255,255,.14) !important;
+        }
+
+        .weather-widget.weather-3day .forecast-name {
+            font-size: 8.2px !important;
+            font-weight: 700 !important;
+            line-height: 1 !important;
+            letter-spacing: .08px !important;
+            text-transform: uppercase !important;
+            white-space: nowrap !important;
+        }
+
+        .weather-widget.weather-3day .forecast-icon.material-symbols-outlined {
+            font-size: 16px !important;
+            line-height: 1 !important;
+        }
+
+        .weather-widget.weather-3day .forecast-temps {
+            display: inline-flex !important;
+            align-items: baseline !important;
+            justify-content: center !important;
+            gap: 2px !important;
+            white-space: nowrap !important;
+            line-height: 1 !important;
+        }
+
+        .weather-widget.weather-3day .forecast-temps strong {
+            font-size: 10.5px !important;
+            font-weight: 700 !important;
+            line-height: 1 !important;
+        }
+
+        .weather-widget.weather-3day .forecast-temps small {
+            font-size: 8.5px !important;
+            line-height: 1 !important;
+            opacity: .82 !important;
+        }
+
+        .weather-widget.weather-3day .forecast-temps small::before {
+            content: '/';
+            margin-right: 2px;
+            opacity: .6;
+        }
+
+        @media (max-width: 699px) and (orientation: portrait) {
+            .weather-widget.weather-3day {
+                width: min(94vw, 390px) !important;
+                padding: 5px 7px !important;
+                gap: 5px !important;
+                margin-bottom: max(2px, env(safe-area-inset-bottom)) !important;
+            }
+
+            .weather-widget.weather-3day .weather-topline {
+                padding-right: 5px !important;
+            }
+
+            .weather-widget.weather-3day .city-name-static {
+                font-size: 8.7px !important;
+            }
+
+            .weather-widget.weather-3day .forecast-day {
+                padding: 2px 3px !important;
+                gap: 2px !important;
+            }
+
+            .weather-widget.weather-3day .forecast-name {
+                font-size: 7.5px !important;
+            }
+
+            .weather-widget.weather-3day .forecast-icon.material-symbols-outlined {
+                font-size: 15px !important;
+            }
+
+            .weather-widget.weather-3day .forecast-temps strong {
+                font-size: 9.8px !important;
+            }
+
+            .weather-widget.weather-3day .forecast-temps small {
+                font-size: 8px !important;
+            }
+        }
+
+        @media (max-width: 360px) and (orientation: portrait) {
+            .weather-widget.weather-3day .weather-topline {
+                display: none !important;
+            }
+
+            .weather-widget.weather-3day {
+                grid-template-columns: 1fr !important;
+                width: min(96vw, 350px) !important;
+            }
+        }
+
+        @media (min-width: 900px) and (hover: hover) and (pointer: fine) {
+            .weather-widget.weather-3day {
+                width: min(500px, 58vw) !important;
+                padding: 5px 9px !important;
+            }
+        }
+
 </style>
     <link rel="stylesheet" href="../assets/css/wow.css">
 </head>
