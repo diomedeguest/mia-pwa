@@ -1,4 +1,4 @@
-const CACHE_NAME = 'diomede-v242-menu-mobile-spacing-order';
+const CACHE_NAME = 'diomede-v241-index-welcome-whiter';
 
 const APP_SHELL = [
   './',

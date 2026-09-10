@@ -456,6 +456,90 @@
     .tagline { margin-bottom: 7px !important; }
 }
 
+
+/* ==========================================================
+   INDEX WELCOME — RIFINITURA FINALE
+   - logo leggermente più piccolo
+   - riquadro leggermente più piccolo e più trasparente
+   ========================================================== */
+.white-box {
+    width: min(80vw, 330px) !important;
+    max-width: 330px !important;
+    padding: 10px 14px 13px !important;
+    background: rgba(255,255,255,.24) !important;
+    border: 1px solid rgba(255,255,255,.30) !important;
+    box-shadow: 0 12px 28px rgba(0,0,0,.18) !important;
+    -webkit-backdrop-filter: blur(3px) saturate(102%) !important;
+    backdrop-filter: blur(3px) saturate(102%) !important;
+}
+
+.logo-inner {
+    width: 270px !important;
+    max-width: 84% !important;
+    max-height: 190px !important;
+    margin-bottom: 4px !important;
+}
+
+@media (max-width: 600px) and (orientation: portrait) {
+    .white-box {
+        width: min(80vw, 300px) !important;
+        max-width: 300px !important;
+        padding: 10px 11px 13px !important;
+        background: rgba(255,255,255,.20) !important;
+        border-color: rgba(255,255,255,.28) !important;
+    }
+
+    .logo-inner {
+        width: 220px !important;
+        max-width: 84% !important;
+        max-height: 160px !important;
+        margin-bottom: 3px !important;
+    }
+}
+
+@media (max-height: 700px) {
+    .white-box {
+        width: min(80vw, 310px) !important;
+        max-width: 310px !important;
+        padding-top: 8px !important;
+        padding-bottom: 10px !important;
+        background: rgba(255,255,255,.19) !important;
+    }
+
+    .logo-inner {
+        width: 198px !important;
+        max-width: 80% !important;
+        max-height: 138px !important;
+        margin-bottom: 2px !important;
+    }
+}
+
+
+
+/* ==========================================================
+   INDEX WELCOME — PIÙ BIANCO / MENO TRASPARENTE
+   Mantiene dimensioni e logo invariati.
+   ========================================================== */
+.white-box {
+    background: rgba(255,255,255,.70) !important;
+    border-color: rgba(255,255,255,.66) !important;
+    -webkit-backdrop-filter: blur(5px) saturate(104%) !important;
+    backdrop-filter: blur(5px) saturate(104%) !important;
+}
+
+@media (max-width: 600px) and (orientation: portrait) {
+    .white-box {
+        background: rgba(255,255,255,.66) !important;
+        border-color: rgba(255,255,255,.62) !important;
+    }
+}
+
+@media (max-height: 700px) {
+    .white-box {
+        background: rgba(255,255,255,.64) !important;
+    }
+}
+
 </style>
     <link rel="stylesheet" href="assets/css/wow.css">
 </head>

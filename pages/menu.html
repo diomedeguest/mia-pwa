@@ -3095,6 +3095,36 @@
             }
         }
 
+
+
+        /* ==========================================================
+           MOBILE PORTRAIT — LOGO MENU PIÙ BASSO E PIÙ PRESENTE
+           Sposta SOLO il logo verso le icone, lasciando ITA/ENG fissi.
+           ========================================================== */
+        @media (max-width: 699px) and (orientation: portrait) {
+            .header-wrapper {
+                top: 0 !important;
+            }
+
+            .header-wrapper .logo-img {
+                position: relative !important;
+                top: 40px !important;
+                width: min(68vw, 250px) !important;
+                max-width: 250px !important;
+                max-height: 150px !important;
+                height: auto !important;
+                object-fit: contain !important;
+            }
+        }
+
+        @media (max-width: 699px) and (orientation: portrait) and (max-height: 700px) {
+            .header-wrapper .logo-img {
+                top: 27px !important;
+                width: min(62vw, 220px) !important;
+                max-width: 220px !important;
+                max-height: 132px !important;
+            }
+        }
 </style>
     <link rel="stylesheet" href="../assets/css/wow.css">
 </head>
