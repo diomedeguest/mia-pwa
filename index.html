@@ -310,6 +310,98 @@
     }
 }
 
+
+
+/* ==========================================================
+   INDEX WELCOME — RIQUADRO PIÙ COMPATTO E SEMITRASPARENTE
+   Mantiene inalterate le dimensioni di logo e testi.
+   ========================================================== */
+.white-box {
+    width: auto !important;
+    min-width: 355px !important;
+    max-width: 390px !important;
+    padding: 20px 22px 22px !important;
+    background: rgba(255,255,255,.56) !important;
+    border: 1px solid rgba(255,255,255,.50) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 22px 48px rgba(0,0,0,.28) !important;
+    -webkit-backdrop-filter: blur(7px) saturate(106%) !important;
+    backdrop-filter: blur(7px) saturate(106%) !important;
+}
+
+/* Dimensioni del logo preservate: riduco solo gli spazi attorno. */
+.logo-inner {
+    margin-bottom: 10px !important;
+}
+
+.divider {
+    margin: 11px auto !important;
+}
+
+.subtitle {
+    margin-bottom: 5px !important;
+}
+
+.tagline {
+    margin-bottom: 17px !important;
+}
+
+@media (max-width: 600px) and (orientation: portrait) {
+    .white-box {
+        width: min(86vw, 340px) !important;
+        min-width: 0 !important;
+        max-width: 340px !important;
+        padding: 17px 16px 20px !important;
+        background: rgba(255,255,255,.52) !important;
+        box-shadow: 0 18px 40px rgba(0,0,0,.25) !important;
+        -webkit-backdrop-filter: blur(6px) saturate(105%) !important;
+        backdrop-filter: blur(6px) saturate(105%) !important;
+    }
+
+    /* Mantengo la dimensione mobile già approvata: 245px. */
+    .logo-inner {
+        width: 245px !important;
+        max-width: 86% !important;
+        max-height: 175px !important;
+        margin-bottom: 8px !important;
+    }
+
+    .divider {
+        margin: 9px auto !important;
+    }
+
+    .subtitle {
+        margin-bottom: 4px !important;
+    }
+
+    .tagline {
+        margin-bottom: 14px !important;
+    }
+}
+
+@media (max-height: 700px) {
+    .white-box {
+        padding-top: 14px !important;
+        padding-bottom: 16px !important;
+    }
+
+    /* Mantengo la dimensione già prevista per schermi bassi: 215px. */
+    .logo-inner {
+        width: 215px !important;
+        max-width: 82% !important;
+        max-height: 150px !important;
+        margin-bottom: 7px !important;
+    }
+
+    .divider {
+        margin: 8px auto !important;
+    }
+
+    .tagline {
+        margin-bottom: 12px !important;
+    }
+}
+
 </style>
     <link rel="stylesheet" href="assets/css/wow.css">
 </head>

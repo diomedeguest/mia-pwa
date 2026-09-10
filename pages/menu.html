@@ -2615,6 +2615,215 @@
             max-height: 92px !important;
         }
 
+
+
+        /* ==========================================================
+           AGGIUNTA FINALE — meteo 3 giorni + migliore allineamento mobile
+           ========================================================== */
+        .weather-widget.weather-3day {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 8px !important;
+            width: min(100%, 560px) !important;
+            border-radius: 22px !important;
+            padding: 10px 12px !important;
+            background: rgba(255,255,255,0.14) !important;
+            border: 1px solid rgba(255,255,255,0.22) !important;
+            backdrop-filter: blur(16px) !important;
+        }
+
+        .weather-widget.weather-3day .weather-topline {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .weather-widget.weather-3day .city-name-static {
+            border-left: 0 !important;
+            padding-left: 0 !important;
+            font-size: 12px !important;
+            font-weight: 700;
+            letter-spacing: .25px;
+        }
+
+        .weather-widget.weather-3day .weather-note {
+            font-size: 10px;
+            opacity: .92;
+            letter-spacing: .18px;
+            text-transform: uppercase;
+        }
+
+        .weather-widget.weather-3day .forecast-grid {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 8px;
+        }
+
+        .weather-widget.weather-3day .forecast-day {
+            display: grid;
+            justify-items: center;
+            align-items: center;
+            gap: 3px;
+            min-width: 0;
+            padding: 8px 4px 7px;
+            border-radius: 16px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+        }
+
+        .weather-widget.weather-3day .forecast-name {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .16px;
+            text-transform: uppercase;
+        }
+
+        .weather-widget.weather-3day .forecast-icon.material-symbols-outlined {
+            font-size: 20px !important;
+            line-height: 1;
+        }
+
+        .weather-widget.weather-3day .forecast-desc {
+            max-width: 100%;
+            font-size: 9px;
+            text-align: center;
+            line-height: 1.1;
+            opacity: .94;
+        }
+
+        .weather-widget.weather-3day .forecast-temps {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 6px;
+            line-height: 1;
+        }
+
+        .weather-widget.weather-3day .forecast-temps strong {
+            font-size: 13px;
+            font-weight: 700;
+            font-family: var(--elegant-font);
+        }
+
+        .weather-widget.weather-3day .forecast-temps small {
+            font-size: 10px;
+            opacity: .9;
+        }
+
+        @media (max-width: 699px) and (orientation: portrait) {
+            .container {
+                row-gap: 8px !important;
+                padding-top: max(12px, env(safe-area-inset-top)) !important;
+            }
+
+            .header-wrapper {
+                min-height: 138px !important;
+            }
+
+            #main-grid {
+                width: min(100%, 424px) !important;
+                max-width: 424px !important;
+                gap: clamp(11px, 1.9vh, 16px) clamp(13px, 3.4vw, 20px) !important;
+                padding: 4px 2px 2px !important;
+                align-content: center !important;
+                place-items: start stretch !important;
+            }
+
+            #main-grid .btn {
+                width: 100% !important;
+                display: grid !important;
+                grid-template-rows: auto minmax(22px, auto) !important;
+                justify-items: center !important;
+                align-items: start !important;
+            }
+
+            .circle {
+                margin-bottom: 7px !important;
+            }
+
+            .label {
+                display: flex !important;
+                align-items: flex-start !important;
+                justify-content: center !important;
+                min-height: 22px !important;
+                line-height: 1.18 !important;
+                text-align: center !important;
+                max-width: 100% !important;
+                white-space: normal !important;
+            }
+
+            .weather-widget.weather-3day {
+                width: min(100%, 430px) !important;
+                padding: 8px 10px !important;
+                gap: 7px !important;
+                margin-bottom: max(2px, env(safe-area-inset-bottom)) !important;
+            }
+
+            .weather-widget.weather-3day .forecast-grid {
+                gap: 6px !important;
+            }
+
+            .weather-widget.weather-3day .forecast-day {
+                padding: 7px 3px 6px !important;
+            }
+        }
+
+        @media (max-width: 699px) and (orientation: portrait) and (max-height: 700px) {
+            #main-grid {
+                gap: 8px 11px !important;
+            }
+
+            #main-grid .btn {
+                grid-template-rows: auto minmax(18px, auto) !important;
+            }
+
+            .circle {
+                margin-bottom: 5px !important;
+            }
+
+            .label {
+                min-height: 18px !important;
+                font-size: 7.9px !important;
+            }
+
+            .weather-widget.weather-3day {
+                padding: 7px 9px !important;
+            }
+
+            .weather-widget.weather-3day .city-name-static {
+                font-size: 11px !important;
+            }
+
+            .weather-widget.weather-3day .weather-note {
+                font-size: 9px !important;
+            }
+
+            .weather-widget.weather-3day .forecast-name {
+                font-size: 9px !important;
+            }
+
+            .weather-widget.weather-3day .forecast-desc {
+                font-size: 8.2px !important;
+            }
+
+            .weather-widget.weather-3day .forecast-temps strong {
+                font-size: 12px !important;
+            }
+
+            .weather-widget.weather-3day .forecast-temps small {
+                font-size: 9px !important;
+            }
+        }
+
+        @media (min-width: 900px) and (hover: hover) and (pointer: fine) {
+            .weather-widget.weather-3day {
+                width: min(100%, 520px) !important;
+                padding: 8px 12px !important;
+            }
+        }
 </style>
     <link rel="stylesheet" href="../assets/css/wow.css">
 </head>
@@ -2631,11 +2840,31 @@
 
 <nav id="main-grid"></nav>
 
-        <a href="https://www.google.com/search?q=meteo+brindisi" target="_blank" class="weather-widget" rel="noopener">
-            <span id="weather-icon" class="material-symbols-outlined">cloud</span>
-            <span id="description">...</span>
-            <span id="temp" class="temp-val">--</span>
-            <span class="city-name">Brindisi</span>
+        <a href="https://www.google.com/search?q=meteo+brindisi" target="_blank" class="weather-widget weather-3day" rel="noopener" aria-label="Meteo Brindisi prossimi 3 giorni">
+            <div class="weather-topline">
+                <span class="city-name city-name-static">Brindisi</span>
+                <span class="weather-note" data-it="Prossimi 3 giorni" data-en="Next 3 days">Prossimi 3 giorni</span>
+            </div>
+            <div class="forecast-grid" id="forecast-grid">
+                <div class="forecast-day" data-day-index="0">
+                    <span class="forecast-name">Oggi</span>
+                    <span class="material-symbols-outlined forecast-icon">cloud</span>
+                    <span class="forecast-desc">...</span>
+                    <span class="forecast-temps"><strong>--°</strong><small>--°</small></span>
+                </div>
+                <div class="forecast-day" data-day-index="1">
+                    <span class="forecast-name">Domani</span>
+                    <span class="material-symbols-outlined forecast-icon">cloud</span>
+                    <span class="forecast-desc">...</span>
+                    <span class="forecast-temps"><strong>--°</strong><small>--°</small></span>
+                </div>
+                <div class="forecast-day" data-day-index="2">
+                    <span class="forecast-name">--</span>
+                    <span class="material-symbols-outlined forecast-icon">cloud</span>
+                    <span class="forecast-desc">...</span>
+                    <span class="forecast-temps"><strong>--°</strong><small>--°</small></span>
+                </div>
+            </div>
         </a>
     </div>
 
@@ -2652,7 +2881,41 @@
             { id: 'checkout',    icon: 'logout',         it: 'Check-Out',    en: 'Check-Out' }
         ];
 
-        const weatherMap = { 0: {icon:'wb_sunny', it:'Sereno', en:'Clear'}, 3: {icon:'cloud', it:'Nuvoloso', en:'Cloudy'}, 61: {icon:'rainy', it:'Pioggia', en:'Rain'} };
+        const weatherMap = {
+            0:  { icon: 'wb_sunny',          it: 'Sereno',        en: 'Clear' },
+            1:  { icon: 'light_mode',        it: 'Poco nuvoloso', en: 'Mostly clear' },
+            2:  { icon: 'partly_cloudy_day', it: 'Parz. nuvoloso',en: 'Partly cloudy' },
+            3:  { icon: 'cloud',             it: 'Nuvoloso',      en: 'Cloudy' },
+            45: { icon: 'foggy',             it: 'Nebbia',        en: 'Fog' },
+            48: { icon: 'foggy',             it: 'Brina',         en: 'Rime fog' },
+            51: { icon: 'rainy',             it: 'Pioviggine',    en: 'Drizzle' },
+            53: { icon: 'rainy',             it: 'Pioviggine',    en: 'Drizzle' },
+            55: { icon: 'rainy',             it: 'Pioviggine',    en: 'Drizzle' },
+            56: { icon: 'rainy',             it: 'Pioggia gelata',en: 'Freezing drizzle' },
+            57: { icon: 'rainy',             it: 'Pioggia gelata',en: 'Freezing drizzle' },
+            61: { icon: 'rainy',             it: 'Pioggia',       en: 'Rain' },
+            63: { icon: 'rainy',             it: 'Pioggia',       en: 'Rain' },
+            65: { icon: 'rainy_heavy',       it: 'Pioggia forte', en: 'Heavy rain' },
+            66: { icon: 'weather_mix',       it: 'Pioggia gelata',en: 'Freezing rain' },
+            67: { icon: 'weather_mix',       it: 'Pioggia gelata',en: 'Freezing rain' },
+            71: { icon: 'weather_snowy',     it: 'Neve',          en: 'Snow' },
+            73: { icon: 'weather_snowy',     it: 'Neve',          en: 'Snow' },
+            75: { icon: 'weather_snowy',     it: 'Neve',          en: 'Snow' },
+            77: { icon: 'weather_snowy',     it: 'Neve',          en: 'Snow grains' },
+            80: { icon: 'rainy',             it: 'Rovesci',       en: 'Showers' },
+            81: { icon: 'rainy',             it: 'Rovesci',       en: 'Showers' },
+            82: { icon: 'rainy_heavy',       it: 'Rovesci forti', en: 'Heavy showers' },
+            85: { icon: 'weather_snowy',     it: 'Rovesci neve',  en: 'Snow showers' },
+            86: { icon: 'weather_snowy',     it: 'Rovesci neve',  en: 'Snow showers' },
+            95: { icon: 'thunderstorm',      it: 'Temporale',     en: 'Thunderstorm' },
+            96: { icon: 'thunderstorm',      it: 'Temporale',     en: 'Thunderstorm' },
+            99: { icon: 'thunderstorm',      it: 'Temporale',     en: 'Thunderstorm' }
+        };
+
+        const dayLabels = {
+            it: ['Oggi', 'Domani'],
+            en: ['Today', 'Tomorrow']
+        };
 
         function renderMenu(lang) {
             const grid = document.getElementById('main-grid');
@@ -2666,25 +2929,62 @@
             });
         }
 
+        function translateStaticTexts(lang) {
+            document.querySelectorAll('[data-it]').forEach(el => {
+                const value = el.getAttribute('data-' + lang);
+                if (value) el.innerText = value;
+            });
+        }
+
         function setLanguage(lang) {
             localStorage.setItem('preferredLang', lang);
             document.getElementById('btn-it').classList.toggle('active', lang === 'it');
             document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-            document.querySelectorAll('[data-it]').forEach(el => el.innerText = el.getAttribute('data-' + lang));
+            translateStaticTexts(lang);
             renderMenu(lang);
             updateWeather(lang);
         }
 
+        function weekdayLabel(dateString, lang) {
+            const date = new Date(dateString + 'T12:00:00');
+            return new Intl.DateTimeFormat(lang === 'it' ? 'it-IT' : 'en-US', { weekday: 'short' }).format(date).replace('.', '');
+        }
+
+        function applyForecastDay(card, label, info, max, min) {
+            const name = card.querySelector('.forecast-name');
+            const icon = card.querySelector('.forecast-icon');
+            const desc = card.querySelector('.forecast-desc');
+            const strong = card.querySelector('.forecast-temps strong');
+            const small = card.querySelector('.forecast-temps small');
+            name.innerText = label;
+            icon.innerText = info.icon;
+            desc.innerText = info.label;
+            strong.innerText = `${Math.round(max)}°`;
+            small.innerText = `${Math.round(min)}°`;
+        }
+
         async function updateWeather(lang) {
             try {
-                const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=40.6321&longitude=17.9361&current_weather=true`);
+                const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=40.6321&longitude=17.9361&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=auto&forecast_days=3');
                 const data = await res.json();
-                const code = data.current_weather.weathercode;
-                const info = weatherMap[code] || { icon: 'cloud', it: 'Nuvoloso', en: 'Cloudy' };
-                document.getElementById('temp').innerText = Math.round(data.current_weather.temperature) + '°C';
-                document.getElementById('weather-icon').innerText = info.icon;
-                document.getElementById('description').innerText = info[lang];
-            } catch (e) { console.error("Weather error"); }
+                const days = document.querySelectorAll('.forecast-day');
+                const codes = data?.daily?.weathercode || [];
+                const maxs = data?.daily?.temperature_2m_max || [];
+                const mins = data?.daily?.temperature_2m_min || [];
+                const dates = data?.daily?.time || [];
+
+                days.forEach((card, index) => {
+                    const code = codes[index];
+                    const base = weatherMap[code] || { icon: 'cloud', it: 'Variabile', en: 'Variable' };
+                    const info = { icon: base.icon, label: base[lang] };
+                    const label = index < 2
+                        ? dayLabels[lang][index]
+                        : weekdayLabel(dates[index], lang);
+                    applyForecastDay(card, label, info, maxs[index], mins[index]);
+                });
+            } catch (e) {
+                console.error('Weather error', e);
+            }
         }
 
         window.addEventListener('DOMContentLoaded', () => {
