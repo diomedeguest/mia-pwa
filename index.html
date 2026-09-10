@@ -6,6 +6,20 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0,user-scalable=yes,viewport-fit=cover>
     <title>Welcome - Diomede Luxury</title>
     <script>
+    /* Diomede: scelta esplicita fra modalità ospite e tablet kiosk.
+       ?mode=kiosk attiva e memorizza il kiosk; ?mode=guest torna alla PWA completa. */
+    try {
+        const diomedeParams = new URLSearchParams(window.location.search);
+        const requestedMode = (diomedeParams.get('mode') || '').toLowerCase();
+        if (requestedMode === 'kiosk') localStorage.setItem('diomedeMode', 'kiosk');
+        if (requestedMode === 'guest') localStorage.removeItem('diomedeMode');
+        if (localStorage.getItem('diomedeMode') === 'kiosk') {
+            document.documentElement.classList.add('diomede-kiosk-mode');
+        }
+    } catch (_) {}
+    </script>
+
+    <script>
     try {
         if (sessionStorage.getItem('diomede-session-visited')) {
             document.documentElement.classList.add('returning-guest');

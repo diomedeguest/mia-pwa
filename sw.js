@@ -1,4 +1,4 @@
-const CACHE_NAME = 'diomede-v241-index-welcome-whiter';
+const CACHE_NAME = 'diomede-v242-dual-mode-kiosk';
 
 const APP_SHELL = [
   './',
@@ -8,6 +8,7 @@ const APP_SHELL = [
   './assets/css/style.css',
   './assets/css/wow.css',
   './assets/js/common.js',
+  './assets/js/qrcode-local.js',
   './assets/images/header.png',
   './assets/images/menu-logo-luxury.png',
   './assets/images/menu-custom-landscape.webp',
