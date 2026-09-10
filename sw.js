@@ -1,4 +1,4 @@
-const CACHE_NAME = 'diomede-v246-trasporti-territorio';
+const CACHE_NAME = 'diomede-v247-territorio-refine';
 
 const APP_SHELL = [
   './',
