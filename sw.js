@@ -1,4 +1,4 @@
-const CACHE_NAME = 'diomede-v247-territorio-refine';
+const CACHE_NAME = 'diomede-v248-wifi-refine';
 
 const APP_SHELL = [
   './',

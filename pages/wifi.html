@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-<meta name="robots" content="noindex,nofollow,noarchive">
+    <meta name="robots" content="noindex,nofollow,noarchive">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Wi-Fi - Diomede Luxury</title>
     <meta name="theme-color" content="#F0EDE9">
@@ -11,218 +11,273 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=Open+Sans:wght@400;600&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,200,0,0&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=Open+Sans:wght@400;600;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,200,0,0&display=swap" rel="stylesheet">
 
     <style>
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-
+        :root {
+            --bg:#F0EDE9;
+            --gold:#A39689;
+            --gold-dark:#8D8378;
+            --text:#23211f;
+            --muted:#6c655e;
+            --border:rgba(163,150,137,.28);
+        }
         body {
-            font-family: 'Open Sans', sans-serif;
-            margin: 0; padding: 0;
-            background-color: #F0EDE9;
-            color: #1a1a1a;
-            line-height: 1.4;
-            text-align: center;
+            font-family:'Open Sans',sans-serif;
+            margin:0;
+            padding:0;
+            background:var(--bg);
+            color:var(--text);
+            line-height:1.45;
+            text-align:center;
         }
-
-        /* LINGUA SWITCHER */
         .lang-switcher {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            display: flex;
-            gap: 8px;
-            z-index: 100;
+            position:absolute;
+            top:15px;
+            right:15px;
+            display:flex;
+            gap:8px;
+            z-index:100;
         }
-
         .lang-btn {
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            border: 1px solid rgba(0,0,0,0.1);
-            background: rgba(255,255,255,0.6);
-            color: #1a1a1a;
-            font-size: 10px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            backdrop-filter: blur(5px);
-            transition: 0.3s;
+            width:35px;
+            height:35px;
+            border-radius:50%;
+            border:1px solid rgba(0,0,0,.1);
+            background:rgba(255,255,255,.6);
+            color:#1a1a1a;
+            font-size:10px;
+            font-weight:700;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            cursor:pointer;
+            backdrop-filter:blur(5px);
+            -webkit-backdrop-filter:blur(5px);
+            transition:.3s;
         }
+        .lang-btn.active { background:var(--gold); color:#fff; border-color:var(--gold); }
 
-        .lang-btn.active {
-            background: #A39689;
-            color: white;
-            border-color: #A39689;
-        }
-
-        /* HEADER */
         .hero-header {
-            width: 100%;
-            height: 240px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            padding: 10px 20px;
-            overflow: hidden;
+            width:100%;
+            height:200px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            position:relative;
+            padding:10px 20px;
+            overflow:hidden;
         }
-
         .logo-img {
-            width: 100%;
-            max-width: 300px;
-            height: auto;
-            z-index: 5;
-            display: block;
+            width:100%;
+            max-width:250px;
+            height:auto;
+            z-index:5;
+            display:block;
         }
-
         .hero-overlay {
-            position: absolute;
-            bottom: 0; left: 0; width: 100%; height: 60px;
-            background: linear-gradient(to top, #F0EDE9, rgba(240, 237, 233, 0));
+            position:absolute;
+            bottom:0; left:0;
+            width:100%; height:60px;
+            background:linear-gradient(to top,var(--bg),rgba(240,237,233,0));
         }
 
-        /* CONTAINER */
         .container {
-            width: 100%;
-            max-width: 900px;
-            margin: -30px auto 0;
-            padding: 0 20px 80px;
-            position: relative;
-            z-index: 10;
+            width:100%;
+            max-width:860px;
+            margin:-20px auto 0;
+            padding:0 20px 80px;
+            position:relative;
+            z-index:10;
         }
-
+        .header-content { margin-bottom:24px; }
         h2 {
-            font-family: 'PT Serif', serif;
-            font-size: 34px;
-            margin: 0;
-            font-weight: 400;
-            letter-spacing: 0.5px;
-            color: #2c2c2c;
+            font-family:'PT Serif',serif;
+            font-size:30px;
+            margin:0;
+            font-weight:400;
+            letter-spacing:.5px;
+            color:#2c2c2c;
         }
-
-        .divider { width: 50px; height: 1px; background-color: #A39689; margin: 15px auto 35px; }
-
-        /* GRID INFO */
-        .info-box {
-            display: grid;
-            gap: 15px;
-            grid-template-columns: 1fr;
-            margin-top: 10px;
+        .intro {
+            margin:10px auto 0;
+            max-width:520px;
+            font-size:13px;
+            line-height:1.65;
+            color:var(--muted);
         }
+        .divider { width:40px; height:1px; background:var(--gold); margin:12px auto 0; }
 
-        @media (min-width: 768px) {
-            .hero-header { height: 280px; }
-            .logo-img { max-width: 400px; }
-            .container { margin-top: -40px; }
-            .info-box { grid-template-columns: 1fr 1fr; gap: 20px; }
-            h2 { font-size: 40px; }
+        .wifi-panel {
+            display:grid;
+            grid-template-columns:1fr;
+            gap:18px;
+            padding:22px;
+            background:rgba(255,255,255,.56);
+            border:1px solid var(--border);
+            border-radius:24px;
+            box-shadow:0 6px 20px rgba(0,0,0,.035);
+            text-align:left;
         }
-
-        /* CARD Wi-Fi */
-        .wifi-card {
-            background-color: rgba(255, 255, 255, 0.5);
-            border: 1px solid rgba(163, 150, 137, 0.3);
-            border-radius: 20px;
-            padding: 25px;
-            text-align: left;
-            display: flex;
-            flex-direction: column;
-            transition: all 0.3s ease;
+        .wifi-details { display:grid; gap:14px; }
+        .connection-heading {
+            display:flex;
+            align-items:center;
+            gap:12px;
+            padding-bottom:14px;
+            border-bottom:1px solid rgba(163,150,137,.18);
         }
-
-        .label-group {
-            display: flex;
-            align-items: center;
-            margin-bottom: 12px;
+        .wifi-symbol {
+            width:46px; height:46px;
+            border-radius:50%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            flex:0 0 auto;
+            background:rgba(163,150,137,.14);
+            color:var(--gold-dark);
         }
-
-        .wifi-card .material-symbols-outlined {
-            font-size: 24px;
-            margin-right: 12px;
-            color: #A39689;
-            font-variation-settings: 'wght' 300;
+        .wifi-symbol .material-symbols-outlined { font-size:24px; }
+        .connection-copy strong {
+            display:block;
+            font-family:'PT Serif',serif;
+            font-size:21px;
+            font-weight:400;
+            color:#2c2c2c;
+            margin-bottom:2px;
         }
-
-        .label {
-            font-size: 11px;
-            text-transform: uppercase;
-            font-weight: 700;
-            letter-spacing: 1.2px;
-            color: #888;
+        .connection-copy span {
+            display:block;
+            font-size:11px;
+            color:var(--muted);
         }
-
-        .value {
-            font-size: 18px;
-            font-weight: 600;
-            padding-left: 36px;
-            display: block;
-            word-break: break-all;
-            color: #1a1a1a;
-            user-select: all; /* Facilita la copia su alcuni dispositivi */
+        .credential-row {
+            display:grid;
+            grid-template-columns:38px minmax(0,1fr);
+            gap:12px;
+            align-items:center;
+            padding:14px 15px;
+            background:rgba(255,255,255,.66);
+            border:1px solid rgba(163,150,137,.22);
+            border-radius:18px;
         }
+        .credential-icon {
+            width:38px; height:38px;
+            border-radius:50%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            background:rgba(163,150,137,.11);
+            color:var(--gold-dark);
+        }
+        .credential-icon .material-symbols-outlined { font-size:19px; }
+        .credential-content { min-width:0; }
+        .credential-label {
+            display:block;
+            font-size:9px;
+            text-transform:uppercase;
+            font-weight:700;
+            letter-spacing:1.25px;
+            color:#8a8179;
+            margin-bottom:4px;
+        }
+        .credential-value {
+            display:block;
+            font-size:16px;
+            font-weight:700;
+            color:#292623;
+            overflow-wrap:anywhere;
+            user-select:all;
+        }
+        .credential-value.password {
+            font-size:13px;
+            line-height:1.55;
+            letter-spacing:.15px;
+        }
+        .wifi-note {
+            display:flex;
+            align-items:flex-start;
+            gap:8px;
+            margin-top:2px;
+            padding:0 2px;
+            font-size:11px;
+            line-height:1.55;
+            color:var(--muted);
+        }
+        .wifi-note .material-symbols-outlined { font-size:16px; color:var(--gold-dark); margin-top:1px; }
 
-        /* QR CODE */
         .qr-card {
-            margin: 22px auto 0;
-            background-color: rgba(255,255,255,0.5);
-            border: 1px solid rgba(163,150,137,0.3);
-            border-radius: 20px;
-            padding: 20px;
-            max-width: 300px;
+            background:rgba(255,255,255,.82);
+            border:1px solid rgba(163,150,137,.24);
+            border-radius:20px;
+            padding:18px;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:center;
+            text-align:center;
+            min-height:100%;
+        }
+        .qr-eyebrow {
+            font-size:9px;
+            font-weight:700;
+            text-transform:uppercase;
+            letter-spacing:1.25px;
+            color:var(--gold-dark);
+            margin-bottom:10px;
         }
         .qr-card img {
-            width: 180px;
-            max-width: 70vw;
-            height: auto;
-            display: block;
-            margin: 0 auto 12px;
-            border-radius: 8px;
+            width:176px;
+            max-width:65vw;
+            height:auto;
+            display:block;
+            padding:8px;
+            background:#fff;
+            border-radius:14px;
+            box-shadow:inset 0 0 0 1px rgba(0,0,0,.035);
         }
         .qr-caption {
-            margin: 0;
-            font-size: 12px;
-            color: #6d645d;
-            line-height: 1.5;
+            margin:12px 0 0;
+            max-width:230px;
+            font-size:11px;
+            color:var(--muted);
+            line-height:1.55;
         }
 
-        /* BACK BUTTON */
-        .back-btn-container {
-            margin-top: 50px;
-            display: flex;
-            justify-content: center;
-        }
-
+        .back-btn-container { margin-top:46px; display:flex; justify-content:center; }
         .back-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 16px 40px;
-            background-color: #A39689;
-            color: #ffffff;
-            text-decoration: none;
-            text-transform: uppercase;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            border-radius: 50px;
-            border: none;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            padding:14px 34px;
+            background:var(--gold);
+            color:#fff;
+            text-decoration:none;
+            text-transform:uppercase;
+            font-size:10px;
+            font-weight:700;
+            letter-spacing:1.5px;
+            border-radius:50px;
+            box-shadow:0 4px 12px rgba(0,0,0,.08);
+            transition:.3s;
         }
+        .back-btn:active { transform:scale(.96); background:var(--gold-dark); }
+        .back-btn .material-symbols-outlined { margin-right:8px; font-size:14px; color:#fff; }
 
-        .back-btn:active {
-            transform: scale(0.96);
-            background-color: #8D8378;
+        @media (min-width:768px) {
+            .hero-header { height:260px; }
+            .logo-img { max-width:350px; }
+            .container { margin-top:-30px; }
+            h2 { font-size:38px; }
+            .wifi-panel { grid-template-columns:minmax(0,1.25fr) minmax(250px,.75fr); padding:26px; gap:22px; }
         }
-
-        .back-btn .material-symbols-outlined {
-            margin-right: 10px;
-            font-size: 16px;
-            color: #ffffff;
-            font-variation-settings: 'wght' 500;
+        @media (max-width:520px) {
+            .wifi-panel { padding:16px; border-radius:21px; }
+            .credential-row { padding:13px; }
+            .credential-value.password { font-size:12px; }
+            .qr-card { padding:16px; }
+            .qr-card img { width:164px; }
         }
     </style>
 
@@ -248,98 +303,98 @@
     transition:transform .18s ease, background .18s ease;
     padding:0;
 }
-.diomede-global-back:active{
-    transform:scale(.94);
-    background:#8D8378;
-}
-.diomede-global-back .material-symbols-outlined{
-    font-size:20px;
-    line-height:1;
-    font-variation-settings:'wght' 300;
-}
+.diomede-global-back:active{ transform:scale(.94); background:#8D8378; }
+.diomede-global-back .material-symbols-outlined{ font-size:20px; line-height:1; font-variation-settings:'wght' 300; }
 @media (max-width:480px){
-    .diomede-global-back{
-        top:max(14px, env(safe-area-inset-top));
-        left:14px;
-        width:36px;
-        height:36px;
-    }
+    .diomede-global-back{ top:max(14px, env(safe-area-inset-top)); left:14px; width:36px; height:36px; }
 }
 </style>
-
-    <link rel="stylesheet" href="../assets/css/wow.css">
+<link rel="stylesheet" href="../assets/css/wow.css">
 </head>
 <body>
-
 <button type="button" class="diomede-global-back" aria-label="Torna alla pagina precedente" title="Indietro" onclick="diomedeGoBack()">
     <span class="material-symbols-outlined">arrow_back_ios_new</span>
 </button>
 
+<div class="lang-switcher">
+    <div id="btn-it" class="lang-btn" onclick="setLanguage('it')">ITA</div>
+    <div id="btn-en" class="lang-btn" onclick="setLanguage('en')">ENG</div>
+</div>
 
-    <div class="lang-switcher">
-        <div id="btn-it" class="lang-btn" onclick="setLanguage('it')">ITA</div>
-        <div id="btn-en" class="lang-btn" onclick="setLanguage('en')">ENG</div>
-    </div>
+<div class="hero-header">
+    <img src="../assets/images/header.png" alt="Diomede Luxury Logo" class="logo-img">
+    <div class="hero-overlay"></div>
+</div>
 
-    <div class="hero-header">
-        <img src="../assets/images/header.png" alt="Diomede Luxury Logo" class="logo-img">
-        <div class="hero-overlay"></div>
-    </div>
-
-    <div class="container">
+<div class="container">
+    <div class="header-content">
         <h2 data-it="Wi-Fi" data-en="Wi-Fi">Wi-Fi</h2>
+        <p class="intro" data-it="Tutto quello che ti serve per collegarti alla rete dell’appartamento." data-en="Everything you need to connect to the apartment Wi-Fi.">Tutto quello che ti serve per collegarti alla rete dell’appartamento.</p>
         <div class="divider"></div>
+    </div>
 
-        <div class="info-box">
-            <div class="wifi-card">
-                <div class="label-group">
-                    <span class="material-symbols-outlined">wifi</span>
-                    <span class="label" data-it="Nome Rete" data-en="Network Name">Nome Rete</span>
+    <section class="wifi-panel" aria-label="Dati connessione Wi-Fi">
+        <div class="wifi-details">
+            <div class="connection-heading">
+                <div class="wifi-symbol"><span class="material-symbols-outlined">wifi</span></div>
+                <div class="connection-copy">
+                    <strong data-it="Connettiti al Wi-Fi" data-en="Connect to Wi-Fi">Connettiti al Wi-Fi</strong>
+                    <span data-it="Rete dedicata agli ospiti Diomede Luxury" data-en="Dedicated network for Diomede Luxury guests">Rete dedicata agli ospiti Diomede Luxury</span>
                 </div>
-                <span class="value">Diomede_Guest</span>
             </div>
 
-            <div class="wifi-card">
-                <div class="label-group">
-                    <span class="material-symbols-outlined">key</span>
-                    <span class="label" data-it="Password" data-en="Password">Password</span>
+            <div class="credential-row">
+                <div class="credential-icon"><span class="material-symbols-outlined">router</span></div>
+                <div class="credential-content">
+                    <span class="credential-label" data-it="Nome rete" data-en="Network name">Nome rete</span>
+                    <span class="credential-value">Diomede_Guest</span>
                 </div>
-                <span class="value">EUWRGlpmu6xorTOa5Lzv90Zh6Y5h6VBQ</span>
+            </div>
+
+            <div class="credential-row">
+                <div class="credential-icon"><span class="material-symbols-outlined">key</span></div>
+                <div class="credential-content">
+                    <span class="credential-label" data-it="Password" data-en="Password">Password</span>
+                    <span class="credential-value password">EUWRGlpmu6xorTOa5Lzv90Zh6Y5h6VBQ</span>
+                </div>
+            </div>
+
+            <div class="wifi-note">
+                <span class="material-symbols-outlined">info</span>
+                <span data-it="Puoi inserire i dati manualmente oppure scansionare il QR code." data-en="You can enter the details manually or scan the QR code.">Puoi inserire i dati manualmente oppure scansionare il QR code.</span>
             </div>
         </div>
 
         <div class="qr-card">
+            <div class="qr-eyebrow" data-it="Accesso rapido" data-en="Quick access">Accesso rapido</div>
             <img src="../assets/images/wifi_qr.png" alt="QR Code Wi-Fi Diomede Guest">
-            <p class="qr-caption" data-it="Scansiona il QR code per collegarti rapidamente alla rete Wi-Fi." data-en="Scan the QR code to quickly connect to the Wi-Fi network.">Scansiona il QR code per collegarti rapidamente alla rete Wi-Fi.</p>
+            <p class="qr-caption" data-it="Scansiona il QR code con il tuo smartphone per collegarti alla rete Wi-Fi." data-en="Scan the QR code with your smartphone to connect to the Wi-Fi network.">Scansiona il QR code con il tuo smartphone per collegarti alla rete Wi-Fi.</p>
         </div>
+    </section>
 
-        <div class="back-btn-container">
-            <a href="menu.html" class="back-btn">
-                <span class="material-symbols-outlined">arrow_back_ios_new</span>
-                <span data-it="Torna alla home" data-en="Back to home">Torna alla home</span>
-            </a>
-        </div>
+    <div class="back-btn-container">
+        <a href="menu.html" class="back-btn">
+            <span class="material-symbols-outlined">arrow_back_ios_new</span>
+            <span data-it="Torna al menu" data-en="Back to menu">Torna al menu</span>
+        </a>
     </div>
+</div>
 
-    <script>
-        function setLanguage(lang) {
-            localStorage.setItem('preferredLang', lang);
-
-            document.getElementById('btn-it').classList.toggle('active', lang === 'it');
-            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-
-            document.querySelectorAll('[data-it]').forEach(el => {
-                const text = el.getAttribute('data-' + lang);
-                el.textContent = text;
-            });
-        }
-
-        window.onload = () => {
-            const savedLang = localStorage.getItem('preferredLang') || 'it';
-            setLanguage(savedLang);
-        };
-    </script>
-
+<script>
+function setLanguage(lang) {
+    localStorage.setItem('preferredLang', lang);
+    document.getElementById('btn-it').classList.toggle('active', lang === 'it');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.querySelectorAll('[data-it]').forEach(el => {
+        const text = el.getAttribute('data-' + lang);
+        if (text) el.textContent = text;
+    });
+}
+window.addEventListener('load', () => {
+    const savedLang = localStorage.getItem('preferredLang') || 'it';
+    setLanguage(savedLang);
+});
+</script>
 <script src="../assets/js/common.js"></script>
 </body>
 </html>
