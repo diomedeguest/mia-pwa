@@ -1,4 +1,4 @@
-const CACHE_NAME = 'diomede-v258-kiosk-inattivita-10min';
+const CACHE_NAME = 'diomede-v259-opinioni-senza-host';
 
 const APP_SHELL = [
   './',
