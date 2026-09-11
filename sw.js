@@ -1,4 +1,4 @@
-const CACHE_NAME = 'diomede-v253-menu-logo-slightly-up';
+const CACHE_NAME = 'diomede-v258-kiosk-inattivita-10min';
 
 const APP_SHELL = [
   './',

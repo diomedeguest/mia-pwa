@@ -23,8 +23,12 @@ Se i dati dell'app/browser vengono cancellati dal sistema MDM, riaprire l'URL co
 
 ## Layout kiosk zero-touch
 - Contatti: numero visibile e QR WhatsApp già mostrato in pagina.
-- Convenzioni: indirizzo e sito visibili, nessun pulsante superfluo, un solo QR code per aprire il sito dal telefono dell'ospite.
+- Partner: indirizzo e sito visibili, nessun pulsante superfluo, un solo QR code per aprire il sito dal telefono dell'ospite.
 
 
 ## Invio recensioni via email
-La pagina Recensione invia voto e commento a `diomedeguest@gmail.com` tramite FormSubmit, senza aprire app esterne. Oggetto: `[Recensione] Diomede Luxury – X/5`. Al primo invio FormSubmit richiede una conferma una tantum via email.
+La pagina “La tua opinione conta” invia voto e commento a `diomedeguest@gmail.com` tramite FormSubmit, senza aprire app esterne. Oggetto: `[Recensione] Diomede Luxury – X/5`. Al primo invio FormSubmit richiede una conferma una tantum via email.
+
+## Ritorno automatico alla schermata iniziale
+In modalità kiosk, dopo **10 minuti senza interazioni** (touch, scroll, tasti o gesture), la PWA torna automaticamente alla pagina iniziale (`index.html?mode=kiosk`). Il controllo usa il tempo reale trascorso, quindi funziona anche quando Android sospende temporaneamente i timer con schermo spento o app in background.
+

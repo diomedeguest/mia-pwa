@@ -484,6 +484,63 @@
     }
 
 
+    function setupKioskInactivityReturn() {
+        if (!isKioskMode) return;
+
+        const INACTIVITY_MS = 10 * 60 * 1000;
+        let lastActivity = Date.now();
+        let inactivityTimer = null;
+        let redirecting = false;
+
+        function indexUrl() {
+            const root = appRootUrl();
+            if (!root) return null;
+            const url = new URL('index.html', root);
+            url.searchParams.set('mode', 'kiosk');
+            return url.href;
+        }
+
+        function goToIndexIfInactive() {
+            if (redirecting) return;
+            const elapsed = Date.now() - lastActivity;
+            if (elapsed < INACTIVITY_MS) {
+                scheduleCheck(INACTIVITY_MS - elapsed);
+                return;
+            }
+
+            const target = indexUrl();
+            if (!target) return;
+            redirecting = true;
+            window.location.replace(target);
+        }
+
+        function scheduleCheck(delay = INACTIVITY_MS) {
+            window.clearTimeout(inactivityTimer);
+            inactivityTimer = window.setTimeout(goToIndexIfInactive, Math.max(250, delay));
+        }
+
+        function markActivity() {
+            if (redirecting) return;
+            lastActivity = Date.now();
+            scheduleCheck();
+        }
+
+        /* Solo interazioni reali dell'ospite: niente eventi sintetici. */
+        ['pointerdown', 'touchstart', 'touchmove', 'keydown', 'wheel'].forEach(type => {
+            window.addEventListener(type, markActivity, { passive: true, capture: true });
+        });
+        window.addEventListener('scroll', markActivity, { passive: true, capture: true });
+
+        /* Android può sospendere i timer a schermo spento/in background.
+           Quando la pagina torna visibile controlliamo il tempo realmente trascorso. */
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden) goToIndexIfInactive();
+        });
+        window.addEventListener('pageshow', goToIndexIfInactive);
+
+        scheduleCheck();
+    }
+
     function setupKioskToolbarNudge() {
         if (!isKioskMode || !document.body.classList.contains('diomede-menu-page')) return;
 
@@ -544,6 +601,7 @@
         setupPageTransitions();
         setupReveal();
         setupMenuMotion();
+        setupKioskInactivityReturn();
         setupKioskToolbarNudge();
         setupInstructionHeader();
         setupHaptics();

@@ -283,228 +283,43 @@
 
 
 /* ==========================================================
-   WELCOME INDEX — LOGO XXXL
-   Logo ancora più grande e leggibile nel riquadro iniziale.
-   ========================================================== */
-.white-box {
-    max-width: 460px !important;
-    padding-top: 30px !important;
-}
-
-.logo-inner {
-    width: 300px !important;
-    max-width: 88% !important;
-    max-height: 215px !important;
-    height: auto !important;
-    margin-bottom: 18px !important;
-    object-fit: contain !important;
-    filter: drop-shadow(0 4px 12px rgba(0,0,0,.10)) !important;
-}
-
-@media (max-width: 600px) and (orientation: portrait) {
-    .white-box {
-        width: min(90vw, 390px) !important;
-        padding: 22px 20px 26px !important;
-    }
-
-    .logo-inner {
-        width: 245px !important;
-        max-width: 86% !important;
-        max-height: 175px !important;
-        margin-bottom: 14px !important;
-    }
-}
-
-@media (max-height: 700px) {
-    .white-box {
-        padding-top: 19px !important;
-    }
-
-    .logo-inner {
-        width: 215px !important;
-        max-width: 82% !important;
-        max-height: 150px !important;
-        margin-bottom: 12px !important;
-    }
-}
-
-
-
-/* ==========================================================
-   INDEX WELCOME — RIQUADRO PIÙ COMPATTO E SEMITRASPARENTE
-   Mantiene inalterate le dimensioni di logo e testi.
-   ========================================================== */
-.white-box {
-    width: auto !important;
-    min-width: 355px !important;
-    max-width: 390px !important;
-    padding: 20px 22px 22px !important;
-    background: rgba(255,255,255,.56) !important;
-    border: 1px solid rgba(255,255,255,.50) !important;
-    border-radius: 16px !important;
-    box-shadow: 0 22px 48px rgba(0,0,0,.28) !important;
-    -webkit-backdrop-filter: blur(7px) saturate(106%) !important;
-    backdrop-filter: blur(7px) saturate(106%) !important;
-}
-
-/* Dimensioni del logo preservate: riduco solo gli spazi attorno. */
-.logo-inner {
-    margin-bottom: 10px !important;
-}
-
-.divider {
-    margin: 11px auto !important;
-}
-
-.subtitle {
-    margin-bottom: 5px !important;
-}
-
-.tagline {
-    margin-bottom: 17px !important;
-}
-
-@media (max-width: 600px) and (orientation: portrait) {
-    .white-box {
-        width: min(86vw, 340px) !important;
-        min-width: 0 !important;
-        max-width: 340px !important;
-        padding: 17px 16px 20px !important;
-        background: rgba(255,255,255,.52) !important;
-        box-shadow: 0 18px 40px rgba(0,0,0,.25) !important;
-        -webkit-backdrop-filter: blur(6px) saturate(105%) !important;
-        backdrop-filter: blur(6px) saturate(105%) !important;
-    }
-
-    /* Mantengo la dimensione mobile già approvata: 245px. */
-    .logo-inner {
-        width: 245px !important;
-        max-width: 86% !important;
-        max-height: 175px !important;
-        margin-bottom: 8px !important;
-    }
-
-    .divider {
-        margin: 9px auto !important;
-    }
-
-    .subtitle {
-        margin-bottom: 4px !important;
-    }
-
-    .tagline {
-        margin-bottom: 14px !important;
-    }
-}
-
-@media (max-height: 700px) {
-    .white-box {
-        padding-top: 14px !important;
-        padding-bottom: 16px !important;
-    }
-
-    /* Mantengo la dimensione già prevista per schermi bassi: 215px. */
-    .logo-inner {
-        width: 215px !important;
-        max-width: 82% !important;
-        max-height: 150px !important;
-        margin-bottom: 7px !important;
-    }
-
-    .divider {
-        margin: 8px auto !important;
-    }
-
-    .tagline {
-        margin-bottom: 12px !important;
-    }
-}
-
-
-
-/* ==========================================================
-   INDEX WELCOME — EXTRA COMPACT + PIÙ TRASPARENTE
-   Mantiene INVARIATE le dimensioni di logo e testi.
-   ========================================================== */
-.white-box {
-    width: min(82vw, 350px) !important;
-    min-width: 0 !important;
-    max-width: 350px !important;
-    padding: 12px 16px 15px !important;
-    background: rgba(255,255,255,.34) !important;
-    border: 1px solid rgba(255,255,255,.36) !important;
-    border-radius: 15px !important;
-    box-shadow: 0 14px 34px rgba(0,0,0,.20) !important;
-    -webkit-backdrop-filter: blur(4px) saturate(104%) !important;
-    backdrop-filter: blur(4px) saturate(104%) !important;
-}
-
-/* Solo spazi: logo e tipografia restano delle dimensioni già approvate. */
-.logo-inner { margin-bottom: 5px !important; }
-.divider { margin: 7px auto !important; }
-.subtitle { margin-bottom: 2px !important; }
-.tagline { margin-bottom: 10px !important; }
-
-@media (max-width: 600px) and (orientation: portrait) {
-    .white-box {
-        width: min(82vw, 320px) !important;
-        max-width: 320px !important;
-        padding: 11px 12px 14px !important;
-        background: rgba(255,255,255,.29) !important;
-        border-color: rgba(255,255,255,.32) !important;
-        box-shadow: 0 12px 28px rgba(0,0,0,.18) !important;
-        -webkit-backdrop-filter: blur(3px) saturate(103%) !important;
-        backdrop-filter: blur(3px) saturate(103%) !important;
-    }
-
-    .logo-inner { margin-bottom: 4px !important; }
-    .divider { margin: 6px auto !important; }
-    .subtitle { margin-bottom: 2px !important; }
-    .tagline { margin-bottom: 9px !important; }
-}
-
-@media (max-height: 700px) {
-    .white-box {
-        padding-top: 9px !important;
-        padding-bottom: 11px !important;
-        background: rgba(255,255,255,.27) !important;
-    }
-    .logo-inner { margin-bottom: 3px !important; }
-    .divider { margin: 5px auto !important; }
-    .tagline { margin-bottom: 7px !important; }
-}
-
-
-/* ==========================================================
-   INDEX WELCOME — RIFINITURA FINALE
-   - logo leggermente più piccolo
-   - riquadro leggermente più piccolo e più trasparente
+   WELCOME INDEX — STILE FINALE CONSOLIDATO
+   Mantiene l'aspetto approvato eliminando gli override storici.
    ========================================================== */
 .white-box {
     width: min(80vw, 330px) !important;
+    min-width: 0 !important;
     max-width: 330px !important;
     padding: 10px 14px 13px !important;
-    background: rgba(255,255,255,.24) !important;
-    border: 1px solid rgba(255,255,255,.30) !important;
+    background: rgba(255,255,255,.70) !important;
+    border: 1px solid rgba(255,255,255,.66) !important;
+    border-radius: 15px !important;
     box-shadow: 0 12px 28px rgba(0,0,0,.18) !important;
-    -webkit-backdrop-filter: blur(3px) saturate(102%) !important;
-    backdrop-filter: blur(3px) saturate(102%) !important;
+    -webkit-backdrop-filter: blur(5px) saturate(104%) !important;
+    backdrop-filter: blur(5px) saturate(104%) !important;
 }
 
 .logo-inner {
     width: 270px !important;
     max-width: 84% !important;
     max-height: 190px !important;
+    height: auto !important;
     margin-bottom: 4px !important;
+    object-fit: contain !important;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,.10)) !important;
 }
+
+.divider { margin: 7px auto !important; }
+.subtitle { margin-bottom: 2px !important; }
+.tagline { margin-bottom: 10px !important; }
 
 @media (max-width: 600px) and (orientation: portrait) {
     .white-box {
         width: min(80vw, 300px) !important;
         max-width: 300px !important;
         padding: 10px 11px 13px !important;
-        background: rgba(255,255,255,.20) !important;
-        border-color: rgba(255,255,255,.28) !important;
+        background: rgba(255,255,255,.66) !important;
+        border-color: rgba(255,255,255,.62) !important;
     }
 
     .logo-inner {
@@ -513,6 +328,10 @@
         max-height: 160px !important;
         margin-bottom: 3px !important;
     }
+
+    .divider { margin: 6px auto !important; }
+    .subtitle { margin-bottom: 2px !important; }
+    .tagline { margin-bottom: 9px !important; }
 }
 
 @media (max-height: 700px) {
@@ -521,7 +340,7 @@
         max-width: 310px !important;
         padding-top: 8px !important;
         padding-bottom: 10px !important;
-        background: rgba(255,255,255,.19) !important;
+        background: rgba(255,255,255,.64) !important;
     }
 
     .logo-inner {
@@ -530,32 +349,9 @@
         max-height: 138px !important;
         margin-bottom: 2px !important;
     }
-}
 
-
-
-/* ==========================================================
-   INDEX WELCOME — PIÙ BIANCO / MENO TRASPARENTE
-   Mantiene dimensioni e logo invariati.
-   ========================================================== */
-.white-box {
-    background: rgba(255,255,255,.70) !important;
-    border-color: rgba(255,255,255,.66) !important;
-    -webkit-backdrop-filter: blur(5px) saturate(104%) !important;
-    backdrop-filter: blur(5px) saturate(104%) !important;
-}
-
-@media (max-width: 600px) and (orientation: portrait) {
-    .white-box {
-        background: rgba(255,255,255,.66) !important;
-        border-color: rgba(255,255,255,.62) !important;
-    }
-}
-
-@media (max-height: 700px) {
-    .white-box {
-        background: rgba(255,255,255,.64) !important;
-    }
+    .divider { margin: 5px auto !important; }
+    .tagline { margin-bottom: 7px !important; }
 }
 
 </style>
