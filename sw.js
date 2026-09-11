@@ -1,4 +1,4 @@
-const CACHE_NAME = 'diomede-v252-menu-logo-size-only';
+const CACHE_NAME = 'diomede-v253-menu-logo-slightly-up';
 
 const APP_SHELL = [
   './',
