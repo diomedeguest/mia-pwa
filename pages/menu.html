@@ -31,6 +31,24 @@
                         url('../assets/images/sfondo.png') center/cover no-repeat fixed;
         }
 
+        /* KIOSK TABLET: micro-scroll invisibile per consentire al WebView di
+           collassare la propria toolbar superiore senza modificare il layout. */
+        html.diomede-kiosk-mode,
+        body.diomede-kiosk-mode {
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
+            overscroll-behavior-y: contain;
+            -webkit-overflow-scrolling: touch;
+        }
+        body.diomede-kiosk-mode::after {
+            content: "";
+            display: block;
+            width: 1px;
+            height: 28px;
+            pointer-events: none;
+            opacity: 0;
+        }
+
         .container {
             display: flex;
             flex-direction: column;
@@ -3111,9 +3129,9 @@
             .header-wrapper .logo-img {
                 position: relative !important;
                 top: 76px !important;
-                width: min(72vw, 270px) !important;
-                max-width: 270px !important;
-                max-height: 165px !important;
+                width: min(68vw, 248px) !important;
+                max-width: 248px !important;
+                max-height: 154px !important;
                 height: auto !important;
                 object-fit: contain !important;
             }
@@ -3126,9 +3144,9 @@
 
             .header-wrapper .logo-img {
                 top: 64px !important;
-                width: min(69vw, 252px) !important;
-                max-width: 252px !important;
-                max-height: 154px !important;
+                width: min(65vw, 232px) !important;
+                max-width: 232px !important;
+                max-height: 146px !important;
             }
         }
 
@@ -3140,9 +3158,9 @@
 
             .header-wrapper .logo-img {
                 top: 48px !important;
-                width: min(64vw, 228px) !important;
-                max-width: 228px !important;
-                max-height: 138px !important;
+                width: min(61vw, 212px) !important;
+                max-width: 212px !important;
+                max-height: 132px !important;
             }
         }
 </style>

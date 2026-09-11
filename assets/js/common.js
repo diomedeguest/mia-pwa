@@ -483,6 +483,25 @@
         }
     }
 
+
+    function setupKioskToolbarNudge() {
+        if (!isKioskMode || !document.body.classList.contains('diomede-menu-page')) return;
+
+        /* Alcuni WebView Android nascondono la toolbar solo dopo che la pagina
+           entra in uno stato realmente scrollabile. Il layout resta immobile:
+           scrolliamo soltanto di 1-2 px, una volta per apertura della pagina. */
+        const nudge = () => {
+            try {
+                const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+                if (maxScroll > 0) window.scrollTo(0, Math.min(2, maxScroll));
+            } catch (_) {}
+        };
+
+        requestAnimationFrame(() => requestAnimationFrame(nudge));
+        window.setTimeout(nudge, 220);
+        window.setTimeout(nudge, 700);
+    }
+
     function setupInstructionHeader() {
         if (!document.body.classList.contains('instruction-page')) return;
         let ticking = false;
@@ -525,6 +544,7 @@
         setupPageTransitions();
         setupReveal();
         setupMenuMotion();
+        setupKioskToolbarNudge();
         setupInstructionHeader();
         setupHaptics();
     });

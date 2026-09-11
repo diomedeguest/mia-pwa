@@ -1,4 +1,4 @@
-const CACHE_NAME = 'diomede-v250-kiosk-startup-reload-fix';
+const CACHE_NAME = 'diomede-v252-menu-logo-size-only';
 
 const APP_SHELL = [
   './',

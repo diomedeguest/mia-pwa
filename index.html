@@ -14,20 +14,11 @@
         if (requestedMode === 'kiosk') localStorage.setItem('diomedeMode', 'kiosk');
         if (requestedMode === 'guest') {
             localStorage.removeItem('diomedeMode');
-            sessionStorage.removeItem('diomede-kiosk-startup-reload');
         }
 
         const kioskActive = localStorage.getItem('diomedeMode') === 'kiosk';
         if (kioskActive) {
             document.documentElement.classList.add('diomede-kiosk-mode');
-
-            /* Alcuni browser/WebView kiosk mostrano la barra superiore solo al primo avvio.
-               Un singolo reload automatico riproduce il refresh manuale che la elimina.
-               sessionStorage impedisce qualsiasi loop e non coinvolge la modalità guest. */
-            if (!sessionStorage.getItem('diomede-kiosk-startup-reload')) {
-                sessionStorage.setItem('diomede-kiosk-startup-reload', '1');
-                window.setTimeout(() => window.location.reload(), 650);
-            }
         }
     } catch (_) {}
     </script>
